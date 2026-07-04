@@ -12,10 +12,22 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-window.ELEVENLABS_VOICE_ID = '{{ .Env.ELEVENLABS_VOICE_ID | default "" }}';
-if (window.ELEVENLABS_VOICE_ID) {
-  document.write('<script src="https://elevenlabs.io/conversations/sdk"><\/script>');
+// 🆕 Dynamic loader for ElevenLabs voice ID (no Go template)
+async function loadElevenLabsVoice() {
+  try {
+    const res = await fetch('/api/voice-config');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.voiceId) {
+        window.ELEVENLABS_VOICE_ID = data.voiceId;
+        const script = document.createElement('script');
+        script.src = 'https://elevenlabs.io/conversations/sdk';
+        document.head.appendChild(script);
+      }
+    }
+  } catch (_) { /* fallback to Web Speech API */ }
 }
+loadElevenLabsVoice();
 </script>
 <style>
 .tab-content { display: none; }
@@ -921,15 +933,11 @@ if (window.ELEVENLABS_VOICE_ID) {
 // ============================================================
 // DETECT VOICE ENGINE
 // ============================================================
-const hasElevenLabsVoice = window.ELEVENLABS_VOICE_ID && window.ELEVENLABS_VOICE_ID !== '';
-const voiceEngineLabel = document.getElementById('voice-engine-label');
-const fallbackBadge = document.getElementById('voice-fallback-badge');
-if (!hasElevenLabsVoice) {
-  voiceEngineLabel.textContent = 'Web Speech API';
-  fallbackBadge.classList.remove('hidden');
-} else {
-  voiceEngineLabel.textContent = 'ElevenLabs';
-}
+// The voice ID is now loaded dynamically via fetch.
+// We'll set a flag after loading.
+let hasElevenLabsVoice = false;
+// We'll update this when the SDK loads (if loaded)
+// The fallback will be used if no voice ID is set.
 
 // ============================================================
 // TAB SWITCH
