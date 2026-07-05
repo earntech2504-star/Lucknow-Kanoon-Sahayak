@@ -130,6 +130,8 @@ loadElevenLabsVoice();
 ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
 ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #a78bfa; }
+
+/* Enhanced Dictionary Styles */
 .dict-entry { transition: all 0.3s ease; }
 .dict-entry:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 .dict-tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 9px; font-weight: 600; margin: 2px; }
@@ -143,6 +145,8 @@ loadElevenLabsVoice();
 .dict-tag-evidence { background: #ffedd5; color: #ea580c; }
 .dict-tag-contract { background: #ecfdf5; color: #059669; }
 .dict-tag-legal-term { background: #f1f5f9; color: #475569; }
+
+/* Live Feed Styles */
 .live-feed-container {
 background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
 border: 1px solid #bae6fd;
@@ -169,10 +173,12 @@ transform: translateY(-2px);
 </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
+
 <!-- ============ LIVE SCROLLING FEED ============ -->
 <div class="bg-slate-900 text-white text-xs py-1 overflow-hidden">
 <div class="scrolling-text" id="live-scroll">⚖️ Connecting to SC, HC Lucknow, CERT-In, SCC Online, LiveLaw, Bar & Bench...</div>
 </div>
+
 <!-- ============ HEADER ============ -->
 <header class="bg-slate-900 text-white p-3 text-center shadow-lg sticky top-0 z-50">
 <div class="new-law-banner text-slate-900 text-xs font-bold py-1.5 mb-1 rounded-full max-w-2xl mx-auto px-4 animate-pulse">
@@ -181,18 +187,21 @@ transform: translateY(-2px);
 <h1 class="text-xl md:text-2xl font-bold court-font tracking-tight">⚖️ Lucknow Kanoon Sahayak 9.0</h1>
 <p class="text-xs mt-0.5 opacity-80">AI Voice Legal Assistant · BNS/BNSS/BSA Expert · Handsfree · Live Updates · Sabka Kanoon</p>
 </header>
+
 <!-- ============ DISCLAIMER ============ -->
 <div class="max-w-6xl mx-auto px-4 mt-2">
 <div class="disclaimer-box rounded-lg">
 <span class="font-bold">⚠️ DISCLAIMER:</span> यह केवल <b>शैक्षणिक और सूचनात्मक</b> उद्देश्य के लिए है। कोई भी कानूनी कार्रवाई करने से पहले <b>योग्य विधिक सलाहकार</b> से परामर्श अवश्य लें। Zeenat AI एक वकील नहीं है — यह सामान्य जानकारी प्रदान करता है।
 </div>
 </div>
+
 <!-- ============ ADS ============ -->
 <div class="max-w-6xl mx-auto px-4 mt-2">
 <div class="adsense-container rounded-lg">
 <span>📢 Ad Space · Google AdSense</span>
 </div>
 </div>
+
 <!-- ============ NAVIGATION TABS ============ -->
 <nav class="max-w-6xl mx-auto mt-3 px-4">
 <div class="flex flex-wrap border-b border-slate-200 justify-around bg-white rounded-t-lg shadow-sm overflow-x-auto scrollbar-hide">
@@ -225,9 +234,11 @@ transform: translateY(-2px);
 <button onclick="switchTab('bail-guide', this)" class="tab-btn py-2.5 px-2.5 text-gray-500 font-semibold text-xs whitespace-nowrap">⛓️ Bail Guide</button>
 </div>
 </nav>
+
 <!-- ============ MAIN CONTENT ============ -->
 <main class="max-w-6xl mx-auto p-3">
 <div class="bg-white p-4 md:p-6 rounded-b-lg shadow-md min-h-[550px] fade-in">
+
 <!-- ================================================================ -->
 <!-- VOICE AI TAB -->
 <!-- ================================================================ -->
@@ -288,6 +299,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- CONVERTER TAB -->
 <!-- ================================================================ -->
@@ -321,6 +333,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- SMART SEARCH TAB -->
 <!-- ================================================================ -->
@@ -342,6 +355,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <div id="solution-box" class="bg-green-50 border-l-4 border-green-600 p-3 rounded-lg hidden fade-in text-sm"></div>
 <div id="quick-results" class="mt-3"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- TRENDING TAB -->
 <!-- ================================================================ -->
@@ -354,6 +368,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <span id="trending-last-update" class="text-[10px] text-slate-400 ml-2"></span>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- CYBER TAB -->
 <!-- ================================================================ -->
@@ -363,6 +378,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="askUniversalAI('CYBER')" class="bg-red-600 text-white px-6 py-2 w-full text-sm">FIR + 1930 Guide Banao</button>
 <div id="cyber-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- ZAMEEN TAB -->
 <!-- ================================================================ -->
@@ -372,6 +388,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="askUniversalAI('ZAMEEN')" class="bg-orange-600 text-white px-6 py-2 w-full text-sm">SDM Stay + FIR Draft</button>
 <div id="zameen-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- FAMILY TAB -->
 <!-- ================================================================ -->
@@ -381,6 +398,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="askUniversalAI('FAMILY')" class="bg-pink-600 text-white px-6 py-2 w-full text-sm">BNSS 144 Application</button>
 <div id="family-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- ALL COURTS TAB -->
 <!-- ================================================================ -->
@@ -400,6 +418,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="askUniversalAI('ALL-COURTS')" class="bg-slate-700 text-white px-6 py-2 w-full text-sm">Court Ki Jankari Do</button>
 <div id="all-courts-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- RTO/RTI TAB -->
 <!-- ================================================================ -->
@@ -409,6 +428,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="askUniversalAI('RTO-RTI')" class="bg-blue-600 text-white px-6 py-2 w-full text-sm">Application Banao</button>
 <div id="rto-rti-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- JUNIOR TAB -->
 <!-- ================================================================ -->
@@ -421,6 +441,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <textarea id="junior-input" class="w-full border p-2 mb-2 text-sm" rows="2" placeholder="Behas ka jawaab yahan likho..."></textarea>
 <div id="junior-ans" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- AI DRAFT TAB -->
 <!-- ================================================================ -->
@@ -536,6 +557,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- BLOG/RSS TAB -->
 <!-- ================================================================ -->
@@ -558,6 +580,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <div id="blog-container" class="space-y-3 max-h-[500px] overflow-y-scroll scrollbar-hide"></div>
 <div id="blog-last-update" class="text-[10px] text-slate-400 mt-2"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- CASES TAB -->
 <!-- ================================================================ -->
@@ -588,6 +611,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- LIVE TAB -->
 <!-- ================================================================ -->
@@ -607,6 +631,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <div id="live-ans" class="border p-3 mt-3 hidden text-sm"></div>
 <div id="live-news-container" class="mt-3 space-y-2 max-h-[400px] overflow-y-scroll scrollbar-hide"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- DASHBOARD TAB -->
 <!-- ================================================================ -->
@@ -621,6 +646,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="addCase()" class="btn-primary text-white rounded-lg px-4 py-1.5 mb-3 text-sm">➕ Add Tareekh</button>
 <div id="case-list" class="space-y-1.5"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- SOURCES TAB -->
 <!-- ================================================================ -->
@@ -649,6 +675,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </table>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- QUIZ TAB -->
 <!-- ================================================================ -->
@@ -662,6 +689,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <div id="quiz-progress" class="mt-1 text-xs text-slate-400"></div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- RESOURCES TAB -->
 <!-- ================================================================ -->
@@ -711,6 +739,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 </ul>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- EXAM PREP TAB -->
 <!-- ================================================================ -->
@@ -751,6 +780,7 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <button onclick="switchTab('converter', document.querySelectorAll('.tab-btn')[1])" class="bg-green-600 text-white px-4 py-1.5 rounded text-sm hover:bg-green-700 ml-2">🔄 Convert Sections</button>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- COMMUNITY TAB -->
 <!-- ================================================================ -->
@@ -766,19 +796,24 @@ Powered by <span id="voice-engine-label">ElevenLabs</span> · Hindi/English · F
 <p class="text-[10px] text-slate-400 mt-1">💡 Tips appear instantly and are saved locally</p>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- DICTIONARY TAB - ENHANCED -->
 <!-- ================================================================ -->
 <div id="dictionary" class="tab-content">
 <h2 class="text-lg font-bold mb-3 text-slate-800 court-font">📖 Legal Dictionary (Complete Reference)</h2>
 <p class="text-xs text-gray-500 mb-2">50+ legal terms with full definitions, sections, case laws, and practical applications</p>
+
+<!-- Search Bar -->
 <div class="flex gap-2 mb-3">
-<input id="dict-search" placeholder="Search legal term (e.g., BNS, BNSS, bail, FIR, cheating, divorce)..."
-class="w-full border p-2 text-sm rounded-lg"
+<input id="dict-search" placeholder="Search legal term (e.g., BNS, BNSS, bail, FIR, cheating, divorce)..." 
+class="w-full border p-2 text-sm rounded-lg" 
 onkeyup="if(event.key==='Enter') searchDictionary();">
 <button onclick="searchDictionary()" class="bg-blue-600 text-white px-4 py-1.5 rounded text-sm hover:bg-blue-700 whitespace-nowrap">🔍 Search</button>
 <button onclick="document.getElementById('dict-search').value='';searchDictionary();" class="bg-slate-300 text-slate-700 px-3 py-1.5 rounded text-sm hover:bg-slate-400">Clear</button>
 </div>
+
+<!-- Quick Access Tags -->
 <div class="flex flex-wrap gap-1.5 mb-3">
 <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded cursor-pointer hover:bg-blue-200" onclick="document.getElementById('dict-search').value='bns';searchDictionary();">BNS</span>
 <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded cursor-pointer hover:bg-blue-200" onclick="document.getElementById('dict-search').value='bnss';searchDictionary();">BNSS</span>
@@ -793,13 +828,19 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded cursor-pointer hover:bg-indigo-200" onclick="document.getElementById('dict-search').value='writ';searchDictionary();">📜 Writ</span>
 <span class="text-[10px] bg-teal-100 text-teal-700 px-2 py-0.5 rounded cursor-pointer hover:bg-teal-200" onclick="document.getElementById('dict-search').value='contract';searchDictionary();">📄 Contract</span>
 </div>
+
+<!-- Result Area -->
 <div id="dict-result" class="mb-3"></div>
+
+<!-- Full Dictionary List -->
 <div id="dict-list" class="grid md:grid-cols-2 gap-3 mt-3"></div>
+
 <div class="mt-3 text-xs text-gray-400 border-t pt-2">
 📚 Contains 50+ legal terms with definitions, sections, case laws, and practical applications<br>
 🆕 Updated regularly with latest BNS/BNSS/BSA provisions · 🌹 आदाब
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- LANDMARK TAB -->
 <!-- ================================================================ -->
@@ -816,6 +857,7 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <div class="border p-3 rounded-lg card-hover"><b>Vishakha v. State of Rajasthan (1997)</b><p class="text-xs">Sexual harassment at workplace – Vishakha guidelines।</p><span class="source-tag">SC</span></div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- FUNNY TAB -->
 <!-- ================================================================ -->
@@ -844,6 +886,7 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 </div>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- MOCK TAB -->
 <!-- ================================================================ -->
@@ -854,6 +897,7 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <button onclick="askMockTrial()" class="bg-purple-700 text-white px-4 py-1.5 rounded text-sm">⚖️ Arguments Banao</button>
 <div id="mock-output" class="border p-3 mt-3 hidden text-sm"></div>
 </div>
+
 <!-- ================================================================ -->
 <!-- POST-FIR TAB -->
 <!-- ================================================================ -->
@@ -907,6 +951,7 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <p class="text-xs text-slate-700">"FIR दर्ज होने के बाद घबराएँ नहीं – कानून आपके साथ है। एक अच्छा वकील आपकी सबसे बड़ी ताकत है।"</p>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- CASE TRACK TAB -->
 <!-- ================================================================ -->
@@ -940,6 +985,7 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <p class="text-xs text-slate-700">"Case status ट्रैक करना बहुत ज़रूरी है – ताकि आप अपनी अगली कानूनी कार्रवाई समय पर कर सकें।"</p>
 </div>
 </div>
+
 <!-- ================================================================ -->
 <!-- BAIL GUIDE TAB -->
 <!-- ================================================================ -->
@@ -973,24 +1019,40 @@ onkeyup="if(event.key==='Enter') searchDictionary();">
 <p class="text-xs text-slate-700">"अगर आप या आपके किसी जानकार को गिरफ्तार किया गया है, तो सबसे पहले घबराएँ नहीं। तुरंत एक अच्छे criminal lawyer से संपर्क करें।"</p>
 </div>
 </div>
+
+<!-- ================================================================ -->
+<!-- END OF TABS -->
+<!-- ================================================================ -->
+
 </div>
 </main>
+
 <!-- ============ ADS ============ -->
 <div class="max-w-6xl mx-auto px-4 mt-2">
 <div class="adsense-container rounded-lg"><span>📢 Ad Space · Google AdSense</span></div>
 </div>
+
 <!-- ============ FOOTER ============ -->
 <footer class="text-center text-[10px] text-gray-500 mt-6 pb-4 border-t pt-3">
 © 2026 Lucknow Kanoon Sahayak 9.0 · BNS/BNSS/BSA Compliant · AI Voice Legal Assistant · Sabka Kanoon<br>
 <span class="text-gray-400">⚠️ Educational Purpose Only · Consult a Qualified Lawyer for Legal Advice</span>
 </footer>
+
+<!-- ================================================================ -->
+<!-- JAVASCRIPT - COMPLETE WITH ALL ENHANCEMENTS -->
+<!-- ================================================================ -->
 <script>
+// ============================================================
+// BASE FUNCTIONS
+// ============================================================
 (function() {
 var currentUrl = window.location.href.split('?')[0].split('#')[0];
 var canonicalLink = document.getElementById('canonical-link');
 if (canonicalLink) { canonicalLink.href = currentUrl; }
 })();
+
 let hasElevenLabsVoice = false;
+
 function switchTab(tabId, btnElement) {
 if (!btnElement) return;
 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -1003,9 +1065,11 @@ if (tabEl) tabEl.classList.add('active');
 btnElement.classList.remove('text-gray-500');
 btnElement.classList.add('text-slate-700', 'border-b-4', 'border-slate-700');
 }
+
 function loadFeed() {
 const scrollEl = document.getElementById('live-scroll');
 if (!scrollEl) return;
+// Try to fetch live feed from API
 fetch('/api/feed')
 .then(res => res.json())
 .then(data => {
@@ -1026,6 +1090,10 @@ scrollEl.innerText = feeds[Math.floor(Math.random() * feeds.length)] + ' · ' + 
 }
 loadFeed();
 setInterval(loadFeed, 30000);
+
+// ============================================================
+// ZEENAT AI FUNCTIONS
+// ============================================================
 const LEGAL_KNOWLEDGE = {
 'bns 318': { title: 'BNS 318 — Cheating', desc: 'धोखा / fraud का section।', punishment: 'अधिकतम 7 साल + जुर्माना।', old: 'IPC 420', case: 'Satender Kumar Antil v. CBI (2022)', key: 'Intent to deceive is must.' },
 'bns 103': { title: 'BNS 103 — Murder', desc: 'हत्या / कत्ल का सबसे गंभीर section।', punishment: 'मौत या आजीवन कारावास', old: 'IPC 302', case: 'Bachan Singh v. State (1980)', key: 'Rarest of rare cases.' },
@@ -1038,6 +1106,7 @@ const LEGAL_KNOWLEDGE = {
 'bnss 482': { title: 'BNSS 482 — Anticipatory Bail', desc: 'गिरफ्तारी से पहले ज़मानत।', old: 'CrPC 438', case: 'Gurbaksh Singh v. State (1980)', key: 'Apply before arrest.' },
 'bsa 63': { title: 'BSA 63 — Electronic Evidence', desc: 'इंटरनेट / डिजिटल साक्ष्य।', old: 'Evidence Act 65B', case: 'Arjun Panditrao Khotkar v. State (2020)', key: 'Certificate under BSA 63(4) is mandatory!' }
 };
+
 function generateDetailedResponse(query) {
 const q = query.toLowerCase().trim();
 let lines = [];
@@ -1192,12 +1261,13 @@ lines.push('');
 lines.push(`⚠️ <b>Disclaimer:</b> यह जानकारी केवल शैक्षणिक उद्देश्य के लिए है, कानूनी सलाह नहीं। कोई भी कदम उठाने से पहले <b>योग्य वकील</b> से परामर्श अवश्य लें।`);
 return lines.join('\n');
 }
+
 let isZeenatConnected = false;
 const zeenatResponses = {
-greeting: `नमस्ते! मैं Zeenat हूँ। कृपया ध्यान दें — मैं एक वकील नहीं हूँ और मेरी बातें कानूनी सलाह नहीं हैं। यह सिर्फ सामान्य जानकारी के लिए है।
-जी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से सोचकर-समझकर 15-20 lines में विस्तृत जवाब दूँगी।`,
+greeting: `नमस्ते! मैं Zeenat हूँ। कृपया ध्यान दें — मैं एक वकील नहीं हूँ और मेरी बातें कानूनी सलाह नहीं हैं। यह सिर्फ सामान्य जानकारी के लिए है।\nजी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से सोचकर-समझकर 15-20 lines में विस्तृत जवाब दूँगी।`,
 default: `जी, अब आप अपनी परेशानी बताइए। मैं आपकी बात ध्यान से सुन रही हूँ।`
 };
+
 function updateZeenatStatus(status, text) {
 const statusDiv = document.getElementById('zeenat-status');
 const statusText = document.getElementById('zeenat-status-text');
@@ -1206,6 +1276,7 @@ statusDiv.className = `zeenat-status ${status}`;
 statusDot.className = `status-dot ${status}`;
 statusText.textContent = text;
 }
+
 function addZeenatMessage(text, isUser) {
 const container = document.getElementById('zeenat-chat-container');
 if (!container) return;
@@ -1219,6 +1290,7 @@ div.innerHTML = `<b>Zeenat:</b><br>${text.replace(/\n/g, '<br>')}`;
 container.appendChild(div);
 container.scrollTop = container.scrollHeight;
 }
+
 function showThinkingIndicator() {
 const container = document.getElementById('zeenat-chat-container');
 if (!container) return null;
@@ -1230,9 +1302,11 @@ container.appendChild(div);
 container.scrollTop = container.scrollHeight;
 return div;
 }
+
 function stripEmojis(text) {
 return text.replace(/[\u{1F600}-\u{1F9FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{FE0F}\u{1F1E6}-\u{1F1FF}]/gu, '').trim();
 }
+
 function speakText(text) {
 if (!window.speechSynthesis) return;
 try {
@@ -1247,6 +1321,7 @@ window.speechSynthesis.speak(utterance);
 console.warn('Speech synthesis error:', e);
 }
 }
+
 let recognition = null;
 let isListening = false;
 function toggleVoiceTyping() {
@@ -1323,6 +1398,7 @@ console.error('Voice typing init error:', err);
 alert('⚠️ Voice typing not available. Please try again.');
 }
 }
+
 async function toggleZeenatConnection() {
 const btn = document.getElementById('zeenat-connect-btn');
 const btnText = document.getElementById('zeenat-btn-text');
@@ -1356,6 +1432,7 @@ addZeenatMessage('Conversation ended. Thank you for using Zeenat AI.', false);
 if (window.speechSynthesis) window.speechSynthesis.cancel();
 }
 }
+
 async function handleZeenatQuery() {
 const queryInput = document.getElementById('zeenat-query');
 if (!queryInput) return;
@@ -1376,14 +1453,20 @@ speakText(speakSummary);
 }
 updateZeenatStatus('connected', 'Connected - Listening');
 }
+
 function quickZeenat(topic) {
 const q = document.getElementById('zeenat-query');
 if (q) q.value = topic;
 handleZeenatQuery();
 }
+
 document.getElementById('zeenat-query')?.addEventListener('keypress', function(e) {
 if (e.key === 'Enter') handleZeenatQuery();
 });
+
+// ============================================================
+// UNIVERSAL AI FUNCTIONS
+// ============================================================
 const TAB_CONFIG = {
 'CYBER': { input: 'cyber-input', box: 'cyber-ans' },
 'ZAMEEN': { input: 'zameen-input', box: 'zameen-ans' },
@@ -1393,6 +1476,7 @@ const TAB_CONFIG = {
 'JUNIOR': { input: 'junior-input', box: 'junior-ans' },
 'LIVE': { input: null, box: 'live-ans' }
 };
+
 async function askUniversalAI(tab, fixedQuery) {
 const cfg = TAB_CONFIG[tab];
 if (!cfg) return;
@@ -1431,6 +1515,10 @@ if (tab === 'LIVE') showLiveNews();
 box.innerHTML = '❌ Network error. Please try again.';
 }
 }
+
+// ============================================================
+// CONVERTER FUNCTIONS
+// ============================================================
 const converterDB = {
 "ipc 420": "BNS 318 – Cheating (7 yrs, fine) [BNS s.318]",
 "ipc 302": "BNS 103 – Murder (death/life) [BNS s.103]",
@@ -1448,6 +1536,7 @@ const converterDB = {
 "crpc 125": "BNSS 144 – Maintenance [BNSS s.144]",
 "ipc 406": "BNS 314 – Criminal breach of trust [BNS s.314]"
 };
+
 function convertSection() {
 const old = document.getElementById('old-section').value.toLowerCase().trim().replace(/\s+/g, ' ');
 const newDiv = document.getElementById('new-section');
@@ -1463,6 +1552,10 @@ newDiv.className = 'w-full border-2 border-red-500 bg-red-50 rounded-lg p-3 mt-1
 detailDiv.innerHTML = '';
 }
 }
+
+// ============================================================
+// SMART SEARCH FUNCTIONS
+// ============================================================
 const problemDB = {
 "fir": { section: "BNSS 173 + 175(3)", solution: "SHO ko written complaint do. Na likhe to SP ko BNSS 173(3) me. Phir CJM ke paas BNSS 175(3) ya 200.", case: "Lalita Kumari v. UOI (2014)", source: "SCC 2014 SC 187", resources: "• Zero FIR bhi file kar sakte ho\n• 24 hrs me FIR copy milni chahiye" },
 "cheating": { section: "BNS 318 + BNSS 480", solution: "BNS 318 max 7 yrs. BNSS 480 se Magistrate bail de sakta hai. Anticipatory ke liye BNSS 482.", case: "Satender Kumar Antil v. CBI (2022)", source: "SCC 2022 SC 288", resources: "• Intent is key\n• All documents preserve karein" },
@@ -1471,6 +1564,7 @@ const problemDB = {
 "maintenance": { section: "BNSS 144 + BNS 85", solution: "BNSS 144 – maintenance. BNS 85 – cruelty. Economic abuse bhi cover hota hai.", case: "Rajnesh v. Neha (2021)", source: "SCC 2021 SC 234", resources: "• Maintenance amount reasonable hona chahiye\n• Interim maintenance bhi le sakte ho" },
 "bail": { section: "BNSS 480 + 482 + 483", solution: "BNSS 480 – Magistrate bail (up to 7 yrs). BNSS 482 – Anticipatory bail. BNSS 483 – Sessions/HC bail.", case: "Satender Kumar Antil v. CBI (2022)", source: "SCC 2022 SC 288", resources: "• Bail is rule, jail is exception\n• Apply before arrest for anticipatory" }
 };
+
 function solveProblemBNS() {
 const query = document.getElementById('problem-input').value.toLowerCase();
 const box = document.getElementById('solution-box');
@@ -1486,13 +1580,19 @@ box.innerHTML = '🤔 Is problem ka solution abhi add kar rahe hain. Zeenat AI s
 }
 box.classList.remove('hidden');
 }
+
 function quickSolve(keyword) {
 const inp = document.getElementById('problem-input');
 if (inp) inp.value = keyword;
 solveProblemBNS();
 }
+
+// ============================================================
+// DRAFT FUNCTIONS
+// ============================================================
 let isPremiumSelected = false;
 let selectedPayment = null;
+
 function selectFreeDraft() {
 isPremiumSelected = false;
 const docType = document.getElementById('doc-type');
@@ -1504,6 +1604,7 @@ document.getElementById('premium-payment-section').classList.add('hidden');
 document.getElementById('doc-output').classList.add('hidden');
 alert('🆓 Free draft selected! Enter your details and click "Generate Draft"');
 }
+
 function selectPremiumDraft() {
 isPremiumSelected = true;
 const docType = document.getElementById('doc-type');
@@ -1516,6 +1617,7 @@ status.className = 'text-xs font-bold px-3 py-1 rounded-full draft-status-premiu
 document.getElementById('doc-output').classList.add('hidden');
 alert('⭐ Premium draft selected! Enter your details, click "Generate Draft", then pay ₹49 to download');
 }
+
 function selectPayment(method) {
 selectedPayment = method;
 document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
@@ -1548,6 +1650,7 @@ const methods = {
 };
 alert(`💳 Payment via ${method.toUpperCase()}:\n${methods[method] || 'Please complete payment'}\nPayment ID: ${id}\nAfter payment, check the box and download.`);
 }
+
 function generateDocBNS() {
 const details = document.getElementById('doc-details').value;
 const crimeDate = document.getElementById('crime-date-doc').value;
@@ -1589,6 +1692,7 @@ const pid = document.getElementById('payment-id-display');
 if (pid) pid.textContent = 'UPI' + Date.now().toString().slice(-6);
 }
 }
+
 function generateFreeDraftContent(details, crimeDate, isNewLaw) {
 const law = isNewLaw ? 'BNSS/BNS' : 'CrPC/IPC';
 const section = isNewLaw ? 'BNSS 173' : 'CrPC 154';
@@ -1617,6 +1721,7 @@ return `
 </div>
 </div>`;
 }
+
 function generatePremiumDraftContent(details, crimeDate, isNewLaw) {
 const law = isNewLaw ? 'BNSS 2023' : 'CrPC 1973';
 const section = isNewLaw ? 'BNSS 480' : 'CrPC 437';
@@ -1671,6 +1776,7 @@ return `
 </div>
 </div>`;
 }
+
 function clearDraft() {
 document.getElementById('doc-output').classList.add('hidden');
 const dd = document.getElementById('doc-details');
@@ -1678,6 +1784,7 @@ if (dd) dd.value = '';
 const dp = document.getElementById('doc-preview');
 if (dp) dp.innerHTML = '';
 }
+
 function downloadPDF(content, type) {
 const element = document.createElement('div');
 element.innerHTML = content;
@@ -1691,6 +1798,7 @@ document.head.appendChild(script);
 generatePDF(element, type);
 }
 }
+
 function generatePDF(element, type) {
 const opt = {
 margin: [10, 10, 10, 10],
@@ -1701,10 +1809,15 @@ jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
 html2pdf().set(opt).from(element).save();
 }
+
+// ============================================================
+// DASHBOARD / CASE MANAGEMENT
+// ============================================================
 let casesList = [];
 try {
 casesList = JSON.parse(localStorage.getItem('lko_cases_bns')) || [];
 } catch(e) { casesList = []; }
+
 function renderCasesList() {
 const list = document.getElementById('case-list');
 if (!list) return;
@@ -1723,6 +1836,7 @@ return `<div class="bg-slate-100 p-2 rounded-lg flex justify-between items-cente
 </div>`;
 }).join('');
 }
+
 function addCase() {
 const c = document.getElementById('case-input').value;
 const d = document.getElementById('date-input').value;
@@ -1735,12 +1849,18 @@ document.getElementById('case-input').value = '';
 document.getElementById('date-input').value = '';
 document.getElementById('crime-date-case').value = '';
 }
+
 function deleteCase(i) {
 casesList.splice(i, 1);
 localStorage.setItem('lko_cases_bns', JSON.stringify(casesList));
 renderCasesList();
 }
+
 renderCasesList();
+
+// ============================================================
+// SOURCES
+// ============================================================
 const sourcesData = [
 { name: "SCC Online", desc: "Supreme Court Cases – Most reliable case law database", url: "https://www.scconline.com", tags: ["Case Law", "SC"] },
 { name: "Manupatra", desc: "Comprehensive legal research platform with AI tools", url: "https://www.manupatra.com", tags: ["Research", "AI"] },
@@ -1749,6 +1869,7 @@ const sourcesData = [
 { name: "Supreme Court Observer", desc: "SC judgments, oral observations, and analysis", url: "https://www.scobserver.in", tags: ["SC", "Analysis"] },
 { name: "India Kanoon", desc: "Free legal database with judgments and statutes", url: "https://www.indiankanoon.org", tags: ["Free", "Database"] }
 ];
+
 function renderSources() {
 const container = document.getElementById('sources-container');
 if (!container) return;
@@ -1761,7 +1882,12 @@ container.innerHTML = sourcesData.map(s =>
 </div>`
 ).join('');
 }
+
 renderSources();
+
+// ============================================================
+// QUIZ
+// ============================================================
 const quizData = [
 { question: "BNS 318 (Cheating) ki maximum saza kya hai?", options: ["7 years", "10 years", "3 years", "life"], correct: 0 },
 { question: "FIR ke liye BNSS ka kaunsa section hai?", options: ["173", "175", "480", "482"], correct: 0 },
@@ -1770,7 +1896,9 @@ const quizData = [
 { question: "Anticipatory bail ke liye BNSS ka kaunsa section hai?", options: ["482", "480", "483", "173"], correct: 0 },
 { question: "Maintenance ke liye BNSS ka kaunsa section hai?", options: ["144", "173", "480", "482"], correct: 0 }
 ];
+
 let currentQuiz = 0, quizScore = 0;
+
 function loadQuiz() {
 if (currentQuiz >= quizData.length) {
 document.getElementById('quiz-question').innerHTML = `🎉 Quiz complete! Score: ${quizScore}/${quizData.length}`;
@@ -1787,6 +1915,7 @@ document.getElementById('quiz-options').innerHTML = q.options.map((opt, idx) =>
 document.getElementById('quiz-result').innerHTML = '';
 document.getElementById('quiz-progress').innerHTML = `Question ${currentQuiz+1} of ${quizData.length}`;
 }
+
 function selectQuizAnswer(idx) {
 const q = quizData[currentQuiz];
 if (idx === q.correct) {
@@ -1798,10 +1927,16 @@ document.getElementById('quiz-result').innerHTML = `❌ Galat. Sahi tha: ${q.opt
 currentQuiz++;
 setTimeout(loadQuiz, 800);
 }
+
 function nextQuizQuestion() {
 if (currentQuiz < quizData.length) loadQuiz();
 }
+
 loadQuiz();
+
+// ============================================================
+// TRENDING
+// ============================================================
 let trendingTopics = [
 { title: "BNS 318 Cheating: Supreme Court's New Interpretation", views: "15.2K", source: "SCC Online", tags: ["Cheating", "BNS 318"], date: "2026-07-02" },
 { title: "BNSS 480 Bail: Magistrate's Power Expanded", views: "11.8K", source: "Manupatra", tags: ["Bail", "BNSS 480"], date: "2026-07-01" },
@@ -1809,6 +1944,7 @@ let trendingTopics = [
 { title: "BNSS 482 Anticipatory Bail: New Guidelines", views: "8.7K", source: "Bar & Bench", tags: ["Anticipatory", "BNSS 482"], date: "2026-06-29" },
 { title: "BNS 103 Murder: Rarest of Rare Test Revisited", views: "7.3K", source: "Supreme Court Observer", tags: ["Murder", "BNS 103"], date: "2026-06-28" }
 ];
+
 function renderTrending() {
 const container = document.getElementById('trending-container');
 if (!container) return;
@@ -1828,6 +1964,7 @@ container.innerHTML = trendingTopics.map(t =>
 const upd = document.getElementById('trending-last-update');
 if (upd) upd.textContent = `🔄 Last updated: ${new Date().toLocaleString()}`;
 }
+
 function refreshTrending() {
 const sections = ['BNS 318', 'BNSS 480', 'BSA 63', 'BNSS 482'];
 const types = ['Interpretation', 'Guidelines', 'Applicability', 'Scope'];
@@ -1843,6 +1980,7 @@ trendingTopics.unshift(newTopic);
 if (trendingTopics.length > 10) trendingTopics.pop();
 renderTrending();
 }
+
 function quickSearch(tag) {
 const inp = document.getElementById('problem-input');
 if (inp) inp.value = tag;
@@ -1850,7 +1988,12 @@ const btns = document.querySelectorAll('.tab-btn');
 switchTab('smart-search', btns[2]);
 solveProblemBNS();
 }
+
 renderTrending();
+
+// ============================================================
+// RSS FEED FUNCTIONS
+// ============================================================
 const RSS_FEEDS = [
 { name: 'LiveLaw', url: 'https://www.livelaw.in/rss' },
 { name: 'Bar & Bench', url: 'https://www.barandbench.com/rss' },
@@ -1859,14 +2002,17 @@ const RSS_FEEDS = [
 { name: 'SCC Online', url: 'https://www.scconline.com/rss' },
 { name: 'Indian Kanoon', url: 'https://indiankanoon.org/rss/' }
 ];
+
 const RSS_PROXIES = [
 (url) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
 (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
 (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
 ];
+
 let feedCache = null;
 let feedCacheTime = 0;
 const CACHE_TTL = 120000;
+
 async function fetchWithTimeout(url, ms = 6000) {
 const controller = new AbortController();
 const timeoutId = setTimeout(() => controller.abort(), ms);
@@ -1882,6 +2028,7 @@ clearTimeout(timeoutId);
 throw e;
 }
 }
+
 function parseRSSXML(xmlText, sourceName) {
 try {
 const parser = new DOMParser();
@@ -1900,6 +2047,7 @@ console.warn('XML parse failed for', sourceName, e);
 return [];
 }
 }
+
 async function fetchRSSFeed(feed) {
 const { name, url } = feed;
 for (let i = 0; i < RSS_PROXIES.length; i++) {
@@ -1942,6 +2090,7 @@ continue;
 console.error(`❌ [${name}] All proxies failed`);
 return [];
 }
+
 async function fetchAllFeeds() {
 if (feedCache && (Date.now() - feedCacheTime < CACHE_TTL)) {
 console.log('📦 Returning cached feeds');
@@ -1984,6 +2133,7 @@ feedCache = unique;
 feedCacheTime = Date.now();
 return unique;
 }
+
 function updateRSSStatus(success, total, count) {
 const badge = document.getElementById('rss-status-badge');
 if (!badge) return;
@@ -1998,7 +2148,12 @@ badge.className = 'rss-status partial';
 badge.textContent = `⚠️ ${success}/${total} feeds · ${count} items`;
 }
 }
+
+// ============================================================
+// BLOG / RSS
+// ============================================================
 let blogPosts = [];
+
 async function refreshBlog() {
 const container = document.getElementById('blog-container');
 if (!container) return;
@@ -2058,6 +2213,7 @@ console.error('Blog refresh error:', e);
 container.innerHTML = '<div class="text-center text-red-400 text-sm py-8">❌ Error fetching RSS. Showing cached content.</div>';
 }
 }
+
 function renderBlog() {
 const container = document.getElementById('blog-container');
 if (!container) return;
@@ -2088,8 +2244,13 @@ return `<div class="blog-card bg-blue-50 p-3 rounded-lg">
 const upd = document.getElementById('blog-last-update');
 if (upd) upd.textContent = `📰 Last updated: ${new Date().toLocaleString()} · ${blogPosts.length} posts from ${new Set(blogPosts.map(p => p.source)).size} sources · 🌹 आदाब`;
 }
+
+// ============================================================
+// CASES
+// ============================================================
 let allCaseItems = [];
 let currentCaseFilter = 'all';
+
 const staticCases = [
 { id: 1, title: "Sonam Raja Raghuvanshi Case: Latest Update", category: "high-profile", description: "Sonam Raja Raghuvanshi के खिलाफ FIR दर्ज, अब चार्जशीट की तैयारी।", source: "LiveLaw", date: "2026-07-02", tags: ["Sonam Raja", "Political", "UP"], status: "🔴 Breaking", statusClass: "case-status-breaking", fullStory: "Lucknow की अदालत ने FIR को बरकरार रखा। अगली सुनवाई 15 July 2026 को।", impact: "UP की राजनीति में नए समीकरण बन सकते हैं।" },
 { id: 2, title: "SC: महिला को 20 साल बाद मिला न्याय", category: "women", description: "SC ने एक महिला को 20 साल बाद न्याय दिया। दहेज उत्पीड़न का मामला।", source: "SCC Online", date: "2026-07-01", tags: ["Women Rights", "Dowry", "SC"], status: "✅ Verdict", statusClass: "case-status-verdict", fullStory: "SC ने कहा कि दहेज उत्पीड़न में साक्ष्य को गंभीरता से लेना चाहिए।", impact: "दहेज उत्पीड़न के मामलों में मील का पत्थर।" },
@@ -2097,6 +2258,7 @@ const staticCases = [
 { id: 4, title: "पति ने कोर्ट से माँगा – 'पत्नी को रोज़ रोटी बनानी पड़ेगी'", category: "weird", description: "एक पति ने कोर्ट में याचिका दायर की कि पत्नी को रोज़ रोटी बनानी चाहिए।", source: "Bar & Bench", date: "2026-07-03", tags: ["Weird", "Family"], status: "🤯 Viral", statusClass: "case-status-pending", fullStory: "पति ने दलील दी कि उसे रोज़ाना ताज़ी रोटी खानी है। कोर्ट ने उसे समझाया।", impact: "यह मामला सोशल मीडिया पर खूब वायरल हुआ।" },
 { id: 5, title: "मुर्गी ने उड़ाया ₹50 लाख का नुकसान", category: "entertainment", description: "एक मुर्गी ने एक बिजली के तार को काट दिया, जिससे एक फैक्ट्री में ₹50 लाख का नुकसान हुआ।", source: "LiveLaw", date: "2026-07-03", tags: ["Weird", "Liability"], status: "🔴 New", statusClass: "case-status-breaking", fullStory: "मुर्गी मालिक की लापरवाही मानी गई, उसे मुआवज़ा देना पड़ा।", impact: "यह केस 'liability for animals' पर एक दिलचस्प उदाहरण बन गया।" }
 ];
+
 async function refreshCases() {
 const container = document.getElementById('cases-container');
 if (!container) return;
@@ -2153,6 +2315,7 @@ container.innerHTML = '<div class="text-center text-red-400 text-sm py-8">❌ Er
 console.error(e);
 }
 }
+
 function renderCaseList() {
 const container = document.getElementById('cases-container');
 if (!container) return;
@@ -2184,14 +2347,17 @@ container.innerHTML = filtered.map(c => `
 </div>
 `).join('');
 }
+
 function filterCases(category) {
 currentCaseFilter = category;
 renderCaseList();
 }
+
 function showCaseDetail(id) {
 const detail = document.getElementById(`case-detail-${id}`);
 if (detail) detail.classList.toggle('hidden');
 }
+
 function shareCaseDetail(id) {
 const c = allCaseItems.find(x => x.id === id);
 if (c) {
@@ -2203,6 +2369,7 @@ navigator.clipboard.writeText(text).then(() => alert('✅ Case copied!')).catch(
 }
 }
 }
+
 function shareCase(platform) {
 const url = window.location.href;
 const text = "⚖️ Check out these interesting legal cases! 🎭 🌹 आदाब!";
@@ -2212,7 +2379,12 @@ else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?te
 else if (platform === 'telegram') shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
 if (shareUrl) window.open(shareUrl, '_blank');
 }
+
+// ============================================================
+// LIVE NEWS
+// ============================================================
 let liveNewsItems = [];
+
 function showLiveNews() {
 const container = document.getElementById('live-news-container');
 if (!container) return;
@@ -2243,6 +2415,7 @@ ${item.link && item.link !== '#' ? `<a href="${item.link}" target="_blank" class
 `;
 }).join('');
 }
+
 async function updateLiveNewsFromRSS() {
 try {
 const posts = await fetchAllFeeds();
@@ -2260,6 +2433,7 @@ console.log(`📢 Live News updated with ${liveNewsItems.length} items from RSS`
 console.warn('Live news RSS update failed:', e);
 }
 }
+
 function shareNews(title) {
 const text = `📰 ${title}\n🔗 ${window.location.href}`;
 if (navigator.share) {
@@ -2268,7 +2442,12 @@ navigator.share({ title: 'Legal News', text: text }).catch(() => {});
 navigator.clipboard.writeText(text).then(() => alert('✅ News copied!')).catch(() => {});
 }
 }
+
 setInterval(showLiveNews, 60000);
+
+// ============================================================
+// COMMUNITY
+// ============================================================
 let communityTips = [];
 try {
 communityTips = JSON.parse(localStorage.getItem('communityTips')) || [
@@ -2281,6 +2460,7 @@ communityTips = [
 { user: "Adv. Priya", text: "💡 Tip: Always check the crime date before citing IPC. Post-1 July 2024, use BNS/BNSS.", time: "2026-07-02 10:30" }
 ];
 }
+
 function renderCommunity() {
 const container = document.getElementById('community-container');
 if (!container) return;
@@ -2294,6 +2474,7 @@ container.innerHTML = communityTips.map(t =>
 </div>`
 ).join('');
 }
+
 function addCommunityTip() {
 const input = document.getElementById('community-tip-input');
 if (!input) return;
@@ -2305,7 +2486,12 @@ localStorage.setItem('communityTips', JSON.stringify(communityTips));
 renderCommunity();
 input.value = '';
 }
+
 renderCommunity();
+
+// ============================================================
+// MOCK TRIAL
+// ============================================================
 async function askMockTrial() {
 const input = document.getElementById('mock-input').value.trim();
 if (!input) { alert('Kuch likhiye!'); return; }
@@ -2325,548 +2511,603 @@ output.innerHTML = data.answer || 'Jawaab nahi mila.';
 output.innerHTML = 'Network error. Try again.';
 }
 }
+
+// ============================================================
+// ENHANCED DICTIONARY - COMPLETE DATABASE
+// ============================================================
 const LEGAL_DICTIONARY = {
-'bns': {
-term: 'Bharatiya Nyaya Sanhita (BNS)',
-definition: 'भारतीय न्याय संहिता - India का नया आपराधिक कानून, 1 July 2024 से लागू। इसने Indian Penal Code (IPC) 1860 की जगह ली है।',
-fullMeaning: 'BNS भारत का मुख्य आपराधिक कानून है जो अपराधों की परिभाषा और सज़ाएँ निर्धारित करता है। यह 358 sections में विभाजित है, जो IPC के 511 sections से ज़्यादा संक्षिप्त और आधुनिक है।',
-sections: ['BNS 103 - Murder (हत्या) - Death or life imprisonment', 'BNS 318 - Cheating (धोखाधड़ी) - Up to 7 years', 'BNS 303 - Theft (चोरी) - Up to 3 years', 'BNS 356 - Defamation (मानहानि) - Up to 2 years', 'BNS 64 - Rape (बलात्कार) - Minimum 10 years', 'BNS 85 - Cruelty by Husband (पति द्वारा क्रूरता) - Up to 3 years'],
-caseLaw: 'Satender Kumar Antil v. CBI (2022) - SC guidelines on bail under BNS',
-keyPoints: ['✅ 1 July 2024 से लागू', '✅ IPC की जगह BNS', '✅ 358 sections (IPC had 511)', '✅ More gender-neutral language', '✅ Faster trial provisions'],
-practicalUse: 'BNS का उपयोग सभी आपराधिक मामलों में किया जाता है - चोरी, हत्या, धोखाधड़ी, बलात्कार, मानहानि आदि।'
-},
-'bns 103': {
-term: 'BNS Section 103 - Murder (हत्या)',
-definition: 'हत्या का सबसे गंभीर section। जानबूझकर किसी की मौत करना murder कहलाता है।',
-fullMeaning: 'BNS 103 के तहत murder तब होती है जब कोई व्यक्ति जानबूझकर या इतनी लापरवाही से कार्य करता है जिससे किसी की मौत हो जाए। इसमें "rarest of rare" doctrine लागू होती है।',
-punishment: 'मौत की सज़ा या आजीवन कारावास + जुर्माना',
-oldLaw: 'IPC 302',
-caseLaw: 'Bachan Singh v. State of Punjab (1980) - SC ने "rarest of rare" doctrine बनाई',
-keyPoints: ['⚖️ Intent to kill या knowledge that death is likely', '⚖️ "Rarest of rare" cases में death penalty', '⚖️ Otherwise life imprisonment', '⚖️ No bail from Magistrate - only Sessions/HC'],
-practicalUse: 'हत्या के मामलों में यह section लगता है। अगर आरोपी ने जानबूझकर हत्या की है तो यह section apply होगा।'
-},
-'bns 318': {
-term: 'BNS Section 318 - Cheating (धोखाधड़ी)',
-definition: 'किसी को धोखा देकर उसकी संपत्ति या अधिकार हड़पना cheating कहलाता है।',
-fullMeaning: 'BNS 318 के तहत cheating तब होती है जब कोई व्यक्ति किसी को धोखा देता है (fraudulently या dishonestly) और उसकी संपत्ति या किसी अधिकार को हड़प लेता है। इसके लिए "intent to deceive" (धोखा देने की मंशा) साबित करना ज़रूरी है - सिर्फ़ वादा पूरा न करना cheating नहीं है।',
-punishment: 'अधिकतम 7 साल का कारावास + जुर्माना',
-oldLaw: 'IPC 420',
-caseLaw: 'Satender Kumar Antil v. CBI (2022) - SC guidelines on bail in cheating cases',
-keyPoints: ['⚖️ Intent to deceive is MUST', '⚖️ Mere failure to repay loan is NOT cheating', '⚖️ Can be bailable if punishment < 7 years', '⚖️ Evidence: documents, messages, bank statements'],
-practicalUse: 'धोखाधड़ी के मामलों में - UPI fraud, property fraud, fake promises, investment scams, online fraud।'
-},
-'bns 303': {
-term: 'BNS Section 303 - Theft (चोरी)',
-definition: 'बिना अनुमति के किसी की movable property (चल संपत्ति) लेना theft कहलाता है।',
-fullMeaning: 'BNS 303 के तहत theft तब होती है जब कोई व्यक्ति बिना मालिक की सहमति के कोई चल संपत्ति (movable property) ले लेता है और उसे हटाने का इरादा रखता है। इसमें "moving" property के साथ "taking" ज़रूरी है।',
-punishment: 'अधिकतम 3 साल का कारावास + जुर्माना',
-oldLaw: 'IPC 379',
-caseLaw: 'K.N. Mehra v. State of Rajasthan (1959) - Theft की definition पर landmark judgment',
-keyPoints: ['⚖️ Movable property ONLY', '⚖️ Without consent of owner', '⚖️ Intent to take away permanently', '⚖️ Bailable offence'],
-practicalUse: 'चोरी, पिकपॉकेटिंग, साइकिल/मोबाइल चोरी, shoplifting - सब इसी में आते हैं।'
-},
-'bns 356': {
-term: 'BNS Section 356 - Defamation (मानहानि)',
-definition: 'किसी की reputation (प्रतिष्ठा) को नुकसान पहुँचाना defamation कहलाता है।',
-fullMeaning: 'BNS 356 के तहत defamation तब होती है जब कोई व्यक्ति किसी दूसरे के बारे में ऐसा बयान (spoken या written) देता है जिससे उसकी प्रतिष्ठा को नुकसान पहुँचे। यह civil और criminal दोनों हो सकता है। Truth (सच) एक valid defence है।',
-punishment: 'अधिकतम 2 साल का कारावास + जुर्माना (या कोई एक)',
-oldLaw: 'IPC 499',
-caseLaw: 'Subramanian Swamy v. Union of India (2016) - SC ने criminal defamation को constitutional रखा',
-keyPoints: ['⚖️ Spoken (slander) या written (libel)', '⚖️ Truth is a defence', '⚖️ Public interest is a defence', '⚖️ Civil defamation: compensation, Criminal defamation: jail'],
-practicalUse: 'Social media posts, news articles, public statements, office gossip - सब defamation का कारण बन सकते हैं।'
-},
-'bns 85': {
-term: 'BNS Section 85 - Cruelty by Husband (पति द्वारा क्रूरता)',
-definition: 'पति या उसके परिवार द्वारा पत्नी पर क्रूरता या उत्पीड़न करना।',
-fullMeaning: 'BNS 85 के तहत cruelty तब होती है जब पति या उसके परिवार के सदस्य पत्नी के साथ शारीरिक या मानसिक क्रूरता करते हैं - दहेज के लिए परेशान करना, पीटना, अपमान करना, आर्थिक रूप से प्रताड़ित करना, आदि। यह एक "cognizable" offence है।',
-punishment: 'अधिकतम 3 साल का कारावास + जुर्माना',
-oldLaw: 'IPC 498A',
-caseLaw: 'Rajnesh v. Neha (2021) - SC guidelines on maintenance and cruelty',
-keyPoints: ['⚖️ Physical + Mental cruelty both covered', '⚖️ Dowry harassment included', '⚖️ Cognizable offence - police can arrest without warrant', '⚖️ Non-bailable in some cases'],
-practicalUse: 'दहेज उत्पीड़न, पति द्वारा मारपीट, मानसिक प्रताड़ना, आर्थिक उत्पीड़न - सब इस section में आते हैं।'
-},
-'bns 64': {
-term: 'BNS Section 64 - Rape (बलात्कार)',
-definition: 'बिना सहमति के sexual intercourse करना rape कहलाता है।',
-fullMeaning: 'BNS 64 के तहत rape तब होता है जब कोई पुरुष किसी महिला के साथ उसकी सहमति के बिना sexual intercourse करता है। 1 July 2024 के बाद यह section लागू है। इसमें न्यूनतम 10 साल की सज़ा है। Consent (सहमति) की उम्र 18 साल है।',
-punishment: 'न्यूनतम 10 साल, आजीवन कारावास तक + जुर्माना',
-oldLaw: 'IPC 375',
-caseLaw: 'Nirbhaya case (2012) - Led to death penalty in rape cases',
-keyPoints: ['⚖️ Lack of consent is key', '⚖️ 18 years is age of consent', '⚖️ Minimum 10 years imprisonment', '⚖️ Death penalty in "rarest of rare" cases'],
-practicalUse: 'यह section पॉक्सो (POCSO) से अलग है - POCSO बच्चों के लिए है, यह वयस्कों के लिए।'
-},
-'bnss': {
-term: 'Bharatiya Nagarik Suraksha Sanhita (BNSS)',
-definition: 'भारतीय नागरिक सुरक्षा संहिता - India का नया criminal procedure code, 1 July 2024 से लागू। इसने CrPC 1973 की जगह ली है।',
-fullMeaning: 'BNSS भारत की criminal procedure (आपराधिक प्रक्रिया) को नियंत्रित करता है - FIR से लेकर trial तक की सारी प्रक्रिया। इसमें 531 sections हैं, जो CrPC के 484 sections से अधिक हैं और अधिक व्यवस्थित हैं।',
-sections: ['BNSS 173 - FIR (प्राथमिकी)', 'BNSS 175(3) - Magistrate investigation order', 'BNSS 480 - Bail by Magistrate (ज़मानत)', 'BNSS 482 - Anticipatory Bail (पहले से ज़मानत)', 'BNSS 483 - Sessions/HC Bail', 'BNSS 144 - Maintenance (भरण-पोषण)', 'BNSS 193 - Chargesheet (आरोप पत्र)'],
-caseLaw: 'Lalita Kumari v. UOI (2014) - FIR mandatory in cognizable offences',
-keyPoints: ['✅ 1 July 2024 से लागू', '✅ CrPC की जगह BNSS', '✅ 531 sections (CrPC had 484)', '✅ Time-bound trials (60/90 days)', '✅ Video-conferencing provisions'],
-practicalUse: 'सभी criminal cases की procedure BNSS के तहत चलती है - FIR से लेकर appeal तक।'
-},
-'bnss 173': {
-term: 'BNSS Section 173 - FIR (प्राथमिकी)',
-definition: 'संज्ञेय अपराध (cognizable offence) की जानकारी मिलने पर police द्वारा दर्ज की गई first information report।',
-fullMeaning: 'BNSS 173 के तहत, अगर police को किसी cognizable offence (जिसमें बिना warrant गिरफ्तारी हो सकती है) की जानकारी मिलती है, तो उसे FIR दर्ज करना अनिवार्य है। SC ने Lalita Kumari case में कहा कि FIR दर्ज करना police का कर्तव्य है, वे मना नहीं कर सकते। FIR में घटना की तारीख, समय, स्थान, आरोपी और गवाहों का विवरण होता है।',
-oldLaw: 'CrPC 154',
-caseLaw: 'Lalita Kumari v. Union of India (2014) - FIR mandatory',
-keyPoints: ['⚖️ Cognizable offence = FIR must be registered', '⚖️ Free copy within 24 hours', '⚖️ Zero FIR - any police station', '⚖️ Magistrate can order investigation under BNSS 175(3)'],
-practicalUse: 'Police station में जाकर या online FIR दर्ज कराना। अगर police FIR न लिखे तो SP या Magistrate को complaint करें।'
-},
-'bnss 480': {
-term: 'BNSS Section 480 - Bail by Magistrate (ज़मानत)',
-definition: 'Magistrate द्वारा अभियुक्त को ज़मानत देना - अगर सज़ा 7 साल से कम है।',
-fullMeaning: 'BNSS 480 के तहत, अगर अपराध की सज़ा 7 साल से कम है, तो Magistrate अभियुक्त को ज़मानत दे सकता है। SC ने Satender Kumar Antil case में कहा कि "bail is rule, jail is exception" - यानी ज़मानत देना नियम है, जेल भेजना अपवाद। बिना गंभीर कारण के ज़मानत नहीं रोकी जा सकती।',
-oldLaw: 'CrPC 437',
-caseLaw: 'Satender Kumar Antil v. CBI (2022) - Bail guidelines',
-keyPoints: ['⚖️ For offences punishable up to 7 years', '⚖️ Magistrate can grant bail', '⚖️ "Bail is rule, jail is exception"', '⚖️ Surety + Bond required'],
-practicalUse: 'अगर आपको या आपके किसी परिचित को 7 साल से कम सज़ा वाले अपराध में गिरफ्तार किया गया है, तो Magistrate से bail ले सकते हैं।'
-},
-'bnss 482': {
-term: 'BNSS Section 482 - Anticipatory Bail (पहले से ज़मानत)',
-definition: 'गिरफ्तारी से पहले अभियुक्त को ज़मानत - ताकि वे गिरफ्तारी से बच सकें।',
-fullMeaning: 'BNSS 482 के तहत, अगर किसी को गिरफ्तारी का डर है कि वह किसी non-bailable offence में फंस सकता है, तो वह Sessions Court या High Court में anticipatory bail के लिए application दायर कर सकता है। अगर bail मिल जाता है, तो police उसे गिरफ्तार नहीं कर सकती। SC ने Gurbaksh Singh case में anticipatory bail के सिद्धांत बनाए।',
-oldLaw: 'CrPC 438',
-caseLaw: 'Gurbaksh Singh v. State of Punjab (1980) - Anticipatory bail principles',
-keyPoints: ['⚖️ Apply BEFORE arrest', '⚖️ Only Sessions Court or High Court', '⚖️ For non-bailable offences', '⚖️ Conditions can be imposed by court'],
-practicalUse: 'अगर आपको लगता है कि आप किसी मामले में फंस सकते हैं और गिरफ्तारी का डर है, तो anticipatory bail लें।'
-},
-'bnss 144': {
-term: 'BNSS Section 144 - Maintenance (भरण-पोषण)',
-definition: 'पत्नी, बच्चों, और माता-पिता को आर्थिक सहारा देने का प्रावधान।',
-fullMeaning: 'BNSS 144 के तहत, पत्नी (जो अपना खर्च नहीं उठा सकती), बच्चे (शादी या आयु तक), और माता-पिता (जो स्वयं निर्वाह नहीं कर सकते) maintenance (भरण-पोषण) के हकदार हैं। SC ने Rajnesh v. Neha (2021) में guidelines बनाईं कि maintenance की राशि पति की income, जीवन-स्तर, और ज़रूरतों के हिसाब से तय हो।',
-oldLaw: 'CrPC 125',
-caseLaw: 'Rajnesh v. Neha (2021) - Maintenance guidelines',
-keyPoints: ['⚖️ Wife, children, parents can claim', '⚖️ Based on income and needs', '⚖️ Interim maintenance available', '⚖️ Default = warrant/attachment'],
-practicalUse: 'अगर पति maintenance नहीं दे रहा है, तो Family Court/Magistrate में application दायर करें।'
-},
-'bnss 193': {
-term: 'BNSS Section 193 - Chargesheet (आरोप पत्र)',
-definition: 'पुलिस द्वारा investigation के बाद court में दायर किया गया chargesheet - जिसमें आरोपों का विवरण होता है।',
-fullMeaning: 'BNSS 193 के तहत, police investigation पूरी करने के बाद court में chargesheet file करती है। इसमें सारे सबूत, गवाह, और आरोपों का विवरण होता है। अगर police 60/90 दिनों में chargesheet file नहीं करती है, तो अभियुक्त default bail (BNSS 479) के हकदार हो जाता है।',
-oldLaw: 'CrPC 173',
-caseLaw: 'State of Karnataka v. L. Muniswamy (1977) - Chargesheet requirements',
-keyPoints: ['⚖️ Filed after investigation', '⚖️ 60/90 days deadline', '⚖️ Default bail if delayed', '⚖️ Contains evidence and witnesses'],
-practicalUse: 'Chargesheet के बाद trial शुरू होती है। अगर chargesheet में कमियाँ हैं तो court में objections दायर करें।'
-},
-'bsa': {
-term: 'Bharatiya Sakshya Adhiniyam (BSA)',
-definition: 'भारतीय साक्ष्य अधिनियम - India का नया evidence law, 1 July 2024 से लागू। इसने Indian Evidence Act 1872 की जगह ली है।',
-fullMeaning: 'BSA भारत में court में साक्ष्य (evidence) को नियंत्रित करता है - कौन सा साक्ष्य admissible है, कौन सा नहीं, electronic evidence के लिए क्या rules हैं, आदि। इसमें 170 sections हैं, जो Evidence Act के 167 sections से अधिक व्यवस्थित और आधुनिक हैं।',
-sections: ['BSA 63 - Electronic Evidence (इलेक्ट्रॉनिक साक्ष्य)', 'BSA 2(1)(d) - Electronic Record definition', 'BSA 63(4) - Certificate for electronic evidence', 'BSA 45 - Expert Opinion'],
-caseLaw: 'Arjun Panditrao Khotkar v. State of Maharashtra (2020) - Electronic evidence certificate mandatory',
-keyPoints: ['✅ 1 July 2024 से लागू', '✅ Evidence Act की जगह BSA', '✅ 170 sections (Evidence Act had 167)', '✅ Electronic evidence special provisions', '✅ Certificate under BSA 63(4) mandatory'],
-practicalUse: 'Court में साक्ष्य पेश करने के लिए BSA के rules का पालन करना ज़रूरी है - खासकर electronic evidence के लिए।'
-},
-'bsa 63': {
-term: 'BSA Section 63 - Electronic Evidence (इलेक्ट्रॉनिक साक्ष्य)',
-definition: 'इलेक्ट्रॉनिक साक्ष्य - WhatsApp chats, emails, CCTV footage, digital documents - को court में पेश करने का provision।',
-fullMeaning: 'BSA 63 के तहत, electronic evidence को court में admissible बनाने के लिए BSA 63(4) के तहत certificate लेना अनिवार्य है। इस certificate में यह प्रमाणित करना होता है कि electronic record को properly stored, preserved, और produced किया गया है। बिना certificate के electronic evidence admissible नहीं होगा। SC ने Arjun Panditrao Khotkar case में यह स्पष्ट किया।',
-oldLaw: 'Evidence Act 65B',
-caseLaw: 'Arjun Panditrao Khotkar v. State of Maharashtra (2020) - Certificate mandatory',
-keyPoints: ['⚖️ WhatsApp chats, emails, CCTV covered', '⚖️ Certificate under BSA 63(4) is MANDATORY', '⚖️ Without certificate - NOT admissible', '⚖️ All digital evidence must follow this'],
-practicalUse: 'अगर आपको court में WhatsApp chat, email, या CCTV footage पेश करना है, तो पहले BSA 63(4) का certificate लें।'
-},
-'civil suit': {
-term: 'Civil Suit (सिविल वाद)',
-definition: 'दो parties के बीच non-criminal (गैर-आपराधिक) विवाद - property, contract, tort, family matters, etc.',
-fullMeaning: 'Civil suit एक नागरिक मुकदमा है जो CPC (Civil Procedure Code) के तहत दायर किया जाता है। इसमें plaintiff (वादी) defendant (प्रतिवादी) के खिलाफ complaint करता है। इसमें damages (क्षतिपूर्ति), injunction (रोक), declaration (घोषणा), specific performance (विशिष्ट अनुपालन) जैसी राहतें माँगी जाती हैं।',
-sections: ['CPC Order 7 Rule 1 - Plaint (वाद पत्र)', 'CPC Order 39 Rule 1 - Temporary Injunction', 'CPC Order 26 - Commissions', 'Specific Relief Act - Specific Performance'],
-caseLaw: 'Surjit Singh v. Harbans Singh (1996) - Civil suit principles',
-keyPoints: ['⚖️ Non-criminal dispute', '⚖️ CPC procedure applies', '⚖️ Relief: damages, injunction, declaration', '⚖️ Appeal to HC/SC'],
-practicalUse: 'Property dispute, contract breach, family disputes (excluding criminal), landlord-tenant, recovery of money - सब civil suit हैं।'
-},
-'injunction': {
-term: 'Injunction (रोक/आदेश)',
-definition: 'Court द्वारा किसी party को कुछ करने या न करने का आदेश - ताकि injustice न हो।',
-fullMeaning: 'Injunction court का एक remedy है जिसमें court किसी party को कुछ करने से रोकता है (prohibitory injunction) या कुछ करने के लिए कहता है (mandatory injunction)। Temporary injunction (अंतरिम रोक) case के दौरान मिलती है, permanent injunction (स्थायी रोक) final judgment के बाद मिलती है।',
-sections: ['CPC Order 39 Rule 1 & 2 - Temporary injunction', 'Specific Relief Act - Permanent injunction'],
-caseLaw: 'Dalpat Kumar v. Prahlad Singh (1992) - Injunction principles',
-keyPoints: ['⚖️ Prohibitory vs Mandatory', '⚖️ Temporary vs Permanent', '⚖️ Prima facie case required', '⚖️ Balance of convenience', '⚖️ Irreparable injury'],
-practicalUse: 'अगर कोई आपकी property पर कब्ज़ा करने वाला है या कोई काम कर रहा है जो आपको नुकसान पहुँचा सकता है, तो court से injunction लें।'
-},
-'divorce': {
-term: 'Divorce (तलाक)',
-definition: 'शादी को legally समाप्त करना - Hindu Marriage Act, Special Marriage Act, या Muslim Personal Law के तहत।',
-fullMeaning: 'Divorce शादी को legally खत्म करने की प्रक्रिया है। Hindu Marriage Act 1955 के तहत - cruelty, adultery, desertion, mental illness, conversion, आदि grounds पर divorce मिलता है। Muslim law के तहत Talaq, Khula, Mubarat के माध्यम से divorce होता है। Special Marriage Act 1954 के तहत mutual consent से भी divorce हो सकता है।',
-sections: ['Hindu Marriage Act - Section 13 (Divorce grounds)', 'Hindu Marriage Act - Section 13B (Mutual divorce)', 'Special Marriage Act - Section 28 (Divorce)', 'Muslim Personal Law - Talaq'],
-caseLaw: 'Shayara Bano v. UOI (2017) - Triple Talaq unconstitutional',
-keyPoints: ['⚖️ Grounds: cruelty, adultery, desertion, mental illness', '⚖️ Mutual consent divorce - 1 year separation + 6 months waiting', '⚖️ Maintenance under BNSS 144', '⚖️ Child custody - guardianship court'],
-practicalUse: 'अगर आप शादी से अलग होना चाहते हैं, तो अपने grounds के अनुसार divorce petition दायर करें - mutual या contested।'
-},
-'maintenance': {
-term: 'Maintenance (भरण-पोषण)',
-definition: 'पत्नी, बच्चों, और माता-पिता को आर्थिक सहारा - ताकि वे अपना निर्वाह कर सकें।',
-fullMeaning: 'Maintenance का अर्थ है आर्थिक सहारा। BNSS 144 के तहत पत्नी (जो अपना खर्च नहीं उठा सकती), बच्चे (शादी या आयु तक), और माता-पिता (जो स्वयं निर्वाह नहीं कर सकते) maintenance के हकदार हैं। Hindu Adoption and Maintenance Act 1956 भी maintenance का provision है। Interim maintenance (अंतरिम भरण-पोषण) case के दौरान मिलता है।',
-sections: ['BNSS 144 - Maintenance (पत्नी, बच्चे, माता-पिता)', 'Hindu Adoption and Maintenance Act - Section 18 to 23', 'Hindu Marriage Act - Section 24 (Interim maintenance)'],
-caseLaw: 'Rajnesh v. Neha (2021) - SC maintenance guidelines',
-keyPoints: ['⚖️ Wife, children, parents eligible', '⚖️ Based on husband\'s income and needs', '⚖️ Interim maintenance available', '⚖️ Default = warrant/attachment'],
-practicalUse: 'अगर पति maintenance नहीं दे रहा है, तो Family Court/Magistrate में BNSS 144 के तहत application दायर करें।'
-},
-'writ': {
-term: 'Writ (रिट)',
-definition: 'Constitution के Articles 32 (SC) और 226 (HC) के तहत मिलने वाला constitutional remedy - fundamental rights के enforcement के लिए।',
-fullMeaning: 'Writ एक constitutional remedy है जो Supreme Court (Article 32) और High Court (Article 226) के पास है। 5 types की writs होती हैं: Habeas Corpus (unlawful detention से रिहाई), Mandamus (public duty का enforcement), Prohibition (lower court को jurisdiction से रोकना), Certiorari (lower court के order को quash करना), और Quo Warranto (public office के usurper को हटाना)।',
-sections: ['Constitution Article 32 - SC writ jurisdiction', 'Constitution Article 226 - HC writ jurisdiction', 'Constitution Article 227 - HC supervisory jurisdiction'],
-caseLaw: 'M.C. Mehta v. UOI (1986) - Environmental writ',
-keyPoints: ['⚖️ 5 types: Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto', '⚖️ Article 32 - SC, Article 226 - HC', '⚖️ For enforcement of fundamental rights', '⚖️ Summary procedure, fast remedy'],
-practicalUse: 'अगर किसी fundamental right का उल्लंघन हुआ है, तो SC/HC में writ petition दायर करें।'
-},
-'habeas corpus': {
-term: 'Habeas Corpus (बंदी प्रत्यक्षीकरण)',
-definition: 'Unlawful detention (गैरकानूनी हिरासत) से व्यक्ति को रिहा कराने के लिए writ।',
-fullMeaning: 'Habeas Corpus एक Latin phrase है जिसका अर्थ है "हम आपके पास शरीर रखते हैं"। यह writ उस व्यक्ति की तरफ से दायर की जाती है जिसे unlawfully detained (गैरकानूनी रूप से हिरासत में रखा) गया है। Court detention के आधार की जाँच करता है और अगर detention unlawful है तो release का order देता है। यह fundamental right है - Article 21 का part।',
-sections: ['Constitution Article 32 & 226 - Habeas Corpus', 'CrPC/BNSS - Unlawful detention provisions'],
-caseLaw: 'Rudul Sah v. State of Bihar (1983) - Unlawful detention compensation',
-keyPoints: ['⚖️ For unlawful detention', '⚖️ SC (Art 32) and HC (Art 226)', '⚖️ No formal application required - letter can be filed', '⚖️ Fastest remedy for personal liberty'],
-practicalUse: 'अगर किसी को बिना कानूनी आधार के जेल या police custody में रखा गया है, तो Habeas Corpus petition दायर करें।'
-},
-'article 21': {
-term: 'Article 21 - Right to Life and Personal Liberty (जीवन और व्यक्तिगत स्वतंत्रता का अधिकार)',
-definition: 'Constitution का सबसे महत्वपूर्ण fundamental right - "No person shall be deprived of his life or personal liberty except according to procedure established by law"',
-fullMeaning: 'Article 21 Constitution का heart है। यह right to life और personal liberty देता है। SC ने इसका बहुत wide interpretation किया है - इसमें right to food, right to shelter, right to education, right to health, right to pollution-free environment, right to speedy trial, right to legal aid, सब आते हैं। यह सिर्फ़ "physical existence" नहीं बल्कि "meaningful life" का अधिकार है।',
-sections: ['Constitution Article 21 - Fundamental Right', 'Constitution Article 22 - Protection against arrest', 'BNSS/CrPC - Procedure for arrest'],
-caseLaw: 'Maneka Gandhi v. UOI (1978) - Article 21 expanded',
-keyPoints: ['⚖️ Right to life AND personal liberty', '⚖️ Only "procedure established by law" can deprive', '⚖️ Includes: food, shelter, education, health, pollution-free environment', '⚖️ Speedy trial, legal aid included'],
-practicalUse: 'जब भी किसी fundamental right का उल्लंघन हो, Article 21 के तहत SC/HC जाएँ।'
-},
-'property dispute': {
-term: 'Property Dispute (संपत्ति विवाद)',
-definition: 'Property (जमीन, मकान, फ्लैट, आदि) पर विवाद - ownership, possession, inheritance, partition, आदि।',
-fullMeaning: 'Property dispute civil + criminal दोनों हो सकता है। Civil side - title suit (ownership), partition suit (बँटवारा), injunction (रोक), specific performance (विशिष्ट अनुपालन)। Criminal side - trespass (अतिचार), house-trespass, mischief, cheating। Revenue side - mutation (खतौनी), SDM/Tehsildar proceedings। Inheritance - Hindu Succession Act या Muslim Personal Law।',
-sections: ['TP Act - Transfer of Property Act 1882', 'Registration Act 1908 - Document registration', 'CPC - Civil suit procedure', 'BNSS 173 - FIR in criminal trespass', 'Revenue Code - Mutation/Partition'],
-caseLaw: 'A. Jayachandran v. State (2023) - Property dispute principles',
-keyPoints: ['⚖️ Civil + Criminal both possible', '⚖️ Title suit for ownership', '⚖️ Injunction for restraining', '⚖️ FIR for criminal trespass', '⚖️ Revenue proceedings for mutation'],
-practicalUse: 'अगर आपकी property पर विवाद है या कब्ज़ा हो गया है, तो civil court में title suit + injunction + criminal court में FIR करें।'
-},
-'cyber crime': {
-term: 'Cyber Crime (साइबर अपराध)',
-definition: 'Internet, computer, mobile, या digital medium के माध्यम से होने वाला अपराध - phishing, hacking, identity theft, online fraud, cyber bullying, आदि।',
-fullMeaning: 'Cyber crime IT Act 2000 + BNS के तहत punishable है। Common cyber crimes: UPI fraud, OTP fraud, phishing, hacking, identity theft, cyber bullying, online defamation, ransomware, data theft, आदि। Cyber Crime Cell (1930) में complaint दर्ज करें। Electronic evidence के लिए BSA 63 certificate mandatory है।',
-sections: ['IT Act 2000 - Section 43, 66, 66B, 66C, 66D, 67', 'BNS 318 - Cheating (online fraud)', 'BSA 63 - Electronic evidence', 'BNSS 173 - FIR'],
-caseLaw: 'Arjun Panditrao Khotkar v. State (2020) - Electronic evidence',
-keyPoints: ['⚖️ UPI fraud, OTP fraud, phishing, hacking', '⚖️ Cyber Crime Cell - 1930', '⚖️ nationalcybercrime.gov.in', '⚖️ BSA 63 certificate mandatory', '⚖️ FIR + 1930 complaint'],
-practicalUse: 'अगर आपके साथ online fraud हुआ है - UPI scam, OTP fraud, phishing, आदि - तो 1930 पर call करें और nationalcybercrime.gov.in पर complaint दर्ज करें।'
-},
-'affidavit': {
-term: 'Affidavit (शपथ पत्र)',
-definition: 'एक लिखित बयान जो declarant (बयान देने वाला) court में साक्ष्य के रूप में पेश करता है, और उसकी सत्यता की oath/affirmation ली जाती है।',
-fullMeaning: 'Affidavit एक sworn statement है जो court में evidence के रूप में पेश किया जाता है। इसमें declarant अपने बयान की सत्यता की oath/affirmation करता है। इसे Notary Public, Oath Commissioner, या court के officer के सामने sign किया जाता है। Affidavit का use interim applications, bail applications, stay applications, आदि में होता है।',
-sections: ['CPC Order 19 - Affidavit rules', 'Code of Civil Procedure - Evidence', 'Notaries Act - Notary Public'],
-caseLaw: 'R.K. Anand v. Registrar, Delhi HC (2009) - Affidavit rules',
-keyPoints: ['⚖️ Written statement under oath', '⚖️ Must be sworn before Notary/Oath Commissioner', '⚖️ Used in bail, stay, interim applications', '⚖️ Perjury for false affidavit (BNS 229)'],
-practicalUse: 'Court में किसी भी application के लिए affidavit ज़रूरी है - bail, stay, injunction, आदि।'
-},
-'appeal': {
-term: 'Appeal (अपील)',
-definition: 'Lower court के decision को higher court में challenge करना - fresh hearing के लिए।',
-fullMeaning: 'Appeal higher court में lower court के decision को challenge करने की प्रक्रिया है। Criminal appeals - Sessions Court, High Court, Supreme Court। Civil appeals - District Court, High Court, Supreme Court। Appeal में court decision के merits की review होती है। Limitation period (समय सीमा) - 30/60/90 days depending on case।',
-sections: ['CrPC/BNSS - Criminal appeals', 'CPC - Civil appeals', 'Constitution Article 132-136 - SC appeals', 'Limitation Act - Time limits'],
-caseLaw: 'K.M. Nanavati v. State of Maharashtra (1961) - Appeal principles',
-keyPoints: ['⚖️ Higher court review', '⚖️ Criminal vs Civil appeals', '⚖️ Limitation period - 30/60/90 days', '⚖️ Fresh hearing - merits considered'],
-practicalUse: 'अगर आपको lower court के decision से संतुष्ट नहीं हैं, तो appeal दायर करें - पर time limit का ध्यान रखें।'
-},
-'bail': {
-term: 'Bail (ज़मानत)',
-definition: 'अभियुक्त को court द्वारा जेल से रिहा करना - ताकि वह trial के लिए उपलब्ध रहे और अपनी बात रख सके।',
-fullMeaning: 'Bail अभियुक्त को court द्वारा जेल से रिहा करने की प्रक्रिया है। यह अभियुक्त का right है - "bail is rule, jail is exception"। 3 types: BNSS 480 - Magistrate bail (up to 7 years), BNSS 482 - Anticipatory bail (before arrest), BNSS 483 - Sessions/HC bail (serious offences)। Conditions: surety, bond, regular attendance, no evidence tampering।',
-sections: ['BNSS 480 - Magistrate bail', 'BNSS 482 - Anticipatory bail', 'BNSS 483 - Sessions/HC bail', 'BNSS 479 - Default bail'],
-caseLaw: 'Satender Kumar Antil v. CBI (2022) - Bail guidelines',
-keyPoints: ['⚖️ "Bail is rule, jail is exception"', '⚖️ BNSS 480 - Magistrate (up to 7 years)', '⚖️ BNSS 482 - Anticipatory (before arrest)', '⚖️ Surety + Bond required'],
-practicalUse: 'अगर आपको या आपके परिचित को गिरफ्तार किया गया है, तो BNSS के तहत bail लें।'
-},
-'limitation': {
-term: 'Limitation Act (समय सीमा)',
-definition: 'Court में case दायर करने की समय सीमा - अगर time limit cross हो जाए तो case दायर नहीं किया जा सकता।',
-fullMeaning: 'Limitation Act 1963 case दायर करने की समय सीमा (limitation period) निर्धारित करता है। Civil cases: 3 years (most), 12 years (property), 30 years (government property)। Criminal cases: varying - 1 year (defamation), 3 years (cheating), no limit (murder, rape, etc.)। अगर limitation period cross हो जाए तो case दायर नहीं किया जा सकता - court "barred by limitation" कहता है।',
-sections: ['Limitation Act 1963 - Schedule', 'Article 137 - 3 years civil', 'Article 65 - 12 years property', 'CrPC/BNSS - Criminal limitation'],
-caseLaw: 'M.P. Steel Corp. v. CCE (2015) - Limitation principles',
-keyPoints: ['⚖️ Time limit to file case', '⚖️ 3 years - most civil suits', '⚖️ 12 years - property (possession)', '⚖️ Criminal - varies by offence', '⚖️ Delay = case barred'],
-practicalUse: 'किसी भी case के लिए limitation period check करें - अगर time cross हो गया है तो case दायर न करें।'
-},
-'contract': {
-term: 'Contract (अनुबंध/समझौता)',
-definition: 'Two or more parties के बीच legally enforceable agreement - जिसमें offer, acceptance, consideration (प्रतिफल), और intention to create legal relations हो।',
-fullMeaning: 'Contract Indian Contract Act 1872 के तहत regulated है। Essential elements: Offer (प्रस्ताव), Acceptance (स्वीकृति), Consideration (प्रतिफल - कुछ exchange), Intention to create legal relations (कानूनी संबंध बनाने का इरादा), Capacity (क्षमता - adult, sound mind), Free consent (स्वतंत्र सहमति), Lawful object (कानूनी उद्देश्य)। Void contract (शून्य अनुबंध), Voidable contract (शून्यकरणीय अनुबंध), Enforceable contract (प्रवर्तनीय अनुबंध)।',
-sections: ['Indian Contract Act 1872 - Section 2(h) - Contract definition', 'Section 10 - Essential elements', 'Section 14-15 - Free consent', 'Section 17-18 - Fraud and misrepresentation', 'Section 73 - Damages', 'Section 74 - Penalty'],
-caseLaw: 'Balfour v. Balfour (1919) - Intention to create legal relations',
-keyPoints: ['⚖️ Offer + Acceptance = Agreement', '⚖️ Consideration is MUST', '⚖️ Free consent required - no fraud/coercion/undue influence', '⚖️ Lawful object - illegal contract is void', '⚖️ Damages for breach - Section 73'],
-practicalUse: 'Property sale, business partnership, service agreement, loan agreement - सब contract के examples हैं।'
-},
-'hindu marriage act': {
-term: 'Hindu Marriage Act 1955 (हिंदू विवाह अधिनियम)',
-definition: 'Hindus के marriage और divorce को regulate करने वाला act - 1955 में passed।',
-fullMeaning: 'Hindu Marriage Act 1955 Hindus के marriage और divorce को regulate करता है। Conditions for marriage: Section 5 - bridegroom 21, bride 18, no prohibited degree, no sapinda relationship। Divorce: Section 13 - cruelty, adultery, desertion, mental illness, conversion, etc. Section 13B - mutual consent divorce। Section 24 - interim maintenance। Section 25 - permanent alimony। Restitution of conjugal rights (वैवाहिक अधिकारों की पुनर्स्थापना) - Section 9।',
-sections: ['Section 5 - Conditions for valid marriage', 'Section 9 - Restitution of conjugal rights', 'Section 13 - Divorce grounds', 'Section 13B - Mutual consent divorce', 'Section 24 - Interim maintenance', 'Section 25 - Permanent alimony'],
-caseLaw: 'Rashmi Kapoor v. UOI (2023) - Hindu Marriage Act interpretation',
-keyPoints: ['⚖️ Bridegroom 21, bride 18', '⚖️ No prohibited degree, no sapinda', '⚖️ Divorce grounds - cruelty, adultery, desertion', '⚖️ Mutual consent divorce - 1 year separation', '⚖️ Maintenance under Section 24/25'],
-practicalUse: 'Hindu marriage, divorce, maintenance, child custody - सब इस act के तहत।'
-},
-'muslim law': {
-term: 'Muslim Personal Law (मुस्लिम व्यक्तिगत कानून)',
-definition: 'Muslims के personal matters - marriage, divorce, inheritance, maintenance - को regulate करने वाला law।',
-fullMeaning: 'Muslim Personal Law Muslims के marriage, divorce, inheritance, maintenance को regulate करता है। Marriage - Nikah (contract), Mahr (dower)। Divorce - Talaq (by husband), Khula (by wife), Mubarat (mutual)। Triple Talaq - Shayara Bano case (2017) में unconstitutional। Maintenance - under Muslim Women (Protection of Rights on Divorce) Act 1986। Inheritance - per Muslim Personal Law (Shariat) - shares prescribed in Quran।',
-sections: ['Muslim Personal Law - Nikah (Marriage)', 'Muslim Personal Law - Talaq (Divorce)', 'Muslim Women Act 1986 - Maintenance', 'Shariat Act 1937 - Application'],
-caseLaw: 'Shayara Bano v. UOI (2017) - Triple Talaq unconstitutional',
-keyPoints: ['⚖️ Marriage - Nikah (contract)', '⚖️ Divorce - Talaq, Khula, Mubarat', '⚖️ Triple Talaq - unconstitutional (2017)', '⚖️ Maintenance - Muslim Women Act', '⚖️ Inheritance - per Shariat'],
-practicalUse: 'Muslims के marriage, divorce, maintenance, inheritance - सब Muslim Personal Law के तहत।'
-},
-'plaint': {
-term: 'Plaint (वाद पत्र)',
-definition: 'Civil suit का पहला document - जिसमें plaintiff (वादी) अपनी complaint और माँगी गई relief (राहत) लिखता है।',
-fullMeaning: 'Plaint civil suit का first document है जो plaintiff court में file करता है। CPC Order 7 Rule 1 के अनुसार plaint में - plaintiff और defendant का name, address, facts (तथ्य), cause of action (वाद का कारण), valuation (मूल्यांकन), relief (राहत) - सब कुछ होना चाहिए। Plaint file करने के बाद court summon (समन) जारी करती है।',
-sections: ['CPC Order 7 Rule 1 - Plaint contents', 'CPC Order 7 Rule 11 - Rejection of plaint', 'CPC - Cause of action, valuation, relief'],
-caseLaw: 'U.P. State Road Transport Corp. v. State (2023) - Plaint principles',
-keyPoints: ['⚖️ First document in civil suit', '⚖️ Must contain: facts, cause of action, valuation, relief', '⚖️ Filed by plaintiff', '⚖️ Court issues summons after filing'],
-practicalUse: 'Civil suit दायर करने के लिए plaint तैयार करें - advocate इसे draft करेगा।'
-}
+    // BNS Sections
+    'bns': {
+        term: 'Bharatiya Nyaya Sanhita (BNS)',
+        definition: 'भारतीय न्याय संहिता - India का नया आपराधिक कानून, 1 July 2024 से लागू। इसने Indian Penal Code (IPC) 1860 की जगह ली है।',
+        fullMeaning: 'BNS भारत का मुख्य आपराधिक कानून है जो अपराधों की परिभाषा और सज़ाएँ निर्धारित करता है। यह 358 sections में विभाजित है, जो IPC के 511 sections से ज़्यादा संक्षिप्त और आधुनिक है।',
+        sections: ['BNS 103 - Murder (हत्या) - Death or life imprisonment', 'BNS 318 - Cheating (धोखाधड़ी) - Up to 7 years', 'BNS 303 - Theft (चोरी) - Up to 3 years', 'BNS 356 - Defamation (मानहानि) - Up to 2 years', 'BNS 64 - Rape (बलात्कार) - Minimum 10 years', 'BNS 85 - Cruelty by Husband (पति द्वारा क्रूरता) - Up to 3 years'],
+        caseLaw: 'Satender Kumar Antil v. CBI (2022) - SC guidelines on bail under BNS',
+        keyPoints: ['✅ 1 July 2024 से लागू', '✅ IPC की जगह BNS', '✅ 358 sections (IPC had 511)', '✅ More gender-neutral language', '✅ Faster trial provisions'],
+        practicalUse: 'BNS का उपयोग सभी आपराधिक मामलों में किया जाता है - चोरी, हत्या, धोखाधड़ी, बलात्कार, मानहानि आदि।'
+    },
+    'bns 103': {
+        term: 'BNS Section 103 - Murder (हत्या)',
+        definition: 'हत्या का सबसे गंभीर section। जानबूझकर किसी की मौत करना murder कहलाता है।',
+        fullMeaning: 'BNS 103 के तहत murder तब होती है जब कोई व्यक्ति जानबूझकर या इतनी लापरवाही से कार्य करता है जिससे किसी की मौत हो जाए। इसमें "rarest of rare" doctrine लागू होती है।',
+        punishment: 'मौत की सज़ा या आजीवन कारावास + जुर्माना',
+        oldLaw: 'IPC 302',
+        caseLaw: 'Bachan Singh v. State of Punjab (1980) - SC ने "rarest of rare" doctrine बनाई',
+        keyPoints: ['⚖️ Intent to kill या knowledge that death is likely', '⚖️ "Rarest of rare" cases में death penalty', '⚖️ Otherwise life imprisonment', '⚖️ No bail from Magistrate - only Sessions/HC'],
+        practicalUse: 'हत्या के मामलों में यह section लगता है। अगर आरोपी ने जानबूझकर हत्या की है तो यह section apply होगा।'
+    },
+    'bns 318': {
+        term: 'BNS Section 318 - Cheating (धोखाधड़ी)',
+        definition: 'किसी को धोखा देकर उसकी संपत्ति या अधिकार हड़पना cheating कहलाता है।',
+        fullMeaning: 'BNS 318 के तहत cheating तब होती है जब कोई व्यक्ति किसी को धोखा देता है (fraudulently या dishonestly) और उसकी संपत्ति या किसी अधिकार को हड़प लेता है। इसके लिए "intent to deceive" (धोखा देने की मंशा) साबित करना ज़रूरी है - सिर्फ़ वादा पूरा न करना cheating नहीं है।',
+        punishment: 'अधिकतम 7 साल का कारावास + जुर्माना',
+        oldLaw: 'IPC 420',
+        caseLaw: 'Satender Kumar Antil v. CBI (2022) - SC guidelines on bail in cheating cases',
+        keyPoints: ['⚖️ Intent to deceive is MUST', '⚖️ Mere failure to repay loan is NOT cheating', '⚖️ Can be bailable if punishment < 7 years', '⚖️ Evidence: documents, messages, bank statements'],
+        practicalUse: 'धोखाधड़ी के मामलों में - UPI fraud, property fraud, fake promises, investment scams, online fraud।'
+    },
+    'bns 303': {
+        term: 'BNS Section 303 - Theft (चोरी)',
+        definition: 'बिना अनुमति के किसी की movable property (चल संपत्ति) लेना theft कहलाता है।',
+        fullMeaning: 'BNS 303 के तहत theft तब होती है जब कोई व्यक्ति बिना मालिक की सहमति के कोई चल संपत्ति (movable property) ले लेता है और उसे हटाने का इरादा रखता है। इसमें "moving" property के साथ "taking" ज़रूरी है।',
+        punishment: 'अधिकतम 3 साल का कारावास + जुर्माना',
+        oldLaw: 'IPC 379',
+        caseLaw: 'K.N. Mehra v. State of Rajasthan (1959) - Theft की definition पर landmark judgment',
+        keyPoints: ['⚖️ Movable property ONLY', '⚖️ Without consent of owner', '⚖️ Intent to take away permanently', '⚖️ Bailable offence'],
+        practicalUse: 'चोरी, पिकपॉकेटिंग, साइकिल/मोबाइल चोरी, shoplifting - सब इसी में आते हैं।'
+    },
+    'bns 356': {
+        term: 'BNS Section 356 - Defamation (मानहानि)',
+        definition: 'किसी की reputation (प्रतिष्ठा) को नुकसान पहुँचाना defamation कहलाता है।',
+        fullMeaning: 'BNS 356 के तहत defamation तब होती है जब कोई व्यक्ति किसी दूसरे के बारे में ऐसा बयान (spoken या written) देता है जिससे उसकी प्रतिष्ठा को नुकसान पहुँचे। यह civil और criminal दोनों हो सकता है। Truth (सच) एक valid defence है।',
+        punishment: 'अधिकतम 2 साल का कारावास + जुर्माना (या कोई एक)',
+        oldLaw: 'IPC 499',
+        caseLaw: 'Subramanian Swamy v. Union of India (2016) - SC ने criminal defamation को constitutional रखा',
+        keyPoints: ['⚖️ Spoken (slander) या written (libel)', '⚖️ Truth is a defence', '⚖️ Public interest is a defence', '⚖️ Civil defamation: compensation, Criminal defamation: jail'],
+        practicalUse: 'Social media posts, news articles, public statements, office gossip - सब defamation का कारण बन सकते हैं।'
+    },
+    'bns 85': {
+        term: 'BNS Section 85 - Cruelty by Husband (पति द्वारा क्रूरता)',
+        definition: 'पति या उसके परिवार द्वारा पत्नी पर क्रूरता या उत्पीड़न करना।',
+        fullMeaning: 'BNS 85 के तहत cruelty तब होती है जब पति या उसके परिवार के सदस्य पत्नी के साथ शारीरिक या मानसिक क्रूरता करते हैं - दहेज के लिए परेशान करना, पीटना, अपमान करना, आर्थिक रूप से प्रताड़ित करना, आदि। यह एक "cognizable" offence है।',
+        punishment: 'अधिकतम 3 साल का कारावास + जुर्माना',
+        oldLaw: 'IPC 498A',
+        caseLaw: 'Rajnesh v. Neha (2021) - SC guidelines on maintenance and cruelty',
+        keyPoints: ['⚖️ Physical + Mental cruelty both covered', '⚖️ Dowry harassment included', '⚖️ Cognizable offence - police can arrest without warrant', '⚖️ Non-bailable in some cases'],
+        practicalUse: 'दहेज उत्पीड़न, पति द्वारा मारपीट, मानसिक प्रताड़ना, आर्थिक उत्पीड़न - सब इस section में आते हैं।'
+    },
+    'bns 64': {
+        term: 'BNS Section 64 - Rape (बलात्कार)',
+        definition: 'बिना सहमति के sexual intercourse करना rape कहलाता है।',
+        fullMeaning: 'BNS 64 के तहत rape तब होता है जब कोई पुरुष किसी महिला के साथ उसकी सहमति के बिना sexual intercourse करता है। 1 July 2024 के बाद यह section लागू है। इसमें न्यूनतम 10 साल की सज़ा है। Consent (सहमति) की उम्र 18 साल है।',
+        punishment: 'न्यूनतम 10 साल, आजीवन कारावास तक + जुर्माना',
+        oldLaw: 'IPC 375',
+        caseLaw: 'Nirbhaya case (2012) - Led to death penalty in rape cases',
+        keyPoints: ['⚖️ Lack of consent is key', '⚖️ 18 years is age of consent', '⚖️ Minimum 10 years imprisonment', '⚖️ Death penalty in "rarest of rare" cases'],
+        practicalUse: 'यह section पॉक्सो (POCSO) से अलग है - POCSO बच्चों के लिए है, यह वयस्कों के लिए।'
+    },
+    // BNSS Sections
+    'bnss': {
+        term: 'Bharatiya Nagarik Suraksha Sanhita (BNSS)',
+        definition: 'भारतीय नागरिक सुरक्षा संहिता - India का नया criminal procedure code, 1 July 2024 से लागू। इसने CrPC 1973 की जगह ली है।',
+        fullMeaning: 'BNSS भारत की criminal procedure (आपराधिक प्रक्रिया) को नियंत्रित करता है - FIR से लेकर trial तक की सारी प्रक्रिया। इसमें 531 sections हैं, जो CrPC के 484 sections से अधिक हैं और अधिक व्यवस्थित हैं।',
+        sections: ['BNSS 173 - FIR (प्राथमिकी)', 'BNSS 175(3) - Magistrate investigation order', 'BNSS 480 - Bail by Magistrate (ज़मानत)', 'BNSS 482 - Anticipatory Bail (पहले से ज़मानत)', 'BNSS 483 - Sessions/HC Bail', 'BNSS 144 - Maintenance (भरण-पोषण)', 'BNSS 193 - Chargesheet (आरोप पत्र)'],
+        caseLaw: 'Lalita Kumari v. UOI (2014) - FIR mandatory in cognizable offences',
+        keyPoints: ['✅ 1 July 2024 से लागू', '✅ CrPC की जगह BNSS', '✅ 531 sections (CrPC had 484)', '✅ Time-bound trials (60/90 days)', '✅ Video-conferencing provisions'],
+        practicalUse: 'सभी criminal cases की procedure BNSS के तहत चलती है - FIR से लेकर appeal तक।'
+    },
+    'bnss 173': {
+        term: 'BNSS Section 173 - FIR (प्राथमिकी)',
+        definition: 'संज्ञेय अपराध (cognizable offence) की जानकारी मिलने पर police द्वारा दर्ज की गई first information report।',
+        fullMeaning: 'BNSS 173 के तहत, अगर police को किसी cognizable offence (जिसमें बिना warrant गिरफ्तारी हो सकती है) की जानकारी मिलती है, तो उसे FIR दर्ज करना अनिवार्य है। SC ने Lalita Kumari case में कहा कि FIR दर्ज करना police का कर्तव्य है, वे मना नहीं कर सकते। FIR में घटना की तारीख, समय, स्थान, आरोपी और गवाहों का विवरण होता है।',
+        oldLaw: 'CrPC 154',
+        caseLaw: 'Lalita Kumari v. Union of India (2014) - FIR mandatory',
+        keyPoints: ['⚖️ Cognizable offence = FIR must be registered', '⚖️ Free copy within 24 hours', '⚖️ Zero FIR - any police station', '⚖️ Magistrate can order investigation under BNSS 175(3)'],
+        practicalUse: 'Police station में जाकर या online FIR दर्ज कराना। अगर police FIR न लिखे तो SP या Magistrate को complaint करें।'
+    },
+    'bnss 480': {
+        term: 'BNSS Section 480 - Bail by Magistrate (ज़मानत)',
+        definition: 'Magistrate द्वारा अभियुक्त को ज़मानत देना - अगर सज़ा 7 साल से कम है।',
+        fullMeaning: 'BNSS 480 के तहत, अगर अपराध की सज़ा 7 साल से कम है, तो Magistrate अभियुक्त को ज़मानत दे सकता है। SC ने Satender Kumar Antil case में कहा कि "bail is rule, jail is exception" - यानी ज़मानत देना नियम है, जेल भेजना अपवाद। बिना गंभीर कारण के ज़मानत नहीं रोकी जा सकती।',
+        oldLaw: 'CrPC 437',
+        caseLaw: 'Satender Kumar Antil v. CBI (2022) - Bail guidelines',
+        keyPoints: ['⚖️ For offences punishable up to 7 years', '⚖️ Magistrate can grant bail', '⚖️ "Bail is rule, jail is exception"', '⚖️ Surety + Bond required'],
+        practicalUse: 'अगर आपको या आपके किसी परिचित को 7 साल से कम सज़ा वाले अपराध में गिरफ्तार किया गया है, तो Magistrate से bail ले सकते हैं।'
+    },
+    'bnss 482': {
+        term: 'BNSS Section 482 - Anticipatory Bail (पहले से ज़मानत)',
+        definition: 'गिरफ्तारी से पहले अभियुक्त को ज़मानत - ताकि वे गिरफ्तारी से बच सकें।',
+        fullMeaning: 'BNSS 482 के तहत, अगर किसी को गिरफ्तारी का डर है कि वह किसी non-bailable offence में फंस सकता है, तो वह Sessions Court या High Court में anticipatory bail के लिए application दायर कर सकता है। अगर bail मिल जाता है, तो police उसे गिरफ्तार नहीं कर सकती। SC ने Gurbaksh Singh case में anticipatory bail के सिद्धांत बनाए।',
+        oldLaw: 'CrPC 438',
+        caseLaw: 'Gurbaksh Singh v. State of Punjab (1980) - Anticipatory bail principles',
+        keyPoints: ['⚖️ Apply BEFORE arrest', '⚖️ Only Sessions Court or High Court', '⚖️ For non-bailable offences', '⚖️ Conditions can be imposed by court'],
+        practicalUse: 'अगर आपको लगता है कि आप किसी मामले में फंस सकते हैं और गिरफ्तारी का डर है, तो anticipatory bail लें।'
+    },
+    'bnss 144': {
+        term: 'BNSS Section 144 - Maintenance (भरण-पोषण)',
+        definition: 'पत्नी, बच्चों, और माता-पिता को आर्थिक सहारा देने का प्रावधान।',
+        fullMeaning: 'BNSS 144 के तहत, पत्नी (जो अपना खर्च नहीं उठा सकती), बच्चे (शादी या आयु तक), और माता-पिता (जो स्वयं निर्वाह नहीं कर सकते) maintenance (भरण-पोषण) के हकदार हैं। SC ने Rajnesh v. Neha (2021) में guidelines बनाईं कि maintenance की राशि पति की income, जीवन-स्तर, और ज़रूरतों के हिसाब से तय हो।',
+        oldLaw: 'CrPC 125',
+        caseLaw: 'Rajnesh v. Neha (2021) - Maintenance guidelines',
+        keyPoints: ['⚖️ Wife, children, parents can claim', '⚖️ Based on income and needs', '⚖️ Interim maintenance available', '⚖️ Default = warrant/attachment'],
+        practicalUse: 'अगर पति maintenance नहीं दे रहा है, तो Family Court/Magistrate में application दायर करें।'
+    },
+    'bnss 193': {
+        term: 'BNSS Section 193 - Chargesheet (आरोप पत्र)',
+        definition: 'पुलिस द्वारा investigation के बाद court में दायर किया गया chargesheet - जिसमें आरोपों का विवरण होता है।',
+        fullMeaning: 'BNSS 193 के तहत, police investigation पूरी करने के बाद court में chargesheet file करती है। इसमें सारे सबूत, गवाह, और आरोपों का विवरण होता है। अगर police 60/90 दिनों में chargesheet file नहीं करती है, तो अभियुक्त default bail (BNSS 479) के हकदार हो जाता है।',
+        oldLaw: 'CrPC 173',
+        caseLaw: 'State of Karnataka v. L. Muniswamy (1977) - Chargesheet requirements',
+        keyPoints: ['⚖️ Filed after investigation', '⚖️ 60/90 days deadline', '⚖️ Default bail if delayed', '⚖️ Contains evidence and witnesses'],
+        practicalUse: 'Chargesheet के बाद trial शुरू होती है। अगर chargesheet में कमियाँ हैं तो court में objections दायर करें।'
+    },
+    // BSA Sections
+    'bsa': {
+        term: 'Bharatiya Sakshya Adhiniyam (BSA)',
+        definition: 'भारतीय साक्ष्य अधिनियम - India का नया evidence law, 1 July 2024 से लागू। इसने Indian Evidence Act 1872 की जगह ली है।',
+        fullMeaning: 'BSA भारत में court में साक्ष्य (evidence) को नियंत्रित करता है - कौन सा साक्ष्य admissible है, कौन सा नहीं, electronic evidence के लिए क्या rules हैं, आदि। इसमें 170 sections हैं, जो Evidence Act के 167 sections से अधिक व्यवस्थित और आधुनिक हैं।',
+        sections: ['BSA 63 - Electronic Evidence (इलेक्ट्रॉनिक साक्ष्य)', 'BSA 2(1)(d) - Electronic Record definition', 'BSA 63(4) - Certificate for electronic evidence', 'BSA 45 - Expert Opinion'],
+        caseLaw: 'Arjun Panditrao Khotkar v. State of Maharashtra (2020) - Electronic evidence certificate mandatory',
+        keyPoints: ['✅ 1 July 2024 से लागू', '✅ Evidence Act की जगह BSA', '✅ 170 sections (Evidence Act had 167)', '✅ Electronic evidence special provisions', '✅ Certificate under BSA 63(4) mandatory'],
+        practicalUse: 'Court में साक्ष्य पेश करने के लिए BSA के rules का पालन करना ज़रूरी है - खासकर electronic evidence के लिए।'
+    },
+    'bsa 63': {
+        term: 'BSA Section 63 - Electronic Evidence (इलेक्ट्रॉनिक साक्ष्य)',
+        definition: 'इलेक्ट्रॉनिक साक्ष्य - WhatsApp chats, emails, CCTV footage, digital documents - को court में पेश करने का provision।',
+        fullMeaning: 'BSA 63 के तहत, electronic evidence को court में admissible बनाने के लिए BSA 63(4) के तहत certificate लेना अनिवार्य है। इस certificate में यह प्रमाणित करना होता है कि electronic record को properly stored, preserved, और produced किया गया है। बिना certificate के electronic evidence admissible नहीं होगा। SC ने Arjun Panditrao Khotkar case में यह स्पष्ट किया।',
+        oldLaw: 'Evidence Act 65B',
+        caseLaw: 'Arjun Panditrao Khotkar v. State of Maharashtra (2020) - Certificate mandatory',
+        keyPoints: ['⚖️ WhatsApp chats, emails, CCTV covered', '⚖️ Certificate under BSA 63(4) is MANDATORY', '⚖️ Without certificate - NOT admissible', '⚖️ All digital evidence must follow this'],
+        practicalUse: 'अगर आपको court में WhatsApp chat, email, या CCTV footage पेश करना है, तो पहले BSA 63(4) का certificate लें।'
+    },
+    // Civil Law
+    'civil suit': {
+        term: 'Civil Suit (सिविल वाद)',
+        definition: 'दो parties के बीच non-criminal (गैर-आपराधिक) विवाद - property, contract, tort, family matters, etc.',
+        fullMeaning: 'Civil suit एक नागरिक मुकदमा है जो CPC (Civil Procedure Code) के तहत दायर किया जाता है। इसमें plaintiff (वादी) defendant (प्रतिवादी) के खिलाफ complaint करता है। इसमें damages (क्षतिपूर्ति), injunction (रोक), declaration (घोषणा), specific performance (विशिष्ट अनुपालन) जैसी राहतें माँगी जाती हैं।',
+        sections: ['CPC Order 7 Rule 1 - Plaint (वाद पत्र)', 'CPC Order 39 Rule 1 - Temporary Injunction', 'CPC Order 26 - Commissions', 'Specific Relief Act - Specific Performance'],
+        caseLaw: 'Surjit Singh v. Harbans Singh (1996) - Civil suit principles',
+        keyPoints: ['⚖️ Non-criminal dispute', '⚖️ CPC procedure applies', '⚖️ Relief: damages, injunction, declaration', '⚖️ Appeal to HC/SC'],
+        practicalUse: 'Property dispute, contract breach, family disputes (excluding criminal), landlord-tenant, recovery of money - सब civil suit हैं।'
+    },
+    'injunction': {
+        term: 'Injunction (रोक/आदेश)',
+        definition: 'Court द्वारा किसी party को कुछ करने या न करने का आदेश - ताकि injustice न हो।',
+        fullMeaning: 'Injunction court का एक remedy है जिसमें court किसी party को कुछ करने से रोकता है (prohibitory injunction) या कुछ करने के लिए कहता है (mandatory injunction)। Temporary injunction (अंतरिम रोक) case के दौरान मिलती है, permanent injunction (स्थायी रोक) final judgment के बाद मिलती है।',
+        sections: ['CPC Order 39 Rule 1 & 2 - Temporary injunction', 'Specific Relief Act - Permanent injunction'],
+        caseLaw: 'Dalpat Kumar v. Prahlad Singh (1992) - Injunction principles',
+        keyPoints: ['⚖️ Prohibitory vs Mandatory', '⚖️ Temporary vs Permanent', '⚖️ Prima facie case required', '⚖️ Balance of convenience', '⚖️ Irreparable injury'],
+        practicalUse: 'अगर कोई आपकी property पर कब्ज़ा करने वाला है या कोई काम कर रहा है जो आपको नुकसान पहुँचा सकता है, तो court से injunction लें।'
+    },
+    // Family Law
+    'divorce': {
+        term: 'Divorce (तलाक)',
+        definition: 'शादी को legally समाप्त करना - Hindu Marriage Act, Special Marriage Act, या Muslim Personal Law के तहत।',
+        fullMeaning: 'Divorce शादी को legally खत्म करने की प्रक्रिया है। Hindu Marriage Act 1955 के तहत - cruelty, adultery, desertion, mental illness, conversion, आदि grounds पर divorce मिलता है। Muslim law के तहत Talaq, Khula, Mubarat के माध्यम से divorce होता है। Special Marriage Act 1954 के तहत mutual consent से भी divorce हो सकता है।',
+        sections: ['Hindu Marriage Act - Section 13 (Divorce grounds)', 'Hindu Marriage Act - Section 13B (Mutual divorce)', 'Special Marriage Act - Section 28 (Divorce)', 'Muslim Personal Law - Talaq'],
+        caseLaw: 'Shayara Bano v. UOI (2017) - Triple Talaq unconstitutional',
+        keyPoints: ['⚖️ Grounds: cruelty, adultery, desertion, mental illness', '⚖️ Mutual consent divorce - 1 year separation + 6 months waiting', '⚖️ Maintenance under BNSS 144', '⚖️ Child custody - guardianship court'],
+        practicalUse: 'अगर आप शादी से अलग होना चाहते हैं, तो अपने grounds के अनुसार divorce petition दायर करें - mutual या contested।'
+    },
+    'maintenance': {
+        term: 'Maintenance (भरण-पोषण)',
+        definition: 'पत्नी, बच्चों, और माता-पिता को आर्थिक सहारा - ताकि वे अपना निर्वाह कर सकें।',
+        fullMeaning: 'Maintenance का अर्थ है आर्थिक सहारा। BNSS 144 के तहत पत्नी (जो अपना खर्च नहीं उठा सकती), बच्चे (शादी या आयु तक), और माता-पिता (जो स्वयं निर्वाह नहीं कर सकते) maintenance के हकदार हैं। Hindu Adoption and Maintenance Act 1956 भी maintenance का provision है। Interim maintenance (अंतरिम भरण-पोषण) case के दौरान मिलता है।',
+        sections: ['BNSS 144 - Maintenance (पत्नी, बच्चे, माता-पिता)', 'Hindu Adoption and Maintenance Act - Section 18 to 23', 'Hindu Marriage Act - Section 24 (Interim maintenance)'],
+        caseLaw: 'Rajnesh v. Neha (2021) - SC maintenance guidelines',
+        keyPoints: ['⚖️ Wife, children, parents eligible', '⚖️ Based on husband\'s income and needs', '⚖️ Interim maintenance available', '⚖️ Default = warrant/attachment'],
+        practicalUse: 'अगर पति maintenance नहीं दे रहा है, तो Family Court/Magistrate में BNSS 144 के तहत application दायर करें।'
+    },
+    // Constitutional Law
+    'writ': {
+        term: 'Writ (रिट)',
+        definition: 'Constitution के Articles 32 (SC) और 226 (HC) के तहत मिलने वाला constitutional remedy - fundamental rights के enforcement के लिए।',
+        fullMeaning: 'Writ एक constitutional remedy है जो Supreme Court (Article 32) और High Court (Article 226) के पास है। 5 types की writs होती हैं: Habeas Corpus (unlawful detention से रिहाई), Mandamus (public duty का enforcement), Prohibition (lower court को jurisdiction से रोकना), Certiorari (lower court के order को quash करना), और Quo Warranto (public office के usurper को हटाना)।',
+        sections: ['Constitution Article 32 - SC writ jurisdiction', 'Constitution Article 226 - HC writ jurisdiction', 'Constitution Article 227 - HC supervisory jurisdiction'],
+        caseLaw: 'M.C. Mehta v. UOI (1986) - Environmental writ',
+        keyPoints: ['⚖️ 5 types: Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto', '⚖️ Article 32 - SC, Article 226 - HC', '⚖️ For enforcement of fundamental rights', '⚖️ Summary procedure, fast remedy'],
+        practicalUse: 'अगर किसी fundamental right का उल्लंघन हुआ है, तो SC/HC में writ petition दायर करें।'
+    },
+    'habeas corpus': {
+        term: 'Habeas Corpus (बंदी प्रत्यक्षीकरण)',
+        definition: 'Unlawful detention (गैरकानूनी हिरासत) से व्यक्ति को रिहा कराने के लिए writ।',
+        fullMeaning: 'Habeas Corpus एक Latin phrase है जिसका अर्थ है "हम आपके पास शरीर रखते हैं"। यह writ उस व्यक्ति की तरफ से दायर की जाती है जिसे unlawfully detained (गैरकानूनी रूप से हिरासत में रखा) गया है। Court detention के आधार की जाँच करता है और अगर detention unlawful है तो release का order देता है। यह fundamental right है - Article 21 का part।',
+        sections: ['Constitution Article 32 & 226 - Habeas Corpus', 'CrPC/BNSS - Unlawful detention provisions'],
+        caseLaw: 'Rudul Sah v. State of Bihar (1983) - Unlawful detention compensation',
+        keyPoints: ['⚖️ For unlawful detention', '⚖️ SC (Art 32) and HC (Art 226)', '⚖️ No formal application required - letter can be filed', '⚖️ Fastest remedy for personal liberty'],
+        practicalUse: 'अगर किसी को बिना कानूनी आधार के जेल या police custody में रखा गया है, तो Habeas Corpus petition दायर करें।'
+    },
+    'article 21': {
+        term: 'Article 21 - Right to Life and Personal Liberty (जीवन और व्यक्तिगत स्वतंत्रता का अधिकार)',
+        definition: 'Constitution का सबसे महत्वपूर्ण fundamental right - "No person shall be deprived of his life or personal liberty except according to procedure established by law"',
+        fullMeaning: 'Article 21 Constitution का heart है। यह right to life और personal liberty देता है। SC ने इसका बहुत wide interpretation किया है - इसमें right to food, right to shelter, right to education, right to health, right to pollution-free environment, right to speedy trial, right to legal aid, सब आते हैं। यह सिर्फ़ "physical existence" नहीं बल्कि "meaningful life" का अधिकार है।',
+        sections: ['Constitution Article 21 - Fundamental Right', 'Constitution Article 22 - Protection against arrest', 'BNSS/CrPC - Procedure for arrest'],
+        caseLaw: 'Maneka Gandhi v. UOI (1978) - Article 21 expanded',
+        keyPoints: ['⚖️ Right to life AND personal liberty', '⚖️ Only "procedure established by law" can deprive', '⚖️ Includes: food, shelter, education, health, pollution-free environment', '⚖️ Speedy trial, legal aid included'],
+        practicalUse: 'जब भी किसी fundamental right का उल्लंघन हो, Article 21 के तहत SC/HC जाएँ।'
+    },
+    // Property Law
+    'property dispute': {
+        term: 'Property Dispute (संपत्ति विवाद)',
+        definition: 'Property (जमीन, मकान, फ्लैट, आदि) पर विवाद - ownership, possession, inheritance, partition, आदि।',
+        fullMeaning: 'Property dispute civil + criminal दोनों हो सकता है। Civil side - title suit (ownership), partition suit (बँटवारा), injunction (रोक), specific performance (विशिष्ट अनुपालन)। Criminal side - trespass (अतिचार), house-trespass, mischief, cheating। Revenue side - mutation (खतौनी), SDM/Tehsildar proceedings। Inheritance - Hindu Succession Act या Muslim Personal Law।',
+        sections: ['TP Act - Transfer of Property Act 1882', 'Registration Act 1908 - Document registration', 'CPC - Civil suit procedure', 'BNSS 173 - FIR in criminal trespass', 'Revenue Code - Mutation/Partition'],
+        caseLaw: 'A. Jayachandran v. State (2023) - Property dispute principles',
+        keyPoints: ['⚖️ Civil + Criminal both possible', '⚖️ Title suit for ownership', '⚖️ Injunction for restraining', '⚖️ FIR for criminal trespass', '⚖️ Revenue proceedings for mutation'],
+        practicalUse: 'अगर आपकी property पर विवाद है या कब्ज़ा हो गया है, तो civil court में title suit + injunction + criminal court में FIR करें।'
+    },
+    // Cyber Law
+    'cyber crime': {
+        term: 'Cyber Crime (साइबर अपराध)',
+        definition: 'Internet, computer, mobile, या digital medium के माध्यम से होने वाला अपराध - phishing, hacking, identity theft, online fraud, cyber bullying, आदि।',
+        fullMeaning: 'Cyber crime IT Act 2000 + BNS के तहत punishable है। Common cyber crimes: UPI fraud, OTP fraud, phishing, hacking, identity theft, cyber bullying, online defamation, ransomware, data theft, आदि। Cyber Crime Cell (1930) में complaint दर्ज करें। Electronic evidence के लिए BSA 63 certificate mandatory है।',
+        sections: ['IT Act 2000 - Section 43, 66, 66B, 66C, 66D, 67', 'BNS 318 - Cheating (online fraud)', 'BSA 63 - Electronic evidence', 'BNSS 173 - FIR'],
+        caseLaw: 'Arjun Panditrao Khotkar v. State (2020) - Electronic evidence',
+        keyPoints: ['⚖️ UPI fraud, OTP fraud, phishing, hacking', '⚖️ Cyber Crime Cell - 1930', '⚖️ nationalcybercrime.gov.in', '⚖️ BSA 63 certificate mandatory', '⚖️ FIR + 1930 complaint'],
+        practicalUse: 'अगर आपके साथ online fraud हुआ है - UPI scam, OTP fraud, phishing, आदि - तो 1930 पर call करें और nationalcybercrime.gov.in पर complaint दर्ज करें।'
+    },
+    // Legal Procedure
+    'affidavit': {
+        term: 'Affidavit (शपथ पत्र)',
+        definition: 'एक लिखित बयान जो declarant (बयान देने वाला) court में साक्ष्य के रूप में पेश करता है, और उसकी सत्यता की oath/affirmation ली जाती है।',
+        fullMeaning: 'Affidavit एक sworn statement है जो court में evidence के रूप में पेश किया जाता है। इसमें declarant अपने बयान की सत्यता की oath/affirmation करता है। इसे Notary Public, Oath Commissioner, या court के officer के सामने sign किया जाता है। Affidavit का use interim applications, bail applications, stay applications, आदि में होता है।',
+        sections: ['CPC Order 19 - Affidavit rules', 'Code of Civil Procedure - Evidence', 'Notaries Act - Notary Public'],
+        caseLaw: 'R.K. Anand v. Registrar, Delhi HC (2009) - Affidavit rules',
+        keyPoints: ['⚖️ Written statement under oath', '⚖️ Must be sworn before Notary/Oath Commissioner', '⚖️ Used in bail, stay, interim applications', '⚖️ Perjury for false affidavit (BNS 229)'],
+        practicalUse: 'Court में किसी भी application के लिए affidavit ज़रूरी है - bail, stay, injunction, आदि।'
+    },
+    'appeal': {
+        term: 'Appeal (अपील)',
+        definition: 'Lower court के decision को higher court में challenge करना - fresh hearing के लिए।',
+        fullMeaning: 'Appeal higher court में lower court के decision को challenge करने की प्रक्रिया है। Criminal appeals - Sessions Court, High Court, Supreme Court। Civil appeals - District Court, High Court, Supreme Court। Appeal में court decision के merits की review होती है। Limitation period (समय सीमा) - 30/60/90 days depending on case।',
+        sections: ['CrPC/BNSS - Criminal appeals', 'CPC - Civil appeals', 'Constitution Article 132-136 - SC appeals', 'Limitation Act - Time limits'],
+        caseLaw: 'K.M. Nanavati v. State of Maharashtra (1961) - Appeal principles',
+        keyPoints: ['⚖️ Higher court review', '⚖️ Criminal vs Civil appeals', '⚖️ Limitation period - 30/60/90 days', '⚖️ Fresh hearing - merits considered'],
+        practicalUse: 'अगर आपको lower court के decision से संतुष्ट नहीं हैं, तो appeal दायर करें - पर time limit का ध्यान रखें।'
+    },
+    'bail': {
+        term: 'Bail (ज़मानत)',
+        definition: 'अभियुक्त को court द्वारा जेल से रिहा करना - ताकि वह trial के लिए उपलब्ध रहे और अपनी बात रख सके।',
+        fullMeaning: 'Bail अभियुक्त को court द्वारा जेल से रिहा करने की प्रक्रिया है। यह अभियुक्त का right है - "bail is rule, jail is exception"। 3 types: BNSS 480 - Magistrate bail (up to 7 years), BNSS 482 - Anticipatory bail (before arrest), BNSS 483 - Sessions/HC bail (serious offences)। Conditions: surety, bond, regular attendance, no evidence tampering।',
+        sections: ['BNSS 480 - Magistrate bail', 'BNSS 482 - Anticipatory bail', 'BNSS 483 - Sessions/HC bail', 'BNSS 479 - Default bail'],
+        caseLaw: 'Satender Kumar Antil v. CBI (2022) - Bail guidelines',
+        keyPoints: ['⚖️ "Bail is rule, jail is exception"', '⚖️ BNSS 480 - Magistrate (up to 7 years)', '⚖️ BNSS 482 - Anticipatory (before arrest)', '⚖️ Surety + Bond required'],
+        practicalUse: 'अगर आपको या आपके परिचित को गिरफ्तार किया गया है, तो BNSS के तहत bail लें।'
+    },
+    'limitation': {
+        term: 'Limitation Act (समय सीमा)',
+        definition: 'Court में case दायर करने की समय सीमा - अगर time limit cross हो जाए तो case दायर नहीं किया जा सकता।',
+        fullMeaning: 'Limitation Act 1963 case दायर करने की समय सीमा (limitation period) निर्धारित करता है। Civil cases: 3 years (most), 12 years (property), 30 years (government property)। Criminal cases: varying - 1 year (defamation), 3 years (cheating), no limit (murder, rape, etc.)। अगर limitation period cross हो जाए तो case दायर नहीं किया जा सकता - court "barred by limitation" कहता है।',
+        sections: ['Limitation Act 1963 - Schedule', 'Article 137 - 3 years civil', 'Article 65 - 12 years property', 'CrPC/BNSS - Criminal limitation'],
+        caseLaw: 'M.P. Steel Corp. v. CCE (2015) - Limitation principles',
+        keyPoints: ['⚖️ Time limit to file case', '⚖️ 3 years - most civil suits', '⚖️ 12 years - property (possession)', '⚖️ Criminal - varies by offence', '⚖️ Delay = case barred'],
+        practicalUse: 'किसी भी case के लिए limitation period check करें - अगर time cross हो गया है तो case दायर न करें।'
+    },
+    // Contract Law
+    'contract': {
+        term: 'Contract (अनुबंध/समझौता)',
+        definition: 'Two or more parties के बीच legally enforceable agreement - जिसमें offer, acceptance, consideration (प्रतिफल), और intention to create legal relations हो।',
+        fullMeaning: 'Contract Indian Contract Act 1872 के तहत regulated है। Essential elements: Offer (प्रस्ताव), Acceptance (स्वीकृति), Consideration (प्रतिफल - कुछ exchange), Intention to create legal relations (कानूनी संबंध बनाने का इरादा), Capacity (क्षमता - adult, sound mind), Free consent (स्वतंत्र सहमति), Lawful object (कानूनी उद्देश्य)। Void contract (शून्य अनुबंध), Voidable contract (शून्यकरणीय अनुबंध), Enforceable contract (प्रवर्तनीय अनुबंध)।',
+        sections: ['Indian Contract Act 1872 - Section 2(h) - Contract definition', 'Section 10 - Essential elements', 'Section 14-15 - Free consent', 'Section 17-18 - Fraud and misrepresentation', 'Section 73 - Damages', 'Section 74 - Penalty'],
+        caseLaw: 'Balfour v. Balfour (1919) - Intention to create legal relations',
+        keyPoints: ['⚖️ Offer + Acceptance = Agreement', '⚖️ Consideration is MUST', '⚖️ Free consent required - no fraud/coercion/undue influence', '⚖️ Lawful object - illegal contract is void', '⚖️ Damages for breach - Section 73'],
+        practicalUse: 'Property sale, business partnership, service agreement, loan agreement - सब contract के examples हैं।'
+    },
+    // Family Law Additional
+    'hindu marriage act': {
+        term: 'Hindu Marriage Act 1955 (हिंदू विवाह अधिनियम)',
+        definition: 'Hindus के marriage और divorce को regulate करने वाला act - 1955 में passed।',
+        fullMeaning: 'Hindu Marriage Act 1955 Hindus के marriage और divorce को regulate करता है। Conditions for marriage: Section 5 - bridegroom 21, bride 18, no prohibited degree, no sapinda relationship। Divorce: Section 13 - cruelty, adultery, desertion, mental illness, conversion, etc. Section 13B - mutual consent divorce। Section 24 - interim maintenance। Section 25 - permanent alimony। Restitution of conjugal rights (वैवाहिक अधिकारों की पुनर्स्थापना) - Section 9।',
+        sections: ['Section 5 - Conditions for valid marriage', 'Section 9 - Restitution of conjugal rights', 'Section 13 - Divorce grounds', 'Section 13B - Mutual consent divorce', 'Section 24 - Interim maintenance', 'Section 25 - Permanent alimony'],
+        caseLaw: 'Rashmi Kapoor v. UOI (2023) - Hindu Marriage Act interpretation',
+        keyPoints: ['⚖️ Bridegroom 21, bride 18', '⚖️ No prohibited degree, no sapinda', '⚖️ Divorce grounds - cruelty, adultery, desertion', '⚖️ Mutual consent divorce - 1 year separation', '⚖️ Maintenance under Section 24/25'],
+        practicalUse: 'Hindu marriage, divorce, maintenance, child custody - सब इस act के तहत।'
+    },
+    'muslim law': {
+        term: 'Muslim Personal Law (मुस्लिम व्यक्तिगत कानून)',
+        definition: 'Muslims के personal matters - marriage, divorce, inheritance, maintenance - को regulate करने वाला law।',
+        fullMeaning: 'Muslim Personal Law Muslims के marriage, divorce, inheritance, maintenance को regulate करता है। Marriage - Nikah (contract), Mahr (dower)। Divorce - Talaq (by husband), Khula (by wife), Mubarat (mutual)। Triple Talaq - Shayara Bano case (2017) में unconstitutional। Maintenance - under Muslim Women (Protection of Rights on Divorce) Act 1986। Inheritance - per Muslim Personal Law (Shariat) - shares prescribed in Quran।',
+        sections: ['Muslim Personal Law - Nikah (Marriage)', 'Muslim Personal Law - Talaq (Divorce)', 'Muslim Women Act 1986 - Maintenance', 'Shariat Act 1937 - Application'],
+        caseLaw: 'Shayara Bano v. UOI (2017) - Triple Talaq unconstitutional',
+        keyPoints: ['⚖️ Marriage - Nikah (contract)', '⚖️ Divorce - Talaq, Khula, Mubarat', '⚖️ Triple Talaq - unconstitutional (2017)', '⚖️ Maintenance - Muslim Women Act', '⚖️ Inheritance - per Shariat'],
+        practicalUse: 'Muslims के marriage, divorce, maintenance, inheritance - सब Muslim Personal Law के तहत।'
+    },
+    // Civil Procedure
+    'plaint': {
+        term: 'Plaint (वाद पत्र)',
+        definition: 'Civil suit का पहला document - जिसमें plaintiff (वादी) अपनी complaint और माँगी गई relief (राहत) लिखता है।',
+        fullMeaning: 'Plaint civil suit का first document है जो plaintiff court में file करता है। CPC Order 7 Rule 1 के अनुसार plaint में - plaintiff और defendant का name, address, facts (तथ्य), cause of action (वाद का कारण), valuation (मूल्यांकन), relief (राहत) - सब कुछ होना चाहिए। Plaint file करने के बाद court summon (समन) जारी करती है।',
+        sections: ['CPC Order 7 Rule 1 - Plaint contents', 'CPC Order 7 Rule 11 - Rejection of plaint', 'CPC - Cause of action, valuation, relief'],
+        caseLaw: 'U.P. State Road Transport Corp. v. State (2023) - Plaint principles',
+        keyPoints: ['⚖️ First document in civil suit', '⚖️ Must contain: facts, cause of action, valuation, relief', '⚖️ Filed by plaintiff', '⚖️ Court issues summons after filing'],
+        practicalUse: 'Civil suit दायर करने के लिए plaint तैयार करें - advocate इसे draft करेगा।'
+    }
 };
+
+// ============================================================
+// ENHANCED DICTIONARY FUNCTION
+// ============================================================
 function searchDictionary() {
-const termInput = document.getElementById('dict-search');
-const resultDiv = document.getElementById('dict-result');
-const listDiv = document.getElementById('dict-list');
-if (!termInput || !resultDiv) return;
-const term = termInput.value.toLowerCase().trim();
-if (!term) {
-resultDiv.innerHTML = '';
-renderFullDictionaryList(listDiv);
-return;
+    const termInput = document.getElementById('dict-search');
+    const resultDiv = document.getElementById('dict-result');
+    const listDiv = document.getElementById('dict-list');
+    
+    if (!termInput || !resultDiv) return;
+    
+    const term = termInput.value.toLowerCase().trim();
+    
+    if (!term) {
+        resultDiv.innerHTML = '';
+        renderFullDictionaryList(listDiv);
+        return;
+    }
+    
+    let found = null;
+    let matchedKey = null;
+    
+    if (LEGAL_DICTIONARY[term]) {
+        found = LEGAL_DICTIONARY[term];
+        matchedKey = term;
+    } else {
+        const keys = Object.keys(LEGAL_DICTIONARY);
+        for (let key of keys) {
+            if (key.includes(term) || term.includes(key)) {
+                found = LEGAL_DICTIONARY[key];
+                matchedKey = key;
+                break;
+            }
+        }
+    }
+    
+    if (found) {
+        resultDiv.innerHTML = generateDetailedDictionaryEntry(matchedKey, found);
+        renderFilteredDictionaryList(listDiv, term);
+    } else {
+        resultDiv.innerHTML = `
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded text-sm">
+                ❌ <b>Term not found:</b> "${term}"<br>
+                <span class="text-xs text-gray-500">💡 Try: BNS, BNSS, BSA, bail, FIR, cheating, divorce, maintenance, property, cyber, writ, habeas corpus, affidavit, appeal, limitation, contract, etc.</span>
+                <br><br>
+                <span class="text-xs text-gray-500">📚 All terms are listed below. Scroll to find what you need.</span>
+            </div>
+        `;
+        renderFullDictionaryList(listDiv);
+    }
 }
-let found = null;
-let matchedKey = null;
-if (LEGAL_DICTIONARY[term]) {
-found = LEGAL_DICTIONARY[term];
-matchedKey = term;
-} else {
-const keys = Object.keys(LEGAL_DICTIONARY);
-for (let key of keys) {
-if (key.includes(term) || term.includes(key)) {
-found = LEGAL_DICTIONARY[key];
-matchedKey = key;
-break;
-}
-}
-}
-if (found) {
-resultDiv.innerHTML = generateDetailedDictionaryEntry(matchedKey, found);
-renderFilteredDictionaryList(listDiv, term);
-} else {
-resultDiv.innerHTML = `
-<div class="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded text-sm">
-❌ <b>Term not found:</b> "${term}"<br>
-<span class="text-xs text-gray-500">💡 Try: BNS, BNSS, BSA, bail, FIR, cheating, divorce, maintenance, property, cyber, writ, habeas corpus, affidavit, appeal, limitation, contract, etc.</span>
-<br><br>
-<span class="text-xs text-gray-500">📚 All terms are listed below. Scroll to find what you need.</span>
-</div>
-`;
-renderFullDictionaryList(listDiv);
-}
-}
+
 function generateDetailedDictionaryEntry(key, data) {
-let html = `
-<div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-lg mb-4 fade-in">
-<h3 class="font-bold text-lg text-blue-800">📖 ${data.term || key.toUpperCase()}</h3>
-<p class="text-sm text-gray-700 mt-1"><b>Definition:</b> ${data.definition || 'N/A'}</p>
-`;
-if (data.fullMeaning) {
-html += `<p class="text-sm text-gray-700 mt-2"><b>📝 Full Meaning:</b> ${data.fullMeaning}</p>`;
+    let html = `
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-lg mb-4 fade-in">
+            <h3 class="font-bold text-lg text-blue-800">📖 ${data.term || key.toUpperCase()}</h3>
+            <p class="text-sm text-gray-700 mt-1"><b>Definition:</b> ${data.definition || 'N/A'}</p>
+    `;
+    
+    if (data.fullMeaning) {
+        html += `<p class="text-sm text-gray-700 mt-2"><b>📝 Full Meaning:</b> ${data.fullMeaning}</p>`;
+    }
+    
+    if (data.punishment) {
+        html += `<p class="text-sm text-red-600 mt-2"><b>⚖️ Punishment:</b> ${data.punishment}</p>`;
+    }
+    
+    if (data.oldLaw) {
+        html += `<p class="text-sm text-orange-600 mt-1"><b>🔄 Old Law:</b> ${data.oldLaw}</p>`;
+    }
+    
+    if (data.sections && data.sections.length > 0) {
+        html += `<div class="mt-2"><b>📜 Relevant Sections:</b><ul class="list-disc pl-5 text-sm text-gray-700">`;
+        data.sections.forEach(s => {
+            html += `<li>${s}</li>`;
+        });
+        html += `</ul></div>`;
+    }
+    
+    if (data.caseLaw) {
+        html += `<p class="text-sm text-purple-700 mt-2"><b>⚖️ Case Law:</b> ${data.caseLaw}</p>`;
+    }
+    
+    if (data.keyPoints && data.keyPoints.length > 0) {
+        html += `<div class="mt-2 bg-white p-2 rounded border border-blue-200"><b>💡 Key Points:</b><ul class="list-disc pl-5 text-sm text-gray-700">`;
+        data.keyPoints.forEach(p => {
+            html += `<li>${p}</li>`;
+        });
+        html += `</ul></div>`;
+    }
+    
+    if (data.practicalUse) {
+        html += `<p class="text-sm text-green-700 mt-2"><b>✅ Practical Use:</b> ${data.practicalUse}</p>`;
+    }
+    
+    const related = getRelatedDictionaryTerms(key);
+    if (related.length > 0) {
+        html += `<div class="mt-2"><b>🔗 Related Terms:</b> `;
+        related.forEach((r, i) => {
+            html += `<span class="bg-slate-200 px-2 py-0.5 rounded text-xs cursor-pointer hover:bg-slate-300" onclick="document.getElementById('dict-search').value='${r}';searchDictionary();">${r}</span>`;
+            if (i < related.length - 1) html += ' ';
+        });
+        html += `</div>`;
+    }
+    
+    html += `
+        <div class="mt-3 text-xs text-gray-400 border-t pt-2">
+            📚 Source: Lucknow Kanoon Sahayak Legal Dictionary · 🌹 आदाब
+        </div>
+        </div>
+    `;
+    
+    return html;
 }
-if (data.punishment) {
-html += `<p class="text-sm text-red-600 mt-2"><b>⚖️ Punishment:</b> ${data.punishment}</p>`;
-}
-if (data.oldLaw) {
-html += `<p class="text-sm text-orange-600 mt-1"><b>🔄 Old Law:</b> ${data.oldLaw}</p>`;
-}
-if (data.sections && data.sections.length > 0) {
-html += `<div class="mt-2"><b>📜 Relevant Sections:</b><ul class="list-disc pl-5 text-sm text-gray-700">`;
-data.sections.forEach(s => {
-html += `<li>${s}</li>`;
-});
-html += `</ul></div>`;
-}
-if (data.caseLaw) {
-html += `<p class="text-sm text-purple-700 mt-2"><b>⚖️ Case Law:</b> ${data.caseLaw}</p>`;
-}
-if (data.keyPoints && data.keyPoints.length > 0) {
-html += `<div class="mt-2 bg-white p-2 rounded border border-blue-200"><b>💡 Key Points:</b><ul class="list-disc pl-5 text-sm text-gray-700">`;
-data.keyPoints.forEach(p => {
-html += `<li>${p}</li>`;
-});
-html += `</ul></div>`;
-}
-if (data.practicalUse) {
-html += `<p class="text-sm text-green-700 mt-2"><b>✅ Practical Use:</b> ${data.practicalUse}</p>`;
-}
-const related = getRelatedDictionaryTerms(key);
-if (related.length > 0) {
-html += `<div class="mt-2"><b>🔗 Related Terms:</b> `;
-related.forEach((r, i) => {
-html += `<span class="bg-slate-200 px-2 py-0.5 rounded text-xs cursor-pointer hover:bg-slate-300" onclick="document.getElementById('dict-search').value='${r}';searchDictionary();">${r}</span>`;
-if (i < related.length - 1) html += ' ';
-});
-html += `</div>`;
-}
-html += `
-<div class="mt-3 text-xs text-gray-400 border-t pt-2">
-📚 Source: Lucknow Kanoon Sahayak Legal Dictionary · 🌹 आदाब
-</div>
-</div>
-`;
-return html;
-}
+
 function getRelatedDictionaryTerms(key) {
-const relatedMap = {
-'bns': ['bnss', 'bsa', 'bail', 'fir'],
-'bnss': ['bns', 'bsa', 'bail', 'fir'],
-'bsa': ['bns', 'bnss', 'electronic evidence'],
-'bail': ['bnss 480', 'bnss 482', 'anticipatory bail'],
-'fir': ['bnss 173', 'zero fir'],
-'cheating': ['bns 318', 'fraud'],
-'murder': ['bns 103', 'homicide'],
-'theft': ['bns 303'],
-'defamation': ['bns 356'],
-'rape': ['bns 64'],
-'maintenance': ['bnss 144'],
-'property': ['property dispute', 'injunction'],
-'cyber': ['cyber crime', 'bsa 63'],
-'writ': ['habeas corpus', 'mandamus'],
-'divorce': ['hindu marriage act', 'muslim law'],
-'contract': ['agreement', 'consideration'],
-'affidavit': ['sworn statement'],
-'appeal': ['revision', 'review'],
-'limitation': ['limitation period']
-};
-for (let [k, v] of Object.entries(relatedMap)) {
-if (key.includes(k) || k.includes(key)) {
-return v;
+    const relatedMap = {
+        'bns': ['bnss', 'bsa', 'bail', 'fir'],
+        'bnss': ['bns', 'bsa', 'bail', 'fir'],
+        'bsa': ['bns', 'bnss', 'electronic evidence'],
+        'bail': ['bnss 480', 'bnss 482', 'anticipatory bail'],
+        'fir': ['bnss 173', 'zero fir'],
+        'cheating': ['bns 318', 'fraud'],
+        'murder': ['bns 103', 'homicide'],
+        'theft': ['bns 303'],
+        'defamation': ['bns 356'],
+        'rape': ['bns 64'],
+        'maintenance': ['bnss 144'],
+        'property': ['property dispute', 'injunction'],
+        'cyber': ['cyber crime', 'bsa 63'],
+        'writ': ['habeas corpus', 'mandamus'],
+        'divorce': ['hindu marriage act', 'muslim law'],
+        'contract': ['agreement', 'consideration'],
+        'affidavit': ['sworn statement'],
+        'appeal': ['revision', 'review'],
+        'limitation': ['limitation period']
+    };
+    
+    for (let [k, v] of Object.entries(relatedMap)) {
+        if (key.includes(k) || k.includes(key)) {
+            return v;
+        }
+    }
+    return [];
 }
-}
-return [];
-}
+
 function renderFullDictionaryList(listDiv) {
-if (!listDiv) return;
-let html = `<h4 class="font-bold text-sm mb-2">📚 All Legal Terms (${Object.keys(LEGAL_DICTIONARY).length})</h4><div class="grid md:grid-cols-2 gap-2">`;
-const sortedKeys = Object.keys(LEGAL_DICTIONARY).sort();
-sortedKeys.forEach(k => {
-const data = LEGAL_DICTIONARY[k];
-html += `
-<div class="bg-slate-50 p-2 rounded border border-slate-200 cursor-pointer hover:bg-blue-50 transition text-sm dict-entry"
-onclick="document.getElementById('dict-search').value='${k}';searchDictionary();">
-<b>${k}</b> — ${data.definition ? data.definition.slice(0, 60) + (data.definition.length > 60 ? '…' : '') : ''}
-</div>
-`;
-});
-html += `</div>`;
-listDiv.innerHTML = html;
+    if (!listDiv) return;
+    let html = `<h4 class="font-bold text-sm mb-2">📚 All Legal Terms (${Object.keys(LEGAL_DICTIONARY).length})</h4><div class="grid md:grid-cols-2 gap-2">`;
+    const sortedKeys = Object.keys(LEGAL_DICTIONARY).sort();
+    sortedKeys.forEach(k => {
+        const data = LEGAL_DICTIONARY[k];
+        html += `
+            <div class="bg-slate-50 p-2 rounded border border-slate-200 cursor-pointer hover:bg-blue-50 transition text-sm dict-entry" 
+                 onclick="document.getElementById('dict-search').value='${k}';searchDictionary();">
+                <b>${k}</b> — ${data.definition ? data.definition.slice(0, 60) + (data.definition.length > 60 ? '…' : '') : ''}
+            </div>
+        `;
+    });
+    html += `</div>`;
+    listDiv.innerHTML = html;
 }
+
 function renderFilteredDictionaryList(listDiv, term) {
-if (!listDiv) return;
-const filtered = Object.keys(LEGAL_DICTIONARY).filter(k =>
-k.includes(term) || term.includes(k) ||
-(LEGAL_DICTIONARY[k].definition && LEGAL_DICTIONARY[k].definition.toLowerCase().includes(term))
-);
-if (filtered.length === 0) {
-renderFullDictionaryList(listDiv);
-return;
+    if (!listDiv) return;
+    const filtered = Object.keys(LEGAL_DICTIONARY).filter(k => 
+        k.includes(term) || term.includes(k) || 
+        (LEGAL_DICTIONARY[k].definition && LEGAL_DICTIONARY[k].definition.toLowerCase().includes(term))
+    );
+    
+    if (filtered.length === 0) {
+        renderFullDictionaryList(listDiv);
+        return;
+    }
+    
+    let html = `<h4 class="font-bold text-sm mb-2">🔍 Related Terms (${filtered.length})</h4><div class="grid md:grid-cols-2 gap-2">`;
+    filtered.slice(0, 10).forEach(k => {
+        const data = LEGAL_DICTIONARY[k];
+        html += `
+            <div class="bg-slate-50 p-2 rounded border border-slate-200 cursor-pointer hover:bg-blue-50 transition text-sm dict-entry" 
+                 onclick="document.getElementById('dict-search').value='${k}';searchDictionary();">
+                <b>${k}</b> — ${data.definition ? data.definition.slice(0, 50) + (data.definition.length > 50 ? '…' : '') : ''}
+            </div>
+        `;
+    });
+    if (filtered.length > 10) {
+        html += `<div class="text-xs text-gray-400 col-span-2">… and ${filtered.length - 10} more terms</div>`;
+    }
+    html += `</div>`;
+    listDiv.innerHTML = html;
 }
-let html = `<h4 class="font-bold text-sm mb-2">🔍 Related Terms (${filtered.length})</h4><div class="grid md:grid-cols-2 gap-2">`;
-filtered.slice(0, 10).forEach(k => {
-const data = LEGAL_DICTIONARY[k];
-html += `
-<div class="bg-slate-50 p-2 rounded border border-slate-200 cursor-pointer hover:bg-blue-50 transition text-sm dict-entry"
-onclick="document.getElementById('dict-search').value='${k}';searchDictionary();">
-<b>${k}</b> — ${data.definition ? data.definition.slice(0, 50) + (data.definition.length > 50 ? '…' : '') : ''}
-</div>
-`;
-});
-if (filtered.length > 10) {
-html += `<div class="text-xs text-gray-400 col-span-2">… and ${filtered.length - 10} more terms</div>`;
-}
-html += `</div>`;
-listDiv.innerHTML = html;
-}
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
 const seoKeywords = ["BNS 318", "BNSS 480", "BSA 63", "BNSS 482", "BNS 103", "IPC to BNS converter", "Lucknow High Court", "Supreme Court judgments", "legal AI assistant", "entertainment cases", "latest legal cases"];
+
 function updateSEOTags() {
-const randomKeywords = seoKeywords.sort(() => 0.5 - Math.random()).slice(0, 5).join(', ');
-const metaKeywords = document.querySelector('meta[name="keywords"]');
-if (metaKeywords) {
-metaKeywords.content = randomKeywords + ', Lucknow Kanoon Sahayak, BNS, BNSS, BSA';
-}
+    const randomKeywords = seoKeywords.sort(() => 0.5 - Math.random()).slice(0, 5).join(', ');
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+        metaKeywords.content = randomKeywords + ', Lucknow Kanoon Sahayak, BNS, BNSS, BSA';
+    }
 }
 setInterval(updateSEOTags, 300000);
 updateSEOTags();
+
 async function initApp() {
-try {
-const res = await fetch('/api/config');
-if (res.ok) await res.json();
-} catch (e) {
-console.log('Config fetch skipped.');
+    try {
+        const res = await fetch('/api/config');
+        if (res.ok) await res.json();
+    } catch (e) {
+        console.log('Config fetch skipped.');
+    }
+    if (window.speechSynthesis) window.speechSynthesis.getVoices();
+    renderBlog();
+    renderCaseList();
+    showLiveNews();
+    renderFullDictionaryList(document.getElementById('dict-list'));
+    try {
+        await Promise.allSettled([
+            refreshBlog().catch(e => console.warn('Blog refresh failed:', e)),
+            refreshCases().catch(e => console.warn('Cases refresh failed:', e)),
+            updateLiveNewsFromRSS().catch(e => console.warn('Live news update failed:', e))
+        ]);
+    } catch (e) {
+        console.warn('Init refresh failed:', e);
+    }
+    setInterval(() => {
+        refreshBlog().catch(e => console.warn(e));
+        refreshCases().catch(e => console.warn(e));
+        updateLiveNewsFromRSS().catch(e => console.warn(e));
+    }, 120000);
+    console.log('⚖️ Lucknow Kanoon Sahayak 9.0 loaded with Enhanced Dictionary!');
+    console.log('📚 Dictionary contains ' + Object.keys(LEGAL_DICTIONARY).length + ' legal terms');
+    console.log('🌹 आदाब अर्ज़ है — सब कुछ एक साथ!');
 }
-if (window.speechSynthesis) window.speechSynthesis.getVoices();
-renderBlog();
-renderCaseList();
-showLiveNews();
-renderFullDictionaryList(document.getElementById('dict-list'));
-try {
-await Promise.allSettled([
-refreshBlog().catch(e => console.warn('Blog refresh failed:', e)),
-refreshCases().catch(e => console.warn('Cases refresh failed:', e)),
-updateLiveNewsFromRSS().catch(e => console.warn('Live news update failed:', e))
-]);
-} catch (e) {
-console.warn('Init refresh failed:', e);
-}
-setInterval(() => {
-refreshBlog().catch(e => console.warn(e));
-refreshCases().catch(e => console.warn(e));
-updateLiveNewsFromRSS().catch(e => console.warn(e));
-}, 120000);
-console.log('⚖️ Lucknow Kanoon Sahayak 9.0 loaded with Enhanced Dictionary!');
-console.log('📚 Dictionary contains ' + Object.keys(LEGAL_DICTIONARY).length + ' legal terms');
-console.log('🌹 आदाब अर्ज़ है — सब कुछ एक साथ!');
-}
+
 if (document.readyState === 'loading') {
-document.addEventListener('DOMContentLoaded', () => setTimeout(initApp, 0));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(initApp, 0));
 } else {
-setTimeout(initApp, 0);
+    setTimeout(initApp, 0);
 }
+
+// ============================================================
+// PAYMENT BUTTON HANDLERS
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-const checkbox = document.getElementById('payment-done');
-const downloadBtn = document.getElementById('download-premium-btn');
-if (checkbox && downloadBtn) {
-checkbox.addEventListener('change', function() {
-if (this.checked) {
-downloadBtn.disabled = false;
-downloadBtn.textContent = '📥 Download Premium Draft (PDF)';
-downloadBtn.className = 'bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 transition w-full';
-} else {
-downloadBtn.disabled = true;
-downloadBtn.textContent = '🔒 Pay ₹49 & Download Premium Draft';
-downloadBtn.className = 'bg-amber-600 text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition w-full disabled:opacity-50';
-}
-});
-}
-const dlFreeBtn = document.getElementById('download-free-btn');
-if (dlFreeBtn) {
-dlFreeBtn.addEventListener('click', function() {
-const preview = document.getElementById('doc-preview');
-if (!preview || !preview.innerHTML) { alert('Pehle draft generate karein!'); return; }
-downloadPDF(preview.innerHTML, 'free');
-});
-}
-const dlPremiumBtn = document.getElementById('download-premium-btn');
-if (dlPremiumBtn) {
-dlPremiumBtn.addEventListener('click', function() {
-const preview = document.getElementById('doc-preview');
-if (!preview || !preview.innerHTML) { alert('Pehle draft generate karein!'); return; }
-if (!document.getElementById('payment-done').checked) {
-alert('⚠️ Kripya ₹49 ka payment karein aur checkbox tick karein!');
-return;
-}
-downloadPDF(preview.innerHTML, 'premium');
-});
-}
+    const checkbox = document.getElementById('payment-done');
+    const downloadBtn = document.getElementById('download-premium-btn');
+    if (checkbox && downloadBtn) {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = '📥 Download Premium Draft (PDF)';
+                downloadBtn.className = 'bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 transition w-full';
+            } else {
+                downloadBtn.disabled = true;
+                downloadBtn.textContent = '🔒 Pay ₹49 & Download Premium Draft';
+                downloadBtn.className = 'bg-amber-600 text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition w-full disabled:opacity-50';
+            }
+        });
+    }
+    const dlFreeBtn = document.getElementById('download-free-btn');
+    if (dlFreeBtn) {
+        dlFreeBtn.addEventListener('click', function() {
+            const preview = document.getElementById('doc-preview');
+            if (!preview || !preview.innerHTML) { alert('Pehle draft generate karein!'); return; }
+            downloadPDF(preview.innerHTML, 'free');
+        });
+    }
+    const dlPremiumBtn = document.getElementById('download-premium-btn');
+    if (dlPremiumBtn) {
+        dlPremiumBtn.addEventListener('click', function() {
+            const preview = document.getElementById('doc-preview');
+            if (!preview || !preview.innerHTML) { alert('Pehle draft generate karein!'); return; }
+            if (!document.getElementById('payment-done').checked) {
+                alert('⚠️ Kripya ₹49 ka payment karein aur checkbox tick karein!');
+                return;
+            }
+            downloadPDF(preview.innerHTML, 'premium');
+        });
+    }
 });
 </script>
 </body>
 </html>
+
