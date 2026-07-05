@@ -10,16 +10,16 @@ export default function handler(req, res) {
   }
 
   try {
-    // Single voiceId declaration – correct spelling and correct ID
+    // Your custom voice ID from .env.local will override this fallback
     const voiceId =
       process.env.ELEVENLABS_VOICE_ID ||
       process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';   // known default voice
+      '21m00Tcm4TlvDq8ikWAM';   // correct fallback ID
 
     // Check if API key exists
     const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
 
-    // Clean response
+    // Full response with all fields
     return res.status(200).json({
       voiceId,
       hasKey,
