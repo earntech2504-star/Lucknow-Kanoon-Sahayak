@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8" />
@@ -226,9 +226,14 @@ loadElevenLabsVoice();
       जी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से <b>सोचकर-समझकर</b> जवाब दूँगी — <b>समस्या (Problem), कानूनी स्थिति, Sections, Case Laws, Step-by-Step समाधान</b>, सब कुछ विस्तार से (15-20 lines में)।
     </div>
   </div>
+  <!-- 🎤 Voice Typing बटन यहाँ जोड़ा गया -->
   <div class="flex gap-2 mb-3">
     <input type="text" id="zeenat-query" placeholder="Type your legal question here..." class="border border-slate-300 rounded-lg p-2 flex-1 text-sm">
     <button onclick="handleZeenatQuery()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">Send</button>
+    <button id="voice-typing-btn" onclick="toggleVoiceTyping()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition text-sm flex items-center gap-1" title="Click to speak your question">
+      <span id="voice-typing-icon">🎤</span>
+      <span id="voice-typing-label" class="text-xs hidden md:inline">Voice</span>
+    </button>
   </div>
   <div class="flex flex-wrap gap-1.5 mb-3">
     <button onclick="quickZeenat('FIR kaise darj karein')" class="text-[10px] bg-red-100 hover:bg-red-200 px-2 py-0.5 rounded">🚨 FIR Kaise Darj Karein</button>
@@ -933,11 +938,7 @@ loadElevenLabsVoice();
 // ============================================================
 // DETECT VOICE ENGINE
 // ============================================================
-// The voice ID is now loaded dynamically via fetch.
-// We'll set a flag after loading.
 let hasElevenLabsVoice = false;
-// We'll update this when the SDK loads (if loaded)
-// The fallback will be used if no voice ID is set.
 
 // ============================================================
 // TAB SWITCH
@@ -1201,10 +1202,18 @@ function showThinkingIndicator() {
   return div;
 }
 
+// ----- 🆕 इमोजी स्ट्रिप (Emoji‑Free TTS) -----
+function stripEmojis(text) {
+  return text.replace(/[\u{1F600}-\u{1F9FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{FE0F}\u{1F1E6}-\u{1F1FF}]/gu, '').trim();
+}
+
+// ----- 🆕 UPDATED speakText (Emoji‑Free) -----
 function speakText(text) {
   if (!window.speechSynthesis) return;
   try {
-    const utterance = new SpeechSynthesisUtterance(text.replace(/\n/g, ' ').replace(/<[^>]*>/g, ''));
+    const cleanText = stripEmojis(text.replace(/<[^>]*>/g, ''));
+    if (!cleanText) return;
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'hi-IN';
     utterance.rate = 0.9;
     utterance.pitch = 1.1;
@@ -1214,6 +1223,94 @@ function speakText(text) {
   }
 }
 
+// ----- 🆕 Voice Typing (Speech‑to‑Text) -----
+let recognition = null;
+let isListening = false;
+
+function toggleVoiceTyping() {
+  const btn = document.getElementById('voice-typing-btn');
+  const icon = document.getElementById('voice-typing-icon');
+  const label = document.getElementById('voice-typing-label');
+
+  if (isListening) {
+    if (recognition) { recognition.stop(); recognition = null; }
+    isListening = false;
+    btn.classList.remove('bg-red-600');
+    btn.classList.add('bg-green-600');
+    icon.textContent = '🎤';
+    label.textContent = 'Voice';
+    return;
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert('⚠️ आपका ब्राउज़र Voice Typing support नहीं करता। कृपया Chrome या Edge use करें।');
+    return;
+  }
+
+  try {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'hi-IN';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+
+    recognition.onstart = function() {
+      isListening = true;
+      btn.classList.remove('bg-green-600');
+      btn.classList.add('bg-red-600');
+      icon.textContent = '⏺️';
+      label.textContent = 'Recording...';
+    };
+
+    recognition.onresult = function(event) {
+      let finalTranscript = '';
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) finalTranscript += transcript;
+        else interimTranscript += transcript;
+      }
+      const queryInput = document.getElementById('zeenat-query');
+      if (queryInput) {
+        queryInput.value = finalTranscript || interimTranscript;
+      }
+    };
+
+    recognition.onerror = function(event) {
+      console.warn('Speech recognition error:', event.error);
+      if (recognition) { recognition.stop(); recognition = null; }
+      isListening = false;
+      btn.classList.remove('bg-red-600');
+      btn.classList.add('bg-green-600');
+      icon.textContent = '🎤';
+      label.textContent = 'Voice';
+      if (event.error !== 'no-speech' && event.error !== 'aborted') {
+        alert('⚠️ Voice typing error: ' + event.error + '. Please try again.');
+      }
+    };
+
+    recognition.onend = function() {
+      if (isListening) {
+        isListening = false;
+        btn.classList.remove('bg-red-600');
+        btn.classList.add('bg-green-600');
+        icon.textContent = '🎤';
+        label.textContent = 'Voice';
+        const queryInput = document.getElementById('zeenat-query');
+        if (queryInput && queryInput.value.trim()) {
+          setTimeout(handleZeenatQuery, 300);
+        }
+      }
+    };
+
+    recognition.start();
+  } catch (err) {
+    console.error('Voice typing init error:', err);
+    alert('⚠️ Voice typing not available. Please try again.');
+  }
+}
+
+// ----- Zeenat Connection & Query (unchanged, but uses updated speakText) -----
 async function toggleZeenatConnection() {
   const btn = document.getElementById('zeenat-connect-btn');
   const btnText = document.getElementById('zeenat-btn-text');
@@ -1340,7 +1437,7 @@ async function askUniversalAI(tab, fixedQuery) {
 }
 
 // ============================================================
-// 🆕 LIVE NEWS (Updated: RSS populated)
+// 🆕 LIVE NEWS (UPDATED: RSS populated)
 // ============================================================
 let liveNewsItems = [];
 
@@ -1892,7 +1989,6 @@ const RSS_FEEDS = [
   { name: 'Indian Kanoon', url: 'https://indiankanoon.org/rss/' }
 ];
 
-// 🆕 Multiple RSS-to-JSON proxies (fallback chain)
 const RSS_PROXIES = [
   (url) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
   (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
@@ -1901,7 +1997,7 @@ const RSS_PROXIES = [
 
 let feedCache = null;
 let feedCacheTime = 0;
-const CACHE_TTL = 120000; // 2 minutes
+const CACHE_TTL = 120000;
 
 async function fetchWithTimeout(url, ms = 6000) {
   const controller = new AbortController();
@@ -1919,7 +2015,6 @@ async function fetchWithTimeout(url, ms = 6000) {
   }
 }
 
-// 🆕 Parse raw XML RSS into items (for allorigins/corsproxy fallbacks)
 function parseRSSXML(xmlText, sourceName) {
   try {
     const parser = new DOMParser();
@@ -1939,7 +2034,6 @@ function parseRSSXML(xmlText, sourceName) {
   }
 }
 
-// 🆕 Try multiple proxies in sequence until one works
 async function fetchRSSFeed(feed) {
   const { name, url } = feed;
   
@@ -1954,7 +2048,6 @@ async function fetchRSSFeed(feed) {
       const contentType = response.headers.get('content-type') || '';
       const text = await response.text();
       
-      // rss2json returns JSON
       if (contentType.includes('json') || text.trim().startsWith('{')) {
         try {
           const data = JSON.parse(text);
@@ -1972,7 +2065,6 @@ async function fetchRSSFeed(feed) {
         } catch (e) { /* not JSON, continue */ }
       }
       
-      // Other proxies return raw XML
       if (text.includes('<rss') || text.includes('<item>') || text.includes('<channel>')) {
         const items = parseRSSXML(text, name);
         if (items.length > 0) {
@@ -1992,7 +2084,6 @@ async function fetchRSSFeed(feed) {
   return [];
 }
 
-// 🆕 PARALLEL fetch with Promise.allSettled
 async function fetchAllFeeds() {
   if (feedCache && (Date.now() - feedCacheTime < CACHE_TTL)) {
     console.log('📦 Returning cached feeds');
@@ -2027,12 +2118,10 @@ async function fetchAllFeeds() {
   
   console.log(`📊 RSS Fetch Summary: ${successCount}/${RSS_FEEDS.length} feeds successful, ${allPosts.length} total items`);
   
-  // Update status badge
   updateRSSStatus(successCount, RSS_FEEDS.length, allPosts.length);
   
   allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
   
-  // Deduplicate by title
   const seen = new Set();
   const unique = allPosts.filter(p => {
     const key = p.title.toLowerCase().trim();
@@ -2046,7 +2135,6 @@ async function fetchAllFeeds() {
   return unique;
 }
 
-// 🆕 Update RSS status badge
 function updateRSSStatus(success, total, count) {
   const badge = document.getElementById('rss-status-badge');
   if (!badge) return;
@@ -2415,7 +2503,7 @@ setInterval(updateSEOTags, 300000);
 updateSEOTags();
 
 // ============================================================
-// 🆕 INIT (Updated: parallel refresh with RSS multi-source)
+// 🆕 INIT (UPDATED: parallel refresh with RSS multi-source)
 // ============================================================
 async function initApp() {
   try {
@@ -2426,12 +2514,10 @@ async function initApp() {
   }
   if (window.speechSynthesis) window.speechSynthesis.getVoices();
 
-  // Show static content immediately
   renderBlog();
   renderCaseList();
   showLiveNews();
 
-  // Run refreshes in parallel
   try {
     await Promise.allSettled([
       refreshBlog().catch(e => console.warn('Blog refresh failed:', e)),
@@ -2442,14 +2528,13 @@ async function initApp() {
     console.warn('Init refresh failed:', e);
   }
 
-  // Auto-refresh every 2 minutes
   setInterval(() => {
     refreshBlog().catch(e => console.warn(e));
     refreshCases().catch(e => console.warn(e));
     updateLiveNewsFromRSS().catch(e => console.warn(e));
   }, 120000);
 
-  console.log('⚖️ Lucknow Kanoon Sahayak 9.0 loaded with Multi-Proxy RSS!');
+  console.log('⚖️ Lucknow Kanoon Sahayak 9.0 loaded with Voice Typing & Emoji-Free TTS!');
   console.log('🌹 आदाब अर्ज़ है — सब कुछ एक साथ!');
 }
 
