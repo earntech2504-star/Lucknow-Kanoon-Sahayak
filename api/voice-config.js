@@ -10,13 +10,13 @@ export default function handler(req, res) {
   }
 
   try {
-    // Single voiceId declaration
+    // Single voiceId declaration – correct spelling and correct ID
     const voiceId =
       process.env.ELEVENLABS_VOICE_ID ||
       process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';
+      '21m00Tcm4TlvDq8ikWAM';   // this is the known default voice
 
-    // Check if API key exists
+    // Check if API key exists – correct spelling
     const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
 
     // Return clean response
