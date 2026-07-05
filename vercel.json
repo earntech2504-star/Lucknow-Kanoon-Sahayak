@@ -1,12 +1,11 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
-  "env": {
-    "ELEVENLABS_API_KEY": "@elevenlabs_api_key",
-    "ELEVENLABS_VOICE_ID": "@elevenlabs_voice_id",
-    "UPI_ID": "@upi_id",
-    "UPI_PHONE": "@upi_phone"
-  }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
