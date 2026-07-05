@@ -14,6 +14,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'NEWS_API_KEY missing in .env.local' });
     }
 
+    // ✅ यहाँ backticks ( ` ) use करें – single quotes ( ' ) नहीं!
     const url = `https://newsapi.org/v2/top-headlines?country=in&category=general&pageSize=10&apiKey=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: data.message || 'News API error' });
     }
   } catch (error) {
-    console.error('News error:', error);
+    console.error('News API error:', error);
     return res.status(500).json({ error: 'Failed to fetch news' });
   }
 }
