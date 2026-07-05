@@ -1,4 +1,4 @@
-// api/news.js - Live legal news with News API + RSS + Static fallback
+// api/news.js - Live legal news with News API + RSS fallback
 export default async function handler(req, res) {
   // ✅ CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
