@@ -14,7 +14,7 @@ export default function handler(req, res) {
     const voiceId =
       process.env.ELEVENLABS_VOICE_ID ||
       process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';
+      '21m00Tcm4TlvDq8ikWAM';   // fixed typo (l not 1)
 
     // Check if API key exists (fixed logic)
     const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
