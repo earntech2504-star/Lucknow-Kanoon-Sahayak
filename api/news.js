@@ -1,4 +1,3 @@
-// pages/api/news.js
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -14,8 +13,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'NEWS_API_KEY missing in .env.local' });
     }
 
-    // ✅ Simple concatenation – no backticks, no template literals
-    const url = https://newsapi.org/v2/top-headlines?country=in&category=general&pageSize=10&apiKey= + API_KEY;
+    // ✅ Corrected URL
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=general&pageSize=10&apiKey=${API_KEY}`;
 
     const response = await fetch(url);
     const data = await response.json();
