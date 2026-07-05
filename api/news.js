@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'NEWS_API_KEY missing in .env.local' });
     }
 
-    // ✅ बिना backticks – simple concatenation
+    // ✅ Simple concatenation – no backticks, no template literals
     const url = "https://newsapi.org/v2/top-headlines?country=in&category=general&pageSize=10&apiKey=" + API_KEY;
 
     const response = await fetch(url);
