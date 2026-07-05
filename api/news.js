@@ -1,3 +1,4 @@
+// pages/api/voice-config.js
 export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -7,93 +8,28 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  const news = [
-    {
-      title: "Supreme Court: BNS 318 requires intent to deceive",
-      description: "SC held that mere failure to repay loan doesn't constitute cheating under BNS 318.",
-      source: "LiveLaw",
-      pubDate: new Date().toISOString(),
-      link: "#",
-      tags: ["SC", "BNS 318"]
-    },
-    {
-      title: "BNSS 480: Magistrate can grant bail for 7-year offences",
-      description: "HC clarifies BNSS 480 empowers Magistrate to grant bail.",
-      source: "SCC Online",
-      pubDate: new Date(Date.now() - 86400000).toISOString(),
-      link: "#",
-      tags: ["BNSS 480", "Bail"]
-    },
-    {
-      title: "Lucknow HC: New guidelines for BNSS 482",
-      description: "Allahabad HC issued guidelines for anticipatory bail.",
-      source: "Bar & Bench",
-      pubDate: new Date(Date.now() - 172800000).toISOString(),
-      link: "#",
-      tags: ["BNSS 482", "HC"]
-    },
-    {
-      title: "BSA 63: Certificate mandatory for electronic evidence",
-      description: "SC reiterates certificate under BSA 63(4) is mandatory.",
-      source: "SC Observer",
-      pubDate: new Date(Date.now() - 259200000).toISOString(),
-      link: "#",
-      tags: ["BSA 63", "Evidence"]
-    },
-    {
-      title: "Sonam Raja Raghuvanshi Case Update",
-      description: "Lucknow HC scheduled hearing for 15 July 2026.",
-      source: "LiveLaw",
-      pubDate: new Date(Date.now() - 345600000).toISOString(),
-      link: "#",
-      tags: ["Sonam Raja", "Political"]
-    },
-    {
-      title: "CERT-In: New UPI Fraud Advisory",
-      description: "CERT-In issued advisory about new UPI fraud techniques.",
-      source: "CERT-In",
-      pubDate: new Date(Date.now() - 432000000).toISOString(),
-      link: "#",
-      tags: ["Cyber", "UPI"]
-    },
-    {
-      title: "BNS 103: SC Revisits Death Penalty Test",
-      description: "SC reconsidering rarest of rare doctrine.",
-      source: "SC Observer",
-      pubDate: new Date(Date.now() - 518400000).toISOString(),
-      link: "#",
-      tags: ["BNS 103", "Murder"]
-    },
-    {
-      title: "BNSS 173: Mandatory FIR Registration",
-      description: "SC reaffirms Lalita Kumari judgment.",
-      source: "Indian Kanoon",
-      pubDate: new Date(Date.now() - 604800000).toISOString(),
-      link: "#",
-      tags: ["BNSS 173", "FIR"]
-    },
-    {
-      title: "Women Safety: New POCSO Guidelines",
-      description: "HC issues guidelines for speedy trial.",
-      source: "LiveLaw",
-      pubDate: new Date(Date.now() - 691200000).toISOString(),
-      link: "#",
-      tags: ["Women", "POCSO"]
-    },
-    {
-      title: "Cyber Crime: 500 Crore Fraud Busted",
-      description: "Delhi Police busted major cyber crime racket.",
-      source: "Bar & Bench",
-      pubDate: new Date(Date.now() - 777600000).toISOString(),
-      link: "#",
-      tags: ["Cyber", "Fraud"]
-    }
-  ];
+  try {
+    const voiceId =
+      process.env.ELEVENLABS_VOICE_ID ||
+      process.env.VOICE_ID ||
+      '21m00Tcm4TlvDq8ikWAM';
 
-  return res.status(200).json({
-    news: news,
-    total: news.length,
-    source: 'Static',
-    lastUpdated: new Date().toISOString()
-  });
+    const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
+
+    return res.status(200).json({
+      voiceId,
+      hasKey,
+      engine: hasKey ? 'ElevenLabs' : 'Web Speech',
+      status: voiceId ? 'active' : 'inactive',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('Voice config error:', error);
+    return res.status(500).json({
+      error: 'Voice config error',
+      voiceId: '21m00Tcm4TlvDq8ikWAM',
+      hasKey: false,
+      engine: 'Web Speech',
+    });
+  }
 }
