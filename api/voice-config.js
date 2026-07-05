@@ -10,16 +10,16 @@ export default function handler(req, res) {
   }
 
   try {
-    // Single voiceId declaration (no duplicates!)
+    // Single voiceId declaration
     const voiceId =
       process.env.ELEVENLABS_VOICE_ID ||
       process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';   // fixed typo (l not 1)
+      '21m00Tcm4TlvDq8ikWAM';
 
-    // Check if API key exists (fixed logic)
+    // Check if API key exists
     const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
 
-    // Single response object (no duplicate keys!)
+    // Return clean response
     return res.status(200).json({
       voiceId,
       hasKey,
