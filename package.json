@@ -1,6 +1,6 @@
 {
   "name": "lucknow-kanoon-sahayak",
-  "version": "1.0.0",
+  "version": "9.0.0",
   "description": "AI Voice Legal Assistant for BNS/BNSS/BSA",
   "scripts": {
     "dev": "vercel dev",
