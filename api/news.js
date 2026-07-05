@@ -1,5 +1,5 @@
-// pages/api/voice-config.js
-export default function handler(req, res) {
+// pages/api/news.js
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -9,27 +9,22 @@ export default function handler(req, res) {
   }
 
   try {
-    const voiceId =
-      process.env.ELEVENLABS_VOICE_ID ||
-      process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';
+    const API_KEY = process.env.NEWS_API_KEY;
+    if (!API_KEY) {
+      return res.status(400).json({ error: 'NEWS_API_KEY missing in .env.local' });
+    }
 
-    const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=general&pageSize=10&apiKey=${API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
 
-    return res.status(200).json({
-      voiceId,
-      hasKey,
-      engine: hasKey ? 'ElevenLabs' : 'Web Speech',
-      status: voiceId ? 'active' : 'inactive',
-      timestamp: new Date().toISOString(),
-    });
+    if (data.status === 'ok') {
+      return res.status(200).json(data);
+    } else {
+      return res.status(500).json({ error: data.message || 'News API error' });
+    }
   } catch (error) {
-    console.error('Voice config error:', error);
-    return res.status(500).json({
-      error: 'Voice config error',
-      voiceId: '21m00Tcm4TlvDq8ikWAM',
-      hasKey: false,
-      engine: 'Web Speech',
-    });
+    console.error('News error:', error);
+    return res.status(500).json({ error: 'Failed to fetch news' });
   }
 }
