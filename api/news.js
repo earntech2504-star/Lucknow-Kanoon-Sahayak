@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       console.warn('⚠️ RSS fallback failed:', rssErr.message);
     }
 
-    // 🆕 3. Final fallback - static legal news (always 10+ items)
+    // 🆕 3. Final fallback - static legal news
     const staticNews = [
       { 
         title: "Supreme Court: BNS 318 Cheating Requires Intent to Deceive", 
