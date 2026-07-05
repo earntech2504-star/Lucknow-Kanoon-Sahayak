@@ -1,6 +1,6 @@
-// pages/api/ask.js - GEMINI VERSION
+// api/ask.js
 export default async function handler(req, res) {
-  // Enable CORS
+  // ✅ CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -20,47 +20,91 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Query is required' });
     }
 
-    // 1️⃣ Try Gemini API if key exists
+    // 1️⃣ Try OpenAI if key exists
+    const openaiKey = process.env.OPENAI_API_KEY || process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+    if (openaiKey) {
+      try {
+        const aiResponse = await callOpenAI(query, openaiKey);
+        return res.status(200).json({
+          answer: aiResponse,
+          sources: ['https://openai.com', 'https://indiankanoon.org'],
+          status: 'ai'
+        });
+      } catch (aiErr) {
+        console.warn('OpenAI failed, falling back:', aiErr.message);
+      }
+    }
+
+    // 2️⃣ Try Gemini if key exists
     const geminiKey = process.env.GEMINI_API_KEY;
     if (geminiKey) {
       try {
         const aiResponse = await callGemini(query, geminiKey, tab);
         return res.status(200).json({
           answer: aiResponse,
-          sources: ['Gemini AI', 'BNS/BNSS/BSA 2023'],
+          sources: ['Gemini AI', 'https://indiankanoon.org'],
           status: 'ai'
         });
       } catch (aiErr) {
-        console.warn('Gemini failed, falling back to local knowledge:', aiErr.message);
+        console.warn('Gemini failed, falling back:', aiErr.message);
       }
     }
 
-    // 2️⃣ Fallback to local knowledge base
+    // 3️⃣ Fallback to local knowledge
     const fallbackAnswer = generateLocalLegalResponse(query, date, tab);
     return res.status(200).json({
       answer: fallbackAnswer,
-      sources: ['indiankanoon.org', 'scconline.com'],
+      sources: ['https://indiankanoon.org', 'https://scconline.com'],
       status: 'fallback',
-      note: 'Using offline knowledge base (no API key configured)'
+      note: 'Using offline knowledge base'
     });
 
   } catch (error) {
     console.error('Ask API error:', error);
     return res.status(500).json({
       error: 'Internal server error',
-      answer: 'क्षमा करें, सेवा में कुछ समस्या है। कृपया कुछ देर बाद प्रयास करें। 🌹',
+      answer: 'क्षमा करें, सेवा में कुछ समस्या है। 🌹',
       status: 'error'
     });
   }
 }
 
 // ------------------------------------------------------
-// HELPER: Call Gemini API
+// HELPER: Call OpenAI
+// ------------------------------------------------------
+async function callOpenAI(query, apiKey) {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: 'You are a legal assistant for Indian law (BNS/BNSS/BSA). Provide accurate, helpful, and safe legal information. Always mention that this is for educational purposes only.' },
+        { role: 'user', content: query }
+      ],
+      max_tokens: 500,
+      temperature: 0.7
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`OpenAI API error: ${response.status} - ${err}`);
+  }
+
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content || 'No response from AI.';
+}
+
+// ------------------------------------------------------
+// HELPER: Call Gemini
 // ------------------------------------------------------
 async function callGemini(query, apiKey, tab) {
   const systemPrompt = `You are Zeenat, a Hindi legal assistant for Lucknow Kanoon Sahayak. 
-  Always respond in Hinglish (Hindi + English mix). 
-  Focus on BNS/BNSS/BSA (new laws from 1 July 2024). 
+  Always respond in Hinglish. Focus on BNS/BNSS/BSA (new laws from 1 July 2024).
   Give practical, step-by-step solutions with sections and case laws.
   Tab context: ${tab || 'general'}
   
@@ -91,7 +135,7 @@ async function callGemini(query, apiKey, tab) {
 }
 
 // ------------------------------------------------------
-// FALLBACK: Local legal knowledge (no API key needed)
+// FALLBACK: Local legal knowledge
 // ------------------------------------------------------
 function generateLocalLegalResponse(query, date, tab) {
   const q = query.toLowerCase().trim();
