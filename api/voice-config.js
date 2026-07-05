@@ -1,4 +1,4 @@
-// /api/voice-config.js
+// pages/api/voice-config.js
 export default function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,16 +10,16 @@ export default function handler(req, res) {
   }
 
   try {
-    // Only ONE voiceId declaration
+    // Single voiceId declaration (no duplicates!)
     const voiceId =
       process.env.ELEVENLABS_VOICE_ID ||
       process.env.VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM';   // fixed typo
+      '21m00Tcm4TlvDq8ikWAM';
 
-    // Correctly check if key exists
+    // Check if API key exists (fixed logic)
     const hasKey = Boolean(process.env.ELEVENLABS_API_KEY);
 
-    // Only ONE response object with unique keys
+    // Single response object (no duplicate keys!)
     return res.status(200).json({
       voiceId,
       hasKey,
