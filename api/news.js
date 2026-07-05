@@ -3,7 +3,6 @@ export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
-
   const news = [
     { title: "Supreme Court: BNS 318 Cheating Requires Intent", description: "SC held that mere failure to repay loan doesn't constitute cheating.", source: "SCC Online", pubDate: new Date().toISOString(), link: "#", tags: ["SC", "BNS 318"] },
     { title: "BNSS 480: Magistrate Can Grant Bail", description: "HC clarifies BNSS 480 empowers Magistrate to grant bail.", source: "LiveLaw", pubDate: new Date(Date.now() - 86400000).toISOString(), link: "#", tags: ["BNSS 480", "Bail"] },
@@ -16,11 +15,5 @@ export default function handler(req, res) {
     { title: "Women Safety: New POCSO Guidelines", description: "HC issues guidelines for speedy trial.", source: "LiveLaw", pubDate: new Date(Date.now() - 691200000).toISOString(), link: "#", tags: ["Women", "POCSO"] },
     { title: "Cyber Crime: 500 Crore Fraud Busted", description: "Delhi Police busted major cyber crime racket.", source: "Bar & Bench", pubDate: new Date(Date.now() - 777600000).toISOString(), link: "#", tags: ["Cyber", "Fraud"] }
   ];
-
-  return res.status(200).json({
-    news: news,
-    total: news.length,
-    source: 'Static',
-    lastUpdated: new Date().toISOString()
-  });
+  return res.status(200).json({ news: news, total: news.length, source: 'Static', lastUpdated: new Date().toISOString() });
 }
