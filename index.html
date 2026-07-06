@@ -484,6 +484,14 @@
             background: #fef3c7;
             color: #d97706;
         }
+        
+        /* Voice toggle button */
+        .voice-toggle-btn {
+            transition: all 0.2s;
+        }
+        .voice-toggle-btn:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -593,12 +601,17 @@
                         जी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से <b>सोचकर-समझकर</b> जवाब दूँगी — <b>समस्या (Problem), कानूनी स्थिति, Sections, Case Laws, Step-by-Step समाधान</b>, सब कुछ विस्तार से (15-20 lines में)।
                     </div>
                 </div>
-                <div class="flex gap-2 mb-3">
-                    <input type="text" id="zeenat-query" placeholder="Type your legal question here..." class="border border-slate-300 rounded-lg p-2 flex-1 text-sm">
-                    <button onclick="handleZeenatQuery()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">Send</button>
-                    <button id="voice-typing-btn" onclick="toggleVoiceTyping()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition text-sm flex items-center gap-1" title="Click to speak your question">
+                <div class="flex gap-2 mb-3 flex-wrap">
+                    <input type="text" id="zeenat-query" placeholder="Type your legal question here..." class="border border-slate-300 rounded-lg p-2 flex-1 text-sm min-w-[120px]">
+                    <button onclick="handleZeenatQuery()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm whitespace-nowrap">Send</button>
+                    <button id="voice-typing-btn" onclick="toggleVoiceTyping()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition text-sm flex items-center gap-1 whitespace-nowrap" title="Click to speak your question">
                         <span id="voice-typing-icon">🎤</span>
                         <span id="voice-typing-label" class="text-xs hidden md:inline">Voice</span>
+                    </button>
+                    <!-- ===== NEW: Voice On/Off Toggle Button ===== -->
+                    <button id="voice-toggle-btn" onclick="toggleVoiceOutput()" class="voice-toggle-btn bg-green-100 hover:bg-green-200 text-green-700 px-3 py-2 rounded-lg text-sm flex items-center gap-1 border border-green-300 whitespace-nowrap" title="Toggle voice output on/off">
+                        <span id="voice-toggle-icon">🔊</span>
+                        <span id="voice-toggle-label" class="text-xs hidden md:inline">Voice On</span>
                     </button>
                 </div>
                 <div class="flex flex-wrap gap-1.5 mb-3">
@@ -1721,6 +1734,75 @@
         setInterval(loadFeed, 30000);
 
         // ============================================================
+        // VOICE TOGGLE – NEW FEATURE
+        // ============================================================
+        // Voice output state – saved in localStorage
+        let isVoiceEnabled = true;
+
+        function loadVoiceState() {
+            const saved = localStorage.getItem('zeenat_voice_enabled');
+            if (saved !== null) {
+                isVoiceEnabled = saved === 'true';
+            } else {
+                isVoiceEnabled = true;
+                localStorage.setItem('zeenat_voice_enabled', 'true');
+            }
+            updateVoiceToggleUI();
+        }
+
+        function toggleVoiceOutput() {
+            isVoiceEnabled = !isVoiceEnabled;
+            localStorage.setItem('zeenat_voice_enabled', isVoiceEnabled ? 'true' : 'false');
+            updateVoiceToggleUI();
+            // Cancel any ongoing speech if voice is turned off
+            if (!isVoiceEnabled && window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+            // Show feedback
+            const statusMsg = isVoiceEnabled ? '🔊 Voice output ENABLED' : '🔇 Voice output DISABLED';
+            console.log(statusMsg);
+        }
+
+        function updateVoiceToggleUI() {
+            const icon = document.getElementById('voice-toggle-icon');
+            const label = document.getElementById('voice-toggle-label');
+            const btn = document.getElementById('voice-toggle-btn');
+            if (!icon || !label || !btn) return;
+            if (isVoiceEnabled) {
+                icon.textContent = '🔊';
+                label.textContent = 'Voice On';
+                btn.className = 'voice-toggle-btn bg-green-100 hover:bg-green-200 text-green-700 px-3 py-2 rounded-lg text-sm flex items-center gap-1 border border-green-300 whitespace-nowrap';
+            } else {
+                icon.textContent = '🔇';
+                label.textContent = 'Voice Off';
+                btn.className = 'voice-toggle-btn bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded-lg text-sm flex items-center gap-1 border border-red-300 whitespace-nowrap';
+            }
+        }
+
+        // Modified speakText function – checks voice toggle
+        function speakText(text) {
+            if (!isVoiceEnabled) {
+                console.log('🔇 Voice output is disabled');
+                return;
+            }
+            if (!window.speechSynthesis) {
+                console.warn('Speech synthesis not supported');
+                return;
+            }
+            try {
+                const cleanText = stripEmojis(text.replace(/<[^>]*>/g, ''));
+                if (!cleanText) return;
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'hi-IN';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.1;
+                window.speechSynthesis.speak(utterance);
+            } catch (e) {
+                console.warn('Speech synthesis error:', e);
+            }
+        }
+
+        // ============================================================
         // ZEENAT AI FUNCTIONS
         // ============================================================
         const LEGAL_KNOWLEDGE = {
@@ -2024,21 +2106,6 @@
                 '').trim();
         }
 
-        function speakText(text) {
-            if (!window.speechSynthesis) return;
-            try {
-                const cleanText = stripEmojis(text.replace(/<[^>]*>/g, ''));
-                if (!cleanText) return;
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.lang = 'hi-IN';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.1;
-                window.speechSynthesis.speak(utterance);
-            } catch (e) {
-                console.warn('Speech synthesis error:', e);
-            }
-        }
-
         let recognition = null;
         let isListening = false;
 
@@ -2135,7 +2202,7 @@
                     btn.classList.add('bg-red-600');
                     wave.classList.remove('hidden');
                     addZeenatMessage(zeenatResponses.greeting, false);
-                    if (!hasElevenLabsVoice) speakText(zeenatResponses.greeting);
+                    if (!hasElevenLabsVoice && isVoiceEnabled) speakText(zeenatResponses.greeting);
                 } catch (error) {
                     updateZeenatStatus('disconnected', 'Connection Failed');
                     btnText.textContent = 'Retry Connection';
@@ -2167,7 +2234,7 @@
             const detailedResponse = generateDetailedResponse(query);
             if (thinkingEl && thinkingEl.parentNode) thinkingEl.parentNode.removeChild(thinkingEl);
             addZeenatMessage(detailedResponse, false);
-            if (!hasElevenLabsVoice) {
+            if (!hasElevenLabsVoice && isVoiceEnabled) {
                 const speakSummary = detailedResponse.split('\n').slice(0, 3).join(' ').replace(/<[^>]*>/g, '');
                 speakText(speakSummary);
             }
@@ -3977,6 +4044,9 @@
             console.log('⚖️ Lucknow Kanoon Sahayak 9.0 loaded with Enhanced Dictionary!');
             console.log('📚 Dictionary contains ' + Object.keys(LEGAL_DICTIONARY).length + ' legal terms');
             console.log('🌹 आदाब अर्ज़ है — सब कुछ एक साथ!');
+            
+            // Load voice state from localStorage
+            loadVoiceState();
         }
 
         if (document.readyState === 'loading') {
