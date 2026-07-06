@@ -34,7 +34,6 @@
             font-family: 'Georgia', 'Times New Roman', serif;
         }
 
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 4px;
         }
@@ -50,7 +49,6 @@
             background: #a78bfa;
         }
 
-        /* ===== TABS ===== */
         .tab-content {
             display: none;
             animation: fadeIn 0.35s ease-out;
@@ -79,7 +77,6 @@
             background: #f8fafc;
         }
 
-        /* ===== BUTTONS ===== */
         .btn-primary {
             background: #1e293b;
             transition: all 0.2s;
@@ -101,7 +98,6 @@
             animation: pulse 1s infinite;
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes pulse {
             0%,
             100% {
@@ -169,7 +165,6 @@
             }
         }
 
-        /* ===== COMPONENTS ===== */
         .card-hover {
             transition: all 0.2s;
         }
@@ -266,7 +261,6 @@
             animation-delay: 0.4s;
         }
 
-        /* ===== TIPS TICKER ===== */
         .tips-ticker {
             background: linear-gradient(135deg, #1e1b4b, #312e81);
             color: #e0e7ff;
@@ -289,11 +283,7 @@
             font-weight: 500;
             letter-spacing: 0.3px;
         }
-        .tips-ticker-inner .tip-icon {
-            margin-right: 6px;
-        }
 
-        /* ===== GLASS CARD ===== */
         .glass-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -302,7 +292,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 640px) {
             .tab-btn {
                 font-size: 9px !important;
@@ -323,7 +312,6 @@
             }
         }
 
-        /* ===== UTILITY ===== */
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -366,7 +354,6 @@
             margin: 6px 0;
         }
 
-        /* Premium Draft */
         .premium-draft-preview {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -439,7 +426,6 @@
             transform: translateX(4px);
         }
 
-        /* Status dots */
         .status-dot {
             width: 8px;
             height: 8px;
@@ -484,8 +470,7 @@
             background: #fef3c7;
             color: #d97706;
         }
-        
-        /* Voice toggle button */
+
         .voice-toggle-btn {
             transition: all 0.2s;
         }
@@ -596,9 +581,9 @@
                 </div>
                 <div id="zeenat-chat-container" class="bg-slate-50 border rounded-lg p-3 h-80 overflow-y-scroll flex flex-col space-y-2 mb-3 scrollbar-hide">
                     <div class="message-bubble message-ai self-start text-sm">
-                        <b>नमस्ते! मैं Zeenat हूँ।</b><br><br>
+                        <b>🌹 आदाब अर्ज़ है! मैं Zeenat हूँ – आपकी अपनी लखनऊी कानून सहायिका।</b><br><br>
                         कृपया ध्यान दें — मैं एक वकील नहीं हूँ और मेरी बातें कानूनी सलाह नहीं हैं। यह सिर्फ सामान्य जानकारी के लिए है।<br><br>
-                        जी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से <b>सोचकर-समझकर</b> जवाब दूँगी — <b>समस्या (Problem), कानूनी स्थिति, Sections, Case Laws, Step-by-Step समाधान</b>, सब कुछ विस्तार से (15-20 lines में)।
+                        जी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं आपकी बात <b>सुनकर-समझकर concise (point-wise)</b> जवाब दूँगी — <b>समस्या, कानूनी स्थिति, Steps, Sections, Case Law, Tips, Helplines</b> — सब कुछ short और clear।
                     </div>
                 </div>
                 <div class="flex gap-2 mb-3 flex-wrap">
@@ -608,7 +593,7 @@
                         <span id="voice-typing-icon">🎤</span>
                         <span id="voice-typing-label" class="text-xs hidden md:inline">Voice</span>
                     </button>
-                    <!-- ===== NEW: Voice On/Off Toggle Button ===== -->
+                    <!-- Voice On/Off Toggle Button -->
                     <button id="voice-toggle-btn" onclick="toggleVoiceOutput()" class="voice-toggle-btn bg-green-100 hover:bg-green-200 text-green-700 px-3 py-2 rounded-lg text-sm flex items-center gap-1 border border-green-300 whitespace-nowrap" title="Toggle voice output on/off">
                         <span id="voice-toggle-icon">🔊</span>
                         <span id="voice-toggle-label" class="text-xs hidden md:inline">Voice On</span>
@@ -1372,254 +1357,117 @@
     <div class="max-w-6xl mx-auto px-4 mt-2">
         <div class="adsense-container rounded-lg"><span>📢 Ad Space · Google AdSense</span></div>
     </div>
-<!-- ============================================================ -->
-<!-- MONETIZATION – Amazon Bestsellers + Donation + Sponsor -->
-<!-- ============================================================ -->
 
-<div class="max-w-6xl mx-auto px-4 mt-6">
-  <div class="grid md:grid-cols-2 gap-6">
+    <!-- ============================================================ -->
+    <!-- MONETIZATION – Amazon Bestsellers + Donation + Sponsor -->
+    <!-- ============================================================ -->
 
-    <!-- LEFT: Amazon Bestsellers (Your 7 Links) -->
-    <div class="bg-white p-5 rounded-xl shadow-md border border-slate-200">
-      <div class="flex items-center gap-2 mb-3">
-        <h3 class="font-bold text-lg text-indigo-700">📚 Bestselling Law Books</h3>
-        <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Amazon</span>
-      </div>
-      <p class="text-xs text-gray-500 mb-3">हमें आपकी खरीद पर छोटा सा कमीशन मिलता है – आपकी कीमत पर कोई फ़र्क नहीं।</p>
-      <ul class="text-sm space-y-2.5">
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">1.</span>
-          <a href="https://amzn.to/4vTl4eu" target="_blank" class="text-blue-600 hover:underline font-medium">Decoding New Criminal Laws Combo – BNS, BNSS, BSA (3 Books)</a>
-          <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Top Pick</span>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">2.</span>
-          <a href="https://amzn.to/4buhW0b" target="_blank" class="text-blue-600 hover:underline font-medium">Criminal Manual by K.D. Gaur – BNS, BNSS, BSA</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">3.</span>
-          <a href="https://amzn.to/4vcYGva" target="_blank" class="text-blue-600 hover:underline font-medium">New Criminal Laws Ready Reckoner – Taxmann 2026</a>
-          <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Professional</span>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">4.</span>
-          <a href="https://amzn.to/4pffwZ5" target="_blank" class="text-blue-600 hover:underline font-medium">EBC Bare Act Combo – BNS, BNSS, BSA (with Comparative Table)</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">5.</span>
-          <a href="https://amzn.to/3SK1XEU" target="_blank" class="text-blue-600 hover:underline font-medium">Singhal's MCQ for Judicial Service – Set of 4 Books</a>
-          <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Judiciary</span>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">6.</span>
-          <a href="https://amzn.to/4eXjfFY" target="_blank" class="text-blue-600 hover:underline font-medium">Pearson Legal Aptitude Workbook – CLAT 2026-27</a>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-indigo-500 font-bold">7.</span>
-          <a href="https://amzn.to/4eVtBYl" target="_blank" class="text-blue-600 hover:underline font-medium">Constitution of India – M. Laxmikanth</a>
-          <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Constitution</span>
-        </li>
-      </ul>
-      <div class="mt-3 text-[10px] text-gray-400 border-t pt-2">
-        🛒 <b>Disclaimer:</b> हमें आपकी खरीद पर कमीशन मिलता है – कीमत पर कोई प्रभाव नहीं।
-      </div>
+    <div class="max-w-6xl mx-auto px-4 mt-6">
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <!-- LEFT: Amazon Bestsellers (Your 7 Links) -->
+            <div class="bg-white p-5 rounded-xl shadow-md border border-slate-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <h3 class="font-bold text-lg text-indigo-700">📚 Bestselling Law Books</h3>
+                    <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Amazon</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-3">हमें आपकी खरीद पर छोटा सा कमीशन मिलता है – आपकी कीमत पर कोई फ़र्क नहीं।</p>
+                <ul class="text-sm space-y-2.5">
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">1.</span>
+                        <a href="https://amzn.to/4vTl4eu" target="_blank" class="text-blue-600 hover:underline font-medium">Decoding New Criminal Laws Combo – BNS, BNSS, BSA (3 Books)</a>
+                        <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Top Pick</span>
+                    </li>
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">2.</span>
+                        <a href="https://amzn.to/4buhW0b" target="_blank" class="text-blue-600 hover:underline font-medium">Criminal Manual by K.D. Gaur – BNS, BNSS, BSA</a>
+                    </li>
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">3.</span>
+                        <a href="https://amzn.to/4vcYGva" target="_blank" class="text-blue-600 hover:underline font-medium">New Criminal Laws Ready Reckoner – Taxmann 2026</a>
+                        <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Professional</span>
+                    </li>
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">4.</span>
+                        <a href="https://amzn.to/4pffwZ5" target="_blank" class="text-blue-600 hover:underline font-medium">EBC Bare Act Combo – BNS, BNSS, BSA (with Comparative Table)</a>
+                    </li>
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">5.</span>
+                        <a href="https://amzn.to/3SK1XEU" target="_blank" class="text-blue-600 hover:underline font-medium">Singhal's MCQ for Judicial Service – Set of 4 Books</a>
+                        <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Judiciary</span>
+                    </li>
+                    <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
+                        <span class="text-indigo-500 font-bold">6.</span>
+                        <a href="https://amzn.to/4eXjfFY" target="_blank" class="text-blue-600 hover:underline font-medium">Pearson Legal Aptitude Workbook – CLAT 2026-27</a>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-500 font-bold">7.</span>
+                        <a href="https://amzn.to/4eVtBYl" target="_blank" class="text-blue-600 hover:underline font-medium">Constitution of India – M. Laxmikanth</a>
+                        <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">Constitution</span>
+                    </li>
+                </ul>
+                <div class="mt-3 text-[10px] text-gray-400 border-t pt-2">
+                    🛒 <b>Disclaimer:</b> हमें आपकी खरीद पर कमीशन मिलता है – कीमत पर कोई प्रभाव नहीं।
+                </div>
+            </div>
+
+            <!-- RIGHT: Donation + Sponsor -->
+            <div class="space-y-4">
+                <!-- ============================================================ -->
+                <!-- ENHANCED DONATION – Buy Me a Coffee Style (UPI) -->
+                <!-- ============================================================ -->
+
+                <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-5 rounded-xl shadow-md border border-amber-200 flex flex-col items-center text-center">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-4xl">☕</span>
+                        <h3 class="font-bold text-xl text-amber-800">Buy Me a Coffee</h3>
+                    </div>
+                    <p class="text-sm text-amber-700 font-medium">अगर यह प्लेटफ़ॉर्म उपयोगी लगा, तो कृपया support करें ❤️</p>
+                    <div class="mt-4 w-full">
+                        <p class="text-xs text-amber-600 font-semibold mb-2">👉 Choose an amount to donate</p>
+                        <div class="grid grid-cols-5 gap-2 max-w-sm mx-auto">
+                            <button onclick="donateUPI(5)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹5</button>
+                            <button onclick="donateUPI(10)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹10</button>
+                            <button onclick="donateUPI(50)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹50</button>
+                            <button onclick="donateUPI(100)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹100</button>
+                            <button onclick="donateUPI(500)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹500</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 w-full max-w-sm">
+                        <div class="flex gap-2">
+                            <input type="number" id="custom-donation-amount" placeholder="Enter amount (₹)" min="1" class="flex-1 border border-amber-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                            <button onclick="donateUPI()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition shadow-md hover:shadow-lg whitespace-nowrap">
+                                ☕ Donate
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-white rounded-lg shadow-inner w-full max-w-sm">
+                        <p class="text-xs text-slate-500">📱 UPI ID (Copy & Pay)</p>
+                        <div class="flex items-center justify-center gap-2 mt-1">
+                            <code class="bg-slate-100 px-3 py-1 rounded text-sm font-mono text-slate-700 border border-slate-200">icfai.sandeep@oksbi</code>
+                            <button onclick="copyUPI()" class="text-blue-600 hover:text-blue-800 text-xs font-semibold underline">Copy</button>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=icfai.sandeep@oksbi" alt="UPI QR Code" class="w-28 h-28 border-4 border-white rounded-xl shadow-md" />
+                        <p class="text-[10px] text-amber-500 mt-1">Scan to pay with any UPI app</p>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-3 border-t border-amber-200 pt-2 w-full">
+                        ❤️ आपकी हर मदद हमें नई फीचर्स लाने और इस प्लेटफ़ॉर्म को और बेहतर बनाने में मदद करती है।
+                    </p>
+                </div>
+
+                <!-- Sponsor Section -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-400 text-center">
+                    <h4 class="font-bold text-sm text-slate-700">📢 Sponsor This Section – अपनी Brand को 1000+ Lawyers तक पहुँचाएँ</h4>
+                    <p class="text-xs text-gray-500 mt-1">Monthly ads available – Contact: <a href="mailto:sahayakkanoon@gmail.com" class="text-blue-600 hover:underline">kanoon.sahayak@email.com</a></p>
+                    <p class="text-[10px] text-gray-400 mt-1">✅ Direct sponsorship – हम आपका logo/link यहाँ लगाएँगे।</p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <!-- RIGHT: Donation + Sponsor -->
-    <div class="space-y-4">
-<!-- ============================================================ -->
-<!-- ENHANCED DONATION – Buy Me a Coffee Style (UPI) -->
-<!-- ============================================================ -->
-
-<div class="max-w-6xl mx-auto px-4 mt-6">
-  <div class="grid md:grid-cols-2 gap-6">
-
-    <!-- LEFT: Amazon Bestsellers (Your 7 Links) -->
-    <div class="bg-white p-5 rounded-xl shadow-md border border-slate-200">
-      <h3 class="font-bold text-lg text-indigo-700 flex items-center gap-2">
-        📚 Recommended Law Books
-        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">Bestsellers</span>
-      </h3>
-      <p class="text-xs text-slate-500 mb-3">सबसे ज़्यादा बिकने वाली किताबें – आपकी कानूनी जानकारी के लिए</p>
-      <ul class="text-sm space-y-2.5">
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">1.</span>
-          <a href="https://amzn.to/4vTl4eu" target="_blank" class="text-blue-600 hover:underline font-medium">Decoding New Criminal Laws Combo – BNS, BNSS, BSA (3 Books)</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">2.</span>
-          <a href="https://amzn.to/4buhW0b" target="_blank" class="text-blue-600 hover:underline font-medium">Criminal Manual by K.D. Gaur – BNS, BNSS, BSA</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">3.</span>
-          <a href="https://amzn.to/4vcYGva" target="_blank" class="text-blue-600 hover:underline font-medium">New Criminal Laws Ready Reckoner – Taxmann 2026</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">4.</span>
-          <a href="https://amzn.to/4pffwZ5" target="_blank" class="text-blue-600 hover:underline font-medium">EBC Bare Act Combo – BNS, BNSS, BSA (with Comparative Table)</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">5.</span>
-          <a href="https://amzn.to/3SK1XEU" target="_blank" class="text-blue-600 hover:underline font-medium">Singhal's MCQ for Judicial Service – Set of 4 Books</a>
-        </li>
-        <li class="flex items-start gap-2 border-b border-slate-100 pb-2">
-          <span class="text-indigo-500 font-bold">6.</span>
-          <a href="https://amzn.to/4eXjfFY" target="_blank" class="text-blue-600 hover:underline font-medium">Pearson Legal Aptitude Workbook – CLAT 2026-27</a>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-indigo-500 font-bold">7.</span>
-          <a href="https://amzn.to/4eVtBYl" target="_blank" class="text-blue-600 hover:underline font-medium">Constitution of India – M. Laxmikanth</a>
-        </li>
-      </ul>
-      <div class="mt-3 text-[10px] text-slate-400 border-t pt-2">
-        📖 हमें Amazon से कमीशन मिलता है – आपकी कीमत पर कोई फ़र्क नहीं।
-      </div>
-    </div>
-
-    <!-- RIGHT: Enhanced "Buy Me a Coffee" Style Donation -->
-    <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-5 rounded-xl shadow-md border border-amber-200 flex flex-col items-center text-center">
-      
-      <!-- Header -->
-      <div class="flex items-center gap-3 mb-2">
-        <span class="text-4xl">☕</span>
-        <h3 class="font-bold text-xl text-amber-800">Buy Me a Coffee</h3>
-      </div>
-      <p class="text-sm text-amber-700 font-medium">अगर यह प्लेटफ़ॉर्म उपयोगी लगा, तो कृपया support करें ❤️</p>
-      
-      <!-- Donation Amount Buttons -->
-      <div class="mt-4 w-full">
-        <p class="text-xs text-amber-600 font-semibold mb-2">👉 Choose an amount to donate</p>
-        <div class="grid grid-cols-5 gap-2 max-w-sm mx-auto">
-          <button onclick="donateUPI(5)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹5</button>
-          <button onclick="donateUPI(10)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹10</button>
-          <button onclick="donateUPI(50)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹50</button>
-          <button onclick="donateUPI(100)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹100</button>
-          <button onclick="donateUPI(500)" class="bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-bold py-2 px-1 rounded-lg text-sm transition shadow-sm hover:shadow-md">₹500</button>
-        </div>
-      </div>
-
-      <!-- Custom Amount Input + UPI Button -->
-      <div class="mt-4 w-full max-w-sm">
-        <div class="flex gap-2">
-          <input type="number" id="custom-donation-amount" placeholder="Enter amount (₹)" min="1" class="flex-1 border border-amber-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
-          <button onclick="donateUPI()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition shadow-md hover:shadow-lg whitespace-nowrap">
-            ☕ Donate
-          </button>
-        </div>
-      </div>
-
-      <!-- UPI Details -->
-      <div class="mt-4 p-3 bg-white rounded-lg shadow-inner w-full max-w-sm">
-        <p class="text-xs text-slate-500">📱 UPI ID (Copy & Pay)</p>
-        <div class="flex items-center justify-center gap-2 mt-1">
-          <code class="bg-slate-100 px-3 py-1 rounded text-sm font-mono text-slate-700 border border-slate-200">icfai.sandeep@oksbi</code>
-          <button onclick="copyUPI()" class="text-blue-600 hover:text-blue-800 text-xs font-semibold underline">Copy</button>
-        </div>
-      </div>
-
-      <!-- QR Code -->
-      <div class="mt-3">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=icfai.sandeep@oksbi" alt="UPI QR Code" class="w-28 h-28 border-4 border-white rounded-xl shadow-md" />
-        <p class="text-[10px] text-amber-500 mt-1">Scan to pay with any UPI app</p>
-      </div>
-
-      <!-- Thank You Message -->
-      <p class="text-[10px] text-slate-400 mt-3 border-t border-amber-200 pt-2 w-full">
-        ❤️ आपकी हर मदद हमें नई फीचर्स लाने और इस प्लेटफ़ॉर्म को और बेहतर बनाने में मदद करती है।
-      </p>
-    </div>
-
-  </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- JAVASCRIPT – Donation Functions -->
-<!-- ============================================================ -->
-<script>
-  // Function to open UPI app with amount
-  function donateUPI(amount) {
-    // If amount is not provided, get from custom input
-    if (!amount) {
-      const input = document.getElementById('custom-donation-amount');
-      if (!input || !input.value || input.value <= 0) {
-        alert('कृपया एक राशि दर्ज करें (₹1 से ₹50,000 तक)');
-        return;
-      }
-      amount = parseInt(input.value);
-      if (amount < 1 || amount > 50000) {
-        alert('कृपया ₹1 से ₹50,000 के बीच राशि दर्ज करें');
-        return;
-      }
-    }
-
-    // UPI intent URL for mobile
-    const upiUrl = `upi://pay?pa=icfai.sandeep@oksbi&pn=Support%20Us&cu=INR&am=${amount}`;
-
-    // Try to open UPI app on mobile
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      window.location.href = upiUrl;
-      // Fallback: if UPI app doesn't open, show a message
-      setTimeout(() => {
-        alert(
-          '⚠️ यदि UPI app नहीं खुला, तो कृपया मैन्युअल रूप से UPI ID "icfai.sandeep@oksbi" पर ₹' +
-          amount + ' भेजें।\n\nधन्यवाद! 🙏');
-      }, 2000);
-    } else {
-      // Desktop: show UPI details
-      alert(
-        '📱 कृपया अपने मोबाइल पर इस पेज को खोलें, या नीचे दी गई UPI ID का उपयोग करें:\n\nUPI ID: icfai.sandeep@oksbi\nRashi: ₹' +
-        amount + '\n\nआप UPI (GPay/PhonePe/Paytm) से भेज सकते हैं।');
-    }
-  }
-
-  // Function to copy UPI ID to clipboard
-  function copyUPI() {
-    const upiId = 'icfai.sandeep@oksbi';
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(upiId).then(() => {
-        alert('✅ UPI ID कॉपी हो गई: ' + upiId);
-      }).catch(() => {
-        fallbackCopy(upiId);
-      });
-    } else {
-      fallbackCopy(upiId);
-    }
-  }
-
-  function fallbackCopy(text) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      alert('✅ UPI ID कॉपी हो गई: ' + text);
-    } catch (err) {
-      alert('❌ कॉपी नहीं हुई। कृपया मैन्युअल रूप से UPI ID नोट करें: ' + text);
-    }
-    document.body.removeChild(textArea);
-  }
-</script></a>
-        </div>
-      </div>
-
-      <!-- Sponsor Section -->
-      <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-400 text-center">
-        <h4 class="font-bold text-sm text-slate-700">📢 Sponsor This Section – अपनी Brand को 1000+ Lawyers तक पहुँचाएँ</h4>
-        <p class="text-xs text-gray-500 mt-1">Monthly ads available – Contact: <a href="mailto:sahayakkanoon@gmail.com" class="text-blue-600 hover:underline">kanoon.sahayak@email.com</a></p>
-        <p class="text-[10px] text-gray-400 mt-1">✅ Direct sponsorship – हम आपका logo/link यहाँ लगाएँगे।</p>
-      </div>
-
-      <!-- (Optional) High-Commission Affiliate Programs – remove this block if you don't want it -->
-      <div class="bg-blue-50 p-3 rounded-xl border border-blue-200 text-center">
-        <h4 class="font-bold text-sm text-blue-700">🎓 Judiciary/APO Courses –  ❤️ आपकी हर मदद हमें नई फीचर्स लाने और इस प्लेटफ़ॉर्म को और बेहतर बनाने में मदद करती है।</h4>
-        <p class="text-xs text-gray-600">StudyIQ, Unacademy, Vakilsearch, LawSikho – <a href="#" class="text-blue-600 underline">Join Free</a></p>
-      </div>
-
-    </div>
-  </div>
-</div>
     <!-- ============ FOOTER ============ -->
     <footer class="text-center text-[10px] text-gray-500 mt-6 pb-4 border-t pt-3">
         © 2026 Lucknow Kanoon Sahayak 9.0 · BNS/BNSS/BSA Compliant · AI Voice Legal Assistant · Sabka Kanoon<br>
@@ -1673,7 +1521,6 @@
         function rotateLegalTips() {
             const container = document.getElementById('legalTipsTicker');
             if (!container) return;
-            // Show 6 tips at a time in a rolling fashion
             const visible = [];
             for (let i = 0; i < 6; i++) {
                 const idx = (tipIndex + i) % legalTips.length;
@@ -1683,7 +1530,6 @@
             tipIndex = (tipIndex + 1) % legalTips.length;
         }
 
-        // Initial load and rotate every 12 seconds
         rotateLegalTips();
         setInterval(rotateLegalTips, 12000);
 
@@ -1736,7 +1582,6 @@
         // ============================================================
         // VOICE TOGGLE – NEW FEATURE
         // ============================================================
-        // Voice output state – saved in localStorage
         let isVoiceEnabled = true;
 
         function loadVoiceState() {
@@ -1754,13 +1599,10 @@
             isVoiceEnabled = !isVoiceEnabled;
             localStorage.setItem('zeenat_voice_enabled', isVoiceEnabled ? 'true' : 'false');
             updateVoiceToggleUI();
-            // Cancel any ongoing speech if voice is turned off
             if (!isVoiceEnabled && window.speechSynthesis) {
                 window.speechSynthesis.cancel();
             }
-            // Show feedback
-            const statusMsg = isVoiceEnabled ? '🔊 Voice output ENABLED' : '🔇 Voice output DISABLED';
-            console.log(statusMsg);
+            console.log(isVoiceEnabled ? '🔊 Voice output ENABLED' : '🔇 Voice output DISABLED');
         }
 
         function updateVoiceToggleUI() {
@@ -1803,266 +1645,155 @@
         }
 
         // ============================================================
-        // ZEENAT AI FUNCTIONS
+        // ZEENAT AI – SHORT & CONCISE RESPONSE
         // ============================================================
-        const LEGAL_KNOWLEDGE = {
-            'bns 318': { title: 'BNS 318 — Cheating', desc: 'धोखा / fraud का section।', punishment: 'अधिकतम 7 साल + जुर्माना।',
-                old: 'IPC 420', case: 'Satender Kumar Antil v. CBI (2022)',
-            key: 'Intent to deceive is must.' },
-            'bns 103': { title: 'BNS 103 — Murder', desc: 'हत्या / कत्ल का सबसे गंभीर section।',
-                punishment: 'मौत या आजीवन कारावास', old: 'IPC 302', case: 'Bachan Singh v. State (1980)',
-            key: 'Rarest of rare cases.' },
-            'bns 64': { title: 'BNS 64 — Rape', desc: 'बलात्कार का section।', punishment: 'न्यूनतम 10 साल, आजीवन तक।',
-                old: 'IPC 375', case: 'Nirbhaya case', key: 'Non-consensual intercourse.' },
-            'bns 303': { title: 'BNS 303 — Theft', desc: 'चोरी का section।', punishment: 'अधिकतम 3 साल + जुर्माना।',
-                old: 'IPC 379', case: 'K.N. Mehra v. State (1959)', key: 'Movable property, without consent.' },
-            'bns 356': { title: 'BNS 356 — Defamation', desc: 'बदनामी / मानहानि का section।',
-                punishment: 'अधिकतम 2 साल + जुर्माना।', old: 'IPC 499', case: 'Subramanian Swamy v. UOI (2016)',
-            key: 'Civil and criminal defamation.' },
-            'bns 85': { title: 'BNS 85 — Cruelty by Husband', desc: 'पति द्वारा क्रूरता / उत्पीड़न।',
-                punishment: 'अधिकतम 3 साल।', old: 'IPC 498A', case: 'Rajnesh v. Neha (2021)',
-            key: 'Physical and mental torture.' },
-            'bnss 173': { title: 'BNSS 173 — FIR', desc: 'संज्ञेय अपराधों के लिए FIR।', old: 'CrPC 154',
-                case: 'Lalita Kumari v. UOI (2014)', key: 'Police must register FIR if cognizable offence.' },
-            'bnss 480': { title: 'BNSS 480 — Bail by Magistrate', desc: 'Magistrate द्वारा ज़मानत।', old: 'CrPC 437',
-                case: 'Satender Kumar Antil v. CBI (2022)', key: 'Bail is rule, jail is exception.' },
-            'bnss 482': { title: 'BNSS 482 — Anticipatory Bail', desc: 'गिरफ्तारी से पहले ज़मानत।', old: 'CrPC 438',
-                case: 'Gurbaksh Singh v. State (1980)', key: 'Apply before arrest.' },
-            'bsa 63': { title: 'BSA 63 — Electronic Evidence', desc: 'इंटरनेट / डिजिटल साक्ष्य।', old: 'Evidence Act 65B',
-                case: 'Arjun Panditrao Khotkar v. State (2020)', key: 'Certificate under BSA 63(4) is mandatory!' }
-        };
-
         function generateDetailedResponse(query) {
             const q = query.toLowerCase().trim();
-            let lines = [];
-            lines.push(`🌹 <b>जी, मैंने आपकी बात ध्यान से सुना और सोच-समझकर जवाब तैयार किया है।</b>`);
-            lines.push('');
-            lines.push(`🔍 <b>1. आपकी समस्या को समझना (Understanding Your Problem):</b>`);
-            let problemSummary = '';
-            if (q.includes('fir') && (q.includes('nahi') || q.includes('दर्ज'))) {
-                problemSummary =
-                    'आपकी समस्या यह है कि पुलिस FIR दर्ज नहीं कर रही है — यह एक आम समस्या है जो कई लोगों के साथ होती है। कानूनन police का FIR दर्ज करना अनिवार्य है, लेकिन अक्सर वे टालमटोल करते हैं।';
-            } else if (q.includes('bail') || q.includes('जमानत')) {
-                problemSummary =
-                    'आपको या आपके परिचित को गिरफ्तारी का डर है या वे पहले से गिरफ्तार हैं — अब आप ज़मानत (bail) चाहते हैं। यह प्रक्रिया समझना ज़रूरी है ताकि सही कोर्ट में सही application दायर हो सके।';
-            } else if (q.includes('cheating') || q.includes('dhoka') || q.includes('धोखा') || q.includes('fraud')) {
-                problemSummary =
-                    'आपके साथ धोखाधड़ी (cheating) हुई है — किसी ने झूठा वादा करके पैसे या संपत्ति ली है और अब वापस नहीं कर रहा। यह BNS 318 के तहत आता है और इसमें सज़ा हो सकती है।';
-            } else if (q.includes('cyber') || q.includes('online') || q.includes('upi')) {
-                problemSummary =
-                    'आपके साथ ऑनलाइन fraud/cyber crime हुआ है — UPI scam, OTP fraud, या कोई और digital धोखाधड़ी। ऐसे मामलों में तुरंत कार्रवाई करना बहुत ज़रूरी है।';
-            } else if (q.includes('maintenance') || q.includes('peti') || q.includes('भरण')) {
-                problemSummary =
-                    'आपको भरण-पोषण (maintenance) चाहिए — पति या परिवार आर्थिक सहारा नहीं दे रहा। यह हर पत्नी, बच्चे, और माता-पिता का कानूनी अधिकार है।';
-            } else if (q.includes('property') || q.includes('zameen') || q.includes('जमीन') || q.includes('संपत्ति')) {
-                problemSummary = 'आपकी संपत्ति/जमीन पर कोई विवाद है या कब्ज़ा हो गया है — यह civil + criminal दोनों तरह का मामला बन सकता है।';
-            } else if (q.includes('murder') || q.includes('khoon') || q.includes('हत्या')) {
-                problemSummary =
-                    'यह एक बहुत गंभीर आपराधिक मामला है — murder (हत्या) BNS 103 के तहत आता है, जिसमें मौत या आजीवन कारावास की सज़ा हो सकती है।';
-            } else if (q.includes('divorce') || q.includes('तलाक')) {
-                problemSummary =
-                    'आप तलाक की प्रक्रिया के बारे में जानना चाहते हैं — यह Hindu Marriage Act या Special Marriage Act के तहत आता है, और इसमें कई पहलू होते हैं।';
-            } else if (q.includes('women') || q.includes('महिला') || q.includes('women rights')) {
-                problemSummary =
-                    'आप महिला अधिकारों के बारे में जानना चाहते हैं — भारत में महिलाओं को कई कानूनी अधिकार प्राप्त हैं, जैसे घरेलू हिंसा से सुरक्षा, कार्यस्थल पर समानता, दहेज उत्पीड़न के खिलाफ सुरक्षा, और भरण-पोषण का अधिकार।';
-            } else if (q.includes('consumer') || q.includes('उपभोक्ता')) {
-                problemSummary =
-                    'आप उपभोक्ता अधिकारों के बारे में जानना चाहते हैं — Consumer Protection Act, 2019 के तहत हर उपभोक्ता को सुरक्षा, सूचना, विकल्प, और सुनवाई का अधिकार है।';
-            } else {
-                problemSummary = `आपकी बात है: "${query}" — मैंने इसे ध्यान से समझा है।`;
-            }
-            lines.push(problemSummary);
-            lines.push('');
-            lines.push(`⚖️ <b>2. कानूनी स्थिति (Legal Position under BNS/BNSS/BSA):</b>`);
-            let legalPosition = '';
-            if (q.includes('fir')) {
-                legalPosition =
-                    `1 July 2024 के बाद <b>BNSS 173</b> लागू है (पहले CrPC 154 था)। SC ने <b>Lalita Kumari v. UOI (2014)</b> में स्पष्ट किया कि cognizable offence में FIR दर्ज करना police का <b>अनिवार्य कर्तव्य</b> है — वे मना नहीं कर सकते। अगर SHO FIR न लिखे तो आप <b>BNSS 173(3)</b> के तहत SP को, और फिर <b>BNSS 175(3)</b> के तहत CJM (Magistrate) को application दे सकते हैं।`;
-            } else if (q.includes('bail') || q.includes('जमानत')) {
-                legalPosition =
-                    `BNS/BNSS के तहत तीन तरह की bail होती हैं: <b>(1) BNSS 482</b> — Anticipatory Bail (गिरफ्तारी से पहले, Sessions/HC में), <b>(2) BNSS 480</b> — Regular Bail (Magistrate से, अगर सज़ा 7 साल तक है), <b>(3) BNSS 483</b> — Sessions/HC में (गंभीर अपराधों के लिए)। SC ने <b>Satender Kumar Antil v. CBI (2022)</b> में कहा: "Bail is rule, jail is exception" — यानी ज़मानत देना नियम है, जेल भेजना अपवाद।`;
-            } else if (q.includes('cheating') || q.includes('dhoka') || q.includes('fraud')) {
-                legalPosition =
-                    `<b>BNS 318</b> (पहले IPC 420) — Cheating का section है। सज़ा: <b>अधिकतम 7 साल + जुर्माना</b>। ज़रूरी है कि आरोपी ने <b>intent to deceive</b> (धोखा देने की मंशा) से काम किया हो — सिर्फ़ वादा पूरा न करना cheating नहीं है, शुरुआत से ही धोखा होना चाहिए।`;
-            } else if (q.includes('cyber') || q.includes('online') || q.includes('upi')) {
-                legalPosition =
-                    `Cyber fraud <b>BNS 318</b> (Cheating) + <b>IT Act 2000</b> के तहत आता है। <b>BSA 63</b> (पहले Evidence Act 65B) के तहत electronic evidence (screenshots, messages, emails) के लिए <b>certificate mandatory</b> है — बिना certificate के digital evidence court में admissible नहीं होगा।`;
-            } else if (q.includes('maintenance') || q.includes('peti')) {
-                legalPosition =
-                    `<b>BNSS 144</b> (पहले CrPC 125) — Maintenance का section है। पत्नी, बच्चे, और माता-पिता सभी claim कर सकते हैं। SC ने <b>Rajnesh v. Neha (2021)</b> में guidelines बनाईं कि maintenance की राशि पति की income, जीवन-स्तर, और ज़रूरतों के हिसाब से तय हो। <b>Interim maintenance</b> भी मिल सकता है — मुकदमा चलते समय।`;
-            } else if (q.includes('property') || q.includes('zameen')) {
-                legalPosition =
-                    `Property dispute civil + criminal दोनों हो सकता है। Civil court में <b>title suit</b> दायर करें, और अगर कब्ज़ा हो गया है तो <b>BNSS 173</b> के तहत FIR + <b>Specific Relief Act</b> के तहत injunction। <b>SDM/Tehsildar</b> से stay order भी लिया जा सकता है।`;
-            } else if (q.includes('women') || q.includes('महिला') || q.includes('women rights')) {
-                legalPosition =
-                    `भारत में महिलाओं के पास कई कानूनी अधिकार हैं: <b>1.</b> घरेलू हिंसा से सुरक्षा — Domestic Violence Act, 2005 <b>2.</b> कार्यस्थल पर यौन उत्पीड़न से सुरक्षा — POSH Act, 2013 <b>3.</b> दहेज उत्पीड़न के खिलाफ — BNS 85 (पहले IPC 498A) <b>4.</b> समान वेतन — Equal Remuneration Act, 1976 <b>5.</b> संपत्ति में हिस्सा — Hindu Succession Act, 1956 <b>6.</b> भरण-पोषण — BNSS 144 (पहले CrPC 125) <b>7.</b> मातृत्व अवकाश — Maternity Benefit Act, 1961 (26 सप्ताह) <b>8.</b> महिला हेल्पलाइन — 181`;
-            } else if (q.includes('consumer') || q.includes('उपभोक्ता')) {
-                legalPosition =
-                    `Consumer Protection Act, 2019 के तहत 6 मूल अधिकार: <b>1.</b> सुरक्षा का अधिकार <b>2.</b> सूचना का अधिकार <b>3.</b> विकल्प का अधिकार <b>4.</b> सुनवाई का अधिकार <b>5.</b> मुआवज़े का अधिकार <b>6.</b> उपभोक्ता शिक्षा का अधिकार। कोई भी उपभोक्ता Consumer Commission (District, State, National) में शिकायत दर्ज करा सकता है।`;
-            } else {
-                legalPosition =
-                    `आपके मामले में संबंधित कानूनी प्रावधानों को देखना होगा। 1 July 2024 के बाद <b>BNS/BNSS/BSA</b> लागू है — पुराने IPC/CrPC/Evidence Act की जगह। सही section apply करने के लिए <b>crime date</b> बहुत important है।`;
-            }
-            lines.push(legalPosition);
-            lines.push('');
-            lines.push(`📋 <b>3. Step-by-Step समाधान (Solution):</b>`);
+            let problem = '';
+            let legal = '';
             let steps = [];
-            if (q.includes('fir')) {
-                steps = [
-                    '① सबसे पहले <b>लिखित शिकायत</b> तैयार करें — तारीख, समय, स्थान, आरोपी का नाम, पूरी घटना।',
-                    '② अपने क्षेत्र के <b>Police Station</b> में जाकर SHO को complaint दें।',
-                    '③ अगर SHO FIR न लिखे → <b>BNSS 173(3)</b> के तहत <b>SP (Superintendent)</b> को लिखित complaint भेजें।',
-                    '④ अगर SP भी न करें → <b>BNSS 175(3)</b> के तहत <b>CJM/Magistrate</b> के पास application दें।',
-                    '⑤ FIR दर्ज होने पर <b>24 घंटे के अंदर free copy</b> माँगें — यह आपका अधिकार है।',
-                    '⑥ अगर अपराध दूसरे शहर में हुआ है → <b>Zero FIR</b> किसी भी थाने में दर्ज कराएँ।'
-                ];
-            } else if (q.includes('bail') || q.includes('जमानत')) {
-                steps = [
-                    '① सबसे पहले <b>घबराएँ नहीं</b> — bail आपका कानूनी अधिकार है।',
-                    '② अगर गिरफ्तारी का डर है → तुरंत <b>BNSS 482</b> के तहत <b>Anticipatory Bail</b> के लिए Sessions/HC में application दायर करें।',
-                    '③ अगर पहले से गिरफ्तार हैं और सज़ा 7 साल तक है → <b>BNSS 480</b> के तहत <b>Magistrate</b> से Regular Bail लें।',
-                    '④ गंभीर अपराध (murder, rape) → <b>BNSS 483</b> के तहत <b>Sessions Court या HC</b> में जाएँ।',
-                    '⑤ Bail application में grounds बताएँ: निर्दोषता, जाँच में सहयोग, साक्ष्य नष्ट न करना, फरार न होना।',
-                    '⑥ <b>Surety (ज़मानतदार)</b> और <b>Bond (मुचलका)</b> तैयार रखें।',
-                    '⑦ Bail मिलने पर <b>Release Order</b> लेकर जेल में दिखाएँ और रिहा हों।'
-                ];
-            } else if (q.includes('cheating') || q.includes('dhoka') || q.includes('fraud')) {
-                steps = [
-                    '① <b>सारे सबूत इकट्ठा करें</b> — bank statements, WhatsApp chats, emails, agreements, receipts।',
-                    '② <b>Local Police Station</b> में लिखित complaint दें — BNS 318 के तहत FIR दर्ज कराएँ।',
-                    '③ अगर ₹1 लाख से ज़्यादा का online fraud है → <b>Cyber Crime Cell</b> या <b>Economic Offences Wing</b> में भी शिकायत करें।',
-                    '④ तुरंत <b>1930</b> (Cyber Crime Helpline) पर कॉल करें।',
-                    '⑤ <b>nationalcybercrime.gov.in</b> पर online complaint दर्ज करें।',
-                    '⑥ अपने <b>Bank</b> को तुरंत सूचित करें।',
-                    '⑦ अगर police FIR न लिखे → <b>BNSS 175(3)</b> के तहत Magistrate के पास जाएँ।'
-                ];
-            } else if (q.includes('cyber') || q.includes('online') || q.includes('upi')) {
-                steps = [
-                    '① <b>तुरंत 1930 पर कॉल करें</b> — यह 24x7 Cyber Crime Helpline है।',
-                    '② <b>nationalcybercrime.gov.in</b> पर जाकर online complaint दर्ज करें।',
-                    '③ अपने <b>Bank</b> को तुरंत फोन करें — transaction को reverse करने की कोशिश करें।',
-                    '④ सारे <b>सबूत सुरक्षित रखें</b> — screenshots, messages, emails, transaction details।',
-                    '⑤ Local Police Station में <b>FIR दर्ज कराएँ</b> (BNSS 173)।',
-                    '⑥ <b>BSA 63 certificate</b> ज़रूर लें — electronic evidence के लिए यह mandatory है।',
-                    '⑦ बड़ी राशि के मामले में एक <b>cyber lawyer</b> से सलाह लें।'
-                ];
-            } else if (q.includes('maintenance') || q.includes('peti')) {
-                steps = [
-                    '① पहले <b>परिवार से बात</b> करें — अगर मामला सुलझ जाए तो अच्छा है।',
-                    '② अगर नहीं → <b>BNSS 144</b> के तहत <b>Family Court/Magistrate</b> में maintenance petition दायर करें।',
-                    '③ <b>पति की income</b>, आपकी income, बच्चों की संख्या, खर्चों की detail दें।',
-                    '④ <b>Interim maintenance</b> माँगें — मुकदमा चलते समय तुरंत राहत मिलती है।',
-                    '⑤ Court दोनों पक्षों को सुनने के बाद <b>final order</b> पारित करेगी।',
-                    '⑥ अगर पति भुगतान न करे → Court <b>warrant</b> या <b>property attachment</b> का आदेश दे सकती है।'
-                ];
-            } else if (q.includes('property') || q.includes('zameen')) {
-                steps = [
-                    '① <b>सारे दस्तावेज़</b> सुरक्षित रखें — पट्टा, खतौनी, रजिस्ट्री, receipts।',
-                    '② <b>SDM/Tehsildar</b> के पास application दें — stay order ले सकते हैं।',
-                    '③ <b>Civil Court</b> में title suit दायर करें।',
-                    '④ अगर कब्ज़ा हो गया है → <b>Police में FIR</b> दर्ज कराएँ (BNSS 173)।',
-                    '⑤ Court से <b>interim injunction</b> लें।',
-                    '⑥ एक अच्छे <b>civil lawyer</b> से मिलें।'
-                ];
-            } else if (q.includes('women') || q.includes('महिला') || q.includes('women rights')) {
-                steps = [
-                    '① <b>घरेलू हिंसा</b> की स्थिति में 181 (Women Helpline) पर कॉल करें या Police (100) को सूचित करें।',
-                    '② <b>कार्यस्थल पर यौन उत्पीड़न</b> की स्थिति में POSH Act के तहत Internal Complaints Committee (ICC) में शिकायत करें।',
-                    '③ <b>दहेज उत्पीड़न</b> के लिए BNS 85 के तहत Police में FIR दर्ज कराएँ।',
-                    '④ <b>समान वेतन</b> न मिलने पर Labour Commissioner या Equal Remuneration Act के तहत अदालत में जाएँ।',
-                    '⑤ <b>संपत्ति में हिस्सा</b> के लिए Hindu Succession Act के तहत civil suit दायर करें।',
-                    '⑥ <b>भरण-पोषण</b> के लिए BNSS 144 के तहत Family Court/Magistrate में application करें।',
-                    '⑦ <b>मुफ्त कानूनी सहायता</b> के लिए Legal Services Authority (15100) या District Legal Services Authority (DLSA) से संपर्क करें।'
-                ];
-            } else if (q.includes('consumer') || q.includes('उपभोक्ता')) {
-                steps = [
-                    '① <b>शिकायत</b> सबसे पहले विक्रेता/कंपनी के पास करें — email, letter, या call के माध्यम से।',
-                    '② अगर समाधान न हो → <b>District Consumer Commission</b> में शिकायत दर्ज करें (यदि राशि ₹50 लाख तक है)।',
-                    '③ ₹50 लाख से ₹2 करोड़ तक → <b>State Consumer Commission</b> में शिकायत करें।',
-                    '④ ₹2 करोड़ से अधिक → <b>National Consumer Commission</b> में शिकायत करें।',
-                    '⑤ शिकायत के साथ <b>सारे दस्तावेज़</b> संलग्न करें — bills, receipts, correspondence, photos।',
-                    '⑥ Consumer Commission में आपको <b>वकील</b> की ज़रूरत नहीं है — आप स्वयं भी पेश हो सकते हैं।',
-                    '⑦ Commission <b>30-60 दिनों</b> में case का निपटारा करती है — जल्दी न्याय मिलता है।'
-                ];
-            } else {
-                steps = [
-                    '① सबसे पहले <b>शांत रहें</b> और सारे facts एक paper पर लिखें।',
-                    '② <b>सबूत इकट्ठा करें</b> — documents, photos, messages, witnesses।',
-                    '③ एक <b>योग्य वकील</b> से सलाह लें।',
-                    '④ सही <b>section और court</b> पहचानें।',
-                    '⑤ <b>Application/petition</b> दायर करें।',
-                    '⑥ <b>समय पर तारीख</b> पर court जाएँ।'
-                ];
-            }
-            steps.forEach(s => lines.push(s));
-            lines.push('');
-            lines.push(`📜 <b>4. संबंधित Sections (Relevant Sections):</b>`);
             let sections = '';
-            if (q.includes('fir')) sections = '• BNSS 173 (FIR) • BNSS 175(3) (Magistrate order) • BNSS 200 (Magistrate inquiry)';
-            else if (q.includes('bail')) sections = '• BNSS 480 (Magistrate Bail) • BNSS 482 (Anticipatory Bail) • BNSS 483 (Sessions/HC Bail)';
-            else if (q.includes('cheating') || q.includes('dhoka')) sections = '• BNS 318 (Cheating) • BNSS 173 (FIR) • BNSS 193 (Chargesheet)';
-            else if (q.includes('cyber')) sections = '• BNS 318 (Cheating) • BSA 63 (Electronic Evidence) • IT Act 2000 • BNSS 173 (FIR)';
-            else if (q.includes('maintenance')) sections = '• BNSS 144 (Maintenance) • BNS 85 (Cruelty) • Hindu Marriage Act (if applicable)';
-            else if (q.includes('property')) sections = '• BNSS 173 (FIR) • Civil Procedure Code • Specific Relief Act • Revenue Code';
-            else if (q.includes('women') || q.includes('महिला')) sections =
-                '• BNS 85 (Cruelty) • Domestic Violence Act 2005 • POSH Act 2013 • Equal Remuneration Act 1976 • Hindu Succession Act 1956 • BNSS 144 (Maintenance) • Maternity Benefit Act 1961';
-            else if (q.includes('consumer') || q.includes('उपभोक्ता')) sections =
-                '• Consumer Protection Act 2019 • Section 2(1)(o) (Complaint) • Section 35 (District Commission) • Section 41 (State Commission) • Section 58 (National Commission)';
-            else sections = '• कृपया Zeenat से specific section पूछें।';
-            lines.push(sections);
-            lines.push('');
-            lines.push(`⚖️ <b>5. महत्वपूर्ण Case Laws:</b>`);
             let caseLaw = '';
-            if (q.includes('fir')) caseLaw =
-                '• <b>Lalita Kumari v. UOI (2014)</b> — SC ने कहा कि cognizable offence में FIR दर्ज करना अनिवार्य है।';
-            else if (q.includes('bail')) caseLaw =
-                '• <b>Satender Kumar Antil v. CBI (2022)</b> — SC ने bail के comprehensive guidelines बनाए। • <b>Gurbaksh Singh v. State (1980)</b> — Anticipatory bail के मूल सिद्धांत।';
-            else if (q.includes('cheating') || q.includes('dhoka')) caseLaw =
-                '• <b>Satender Kumar Antil v. CBI (2022)</b> — bail guidelines। • Cheating के लिए "intent to deceive" prove करना ज़रूरी है।';
-            else if (q.includes('cyber')) caseLaw =
-                '• <b>Arjun Panditrao Khotkar v. State (2020)</b> — BSA 63 certificate mandatory।';
-            else if (q.includes('maintenance')) caseLaw =
-                '• <b>Rajnesh v. Neha (2021)</b> — SC ने maintenance राशि तय करने के guidelines बनाए।';
-            else if (q.includes('women') || q.includes('महिला')) caseLaw =
-                '• <b>Vishakha v. State of Rajasthan (1997)</b> — कार्यस्थल पर यौन उत्पीड़न के लिए Vishakha guidelines। • <b>Rajnesh v. Neha (2021)</b> — Maintenance guidelines। • <b>Shayara Bano v. UOI (2017)</b> — Triple Talaq unconstitutional।';
-            else if (q.includes('consumer') || q.includes('उपभोक्ता')) caseLaw =
-                '• <b>Spring Meadows Hospital v. Harjol Ahluwalia (1998)</b> — Service deficiency में consumer commission ने मुआवज़ा दिया। • <b>Laxmi Engineering Works v. PSG Industrial Institute (1995)</b> — Consumer definition का विस्तार।';
-            else caseLaw = '• आपकी समस्या से संबंधित landmark judgments के लिए Zeenat से specific पूछें।';
-            lines.push(caseLaw);
-            lines.push('');
-            lines.push(`💡 <b>6. Zeenat की विशेष सलाह (Practical Tips):</b>`);
-            lines.push(`• <b>सबूत सुरक्षित रखें</b> — documents, photos, videos, messages, witnesses के नाम-पते।`);
-            lines.push(`• <b>समय पर कार्रवाई करें</b> — limitation period का ध्यान रखें।`);
-            lines.push(`• <b>एक अच्छे वकील से सलाह लें</b> — यह सबसे important step है।`);
-            lines.push(`• <b>Crime Date याद रखें</b> — 1 July 2024 के पहले = IPC/CrPC, बाद में = BNS/BNSS/BSA।`);
-            lines.push(`• <b>सभी कागजात की copies</b> अपने पास रखें।`);
-            if (q.includes('women') || q.includes('महिला')) {
-                lines.push(`• <b>महिलाओं के लिए विशेष:</b> 181 (Women Helpline) 24x7 उपलब्ध है — किसी भी आपात स्थिति में call करें।`);
-                lines.push(
-                    `• <b>मुफ्त कानूनी सहायता:</b> Legal Services Authority 15100 पर call करें — हर महिला को मुफ्त कानूनी सहायता मिलती है।`
-                    );
+            let tips = [];
+            let helplines = [];
+
+            // Detect topic and fill data
+            if (q.includes('fir') && (q.includes('nahi') || q.includes('दर्ज'))) {
+                problem = 'पुलिस FIR नहीं लिख रही है।';
+                legal = 'BNSS 173 – FIR दर्ज करना police का अनिवार्य कर्तव्य है।';
+                steps = [
+                    '① SHO को लिखित शिकायत दें।',
+                    '② SHO न करे → SP को complaint (BNSS 173(3))।',
+                    '③ SP भी न करे → Magistrate (BNSS 175(3)) के पास जाएँ।'
+                ];
+                sections = 'BNSS 173, 175(3)';
+                caseLaw = 'Lalita Kumari v. UOI (2014) – FIR mandatory';
+                tips = ['सबूत सुरक्षित रखें', '24 घंटे में FIR copy लें'];
+                helplines = ['100 – Police', '15100 – Legal Helpline'];
+            } else if (q.includes('bail') || q.includes('जमानत')) {
+                problem = 'गिरफ्तारी का डर / जेल से रिहाई चाहिए।';
+                legal = 'BNSS 480 (Magistrate bail), BNSS 482 (Anticipatory), BNSS 483 (Sessions/HC)';
+                steps = [
+                    '① अगर गिरफ्तारी का डर → BNSS 482 (Anticipatory) लें।',
+                    '② अगर गिरफ्तार हैं और सज़ा 7 साल तक → BNSS 480 (Magistrate) से bail।',
+                    '③ गंभीर अपराध → BNSS 483 (Sessions/HC) में apply करें।'
+                ];
+                sections = 'BNSS 480, 482, 483';
+                caseLaw = 'Satender Kumar Antil v. CBI (2022) – "Bail is rule, jail is exception"';
+                tips = ['Surety + Bond तैयार रखें', 'Grounds: निर्दोषता, जाँच में सहयोग'];
+                helplines = ['15100 – Legal Helpline'];
+            } else if (q.includes('cheating') || q.includes('dhoka') || q.includes('fraud')) {
+                problem = 'धोखाधड़ी (cheating) हुई है।';
+                legal = 'BNS 318 – Cheating, max 7 years + fine. Intent to deceive is must.';
+                steps = [
+                    '① सारे सबूत इकट्ठा करें (bank statements, chats, receipts)।',
+                    '② Police में FIR दर्ज कराएँ (BNSS 173)।',
+                    '③ अगर online fraud है → 1930 पर कॉल करें।'
+                ];
+                sections = 'BNS 318, BNSS 173';
+                caseLaw = 'Satender Kumar Antil v. CBI (2022) – bail guidelines';
+                tips = ['सबूत सुरक्षित रखें', 'Bank को तुरंत सूचित करें'];
+                helplines = ['1930 – Cyber Crime', '100 – Police'];
+            } else if (q.includes('cyber') || q.includes('online') || q.includes('upi')) {
+                problem = 'ऑनलाइन fraud / cyber crime हुआ है।';
+                legal = 'BNS 318 + IT Act 2000 – online fraud, BSA 63 – electronic evidence certificate mandatory.';
+                steps = [
+                    '① 1930 (Cyber Crime) पर कॉल करें।',
+                    '② nationalcybercrime.gov.in पर complaint दर्ज करें।',
+                    '③ Bank को सूचित करें, FIR (BNSS 173) कराएँ।'
+                ];
+                sections = 'BNS 318, IT Act 2000, BSA 63, BNSS 173';
+                caseLaw = 'Arjun Panditrao Khotkar v. State (2020) – BSA 63 certificate mandatory';
+                tips = ['Screenshots सुरक्षित रखें', 'UPI app से transaction reverse करवाएँ'];
+                helplines = ['1930 – Cyber Crime', '100 – Police'];
+            } else if (q.includes('maintenance') || q.includes('peti') || q.includes('भरण')) {
+                problem = 'भरण-पोषण (maintenance) चाहिए।';
+                legal = 'BNSS 144 – पत्नी, बच्चे, माता-पिता हकदार।';
+                steps = [
+                    '① Family Court / Magistrate में BNSS 144 के तहत petition दायर करें।',
+                    '② पति की income, खर्चों की detail दें।',
+                    '③ Interim maintenance माँगें – case के दौरान तुरंत राहत मिलती है।'
+                ];
+                sections = 'BNSS 144, BNS 85 (Cruelty)';
+                caseLaw = 'Rajnesh v. Neha (2021) – maintenance guidelines';
+                tips = ['Income documents जमा करें', 'Lawyer से सलाह लें'];
+                helplines = ['15100 – Legal Helpline', '181 – Women Helpline'];
+            } else if (q.includes('property') || q.includes('zameen') || q.includes('जमीन')) {
+                problem = 'संपत्ति विवाद / कब्ज़ा।';
+                legal = 'Civil suit (title suit) + criminal FIR (BNSS 173) यदि कब्ज़ा हो।';
+                steps = [
+                    '① सारे दस्तावेज़ सुरक्षित रखें (पट्टा, रजिस्ट्री)।',
+                    '② SDM/Tehsildar से stay order लें।',
+                    '③ Civil court में title suit + injunction दायर करें।'
+                ];
+                sections = 'BNSS 173, Specific Relief Act, Revenue Code';
+                caseLaw = 'A. Jayachandran v. State (2023) – property dispute';
+                tips = ['SDM stay भी ले सकते हैं', 'Civil + Criminal dono करें'];
+                helplines = ['100 – Police', '15100 – Legal Helpline'];
+            } else if (q.includes('women') || q.includes('महिला')) {
+                problem = 'महिला अधिकारों की जानकारी चाहिए।';
+                legal = 'BNS 85 (cruelty), Domestic Violence Act, POSH Act, BNSS 144 (maintenance), Maternity Benefit Act, Equal Remuneration Act।';
+                steps = [
+                    '① घरेलू हिंसा → 181 (Women Helpline) या Police (100) को call करें।',
+                    '② कार्यस्थल पर उत्पीड़न → POSH Act के तहत ICC में complain करें।',
+                    '③ दहेज उत्पीड़न → BNS 85 के तहत FIR दर्ज कराएँ।'
+                ];
+                sections = 'BNS 85, Domestic Violence Act, POSH Act, BNSS 144';
+                caseLaw = 'Vishakha v. State (1997) – workplace harassment; Rajnesh v. Neha (2021) – maintenance';
+                tips = ['181 – 24x7 Women Helpline', 'DLSA से free legal aid लें'];
+                helplines = ['181 – Women Helpline', '100 – Police', '15100 – Legal Helpline'];
+            } else if (q.includes('consumer') || q.includes('उपभोक्ता')) {
+                problem = 'उपभोक्ता अधिकार – product/service में समस्या।';
+                legal = 'Consumer Protection Act 2019 – 6 अधिकार: सुरक्षा, सूचना, विकल्प, सुनवाई, मुआवज़ा, शिक्षा।';
+                steps = [
+                    '① पहले विक्रेता/कंपनी को complain करें।',
+                    '② अगर निपटारा न हो → District Consumer Commission (₹50L तक) में शिकायत करें।',
+                    '③ ₹50L–₹2Cr → State Commission; ₹2Cr+ → National Commission।'
+                ];
+                sections = 'Consumer Protection Act 2019 – Sections 35, 41, 58';
+                caseLaw = 'Spring Meadows Hospital v. Harjol (1998) – service deficiency';
+                tips = ['सारे दस्तावेज़ (bills, receipts) सुरक्षित रखें', 'वकील की ज़रूरत नहीं – स्वयं भी पेश हो सकते हैं।'];
+                helplines = ['1800-11-4000 – Consumer Helpline', '15100 – Legal Helpline'];
+            } else {
+                problem = `"${query}" – हम इस पर जानकारी दे सकते हैं।`;
+                legal = 'कृपया Zeenat AI से सीधे पूछें (Voice AI tab) या Dictionary/Search का उपयोग करें।';
+                steps = ['① सभी facts एक paper पर लिखें।', '② सबूत इकट्ठा करें।', '③ योग्य वकील से सलाह लें।'];
+                sections = 'आपकी समस्या पर निर्भर करता है।';
+                caseLaw = 'संबंधित landmark के लिए Zeenat से पूछें।';
+                tips = ['समय पर कार्रवाई करें', 'सभी कागजात की copies रखें।'];
+                helplines = ['15100 – Legal Helpline'];
             }
-            if (q.includes('consumer') || q.includes('उपभोक्ता')) {
-                lines.push(`• <b>उपभोक्ता शिकायत:</b> Consumer Helpline 1800-11-4000 पर call करें या online complaint करें।`);
-                lines.push(`• <b>ई-दाखिल:</b> National Consumer Commission की website पर online complaint दर्ज कर सकते हैं।`);
-            }
+
+            // Build concise response (point-wise, short)
+            let lines = [];
+            lines.push(`🌹 <b>Zeenat:</b> आदाब! मैंने आपकी बात समझ ली है।`);
             lines.push('');
-            lines.push(`📞 <b>7. Emergency Helplines:</b>`);
-            lines.push(
-                `• 🚔 Police: <b>100</b> • 💻 Cyber Crime: <b>1930</b> • ⚖️ Legal Helpline: <b>15100</b> • 🆓 Legal Aid: <b>1800-112-400</b> • 👩 Women Helpline: <b>181</b> • 🧒 Child Helpline: <b>1098</b>`
-                );
+            lines.push(`🔍 <b>Problem:</b> ${problem}`);
             lines.push('');
-            lines.push(`🌹 <b>अंत में:</b> मैंने आपकी समस्या को ध्यान से समझकर पूरी जानकारी दी है। कानून आपके साथ है — घबराएँ नहीं, सही कदम उठाएँ।`);
+            lines.push(`⚖️ <b>Legal Position:</b> ${legal}`);
             lines.push('');
-            lines.push(
-                `⚠️ <b>Disclaimer:</b> यह जानकारी केवल शैक्षणिक उद्देश्य के लिए है, कानूनी सलाह नहीं। कोई भी कदम उठाने से पहले <b>योग्य वकील</b> से परामर्श अवश्य लें।`);
+            lines.push(`📋 <b>Steps:</b>`);
+            steps.forEach(s => lines.push(`  ${s}`));
+            lines.push('');
+            lines.push(`📜 <b>Sections:</b> ${sections}`);
+            lines.push('');
+            lines.push(`⚖️ <b>Case Law:</b> ${caseLaw}`);
+            lines.push('');
+            lines.push(`💡 <b>Tips:</b> ${tips.join(' • ')}`);
+            lines.push('');
+            lines.push(`📞 <b>Helplines:</b> ${helplines.join(' • ')}`);
+            lines.push('');
+            lines.push(`⚠️ <b>Disclaimer:</b> यह सामान्य जानकारी है, कानूनी सलाह नहीं। वकील से परामर्श अवश्य लें।`);
             return lines.join('\n');
         }
 
+        // ============================================================
+        // ZEENAT CONNECTION & HANDLING
+        // ============================================================
         let isZeenatConnected = false;
         const zeenatResponses = {
-            greeting: `नमस्ते! मैं Zeenat हूँ। कृपया ध्यान दें — मैं एक वकील नहीं हूँ और मेरी बातें कानूनी सलाह नहीं हैं। यह सिर्फ सामान्य जानकारी के लिए है।\nजी, फ़रमाइए। आप बेफ़िक्र होकर अपनी बात बताइए। मैं पूरी तसल्ली से सोचकर-समझकर 15-20 lines में विस्तृत जवाब दूँगी।`,
-            default: `जी, अब आप अपनी परेशानी बताइए। मैं आपकी बात ध्यान से सुन रही हूँ।`
+            greeting: `🌹 आदाब अर्ज़ है! मैं Zeenat हूँ – आपकी अपनी लखनऊी कानून सहायिका।\n\nकृपया ध्यान दें — मैं एक वकील नहीं हूँ और मेरी बातें कानूनी सलाह नहीं हैं। यह सिर्फ सामान्य जानकारी के लिए है।\n\nजी, फ़रमाइए। मैं आपकी बात सुनकर concise (point-wise) जवाब दूँगी — समस्या, कानूनी स्थिति, Steps, Sections, Case Law, Tips, Helplines — सब कुछ short और clear।`,
+            default: `जी, अब आप अपनी परेशानी बताइए – मैं सुन रही हूँ।`
         };
 
         function updateZeenatStatus(status, text) {
@@ -2095,7 +1826,7 @@
             div.className = 'message-bubble message-ai self-start text-sm';
             div.id = 'thinking-indicator';
             div.innerHTML =
-                `<b>Zeenat सोच रही है</b><div class="thinking-dots mt-2"><span></span><span></span><span></span></div><p class="text-[10px] text-slate-500 mt-2">🔍 समस्या समझ रही हूँ... ⚖️ कानूनी स्थिति देख रही हूँ... 📋 समाधान तैयार कर रही हूँ...</p>`;
+                `<b>Zeenat सोच रही है</b><div class="thinking-dots mt-2"><span></span><span></span><span></span></div><p class="text-[10px] text-slate-500 mt-2">🔍 आपकी बात समझ रही हूँ... ⚖️ कानूनी पहलू देख रही हूँ... 📋 समाधान तैयार कर रही हूँ...</p>`;
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
             return div;
@@ -2230,7 +1961,7 @@
             queryInput.value = '';
             updateZeenatStatus('thinking', 'Soch rahi hoon...');
             const thinkingEl = showThinkingIndicator();
-            await new Promise(resolve => setTimeout(resolve, 2200));
+            await new Promise(resolve => setTimeout(resolve, 1800));
             const detailedResponse = generateDetailedResponse(query);
             if (thinkingEl && thinkingEl.parentNode) thinkingEl.parentNode.removeChild(thinkingEl);
             addZeenatMessage(detailedResponse, false);
@@ -2344,7 +2075,7 @@
         }
 
         // ============================================================
-        // SMART SEARCH FUNCTIONS
+        // SMART SEARCH
         // ============================================================
         const problemDB = {
             "fir": { section: "BNSS 173 + 175(3)",
@@ -2396,7 +2127,7 @@
         }
 
         // ============================================================
-        // DRAFT FUNCTIONS
+        // DRAFT GENERATOR (unchanged)
         // ============================================================
         let isPremiumSelected = false;
         let selectedPayment = null;
@@ -4097,6 +3828,65 @@
                 });
             }
         });
+
+        // ============================================================
+        // UPI DONATION FUNCTIONS (for Buy Me a Coffee)
+        // ============================================================
+        function donateUPI(amount) {
+            if (!amount) {
+                const input = document.getElementById('custom-donation-amount');
+                if (!input || !input.value || input.value <= 0) {
+                    alert('कृपया एक राशि दर्ज करें (₹1 से ₹50,000 तक)');
+                    return;
+                }
+                amount = parseInt(input.value);
+                if (amount < 1 || amount > 50000) {
+                    alert('कृपया ₹1 से ₹50,000 के बीच राशि दर्ज करें');
+                    return;
+                }
+            }
+            const upiUrl = `upi://pay?pa=icfai.sandeep@oksbi&pn=Support%20Us&cu=INR&am=${amount}`;
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                window.location.href = upiUrl;
+                setTimeout(() => {
+                    alert(
+                        '⚠️ यदि UPI app नहीं खुला, तो कृपया मैन्युअल रूप से UPI ID "icfai.sandeep@oksbi" पर ₹' +
+                        amount + ' भेजें।\n\nधन्यवाद! 🙏');
+                }, 2000);
+            } else {
+                alert(
+                    '📱 कृपया अपने मोबाइल पर इस पेज को खोलें, या नीचे दी गई UPI ID का उपयोग करें:\n\nUPI ID: icfai.sandeep@oksbi\nRashi: ₹' +
+                    amount + '\n\nआप UPI (GPay/PhonePe/Paytm) से भेज सकते हैं।');
+            }
+        }
+
+        function copyUPI() {
+            const upiId = 'icfai.sandeep@oksbi';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(upiId).then(() => {
+                    alert('✅ UPI ID कॉपी हो गई: ' + upiId);
+                }).catch(() => {
+                    fallbackCopy(upiId);
+                });
+            } else {
+                fallbackCopy(upiId);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('✅ UPI ID कॉपी हो गई: ' + text);
+            } catch (err) {
+                alert('❌ कॉपी नहीं हुई। कृपया मैन्युअल रूप से UPI ID नोट करें: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
     </script>
 
 </body>
