@@ -2,13 +2,20 @@
   "name": "lucknow-kanoon-sahayak",
   "version": "9.0.0",
   "description": "AI Voice Legal Assistant for BNS/BNSS/BSA",
+  "main": "index.html",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel deploy --prod",
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rss-parser": "^3.13.0",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5"
+  },
   "devDependencies": {
-    "vercel": "^32.0.0"
+    "vercel": "^34.0.0"
+  },
+  "engines": {
+    "node": ">=18.x"
   }
 }

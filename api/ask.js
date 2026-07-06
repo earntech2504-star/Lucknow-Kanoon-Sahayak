@@ -1,22 +1,92 @@
-// api/ask.js - Main legal query handler
+// api/ask.js
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+  // Only allow POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { query, date, tab, lang } = req.body || {};
+
+  if (!query || query.trim().length === 0) {
+    return res.status(400).json({ error: 'Query is required' });
+  }
+
+  // Try to use Gemini if key is available
+  const geminiKey = process.env.GEMINI_API_KEY;
+  let answer = '';
+  let sources = [];
+
+  if (geminiKey) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `You are a legal assistant for Indian law (BNS/BNSS/BSA). Answer in Hindi/English mix. 
+                    User query: ${query}
+                    Context: date=${date || 'today'}, tab=${tab || 'general'}, lang=${lang || 'hi'}
+                    Provide a detailed, structured answer with sections, case laws, and practical steps.`
+                  }
+                ]
+              }
+            ]
+          })
+        }
+      );
+
+      const data = await response.json();
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        answer = data.candidates[0].content.parts[0].text;
+        sources = ['Gemini AI'];
+      } else {
+        throw new Error('No response from Gemini');
+      }
+    } catch (err) {
+      console.error('Gemini error:', err.message);
+      // fallback to static response
+      answer = getFallbackAnswer(query);
+      sources = ['Static Knowledge Base'];
     }
-    
-    const { query, date, tab, lang } = req.body;
-    
-    // Get ElevenLabs key from environment
-    const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
-    
-    // Your legal query logic here
-    const answer = generateLegalResponse(query, date);
-    const sources = ['https://indiankanoon.org', 'https://sci.gov.in'];
-    
-    res.status(200).json({ answer, sources });
+  } else {
+    // No API key – use fallback
+    answer = getFallbackAnswer(query);
+    sources = ['Static Knowledge Base'];
+  }
+
+  // Ensure answer is never empty
+  if (!answer || answer.trim().length === 0) {
+    answer = 'क्षमा करें, मैं इस समय उत्तर नहीं दे पा रही हूँ। कृपया पुनः प्रयास करें।';
+  }
+
+  return res.status(200).json({ answer, sources });
 }
 
-function generateLegalResponse(query, date) {
-    // Add your legal knowledge base
-    return `Based on your query about "${query}", here's the legal information...`;
+// ---------- Fallback static responses ----------
+function getFallbackAnswer(query) {
+  const q = query.toLowerCase();
+  if (q.includes('fir')) {
+    return `FIR के लिए BNSS 173 लागू है। यदि पुलिस FIR नहीं लिखती तो SP या Magistrate (BNSS 175(3)) के पास जाएँ। SC का Lalita Kumari (2014) का निर्णय महत्वपूर्ण है।`;
+  } else if (q.includes('bail') || q.includes('जमानत')) {
+    return `BNSS 480 (Magistrate bail), BNSS 482 (Anticipatory bail), BNSS 483 (Sessions/HC bail)। Satender Kumar Antil (2022) के अनुसार "bail is rule, jail is exception"।`;
+  } else if (q.includes('cheating') || q.includes('धोखा')) {
+    return `BNS 318 (Cheating) – 7 साल तक की सज़ा। Intent to deceive ज़रूरी है।`;
+  } else if (q.includes('cyber') || q.includes('online')) {
+    return `Cyber fraud BNS 318 + IT Act के तहत। BSA 63 (electronic evidence) के लिए certificate mandatory है। 1930 पर कॉल करें।`;
+  } else if (q.includes('maintenance') || q.includes('भरण')) {
+    return `BNSS 144 (Maintenance) – पत्नी, बच्चे, माता-पिता हकदार। Rajnesh v. Neha (2021) guidelines।`;
+  } else if (q.includes('property') || q.includes('जमीन')) {
+    return `Property dispute – Civil suit (title suit) + criminal FIR (BNSS 173) यदि कब्ज़ा हो। SDM से stay ले सकते हैं।`;
+  } else if (q.includes('women') || q.includes('महिला')) {
+    return `महिला अधिकार: BNS 85 (cruelty), Domestic Violence Act, POSH Act, Equal Remuneration Act, Hindu Succession Act, BNSS 144 (maintenance), Maternity Benefit Act। 181 helpline।`;
+  } else if (q.includes('consumer') || q.includes('उपभोक्ता')) {
+    return `Consumer Protection Act 2019 – 6 अधिकार। District/State/National Consumer Commission में शिकायत करें।`;
+  } else {
+    return `आपके प्रश्न "${query}" के लिए हमारे पास जानकारी है। कृपया Zeenat AI से पूछें (Voice AI tab) या हमारे Dictionary/Search का उपयोग करें।`;
+  }
 }

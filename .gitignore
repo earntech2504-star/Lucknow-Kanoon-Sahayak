@@ -1,21 +1,8 @@
 # Environment variables (DO NOT commit)
-.env.local
-.env.*.local
 
-# Vercel
-.vercel
-.vercel.json
-
-# Node modules
 node_modules/
-npm-debug.log*
-
-# OS files
+.env.local
+.env
 .DS_Store
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
+.vercel
+*.log

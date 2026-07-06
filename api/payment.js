@@ -1,4 +1,4 @@
-// api/payment.js - UPI payment verification
+// api/payments.js – UPI payment verification
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
