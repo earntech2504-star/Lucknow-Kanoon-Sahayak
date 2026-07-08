@@ -5574,51 +5574,38 @@
         }
 
         async function fetchAllRSSFeeds() {
-            if (isFetchingRSS) return allRSSItems.length > 0 ? allRSSItems : FALLBACK_RSS;
-            isFetchingRSS = true;
-            try {
-                const allItems = [];
-                const fetchPromises = RSS_FEEDS.map(async (feed) => {
-                    try {
-                        const proxyUrl =
-                            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`;
-                        const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 5000);
-                        const response = await fetch(proxyUrl, { signal: controller.signal });
-                        clearTimeout(timeoutId);
-                        if (!response.ok) return [];
-                        const data = await response.json();
-                        if (data.status === 'ok' && data.items) {
-                            return data.items.slice(0, 3).map(item => ({
-                                title: item.title || 'No Title',
-                                source: feed.name,
-                                category: feed.category || detectCategory(item.title || ''),
-                                time: new Date(item.pubDate || Date.now()).toLocaleTimeString(),
-                                link: item.link || '#'
-                            }));
-                        }
-                        return [];
-                    } catch (e) { return []; }
-                });
-                const results = await Promise.allSettled(fetchPromises);
-                results.forEach(result => {
-                    if (result.status === 'fulfilled' && result.value.length > 0) {
-                        allItems.push(...result.value);
-                    }
-                });
-                if (allItems.length === 0) return FALLBACK_RSS;
-                const seen = new Set();
-                const unique = allItems.filter(item => {
-                    const key = item.title.toLowerCase().trim();
-                    if (seen.has(key)) return false;
-                    seen.add(key);
-                    return true;
-                });
-                allRSSItems = unique;
-                document.getElementById('live-feed-counter').textContent = allRSSItems.length;
-                return allRSSItems;
-            } catch (e) { return FALLBACK_RSS; } finally { isFetchingRSS = false; }
+    if (isFetchingRSS) return allRSSItems.length > 0 ? allRSSItems : FALLBACK_RSS;
+    isFetchingRSS = true;
+    try {
+        // Call your own serverless function
+        const response = await fetch('/api/feed?feed=all');
+        if (!response.ok) return FALLBACK_RSS;
+        
+        const data = await response.json();
+        
+        if (data.source === 'fallback' || !data.items || data.items.length === 0) {
+            return FALLBACK_RSS;
         }
+
+        // Convert to your format
+        const items = data.items.map(item => ({
+            title: item.title || 'No Title',
+            source: item.source || 'Unknown',
+            category: detectCategory(item.title || ''),
+            time: item.pub || new Date().toLocaleTimeString(),
+            link: item.link || '#'
+        }));
+
+        allRSSItems = items;
+        document.getElementById('live-feed-counter').textContent = allRSSItems.length;
+        return allRSSItems;
+    } catch (e) {
+        console.error('RSS fetch error:', e);
+        return FALLBACK_RSS;
+    } finally {
+        isFetchingRSS = false;
+    }
+}                           
 
         async function loadRSSFeeds() {
             const container = document.getElementById('rss-feed-container');
