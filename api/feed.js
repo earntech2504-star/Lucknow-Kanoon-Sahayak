@@ -1,14 +1,43 @@
 // api/feed.js
 export default async function handler(req, res) {
-  // Allow GET only
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Function to fetch and parse RSS
+  // ============================================
+  // 1. SMART FALLBACK DATA (Always Available)
+  // ============================================
+  const FALLBACK_DATA = [
+    { title: '⚖️ Supreme Court: BNS 318 interpretation hearing today', source: 'LiveLaw' },
+    { title: '📰 BNSS 173: New guidelines for FIR registration issued', source: 'Bar & Bench' },
+    { title: '🔴 Lucknow HC: Sonam Raja Raghuvanshi case hearing today', source: 'SCC Online' },
+    { title: '📢 CERT-In: Cyber fraud advisory for UPI users', source: 'CERT-In' },
+    { title: '⚖️ SC: BSA 63 certificate mandatory for electronic evidence', source: 'Supreme Court' },
+    { title: '📜 BNSS 480: Magistrate bail powers expanded', source: 'Legal News' },
+    { title: '👩 NALSA: Free legal aid for women helpline 181', source: 'NALSA' },
+    { title: '🛒 Consumer Helpline 1800-11-4000 now 24x7', source: 'Consumer Affairs' },
+    { title: '📰 BNSS 482: New anticipatory bail guidelines', source: 'Bar & Bench' },
+    { title: '⚖️ SC: Right to Privacy upheld in landmark judgment', source: 'Supreme Court' },
+    { title: '📜 BNS 85: Cruelty by husband - new interpretation', source: 'Legal Update' },
+    { title: '👩 Domestic Violence Act: New protections for women', source: 'Women Rights' },
+    { title: '💻 IT Act 2000: New cyber crime provisions', source: 'Cyber Law' },
+    { title: '⚖️ SC: Right to Education Act - new guidelines', source: 'Supreme Court' },
+    { title: '📰 RTI Act: Transparency in government work', source: 'Legal Service' }
+  ];
+
+  // ============================================
+  // 2. RSS FETCH FUNCTION
+  // ============================================
   async function fetchRSS(url) {
     try {
-      const response = await fetch(url);
+      // Use CORS proxy to avoid restrictions
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      
+      const response = await fetch(proxyUrl, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      
       if (!response.ok) return [];
       const text = await response.text();
       
@@ -19,11 +48,13 @@ export default async function handler(req, res) {
       const pubMatches = text.match(/<pubDate>(.*?)<\/pubDate>/g);
       
       if (titleMatches && titleMatches.length > 1) {
-        for (let i = 1; i < Math.min(titleMatches.length, 6); i++) {
+        for (let i = 1; i < Math.min(titleMatches.length, 8); i++) {
           const title = titleMatches[i].replace(/<[^>]*>/g, '').trim();
           const link = linkMatches && linkMatches[i] ? linkMatches[i].replace(/<[^>]*>/g, '').trim() : '#';
-          const pub = pubMatches && pubMatches[i] ? new Date(pubMatches[i].replace(/<[^>]*>/g, '').trim()).toLocaleTimeString() : new Date().toLocaleTimeString();
-          if (title) {
+          const pub = pubMatches && pubMatches[i] ? 
+            new Date(pubMatches[i].replace(/<[^>]*>/g, '').trim()).toLocaleTimeString() : 
+            new Date().toLocaleTimeString();
+          if (title && title.length > 5) {
             items.push({ title, link, pub });
           }
         }
@@ -35,8 +66,10 @@ export default async function handler(req, res) {
     }
   }
 
+  // ============================================
+  // 3. TRY REAL RSS FIRST
+  // ============================================
   try {
-    // Try to fetch real RSS
     const RSS_URLS = [
       'https://www.livelaw.in/rss',
       'https://www.barandbench.com/rss',
@@ -53,12 +86,13 @@ export default async function handler(req, res) {
       }
     }
 
-    // If we got items, return them
+    // ============================================
+    // 4. IF RSS WORKED - RETURN REAL NEWS
+    // ============================================
     if (allItems.length > 0) {
-      // Limit to 10 items
-      const items = allItems.slice(0, 10).map(item => ({
+      const items = allItems.slice(0, 8).map(item => ({
         title: item.title || 'No Title',
-        source: 'RSS',
+        source: 'RSS Feed',
         link: item.link || '#',
         pub: item.pub || new Date().toLocaleTimeString()
       }));
@@ -66,49 +100,19 @@ export default async function handler(req, res) {
       return res.status(200).json({
         items: items,
         source: 'rss',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        message: '✅ Real RSS news'
       });
     }
 
-    // If no RSS items, return fallback
-    const fallbackFeeds = [
-      '⚖️ SC: BNS 318 hearing today at 10:30 AM',
-      '📰 Breaking: New BNSS guidelines for bail applications',
-      '🔴 Live: Lucknow HC hearing on Sonam Raja Raghuvanshi case',
-      '📢 CERT-In issues advisory on new cyber fraud modus operandi',
-      '⚖️ Supreme Court: BSA 63 certificate mandatory for electronic evidence',
-      '📜 BNSS 480 – Magistrate bail powers expanded',
-      '👩 महिला हेल्पलाइन 181 – 24x7 उपलब्ध',
-      '🛒 Consumer Helpline 1800-11-4000 – ऑनलाइन शिकायत'
-    ];
-
-    const fallbackItems = fallbackFeeds.map(title => ({
-      title: title,
-      source: 'Live Feed',
-      link: '#',
-      pub: new Date().toLocaleTimeString()
-    }));
-
-    return res.status(200).json({
-      items: fallbackItems.slice(0, 6),
-      source: 'fallback',
-      timestamp: new Date().toISOString()
-    });
-
-  } catch (error) {
-    // If anything fails, return fallback
-    const fallbackFeeds = [
-      '⚖️ SC: BNS 318 hearing today at 10:30 AM',
-      '📰 Breaking: New BNSS guidelines for bail applications',
-      '🔴 Live: Lucknow HC hearing on Sonam Raja Raghuvanshi case',
-      '📢 CERT-In issues advisory on new cyber fraud modus operandi',
-      '⚖️ Supreme Court: BSA 63 certificate mandatory for electronic evidence',
-      '📜 BNSS 480 – Magistrate bail powers expanded'
-    ];
-
-    const fallbackItems = fallbackFeeds.map(title => ({
-      title: title,
-      source: 'Live Feed',
+    // ============================================
+    // 5. IF RSS FAILED - RETURN SMART FALLBACK
+    // ============================================
+    // Randomize fallback for freshness
+    const shuffled = [...FALLBACK_DATA].sort(() => 0.5 - Math.random());
+    const fallbackItems = shuffled.slice(0, 6).map(item => ({
+      title: item.title,
+      source: item.source,
       link: '#',
       pub: new Date().toLocaleTimeString()
     }));
@@ -116,7 +120,27 @@ export default async function handler(req, res) {
     return res.status(200).json({
       items: fallbackItems,
       source: 'fallback',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      message: '📢 RSS unavailable - showing curated legal news'
+    });
+
+  } catch (error) {
+    // ============================================
+    // 6. IF ANYTHING FAILS - ALWAYS RETURN FALLBACK
+    // ============================================
+    const shuffled = [...FALLBACK_DATA].sort(() => 0.5 - Math.random());
+    const fallbackItems = shuffled.slice(0, 6).map(item => ({
+      title: item.title,
+      source: item.source,
+      link: '#',
+      pub: new Date().toLocaleTimeString()
+    }));
+
+    return res.status(200).json({
+      items: fallbackItems,
+      source: 'fallback',
+      timestamp: new Date().toISOString(),
+      message: '⚠️ Using fallback data'
     });
   }
 }
