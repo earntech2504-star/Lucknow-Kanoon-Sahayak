@@ -1,4 +1,5 @@
 // api/ask.js – Enhanced with detailed court info (backward compatible)
+
 export default async function handler(req, res) {
   // Only allow POST
   if (req.method !== 'POST') {
