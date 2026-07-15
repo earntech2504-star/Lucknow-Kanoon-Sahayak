@@ -8778,9 +8778,9 @@
                     { title: 'Maintenance under BNSS 144', views: '3.9K', link: '#' }
                 ];
             }
-            container.innerHTML = trendingData.map(t =>
-                `<div class="border p-4 rounded-xl card-hover" style="border-color:rgba(255,255,255,0.06) !important;background:rgba(255,255,255,0.04) !important;"><h4 class="font-bold text-lg" style="color:#f1f5f9 !important;">📌 ${t.title}</h4><p class="text-sm text-slate-500" style="color:#94a3b8 !important;">👁️ ${t.views} views</p></div>`
-            ).join('');
+           container.innerHTML = trendingData.map(t =>
+    `<div ...><h4 class="...">📌 ${t.topic}</h4><p class="...">👁️ ${t.views} views</p></div>`
+).join('');
             if (updateSpan) updateSpan.textContent = `🔄 Updated: ${new Date().toLocaleTimeString()}`;
         }
 
