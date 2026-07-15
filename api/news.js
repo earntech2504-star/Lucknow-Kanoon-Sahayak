@@ -1,6 +1,5 @@
 // api/news.js
-import { parse } from 'rss-parser'; // or use fetch + DOMParser (but on server we use a library)
-// We'll use 'rss-parser' – install via npm
+import Parser from 'rss-parser';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
   ];
 
   try {
-    const parser = new (require('rss-parser'))();
+    const parser = new Parser();
     const allItems = [];
 
     for (const url of sources) {
@@ -38,10 +37,8 @@ export default async function handler(req, res) {
       }
     }
 
-    // Sort by date
     allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-    // Remove duplicates by title
     const seen = new Set();
     const unique = allItems.filter(item => {
       const key = item.title.toLowerCase().trim();
@@ -53,7 +50,6 @@ export default async function handler(req, res) {
     return res.status(200).json(unique.slice(0, 20));
   } catch (err) {
     console.error('News fetch error:', err);
-    // Return fallback static news
     const fallback = [
       {
         title: 'Supreme Court: BNS 318 requires intent to deceive',
