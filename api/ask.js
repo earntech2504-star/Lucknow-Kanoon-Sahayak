@@ -96,13 +96,15 @@ export default async function handler(req, res) {
   return res.status(200).json({ answer, sources });
 }
 
-// ---------- COMPLETE FALLBACK with ALL Sections ----------
+// ============================================================
+// COMPLETE FALLBACK with ALL Sections & Court Info
+// ============================================================
 function getFallbackAnswer(query, voiceMode = false) {
   const q = query.toLowerCase().trim();
 
-  // ============================================
+  // ============================================================
   // 1. COMPLETE COURT INFORMATION (All Lucknow Courts)
-  // ============================================
+  // ============================================================
   const courtInfo = {
     'supreme court': {
       name: 'Supreme Court of India',
@@ -113,7 +115,7 @@ function getFallbackAnswer(query, voiceMode = false) {
       website: 'https://www.sci.gov.in',
       contact: '011-23388921'
     },
-    'hc lucknow bench': {
+    'hc lucknow': {
       name: 'Allahabad High Court – Lucknow Bench',
       location: 'Rana Pratap Marg, Lucknow, Uttar Pradesh - 226001',
       jurisdiction: 'Lucknow, Hardoi, Sitapur, Barabanki, Rae Bareli, Sultanpur, Faizabad, Gonda, Bahraich, Shravasti, Balrampur, Lakhimpur Kheri',
@@ -131,7 +133,7 @@ function getFallbackAnswer(query, voiceMode = false) {
       website: 'https://ecourts.gov.in',
       contact: '0522-2238001'
     },
-    'cjm hazratganj': {
+    'cjm': {
       name: 'Chief Judicial Magistrate (CJM) – Hazratganj, Lucknow',
       location: 'Hazratganj, Lucknow',
       jurisdiction: 'Lucknow district (criminal cases)',
@@ -158,7 +160,7 @@ function getFallbackAnswer(query, voiceMode = false) {
       website: 'https://drt.gov.in',
       contact: '0522-2238001'
     },
-    'sdm sadar': {
+    'sdm': {
       name: 'Sub-Divisional Magistrate (SDM) – Sadar, Lucknow',
       location: 'Sadar, Lucknow',
       jurisdiction: 'Revenue matters, land disputes, maintenance under BNSS 144, public peace.',
@@ -197,22 +199,28 @@ function getFallbackAnswer(query, voiceMode = false) {
     }
   }
 
-  // ============================================
+  // ============================================================
   // 2. BNS/BNSS/BSA SECTION LOOKUP
-  // ============================================
+  // ============================================================
   const sectionLookup = {
-    'bns 318': { act: 'BNS', number: '318', title: 'Cheating', text: '7 years imprisonment. IPC 420 replaced.' },
-    'bns 103': { act: 'BNS', number: '103', title: 'Murder', text: 'Death or Life imprisonment. IPC 302 replaced.' },
-    'bns 303': { act: 'BNS', number: '303', title: 'Theft', text: '3 years imprisonment. IPC 379 replaced.' },
-    'bns 85': { act: 'BNS', number: '85', title: 'Cruelty', text: '3 years imprisonment. IPC 498A replaced.' },
-    'bns 64': { act: 'BNS', number: '64', title: 'Rape', text: '10 years minimum. IPC 375 replaced.' },
-    'bns 65': { act: 'BNS', number: '65', title: 'Rape Punishment', text: '10+ years. IPC 376 replaced.' },
-    'bns 356': { act: 'BNS', number: '356', title: 'Defamation', text: '2 years. IPC 499 replaced.' },
-    'bnss 173': { act: 'BNSS', number: '173', title: 'FIR', text: 'CrPC 154 replaced. FIR mandatory for cognizable offences.' },
-    'bnss 480': { act: 'BNSS', number: '480', title: 'Bail', text: 'CrPC 437 replaced. Magistrate bail.' },
-    'bnss 482': { act: 'BNSS', number: '482', title: 'Anticipatory Bail', text: 'CrPC 438 replaced. Pre-arrest bail.' },
-    'bnss 144': { act: 'BNSS', number: '144', title: 'Maintenance', text: 'CrPC 125 replaced. Wife, children, parents.' },
-    'bsa 63': { act: 'BSA', number: '63', title: 'Electronic Evidence', text: 'Evidence Act 65B replaced. Certificate mandatory.' }
+    'bns 318': { act: 'BNS', number: '318', title: 'Cheating', text: '7 years imprisonment. IPC 420 replaced.', mnemonic: '🧠 3+1+8=12 → 7 years' },
+    'bns 103': { act: 'BNS', number: '103', title: 'Murder', text: 'Death or Life imprisonment. IPC 302 replaced.', mnemonic: '🧠 1+0+3=4 → Death or Life' },
+    'bns 303': { act: 'BNS', number: '303', title: 'Theft', text: '3 years imprisonment. IPC 379 replaced.', mnemonic: '🧠 3+0+3=6 → 3 years' },
+    'bns 85': { act: 'BNS', number: '85', title: 'Cruelty', text: '3 years imprisonment. IPC 498A replaced.', mnemonic: '🧠 8+5=13 → 3 years' },
+    'bns 64': { act: 'BNS', number: '64', title: 'Rape', text: '10 years minimum. IPC 375 replaced.', mnemonic: '🧠 6+4=10 → 10 years minimum' },
+    'bns 65': { act: 'BNS', number: '65', title: 'Gang Rape', text: '20 years minimum. IPC 376 replaced.', mnemonic: '🧠 6+5=11 → 20 years minimum' },
+    'bns 66': { act: 'BNS', number: '66', title: 'Sexual Assault', text: 'Up to 7 years. IPC 354 replaced.', mnemonic: '🧠 6+6=12 → 7 years' },
+    'bns 304': { act: 'BNS', number: '304', title: 'Robbery', text: '7 years imprisonment. IPC 390 replaced.', mnemonic: '🧠 3+0+4=7 → 7 years' },
+    'bns 319': { act: 'BNS', number: '319', title: 'Cheating by Personation', text: '5 years imprisonment. IPC 419 replaced.', mnemonic: '🧠 3+1+9=13 → 5 years' },
+    'bns 352': { act: 'BNS', number: '352', title: 'Criminal Breach of Trust', text: '7 years imprisonment. IPC 405 replaced.', mnemonic: '🧠 3+5+2=10 → 7 years' },
+    'bns 356': { act: 'BNS', number: '356', title: 'Defamation', text: '2 years imprisonment. IPC 499 replaced.', mnemonic: '🧠 3+5+6=14 → 2 years' },
+    'bnss 173': { act: 'BNSS', number: '173', title: 'FIR', text: 'CrPC 154 replaced. FIR mandatory for cognizable offences.', mnemonic: '🧠 1+7+3=11 → FIR' },
+    'bnss 480': { act: 'BNSS', number: '480', title: 'Regular Bail', text: 'CrPC 437 replaced. Magistrate can grant bail.', mnemonic: '🧠 4+8+0=12 → Bail' },
+    'bnss 482': { act: 'BNSS', number: '482', title: 'Anticipatory Bail', text: 'CrPC 438 replaced. Pre-arrest bail from Sessions or HC.', mnemonic: '🧠 4+8+2=14 → Anticipatory Bail' },
+    'bnss 484': { act: 'BNSS', number: '484', title: 'Bail Bond', text: 'CrPC 441 replaced. Execution of bail bond.', mnemonic: '🧠 4+8+4=16 → Bond' },
+    'bnss 144': { act: 'BNSS', number: '144', title: 'Maintenance', text: 'CrPC 125 replaced. Maintenance for wife, children, parents.', mnemonic: '🧠 1+4+4=9 → 9 months' },
+    'bnss 176': { act: 'BNSS', number: '176', title: 'Police Investigation', text: 'CrPC 156 replaced. Police investigation powers.', mnemonic: '🧠 1+7+6=14 → Investigation' },
+    'bsa 63': { act: 'BSA', number: '63', title: 'Electronic Evidence', text: 'Evidence Act 65B replaced. Certificate mandatory.', mnemonic: '🧠 6+3=9 → Evidence' }
   };
 
   // Check if query contains a section number
@@ -221,13 +229,13 @@ function getFallbackAnswer(query, voiceMode = false) {
       if (voiceMode) {
         return `${info.act} ${info.number}: ${info.title}. ${info.text}`;
       }
-      return `📜 **${info.act} ${info.number} – ${info.title}**\n\n${info.text}\n\n⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
+      return `📜 **${info.act} ${info.number} – ${info.title}**\n\n${info.text}\n${info.mnemonic || ''}\n\n⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
     }
   }
 
-  // ============================================
+  // ============================================================
   // 3. TOPIC-BASED RESPONSES
-  // ============================================
+  // ============================================================
   const responses = {
     'fir': {
       voice: "FIR के लिए BNSS 173 लागू है। पुलिस FIR दर्ज करना अनिवार्य है। Lalita Kumari case के अनुसार cognizable offence में FIR mandatory है।",
@@ -371,6 +379,23 @@ function getFallbackAnswer(query, voiceMode = false) {
 📞 **Helplines:** 1800-11-4000 – Consumer Helpline
 
 ⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'rti': {
+      voice: "RTI Act 2005 – 30 days में reply mandatory। Form A + ₹10 fee। First appeal to PIO, second to CIC।",
+      full: `🔍 **Problem:** RTI Application / सूचना का अधिकार
+
+⚖️ **Legal Position:** RTI Act 2005 – Right to Information
+
+📋 **Steps:**
+  ① Form A में application तैयार करें
+  ② ₹10 की fee जमा करें (cash/DD/court fee stamp)
+  ③ PIO को submit करें (hand/post/email)
+
+📜 **Sections:** RTI Act 2005
+💡 **Tips:** 30 days में reply mandatory, No reason required for asking info
+📞 **Helplines:** 15100 – Legal Helpline
+
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
     }
   };
 
@@ -381,9 +406,9 @@ function getFallbackAnswer(query, voiceMode = false) {
     }
   }
 
-  // ============================================
+  // ============================================================
   // 4. DEFAULT RESPONSE
-  // ============================================
+  // ============================================================
   if (voiceMode) {
     return `आपके प्रश्न "${query}" के लिए हमारे पास जानकारी है। कृपया Zeenat AI से पूछें या हमारे Legal Dictionary का उपयोग करें।`;
   }
