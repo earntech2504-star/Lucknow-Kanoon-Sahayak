@@ -1,66 +1,160 @@
-// api/tts.js
-export default async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+// ============================================================
+// TTS.JS - Text-to-Speech
+// ============================================================
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+let speechSynthesis = window.speechSynthesis;
+let currentUtterance = null;
+let isSpeaking = false;
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { text } = req.body;
-  if (!text || text.trim().length === 0) {
-    return res.status(400).json({ error: 'Text is required' });
-  }
-
-  // Limit text to avoid payload size issues
-  const MAX_TEXT_LENGTH = 500;
-  const truncated = text.slice(0, MAX_TEXT_LENGTH);
-
-  const apiKey = process.env.ELEVENLABS_API_KEY;
-  const voiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM'; // default: Rachel
-
-  if (!apiKey) {
-    console.error('ELEVENLABS_API_KEY not set');
-    return res.status(500).json({ error: 'ElevenLabs API key not configured' });
-  }
-
-  try {
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'xi-api-key': apiKey,
-        },
-        body: JSON.stringify({
-          text: truncated,
-          model_id: 'eleven_monolingual_v1',
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.5,
-          },
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('ElevenLabs API error:', response.status, errorText);
-      throw new Error(`ElevenLabs API error: ${response.status}`);
+// ============================================================
+// Speak Text
+// ============================================================
+function speakText(text, language = 'hi-IN') {
+    if (!window.speechSynthesis) {
+        console.warn('Web Speech API not supported');
+        return;
     }
+    
+    // Cancel any ongoing speech
+    stopSpeaking();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = language;
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    
+    // Try to find a female voice
+    const voices = window.speechSynthesis.getVoices();
+    const femaleVoice = voices.find(v => v.lang === language && v.name.includes('Female'));
+    if (femaleVoice) {
+        utterance.voice = femaleVoice;
+    }
+    
+    utterance.onstart = () => { isSpeaking = true; };
+    utterance.onend = () => { isSpeaking = false; };
+    utterance.onerror = () => { isSpeaking = false; };
+    
+    currentUtterance = utterance;
+    window.speechSynthesis.speak(utterance);
+}
 
-    const audioBuffer = await response.arrayBuffer();
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.send(Buffer.from(audioBuffer));
-  } catch (error) {
-    console.error('TTS error:', error.message);
-    res.status(500).json({ error: 'TTS generation failed' });
-  }
+// ============================================================
+// Stop Speaking
+// ============================================================
+function stopSpeaking() {
+    if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        currentUtterance = null;
+    }
+}
+
+// ============================================================
+// Toggle Voice Output
+// ============================================================
+function toggleVoiceOutput() {
+    const btn = document.getElementById('voice-toggle-btn');
+    if (!btn) return;
+    
+    btn.classList.toggle('active');
+    const icon = document.getElementById('voice-toggle-icon');
+    if (icon) {
+        icon.textContent = btn.classList.contains('active') ? '🔊' : '🔇';
+    }
+    
+    if (!btn.classList.contains('active')) {
+        stopSpeaking();
+    }
+}
+
+// ============================================================
+// Toggle Voice Typing (Speech Recognition)
+// ============================================================
+function toggleVoiceTyping() {
+    const btn = document.getElementById('voice-typing-btn');
+    if (!btn) return;
+    
+    const isRecording = btn.classList.contains('recording');
+    if (isRecording) {
+        stopVoiceRecognition();
+    } else {
+        startVoiceRecognition();
+    }
+}
+
+// ============================================================
+// Start Voice Recognition
+// ============================================================
+function startVoiceRecognition() {
+    const btn = document.getElementById('voice-typing-btn');
+    if (!btn) return;
+    
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert('⚠️ Voice recognition not supported in this browser. Try Chrome.');
+        return;
+    }
+    
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'hi-IN';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    
+    recognition.onstart = () => {
+        btn.classList.add('recording');
+        btn.textContent = '⏺️';
+    };
+    
+    recognition.onresult = (event) => {
+        const transcript = Array.from(event.results)
+            .map(result => result[0].transcript)
+            .join('');
+        
+        const input = document.getElementById('zeenat-query');
+        if (input) {
+            input.value = transcript;
+        }
+        
+        if (event.results[0].isFinal) {
+            // Auto-submit after voice input
+            setTimeout(() => {
+                if (input && input.value.trim()) {
+                    handleZeenatQuery();
+                }
+            }, 500);
+        }
+    };
+    
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        btn.classList.remove('recording');
+        btn.textContent = '🎤';
+        
+        if (event.error === 'not-allowed') {
+            alert('⚠️ Please allow microphone access.');
+        }
+    };
+    
+    recognition.onend = () => {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤';
+    };
+    
+    window._recognition = recognition;
+    recognition.start();
+}
+
+// ============================================================
+// Stop Voice Recognition
+// ============================================================
+function stopVoiceRecognition() {
+    if (window._recognition) {
+        window._recognition.stop();
+        window._recognition = null;
+    }
+    const btn = document.getElementById('voice-typing-btn');
+    if (btn) {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤';
+    }
 }
