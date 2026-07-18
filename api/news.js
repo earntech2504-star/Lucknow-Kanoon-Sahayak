@@ -1,105 +1,107 @@
-// api/news.js - RSS Feed Aggregator
-import axios from 'axios';
-import { parseString } from 'xml2js';
+// ============================================================
+// NEWS.JS - Live & Trending News
+// ============================================================
 
-export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { category, limit = 20 } = req.query;
-
-  try {
-    const sources = [
-      { url: 'https://www.livelaw.in/rss', defaultCategory: 'breaking' },
-      { url: 'https://www.barandbench.com/rss', defaultCategory: 'sc' },
-      { url: 'https://www.scconline.com/blog/feed', defaultCategory: 'sc' },
-      { url: 'https://indiankanoon.org/feeds/updates', defaultCategory: 'breaking' },
-      { url: 'https://www.hindustantimes.com/rss/india-news/legal/rssfeed.xml', defaultCategory: 'breaking' }
-    ];
-
-    let allItems = [];
-
-    for (const source of sources) {
-      try {
-        const response = await axios.get(source.url, { timeout: 8000 });
-        if (response.data) {
-          const items = await parseRSS(response.data, source.defaultCategory);
-          allItems = allItems.concat(items);
-        }
-      } catch (e) {
-        console.log(`Error fetching ${source.url}:`, e.message);
-      }
+// ============================================================
+// News Data
+// ============================================================
+const newsData = [
+    {
+        id: 1,
+        title: 'Supreme Court: नए कानूनों पर महत्वपूर्ण निर्णय',
+        category: 'breaking',
+        source: 'Live Law',
+        time: 'Just now',
+        content: 'SC ने BNS 318 पर अपनी पहली टिप्पणी दी है...'
+    },
+    {
+        id: 2,
+        title: 'BNS 103: Murder की सजा कम हो सकती है',
+        category: 'breaking',
+        source: 'Bar & Bench',
+        time: '5 mins ago',
+        content: 'SC ने कहा कि हर मर्डर में मौत की सजा नहीं...'
+    },
+    {
+        id: 3,
+        title: 'BNSS 144: Maintenance के नए नियम',
+        category: 'women',
+        source: 'The Hindu',
+        time: '10 mins ago',
+        content: 'पत्नी को गुजारा भत्ता देने के नए नियम...'
+    },
+    {
+        id: 4,
+        title: 'Cyber Crime: 1930 पर रिकॉर्ड कॉल्स',
+        category: 'cyber',
+        source: 'Times of India',
+        time: '15 mins ago',
+        content: 'साइबर क्राइम हेल्पलाइन 1930 पर 50,000 कॉल्स...'
+    },
+    {
+        id: 5,
+        title: 'BSA 63: Electronic Evidence Guidelines',
+        category: 'bns',
+        source: 'Tech Law',
+        time: '20 mins ago',
+        content: 'इलेक्ट्रॉनिक सबूत की नई गाइडलाइंस जारी...'
     }
+];
 
-    // Sort by date (newest first)
-    allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-    // Filter by category if provided
-    if (category && category !== 'all') {
-      allItems = allItems.filter(item => item.category === category);
-    }
-
-    // Limit results
-    const limitedItems = allItems.slice(0, parseInt(limit));
-
-    res.status(200).json({
-      items: limitedItems,
-      total: allItems.length,
-      lastUpdate: new Date().toISOString(),
-      status: 'success'
+// ============================================================
+// Load Live News
+// ============================================================
+function loadLiveNews() {
+    const container = document.getElementById('live-news-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    newsData.forEach(news => {
+        const div = document.createElement('div');
+        div.className = 'rss-feed-item';
+        div.innerHTML = `
+            <div class="flex justify-between items-start">
+                <div>
+                    <div class="font-medium text-sm text-white">${news.title}</div>
+                    <div class="text-xs text-slate-400">${news.source} · ${news.time}</div>
+                    <div class="text-xs text-slate-500 mt-1">${news.content}</div>
+                </div>
+                <span class="rss-category-tag rss-cat-${news.category}">${news.category}</span>
+            </div>
+        `;
+        container.appendChild(div);
     });
-
-  } catch (error) {
-    console.error('News API error:', error);
-    // Return fallback data
-    res.status(200).json({
-      items: [
-        { title: '🔴 SC to hear BNS 318 challenge tomorrow', category: 'breaking', source: 'LiveLaw', pubDate: new Date().toISOString(), link: '#' },
-        { title: '👩 Women Helpline 181 receives 5000+ calls this month', category: 'women', source: 'News18', pubDate: new Date().toISOString(), link: '#' },
-        { title: '⚖️ Supreme Court issues guidelines on bail', category: 'sc', source: 'Bar & Bench', pubDate: new Date().toISOString(), link: '#' }
-      ],
-      status: 'fallback'
-    });
-  }
 }
 
-async function parseRSS(xml, defaultCategory) {
-  return new Promise((resolve) => {
-    parseString(xml, (err, result) => {
-      if (err || !result) {
-        resolve([]);
+// ============================================================
+// Load Women News (Sidebar)
+// ============================================================
+function loadWomenNews() {
+    const container = document.getElementById('women-news-container');
+    if (!container) return;
+    
+    const womenNews = newsData.filter(n => n.category === 'women' || n.category === 'breaking');
+    if (womenNews.length === 0) {
+        container.innerHTML = '<div class="text-slate-400 text-xs text-center py-3">No news at the moment</div>';
         return;
-      }
-
-      try {
-        const items = result.rss?.channel?.[0]?.item || [];
-        const parsed = items.map(item => ({
-          title: item.title?.[0] || 'No Title',
-          link: item.link?.[0] || '#',
-          description: item.description?.[0] || '',
-          pubDate: item.pubDate?.[0] || new Date().toISOString(),
-          category: detectCategory(item.title?.[0] || '', defaultCategory),
-          source: item.source?.[0]?._ || item['dc:creator']?.[0] || 'Legal News'
-        }));
-        resolve(parsed);
-      } catch (e) {
-        resolve([]);
-      }
+    }
+    
+    container.innerHTML = '';
+    womenNews.forEach(news => {
+        const div = document.createElement('div');
+        div.className = 'border-b border-slate-700/50 py-1 last:border-0';
+        div.innerHTML = `
+            <div class="text-xs text-white">${news.title}</div>
+            <div class="text-[10px] text-slate-400">${news.source} · ${news.time}</div>
+        `;
+        container.appendChild(div);
     });
-  });
 }
 
-function detectCategory(title, defaultCategory) {
-  const t = title.toLowerCase();
-  if (t.includes('breaking') || t.includes('urgent') || t.includes('न्याय')) return 'breaking';
-  if (t.includes('women') || t.includes('woman') || t.includes('महिला')) return 'women';
-  if (t.includes('supreme court') || t.includes('sc') || t.includes('सुप्रीम')) return 'sc';
-  if (t.includes('cyber') || t.includes('online') || t.includes('fraud') || t.includes('साइबर')) return 'cyber';
-  if (t.includes('viral') || t.includes('वायरल')) return 'viral';
-  if (t.includes('funny') || t.includes('humour') || t.includes('मजाक')) return 'funny';
-  if (t.includes('entertainment') || t.includes('bollywood') || t.includes('मनोरंजन')) return 'entertainment';
-  if (t.includes('political') || t.includes('election') || t.includes('राजनीति')) return 'political';
-  if (t.includes('bns') || t.includes('bnss') || t.includes('bsa')) return 'bns';
-  return defaultCategory || 'breaking';
+// ============================================================
+// Refresh News
+// ============================================================
+function refreshNews() {
+    loadLiveNews();
+    loadWomenNews();
 }
