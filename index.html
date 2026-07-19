@@ -72,22 +72,7 @@
 <script src="api/dailyquiz.js"></script>
 <script src="api/donate.js"></script>
 <script src="api/payment.js"></script>
-<script src="api/init.js"></script>   <!-- ✅ SIRF EK BAAR -->
-<<<<<<< HEAD
-<!-- ===== ADMIN HEALTH ROUTE ===== -->
-<!-- ✅ Yeh duplicate hatao -->
-
-
-
-
-=======
->>>>>>> 67ce47ca837471bb9350ec36635b8d8434853088
-<!-- ===== ADMIN HEALTH ROUTE ===== -->
-<!-- ✅ Yeh duplicate hatao -->
-
-
-
-
+<script src="api/init.js"></script>
 <!-- ===== ADMIN HEALTH ROUTE ===== -->
 
 <!-- ===== STRUCTURED DATA (SEO) ===== -->
@@ -794,7 +779,7 @@ body { font-size: 0.9rem !important; }
         const apiFiles = ['config.js','sections.js','voice.js','ask.js','news.js','trending.js','quiz.js','calculator.js','pdf-upload.js','advocates.js','community.js','helpline.js','legal-aid.js','dictionary.js','landmark.js','funny.js','mock.js','bail-guide.js','safety.js','cause-list.js','videos.js','resources.js','exam-prep.js','blog-rss.js','dashboard.js','converter.js','notice-generator.js','suggestions.js','timeline.js','summarizer.js','post-fir.js','case-track.js','section-finder.js','ai-doc.js','junior.js','family.js','cyber.js','zameen.js','all-courts.js','rto-rti.js','bare-act.js','dailyquiz.js','donate.js','payment.js'];
         let loadedFiles = 0;
         apiFiles.forEach(file => {
-            const path = 'src/api/' + file;
+            const path = 'api/' + file;
             const script = document.querySelector(`script[src="${path}"]`);
             const loaded = script !== null;
             if (loaded) loadedFiles++;
@@ -851,7 +836,7 @@ body { font-size: 0.9rem !important; }
             const diagnostics = { issues: [], recommendations: [], warnings: [] };
             if (data.modules.percentage < 50) {
                 diagnostics.issues.push(`Only ${data.modules.percentage}% of modules loaded`);
-                diagnostics.recommendations.push('Check if all API files exist in src/api/ folder');
+                diagnostics.recommendations.push('Check if all API files exist in api/ folder');
             }
             if (data.api_files.missing.length > 0) {
                 diagnostics.warnings.push(`Missing API files: ${data.api_files.missing.join(', ')}`);
@@ -1710,12 +1695,11 @@ function init() {
     }
   }, 500);
   
+  // ✅ Sirf existing functions call karein
   const moduleLoaders = [
-    'loadRSSFeeds', 'loadTrending', 'loadCases', 'loadLiveNews',
-    'loadLandmark', 'loadFunny', 'loadQuickReads', 'loadWomenNews',
-    'loadTrendingTags', 'loadBareAct', 'renderSections', 'searchDictionary',
-    'loadDailyQuiz', 'renderAdvocates', 'loadRights', 'loadFirstAid',
-    'loadCamps', 'loadCalculatorGrid', 'loadHelpline', 'loadVideos'
+    'loadTrending', 'loadCases', 'loadLiveNews',
+    'loadLandmark', 'loadFunny', 'loadBareAct',
+    'loadDailyQuiz', 'loadCalculatorGrid', 'loadHelpline', 'loadVideos'
   ];
   
   moduleLoaders.forEach(fn => {
@@ -1725,11 +1709,8 @@ function init() {
   console.log('✅ All systems ready! Zeenat is live!');
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+// ✅ Sirf yeh rakho - init.js already handle kar raha hai
+console.log('✅ HTML Loaded - Init.js will handle initialization');
 </script>
 </body>
 </html>
