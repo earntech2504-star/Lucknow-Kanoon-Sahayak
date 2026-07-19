@@ -4,7 +4,7 @@
   "builds": [
     {
       "src": "api/**",
-      "use": "@vercel/node"
+      "use": "@vercel/static"
     },
     {
       "src": "*.html",
