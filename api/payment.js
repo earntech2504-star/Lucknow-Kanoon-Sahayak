@@ -6,7 +6,7 @@
 const UPI_CONFIG = {
     upiId: process.env.UPI_ID || 'icfai.sandeep@oksbi',
     upiPhone: process.env.UPI_PHONE || '7235870777',
-    upiName: process.env.UPI_NAME || 'Sandeep Kumar'
+    upiName: process.env.UPI_NAME || 'Sandeep Gupta'
 };
 
 // Payment function
