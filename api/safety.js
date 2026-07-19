@@ -115,4 +115,19 @@ function loadFirstAid() {
                 <li>WhatsApp/Email export karein</li>
                 <li>Notarized affidavit file karein</li>
                 <li>Cloud backup lein</li>
-           
+            </ul>
+        </div>
+    `;
+}
+
+// Emergency contacts
+function getEmergencyContacts() {
+    return {
+        police: '100',
+        women: '181',
+        cyber: '1930',
+        legal: '15100',
+        legalAid: '1800-112-400',
+        child: '1098'
+    };
+}
