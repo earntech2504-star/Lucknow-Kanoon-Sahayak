@@ -622,7 +622,7 @@ function shuffleArray(arr) {
 
 function generateUnlimitedQuiz(count = 10) {
     const shuffled = shuffleArray([...QUIZ_DATA]);
-    const questionsPerCategory = Math.ceil(count / 6); // 6 categories
+    const questionsPerCategory = Math.ceil(count / 6);
     
     const categories = ['BNS', 'BNSS', 'BSA', 'General', 'Women', 'Cyber'];
     let selected = [];
@@ -636,7 +636,6 @@ function generateUnlimitedQuiz(count = 10) {
         }
     });
     
-    // If we need more, add from all
     if (selected.length < count) {
         const remaining = shuffleArray(
             QUIZ_DATA.filter(q => !selected.includes(q))
@@ -648,144 +647,35 @@ function generateUnlimitedQuiz(count = 10) {
 }
 
 // ============================================================
-// API HANDLER - UNLIMITED QUIZ
+// FRONTEND FUNCTIONS
 // ============================================================
-export default async function handler(req, res) {
-    if (req.method !== 'GET') {
-        return res.status(405).json({ 
-            error: 'Method not allowed',
-            status: 'error'
-        });
-    }
-
-    const { 
-        count = 10,        // Number of questions
-        category = 'all',  // all, BNS, BNSS, BSA, General, Women, Cyber, Punishment, Bail, Mnemonic, Court, Constitution
-        difficulty = 'all', // all, easy, medium, hard
-        seed = null       // For reproducible quizzes
-    } = req.query;
-
-    // Validate count (unlimited - up to 1000)
-    const quizCount = Math.min(parseInt(count) || 10, 1000);
+function startQuiz(type) {
+    // Load quiz based on type
+    const container = document.getElementById('quiz-container');
+    if (!container) return;
     
-    try {
-        let questions = [...QUIZ_DATA];
-        
-        // Filter by category
-        if (category !== 'all') {
-            questions = questions.filter(q => q.category === category);
-        }
-        
-        // Filter by difficulty
-        if (difficulty !== 'all') {
-            questions = questions.filter(q => q.difficulty === difficulty);
-        }
-        
-        // If no questions match, fallback to all
-        if (questions.length === 0) {
-            questions = [...QUIZ_DATA];
-        }
-        
-        // Generate quiz
-        let selected;
-        if (seed) {
-            // Deterministic selection using seed
-            const seeded = shuffleArray([...questions]);
-            selected = seeded.slice(0, quizCount);
-        } else {
-            // Random unlimited selection
-            const shuffled = shuffleArray([...questions]);
-            selected = [];
-            const totalAvailable = shuffled.length;
-            
-            // If requesting more than available, cycle through
-            if (quizCount > totalAvailable) {
-                // Repeat questions with different order
-                const cycles = Math.ceil(quizCount / totalAvailable);
-                for (let i = 0; i < cycles; i++) {
-                    const cycled = shuffleArray([...questions]);
-                    selected = selected.concat(cycled);
-                }
-                selected = selected.slice(0, quizCount);
-            } else {
-                selected = shuffled.slice(0, quizCount);
-            }
-        }
-        
-        // Shuffle options for each question (variety)
-        selected = selected.map(q => {
-            const shuffledOptions = shuffleArray([...q.options]);
-            const newAnswerIndex = shuffledOptions.indexOf(q.options[q.answer]);
-            return {
-                ...q,
-                options: shuffledOptions,
-                answer: newAnswerIndex
-            };
-        });
-
-        // Statistics
-        const stats = {
-            totalAvailable: QUIZ_DATA.length,
-            byCategory: {},
-            byDifficulty: {}
-        };
-        
-        QUIZ_DATA.forEach(q => {
-            stats.byCategory[q.category] = (stats.byCategory[q.category] || 0) + 1;
-            stats.byDifficulty[q.difficulty] = (stats.byDifficulty[q.difficulty] || 0) + 1;
-        });
-
-        res.status(200).json({
-            items: selected,
-            count: selected.length,
-            requested: quizCount,
-            category: category,
-            difficulty: difficulty,
-            stats: stats,
-            status: 'success',
-            timestamp: new Date().toISOString(),
-            message: `✅ ${selected.length} questions generated (unlimited pool of ${QUIZ_DATA.length})`
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            error: error.message,
-            status: 'error',
-            message: '❌ Failed to generate quiz'
-        });
+    let questions = [];
+    if (type === 'bns') {
+        questions = QUIZ_DATA.filter(q => q.category === 'BNS');
+    } else if (type === 'bnss') {
+        questions = QUIZ_DATA.filter(q => q.category === 'BNSS');
+    } else if (type === 'bsa') {
+        questions = QUIZ_DATA.filter(q => q.category === 'BSA');
+    } else {
+        questions = shuffleArray([...QUIZ_DATA]);
     }
+    
+    // Limit to 10 questions
+    questions = questions.slice(0, 10);
+    
+    if (questions.length === 0) {
+        container.innerHTML = '<div class="text-slate-400 text-center py-4">⚠️ No questions available for this category.</div>';
+        return;
+    }
+    
+    renderQuiz(questions);
 }
 
-// ============================================================
-// FRONTEND FUNCTION - Load Unlimited Quiz
-// ============================================================
-async function loadUnlimitedQuiz(count = 10, category = 'all', difficulty = 'all') {
-    try {
-        const url = `/api/quiz?count=${count}&category=${category}&difficulty=${difficulty}&t=${Date.now()}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.status === 'success') {
-            // Render quiz
-            renderQuiz(data.items);
-            return data;
-        } else {
-            throw new Error(data.message || 'Failed to load quiz');
-        }
-    } catch (error) {
-        console.error('Quiz Error:', error);
-        document.getElementById('quiz-container').innerHTML = `
-            <div class="text-red-400 text-center py-4">
-                ⚠️ ${error.message || 'Failed to load quiz. Please try again.'}
-            </div>
-        `;
-        return null;
-    }
-}
-
-// ============================================================
-// RENDER QUIZ FUNCTION
-// ============================================================
 function renderQuiz(questions) {
     const container = document.getElementById('quiz-container');
     if (!container) return;
@@ -800,53 +690,44 @@ function renderQuiz(questions) {
         return;
     }
     
-    // Show quiz stats
-    const statsHtml = `
-        <div class="flex flex-wrap gap-2 mb-3 glass-card p-2 rounded-xl">
-            <div><span class="font-semibold text-sm text-white">📊 Total:</span> <span class="text-orange-400 font-bold">${questions.length}</span></div>
-            <div><span class="font-semibold text-sm text-white">📚 Categories:</span> <span class="text-blue-400">${[...new Set(questions.map(q => q.category))].join(', ')}</span></div>
-            <div><span class="font-semibold text-sm text-white">📈 Difficulty:</span> <span class="text-purple-400">${[...new Set(questions.map(q => q.difficulty))].join(', ')}</span></div>
-        </div>
-    `;
-    
-    // Store questions globally for quiz navigation
+    // Store questions globally
     window._quizQuestions = questions;
     window._quizIndex = 0;
     window._quizScore = 0;
     window._quizAnswered = false;
     
-    container.innerHTML = statsHtml + `
-        <div id="quiz-progress-bar" class="quiz-progress-bar mb-2">
-            <div class="fill" style="width:0%"></div>
+    let html = `
+        <div class="flex flex-wrap gap-2 mb-3 glass-card p-2 rounded-xl">
+            <div><span class="font-semibold text-sm text-white">📊 Total:</span> <span class="text-orange-400 font-bold">${questions.length}</span></div>
+            <div><span class="font-semibold text-sm text-white">📚 Category:</span> <span class="text-blue-400">${questions[0].category}</span></div>
+            <div><span class="font-semibold text-sm text-white">📈 Difficulty:</span> <span class="text-purple-400">${questions[0].difficulty}</span></div>
+        </div>
+        <div id="quiz-progress-bar" class="w-full h-1 bg-slate-700 rounded-full mb-2 overflow-hidden">
+            <div id="quiz-progress-fill" class="h-full bg-orange-400 rounded-full" style="width:0%"></div>
         </div>
         <div id="quiz-progress-text" class="text-xs text-slate-400 mb-1">Question 1 of ${questions.length}</div>
-        <div id="quiz-category-badge" class="quiz-category-badge quiz-cat-bns mb-1">📚 ${questions[0].category}</div>
+        <div id="quiz-category-badge" class="inline-block px-2 py-0.5 rounded-full text-xs font-bold mb-1" style="background:rgba(96,165,250,0.2);color:#93c5fd;">📚 ${questions[0].category}</div>
         <div id="quiz-question" class="glass-card p-3 rounded-xl mb-2 font-semibold text-sm text-white">${questions[0].question}</div>
         <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2"></div>
-        <div id="quiz-explanation" class="quiz-explanation hidden"></div>
-        <div id="quiz-result" class="mt-1 text-sm"></div>
+        <div id="quiz-explanation" class="hidden text-xs text-green-400 p-2 rounded bg-slate-800/50 mb-2"></div>
+        <div id="quiz-result" class="text-sm font-bold mb-2"></div>
         <div class="flex flex-wrap gap-2 mt-2">
             <button onclick="nextQuizQuestion()" class="btn-primary text-white px-4 py-2 rounded-xl text-sm font-bold">Next Question →</button>
-            <button onclick="resetQuiz()" class="bg-slate-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-600 transition">🔄 Reset</button>
-            <button onclick="loadUnlimitedQuiz(10)" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition">📝 New Quiz</button>
+            <button onclick="resetQuiz()" class="bg-slate-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-700 transition">🔄 Reset</button>
         </div>
-        <div id="quiz-score" class="mt-1 text-xs text-slate-400 font-bold"></div>
-        <div id="quiz-complete-card" class="quiz-score-card hidden">
-            <div class="score-number" id="final-score-number">0</div>
-            <div class="score-label">out of ${questions.length} (this round)</div>
-            <div class="mt-1 text-base font-bold" id="final-score-label">🏆 Excellent!</div>
-            <button onclick="loadUnlimitedQuiz(10)" class="mt-2 bg-white text-indigo-600 px-4 py-1 rounded-xl font-bold hover:bg-slate-100 transition text-sm">🔄 Start Again</button>
+        <div id="quiz-score" class="mt-2 text-xs text-slate-400 font-bold">📊 Score: 0/${questions.length}</div>
+        <div id="quiz-complete-card" class="hidden quiz-score-card mt-3 p-4 rounded-xl text-center" style="background:linear-gradient(135deg,#f97316,#ef4444);">
+            <div class="text-2xl font-bold text-white" id="final-score-number">0/${questions.length}</div>
+            <div class="text-white/80 text-sm" id="final-score-label">🏆 Excellent!</div>
+            <button onclick="startQuiz('mixed')" class="mt-2 bg-white text-orange-600 px-4 py-1 rounded-xl font-bold hover:bg-slate-100 transition text-sm">🔄 Start Again</button>
         </div>
-        <div class="mt-2 text-xs text-slate-500">💡 ${questions.length} unique questions from pool of ${QUIZ_DATA.length} (unlimited combinations)</div>
+        <div class="mt-2 text-xs text-slate-500">💡 ${questions.length} questions from pool of ${QUIZ_DATA.length}</div>
     `;
     
-    // Load first question
+    container.innerHTML = html;
     loadQuizQuestion();
 }
 
-// ============================================================
-// LOAD QUIZ QUESTION (Uses window._quizQuestions)
-// ============================================================
 function loadQuizQuestion() {
     const questions = window._quizQuestions || [];
     const index = window._quizIndex || 0;
@@ -861,7 +742,8 @@ function loadQuizQuestion() {
     
     // Update progress
     const progress = ((index) / total) * 100;
-    document.getElementById('quiz-progress-bar')?.querySelector('.fill')?.style.setProperty('width', `${progress}%`);
+    const fill = document.getElementById('quiz-progress-fill');
+    if (fill) fill.style.width = `${progress}%`;
     document.getElementById('quiz-progress-text').textContent = `Question ${index + 1} of ${total}`;
     
     // Category badge
@@ -881,13 +763,23 @@ function loadQuizQuestion() {
             Constitution: '📜 Constitution'
         };
         badge.textContent = catMap[q.category] || q.category;
-        badge.className = `quiz-category-badge quiz-cat-${q.category.toLowerCase()}`;
+        badge.style.background = q.category === 'BNS' ? 'rgba(96,165,250,0.2)' :
+                               q.category === 'BNSS' ? 'rgba(244,114,182,0.2)' :
+                               q.category === 'BSA' ? 'rgba(251,191,36,0.2)' :
+                               'rgba(96,165,250,0.2)';
+        badge.style.color = q.category === 'BNS' ? '#93c5fd' :
+                           q.category === 'BNSS' ? '#f472b6' :
+                           q.category === 'BSA' ? '#fcd34d' :
+                           '#93c5fd';
     }
     
     // Question
-    document.getElementById('quiz-question').textContent = q.question;
-    if (q.mnemonic) {
-        document.getElementById('quiz-question').innerHTML = `${q.question}<br><span class="text-xs text-amber-400">${q.mnemonic}</span>`;
+    const qDiv = document.getElementById('quiz-question');
+    if (qDiv) {
+        qDiv.textContent = q.question;
+        if (q.mnemonic) {
+            qDiv.innerHTML = `${q.question}<br><span class="text-xs text-amber-400">${q.mnemonic}</span>`;
+        }
     }
     
     // Options
@@ -908,17 +800,10 @@ function loadQuizQuestion() {
     window._quizAnswered = false;
     document.getElementById('quiz-explanation')?.classList.add('hidden');
     document.getElementById('quiz-result').textContent = '';
-    
-    // Hide complete card
     document.getElementById('quiz-complete-card')?.classList.add('hidden');
-    
-    // Update score display
     updateQuizScore();
 }
 
-// ============================================================
-// SELECT QUIZ OPTION
-// ============================================================
 function selectQuizOption(selected) {
     if (window._quizAnswered) return;
     window._quizAnswered = true;
@@ -930,24 +815,21 @@ function selectQuizOption(selected) {
     const options = document.querySelectorAll('.quiz-option');
     const isCorrect = selected === q.answer;
     
-    // Disable all options
     options.forEach(btn => btn.classList.add('disabled'));
-    
-    // Highlight correct/wrong
     options.forEach((btn, idx) => {
         if (idx === q.answer) btn.classList.add('correct');
         if (idx === selected && !isCorrect) btn.classList.add('wrong');
     });
     
-    // Update score
     if (isCorrect) {
         window._quizScore = (window._quizScore || 0) + 1;
         document.getElementById('quiz-result').textContent = '✅ सही!';
+        document.getElementById('quiz-result').style.color = '#86efac';
     } else {
         document.getElementById('quiz-result').textContent = `❌ गलत! सही उत्तर: ${q.options[q.answer]}`;
+        document.getElementById('quiz-result').style.color = '#fca5a5';
     }
     
-    // Show explanation
     const expDiv = document.getElementById('quiz-explanation');
     if (expDiv) {
         const mnemonicHtml = q.mnemonic ? `<br><span class="text-amber-400 text-xs">${q.mnemonic}</span>` : '';
@@ -958,9 +840,6 @@ function selectQuizOption(selected) {
     updateQuizScore();
 }
 
-// ============================================================
-// NEXT QUIZ QUESTION
-// ============================================================
 function nextQuizQuestion() {
     const questions = window._quizQuestions || [];
     window._quizIndex = (window._quizIndex || 0) + 1;
@@ -972,9 +851,6 @@ function nextQuizQuestion() {
     }
 }
 
-// ============================================================
-// SHOW QUIZ COMPLETE
-// ============================================================
 function showQuizComplete() {
     document.getElementById('quiz-complete-card')?.classList.remove('hidden');
     const total = window._quizQuestions?.length || 1;
@@ -988,9 +864,6 @@ function showQuizComplete() {
     document.getElementById('final-score-label').textContent = label;
 }
 
-// ============================================================
-// RESET QUIZ
-// ============================================================
 function resetQuiz() {
     const questions = window._quizQuestions || [];
     window._quizIndex = 0;
@@ -1002,9 +875,6 @@ function resetQuiz() {
     }
 }
 
-// ============================================================
-// UPDATE QUIZ SCORE DISPLAY
-// ============================================================
 function updateQuizScore() {
     const total = window._quizQuestions?.length || 0;
     const score = window._quizScore || 0;
@@ -1012,48 +882,42 @@ function updateQuizScore() {
 }
 
 // ============================================================
-// QUIZ CATEGORY FILTER - Unlimited Options
+// EXPORT FOR FRONTEND
 // ============================================================
-function loadQuizByCategory(category) {
-    loadUnlimitedQuiz(10, category);
-}
-
-function loadQuizByDifficulty(difficulty) {
-    loadUnlimitedQuiz(10, 'all', difficulty);
+if (typeof window !== 'undefined') {
+    window.startQuiz = startQuiz;
+    window.nextQuizQuestion = nextQuizQuestion;
+    window.resetQuiz = resetQuiz;
+    window.selectQuizOption = selectQuizOption;
+    window.loadQuizQuestion = loadQuizQuestion;
 }
 
 // ============================================================
 // EXPORT FOR NODE/VERCEL
 // ============================================================
-export { 
-    QUIZ_DATA, 
-    shuffleArray, 
-    generateUnlimitedQuiz,
-    loadUnlimitedQuiz,
-    loadQuizByCategory,
-    loadQuizByDifficulty,
-    resetQuiz,
-    nextQuizQuestion,
-    selectQuizOption
-};
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        QUIZ_DATA,
+        shuffleArray,
+        generateUnlimitedQuiz,
+        startQuiz,
+        resetQuiz,
+        nextQuizQuestion
+    };
+}
 
 // ============================================================
-// AUTO-START ON PAGE LOAD (if on frontend)
+// AUTO-START ON PAGE LOAD
 // ============================================================
 if (typeof window !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
-        // Check if quiz container exists
         if (document.getElementById('quiz-container')) {
-            loadUnlimitedQuiz(10);
+            startQuiz('mixed');
         }
     });
 }
 
-// ============================================================
-// SUMMARY
-// ============================================================
 console.log('✅ QUIZ.JS Loaded:');
 console.log(`📚 ${QUIZ_DATA.length} questions available`);
 console.log(`🎯 Unlimited combinations (${QUIZ_DATA.length}! possible)`);
 console.log(`📊 Categories: ${[...new Set(QUIZ_DATA.map(q => q.category))].join(', ')}`);
-console.log(`📈 Difficulties: ${[...new Set(QUIZ_DATA.map(q => q.difficulty))].join(', ')}`);
