@@ -1,17 +1,20 @@
 {
   "name": "lucknow-kanoon-sahayak",
   "version": "9.0.0",
-  "description": "India's #1 Free AI Legal Assistant for BNS/BNSS/BSA",
-  "main": "api/ask.js",
+  "description": "India's #1 Free AI Legal Assistant",
+  "main": "index.html",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel deploy --prod"
+    "start": "serve .",
+    "dev": "serve .",
+    "build": "echo '✅ No build needed - static site'"
   },
+  "keywords": ["legal", "assistant", "BNS", "BNSS", "BSA"],
+  "author": "Lucknow Kanoon Sahayak",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^1.6.2",
-    "xml2js": "^0.6.2"
+    "serve": "^14.0.0"
   },
-  "devDependencies": {
-    "vercel": "^33.1.0"
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
