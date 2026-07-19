@@ -111,7 +111,7 @@ function checkAPIFiles() {
   
   const results = {};
   files.forEach(file => {
-    const path = 'src/api/' + file;
+    const path = 'api/' + file;
     const script = document.querySelector(`script[src="${path}"]`);
     results[file] = {
       path: path,
@@ -217,24 +217,15 @@ function getHealthJSON() {
 function initAllModules() {
   console.log('🚀 Initializing all modules...');
   
+  // ✅ SIRF EXISTING FUNCTIONS CALL KAREIN
   const moduleLoaders = [
-    { name: 'RSS Feeds', fn: 'loadRSSFeeds' },
     { name: 'Trending', fn: 'loadTrending' },
     { name: 'Cases', fn: 'loadCases' },
     { name: 'Live News', fn: 'loadLiveNews' },
     { name: 'Landmark', fn: 'loadLandmark' },
     { name: 'Funny', fn: 'loadFunny' },
-    { name: 'Quick Reads', fn: 'loadQuickReads' },
-    { name: 'Women News', fn: 'loadWomenNews' },
-    { name: 'Trending Tags', fn: 'loadTrendingTags' },
     { name: 'Bare Act', fn: 'loadBareAct' },
-    { name: 'Sections', fn: 'renderSections' },
-    { name: 'Dictionary', fn: 'searchDictionary' },
     { name: 'Daily Quiz', fn: 'loadDailyQuiz' },
-    { name: 'Advocates', fn: 'renderAdvocates' },
-    { name: 'Rights', fn: 'loadRights' },
-    { name: 'First Aid', fn: 'loadFirstAid' },
-    { name: 'Camps', fn: 'loadCamps' },
     { name: 'Calculator', fn: 'loadCalculatorGrid' },
     { name: 'Helpline', fn: 'loadHelpline' },
     { name: 'Videos', fn: 'loadVideos' }
@@ -258,6 +249,19 @@ function initAllModules() {
       HEALTH_STATUS.errors.push(`${item.name}: ${e.message}`);
     }
   });
+  
+  // ✅ Tabs ke liye fix - HTML wala switchTab use karein
+  if (typeof window.switchTab !== 'function') {
+    console.warn('⚠️ switchTab not found, defining fallback...');
+    window.switchTab = function(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+      if (btn) btn.classList.add('active');
+      console.log('✅ Tab switched to:', tabId);
+    };
+  }
   
   HEALTH_STATUS.initialized = true;
   HEALTH_STATUS.timestamp = new Date().toISOString();
