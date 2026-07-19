@@ -15,12 +15,10 @@
 <meta name="twitter:title" content="Lucknow Kanoon Sahayak 9.0" />
 <meta name="twitter:description" content="India's #1 Free AI Legal Assistant" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE" />
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0A0F1F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
 <!-- ===== CDN LIBS ===== -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,110 +27,82 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-
-<!-- ===== API JS FILES ===== -->
-<script src="config.js"></script>
-<script src="sections.js"></script>
-<script src="voice.js"></script>
-<script src="ask.js"></script>
-<script src="news.js"></script>
-<script src="trending.js"></script>
-<script src="quiz.js"></script>
-<script src="calculator.js"></script>
-<script src="pdf-upload.js"></script>
-<script src="advocates.js"></script>
-<script src="community.js"></script>
-<script src="helpline.js"></script>
-<script src="legal-aid.js"></script>
-<script src="dictionary.js"></script>
-<script src="landmark.js"></script>
-<script src="funny.js"></script>
-<script src="mock.js"></script>
-<script src="bail-guide.js"></script>
-<script src="safety.js"></script>
-<script src="cause-list.js"></script>
-<script src="videos.js"></script>
-<script src="resources.js"></script>
-<script src="exam-prep.js"></script>
-<script src="blog-rss.js"></script>
-<script src="dashboard.js"></script>
-<script src="converter.js"></script>
-<script src="notice-generator.js"></script>
-<script src="suggestions.js"></script>
-<script src="timeline.js"></script>
-<script src="summarizer.js"></script>
-<script src="post-fir.js"></script>
-<script src="case-track.js"></script>
-<script src="section-finder.js"></script>
-<script src="ai-doc.js"></script>
-<script src="junior.js"></script>
-<script src="family.js"></script>
-<script src="cyber.js"></script>
-<script src="zameen.js"></script>
-<script src="all-courts.js"></script>
-<script src="rto-rti.js"></script>
-<script src="bare-act.js"></script>
-<script src="dailyquiz.js"></script>
-<script src="donate.js"></script>
-<script src="payment.js"></script>
-<script src="init.js"></script>
-
-<!-- ============================================================
-STRUCTURED DATA (SEO)
-============================================================ -->
+<!-- ===== API JS FILES (src/api/ folder) ===== -->
+<script src="src/api/config.js"></script>
+<script src="src/api/sections.js"></script>
+<script src="src/api/voice.js"></script>
+<script src="src/api/ask.js"></script>
+<script src="src/api/news.js"></script>
+<script src="src/api/trending.js"></script>
+<script src="src/api/quiz.js"></script>
+<script src="src/api/calculator.js"></script>
+<script src="src/api/pdf-upload.js"></script>
+<script src="src/api/advocates.js"></script>
+<script src="src/api/community.js"></script>
+<script src="src/api/helpline.js"></script>
+<script src="src/api/legal-aid.js"></script>
+<script src="src/api/dictionary.js"></script>
+<script src="src/api/landmark.js"></script>
+<script src="src/api/funny.js"></script>
+<script src="src/api/mock.js"></script>
+<script src="src/api/bail-guide.js"></script>
+<script src="src/api/safety.js"></script>
+<script src="src/api/cause-list.js"></script>
+<script src="src/api/videos.js"></script>
+<script src="src/api/resources.js"></script>
+<script src="src/api/exam-prep.js"></script>
+<script src="src/api/blog-rss.js"></script>
+<script src="src/api/dashboard.js"></script>
+<script src="src/api/converter.js"></script>
+<script src="src/api/notice-generator.js"></script>
+<script src="src/api/suggestions.js"></script>
+<script src="src/api/timeline.js"></script>
+<script src="src/api/summarizer.js"></script>
+<script src="src/api/post-fir.js"></script>
+<script src="src/api/case-track.js"></script>
+<script src="src/api/section-finder.js"></script>
+<script src="src/api/ai-doc.js"></script>
+<script src="src/api/junior.js"></script>
+<script src="src/api/family.js"></script>
+<script src="src/api/cyber.js"></script>
+<script src="src/api/zameen.js"></script>
+<script src="src/api/all-courts.js"></script>
+<script src="src/api/rto-rti.js"></script>
+<script src="src/api/bare-act.js"></script>
+<script src="src/api/dailyquiz.js"></script>
+<script src="src/api/donate.js"></script>
+<script src="src/api/payment.js"></script>
+<!-- ===== ADMIN HEALTH ROUTE ===== -->
+<script src="src/api/init.js"></script>
+<!-- ===== STRUCTURED DATA (SEO) ===== -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LegalService",
-  "name": "Lucknow Kanoon Sahayak 9.0",
-  "description": "Free AI-powered legal assistant for BNS, BNSS, BSA.",
-  "url": "https://lucknowkanoon.vercel.app",
-  "telephone": "+91-15100",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Lucknow",
-    "addressRegion": "UP",
-    "addressCountry": "IN"
-  },
-  "areaServed": "Lucknow, Uttar Pradesh",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "127"
-  }
-}
+{"@context":"https://schema.org","@type":"LegalService","name":"Lucknow Kanoon Sahayak 9.0","description":"Free AI-powered legal assistant for BNS, BNSS, BSA.","url":"https://lucknowkanoon.vercel.app","telephone":"+91-15100","address":{"@type":"PostalAddress","addressLocality":"Lucknow","addressRegion":"UP","addressCountry":"IN"},"areaServed":"Lucknow, Uttar Pradesh","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"127"}}
 </script>
-
-<!-- ============================================================
-CSS - PREMIUM DESIGN (UPDATED WITH MOBILE + ELDERLY)
-============================================================ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is BNS 318?","acceptedAnswer":{"@type":"Answer","text":"BNS 318 is the new cheating section (replaces IPC 420) with up to 7 years imprisonment."}},{"@type":"Question","name":"How to file FIR under BNSS?","acceptedAnswer":{"@type":"Answer","text":"FIR is filed under BNSS 173. It is mandatory for cognizable offences."}},{"@type":"Question","name":"What is the bail provision under BNSS?","acceptedAnswer":{"@type":"Answer","text":"BNSS 480 for Magistrate bail, BNSS 482 for anticipatory bail."}}]}
+</script>
 <style>
 /* ===== RESET & BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:18px;scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%,#111827 50%,#0A0F1F 100%);color:#e2e8f0;font-size:1.05rem;line-height:1.8;min-height:100vh;overflow-x:hidden}
-
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:#1e293b;border-radius:4px}
 ::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#f97316,#ef4444);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:#f97316}
-
 /* ===== TYPOGRAPHY ===== */
 .court-font{font-family:'Poppins','Georgia',serif}
 .gradient-text{background:linear-gradient(135deg,#f97316,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradientMove 3s ease-in-out infinite}
 @keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
 /* ===== GLASS CARD ===== */
 .glass-card{background:rgba(255,255,255,0.05)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.25);border-radius:16px;transition:all 0.3s ease}
 .glass-card:hover{border-color:rgba(249,115,22,0.3);box-shadow:0 8px 40px rgba(249,115,22,0.1)}
 .glass-card-premium{background:rgba(255,255,255,0.03)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 32px rgba(0,0,0,0.3);border-radius:16px}
-
 /* ===== TABS ===== */
 .tab-content{display:none;animation:fadeIn 0.4s ease-out}
 .tab-content.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
 /* ===== TAB NAV ===== */
 .tab-nav-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;background:rgba(255,255,255,0.03);border-radius:14px;padding:5px;border:1px solid rgba(255,255,255,0.05);max-height:70vh;overflow-y:auto}
 .tab-nav-grid::-webkit-scrollbar{width:3px}
@@ -140,7 +110,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 @media(max-width:1400px){.tab-nav-grid{grid-template-columns:repeat(6,1fr)}}
 @media(max-width:1024px){.tab-nav-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:640px){.tab-nav-grid{grid-template-columns:repeat(2,1fr)}}
-
 .tab-btn{transition:all 0.25s;font-weight:600;background:rgba(255,255,255,0.03);color:#94a3b8;border:1px solid transparent;cursor:pointer;padding:10px 6px!important;border-radius:10px;font-size:0.65rem!important;min-height:44px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;touch-action:manipulation;position:relative}
 .tab-btn:hover{background:rgba(255,255,255,0.08);color:#e2e8f0;border-color:rgba(255,255,255,0.1);transform:translateY(-1px)}
 .tab-btn.active{color:#f1f5f9;background:rgba(249,115,22,0.15);border-color:#f97316;box-shadow:0 0 25px rgba(249,115,22,0.08)}
@@ -148,7 +117,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .tab-btn .tab-label{font-size:0.5rem;opacity:0.7;font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
 .tab-btn.active .tab-label{opacity:1;color:#f97316}
 .tab-btn .tab-badge{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:0.45rem;padding:1px 5px;border-radius:10px;font-weight:700;animation:pulse 2s infinite}
-
 /* ===== BUTTONS ===== */
 .btn-primary{background:linear-gradient(135deg,#f97316,#ef4444)!important;box-shadow:0 4px 20px rgba(239,68,68,0.35);color:#fff;border:none;cursor:pointer;transition:all 0.3s;padding:12px 24px!important;border-radius:14px!important;font-weight:700;font-size:0.95rem!important;min-height:48px!important;touch-action:manipulation}
 .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(239,68,68,0.5)}
@@ -157,16 +125,13 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .btn-success:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(34,197,94,0.5)}
 .btn-purple{background:linear-gradient(135deg,#8b5cf6,#7c3aed)!important;box-shadow:0 4px 20px rgba(139,92,246,0.35);color:#fff;border:none;cursor:pointer;transition:all 0.3s;padding:12px 24px!important;border-radius:14px!important;font-weight:700;font-size:0.95rem!important;min-height:48px!important}
 .btn-purple:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(139,92,246,0.5)}
-
 /* ===== QUICK ACTIONS ===== */
 .quick-action-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);transition:all 0.25s;font-size:0.8rem!important;padding:6px 14px!important;border-radius:9999px!important;min-height:36px!important;display:inline-flex;align-items:center;cursor:pointer;color:#e2e8f0;gap:4px;touch-action:manipulation}
 .quick-action-btn:hover{background:rgba(255,255,255,0.12);border-color:#f97316;color:#f97316;transform:translateY(-1px)}
-
 /* ===== FILTER PILLS ===== */
 .filter-pill{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:4px 14px!important;font-size:0.75rem!important;color:#94a3b8;cursor:pointer;transition:all 0.25s;white-space:nowrap;min-height:32px!important;display:inline-flex;align-items:center}
 .filter-pill:hover{background:rgba(255,255,255,0.1);color:#f1f5f9}
 .filter-pill.active{background:rgba(249,115,22,0.15);border-color:#f97316;color:#f97316}
-
 /* ===== CARDS ===== */
 .section-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 14px;transition:all 0.3s;cursor:pointer}
 .section-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-3px);border-color:#f97316;box-shadow:0 8px 25px rgba(0,0,0,0.2)}
@@ -174,7 +139,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .section-card .section-title{font-weight:600;color:#f1f5f9;font-size:0.95rem}
 .section-card .section-desc{font-size:0.85rem;color:#94a3b8;margin-top:4px}
 .section-card .section-trick{font-size:0.8rem;color:#fcd34d;background:rgba(251,191,36,0.08);padding:2px 12px;border-radius:8px;display:inline-block;margin-top:4px}
-
 /* ===== STATUS BADGE ===== */
 .status-badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.7rem;font-weight:600}
 .status-badge.pending{background:rgba(245,158,11,0.2);color:#f59e0b}
@@ -182,13 +146,11 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .status-badge.rejected{background:rgba(239,68,68,0.2);color:#ef4444}
 .status-badge.in-progress{background:rgba(96,165,250,0.2);color:#93c5fd}
 .status-badge.escalated{background:rgba(220,38,38,0.2);color:#fca5a5;animation:pulse 1s infinite}
-
 /* ===== DISCLAIMER ===== */
 .disclaimer-box{background:rgba(239,68,68,0.08);border-left:4px solid #ef4444;padding:12px 16px;border-radius:10px;color:#fca5a5;font-size:0.85rem}
 .mnemonic-card{background:linear-gradient(135deg,rgba(249,115,22,0.12),rgba(239,68,68,0.08))!important;border-left:5px solid #f97316;padding:12px 16px;border-radius:12px;margin:6px 0;color:#fcd34d;font-size:0.9rem}
 .memory-trick-badge{display:inline-block;background:rgba(251,191,36,0.12);color:#fcd34d;padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;border:1px solid rgba(251,191,36,0.15);min-height:32px;display:inline-flex;align-items:center}
 .trust-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.04);padding:0.3rem 0.8rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.05);font-weight:500;color:#e2e8f0;font-size:0.8rem;min-height:36px}
-
 /* ===== CHAT ===== */
 .zeenat-chat-wrapper{background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(12px);padding:16px}
 .zeenat-chat-header{display:flex;align-items:center;gap:14px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:14px;border-bottom:1px solid rgba(255,255,255,0.06)}
@@ -224,12 +186,11 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .zeenat-connect-btn{background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:30px;padding:10px 20px;font-weight:700;color:#fff;font-size:0.95rem;cursor:pointer;transition:all 0.3s;width:100%}
 .zeenat-connect-btn:hover{transform:scale(1.01)}
 .zeenat-connect-btn.connected{background:#4f46e5}
-
-/* ===== FLOATING CHAT ===== */
-.floating-chat-btn{position:fixed;bottom:28px;right:28px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f97316,#ef4444);border:none;color:#fff;font-size:28px;cursor:pointer;box-shadow:0 8px 30px rgba(239,68,68,0.4);z-index:999;transition:all 0.3s;display:flex;align-items:center;justify-content:center}
+/* ===== FLOATING CHAT - FIXED ===== */
+.floating-chat-btn{position:fixed;bottom:28px;right:28px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f97316,#ef4444);border:none;color:#fff;font-size:28px;cursor:pointer;box-shadow:0 8px 30px rgba(239,68,68,0.4);z-index:9999;transition:all 0.3s;display:flex;align-items:center;justify-content:center}
 .floating-chat-btn:hover{transform:scale(1.1);box-shadow:0 8px 40px rgba(239,68,68,0.6)}
 .floating-chat-btn.active{background:#22c55e;animation:pulse 1.5s infinite}
-.floating-chat-window{position:fixed;bottom:100px;right:28px;width:380px;max-width:92vw;height:520px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.5);z-index:998;display:none;flex-direction:column;overflow:hidden;backdrop-filter:blur(24px)}
+.floating-chat-window{position:fixed;bottom:100px;right:28px;width:380px;max-width:92vw;height:520px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.5);z-index:9998;display:none;flex-direction:column;overflow:hidden;backdrop-filter:blur(24px)}
 .floating-chat-window.open{display:flex}
 .floating-chat-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.06)}
 .floating-chat-header .title{font-weight:700;color:#f1f5f9;font-size:0.95rem;display:flex;align-items:center;gap:6px}
@@ -245,13 +206,11 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .floating-chat-input-area button:hover{transform:scale(1.05)}
 .floating-chat-input-area .voice-btn{background:#22c55e;font-size:0.75rem}
 .floating-chat-input-area .voice-btn.recording{background:#dc2626;animation:pulse 1s infinite}
-
 /* ===== EMERGENCY ===== */
 .emergency-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 @media(max-width:768px){.emergency-grid{grid-template-columns:1fr 1fr}}
 .emergency-item{background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem}
 .emergency-item .number{font-weight:700;color:#f97316;font-size:1rem}
-
 /* ===== CALCULATOR ===== */
 .calc-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;transition:all 0.3s}
 .calc-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-3px);border-color:#f97316}
@@ -262,7 +221,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:1024px){.calc-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.calc-grid{grid-template-columns:1fr}}
-
 /* ===== QUIZ ===== */
 .quiz-option{background:rgba(255,255,255,0.04);color:#e2e8f0;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;cursor:pointer;transition:all 0.3s;font-size:0.9rem;text-align:left;min-height:44px;width:100%}
 .quiz-option:hover{background:rgba(255,255,255,0.08);border-color:#f97316}
@@ -286,14 +244,12 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .quiz-explanation{background:rgba(34,197,94,0.08);border-left:4px solid #22c55e;padding:8px 12px;border-radius:8px;margin-top:6px;font-size:0.85rem;color:#86efac}
 .quiz-progress-bar{width:100%;height:3px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
 .quiz-progress-bar .fill{height:100%;background:linear-gradient(90deg,#f97316,#ef4444);border-radius:4px;transition:width 0.5s ease}
-
 /* ===== VIDEO ===== */
 .video-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;transition:all 0.3s}
 .video-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.25)}
 .video-card video{width:100%;aspect-ratio:16/9;border:none;background:#111827}
 .video-card .video-placeholder{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#94a3b8;font-size:0.85rem;padding:20px;text-align:center}
 .video-card .video-placeholder .play-icon{font-size:2.5rem;margin-bottom:6px;color:#f97316}
-
 /* ===== MISC ===== */
 .camp-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem}
 .rights-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:0.8rem 1rem;margin:0.4rem 0;cursor:pointer;transition:all 0.25s}
@@ -307,175 +263,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .voice-provider-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:3px 8px;font-size:0.7rem;color:#94a3b8;cursor:pointer;transition:all 0.25s;white-space:nowrap;min-height:28px;min-width:32px;display:inline-flex;align-items:center;justify-content:center}
 .voice-provider-btn:hover{background:rgba(255,255,255,0.1);color:#f1f5f9}
 .voice-provider-btn.active{background:rgba(249,115,22,0.12);border-color:#f97316;color:#f97316}
-
-/* ===== VOICE PROVIDER DISPLAY HIDE ===== */
-#voice-provider-display {
-    display: none !important;
-}
-.voice-provider-btn .provider-label {
-    display: none !important;
-}
-
-/* ===== DARK MODE OVERRIDES ===== */
-.dark-mode body{background:linear-gradient(135deg,#0A0F1F 0%,#111827 50%,#0A0F1F 100%)}
-.dark-mode .glass-card{background:rgba(255,255,255,0.04)!important}
-.dark-mode .tab-btn{background:rgba(255,255,255,0.02)}
-
-/* ===== ELDERLY MODE ===== */
-.elderly-mode html {
-    font-size: 22px !important;
-}
-.elderly-mode body {
-    font-size: 1.4rem !important;
-    line-height: 2 !important;
-}
-.elderly-mode h1 {
-    font-size: 2.6rem !important;
-}
-.elderly-mode h2 {
-    font-size: 2.2rem !important;
-}
-.elderly-mode h3 {
-    font-size: 1.8rem !important;
-}
-.elderly-mode p,
-.elderly-mode li,
-.elderly-mode div,
-.elderly-mode span,
-.elderly-mode label,
-.elderly-mode .text-sm,
-.elderly-mode .text-xs,
-.elderly-mode .text-base {
-    font-size: 1.4rem !important;
-    line-height: 2.2 !important;
-}
-.elderly-mode button,
-.elderly-mode .tab-btn,
-.elderly-mode .quick-action-btn,
-.elderly-mode .btn-primary,
-.elderly-mode .btn-success,
-.elderly-mode .btn-purple {
-    min-height: 72px !important;
-    min-width: 72px !important;
-    font-size: 1.4rem !important;
-    padding: 16px 28px !important;
-}
-.elderly-mode input,
-.elderly-mode select,
-.elderly-mode textarea {
-    min-height: 60px !important;
-    font-size: 1.4rem !important;
-    padding: 14px 18px !important;
-}
-.elderly-mode .msg-bubble {
-    font-size: 1.3rem !important;
-    padding: 16px 20px !important;
-}
-.elderly-mode .zeenat-chat-messages {
-    max-height: 500px !important;
-}
-.elderly-mode .zeenat-input-area input {
-    font-size: 1.3rem !important;
-    min-height: 56px !important;
-}
-.elderly-mode .zeenat-input-area button {
-    min-height: 56px !important;
-    min-width: 56px !important;
-    font-size: 1.4rem !important;
-}
-.elderly-mode .floating-chat-window {
-    height: 70vh !important;
-    width: 90vw !important;
-}
-.elderly-mode .floating-chat-btn {
-    width: 80px !important;
-    height: 80px !important;
-    font-size: 36px !important;
-}
-.elderly-mode .tab-nav-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
-}
-.elderly-mode .tab-btn .tab-icon {
-    font-size: 1.6rem !important;
-}
-.elderly-mode .tab-btn .tab-label {
-    font-size: 0.8rem !important;
-}
-.elderly-mode .glass-card {
-    padding: 20px !important;
-}
-.elderly-mode .calc-card {
-    padding: 20px !important;
-}
-.elderly-mode .calc-card input,
-.elderly-mode .calc-card select {
-    min-height: 56px !important;
-    font-size: 1.3rem !important;
-}
-.elderly-mode .disclaimer-box {
-    font-size: 1.2rem !important;
-    padding: 16px 20px !important;
-}
-.elderly-mode .mnemonic-card {
-    font-size: 1.2rem !important;
-    padding: 16px 20px !important;
-}
-.elderly-mode .memory-trick-badge {
-    font-size: 1.1rem !important;
-    min-height: 44px !important;
-    padding: 6px 16px !important;
-}
-.elderly-mode .trust-badge {
-    font-size: 1.1rem !important;
-    min-height: 44px !important;
-    padding: 0.4rem 1rem !important;
-}
-.elderly-mode .filter-pill {
-    font-size: 1.1rem !important;
-    min-height: 40px !important;
-    padding: 6px 16px !important;
-}
-.elderly-mode .quick-action-btn {
-    font-size: 1.1rem !important;
-    min-height: 44px !important;
-    padding: 8px 18px !important;
-}
-.elderly-mode .section-card {
-    padding: 14px 16px !important;
-}
-.elderly-mode .section-card .section-number {
-    font-size: 1.3rem !important;
-}
-.elderly-mode .section-card .section-title {
-    font-size: 1.2rem !important;
-}
-.elderly-mode .section-card .section-desc {
-    font-size: 1rem !important;
-}
-.elderly-mode .section-card .section-trick {
-    font-size: 1rem !important;
-}
-.elderly-mode .status-badge {
-    font-size: 1rem !important;
-    padding: 4px 14px !important;
-}
-.elderly-mode .lang-toggle {
-    font-size: 1.1rem !important;
-    padding: 0.3rem 0.9rem !important;
-    min-height: 40px !important;
-}
-.elderly-mode .dark-toggle-btn {
-    font-size: 1.1rem !important;
-    min-height: 40px !important;
-    padding: 4px 16px !important;
-}
-.elderly-mode .voice-provider-btn {
-    font-size: 1rem !important;
-    min-height: 38px !important;
-    min-width: 38px !important;
-    padding: 4px 10px !important;
-}
-
 /* ===== DROP ZONE ===== */
 .drop-zone{border:2px dashed rgba(255,255,255,0.12);border-radius:16px;padding:30px 20px;text-align:center;transition:all 0.3s;cursor:pointer}
 .drop-zone:hover{border-color:#f97316;background:rgba(249,115,22,0.04)}
@@ -487,305 +274,103 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 .file-list-item .file-status.processing{background:rgba(251,191,36,0.15);color:#fcd34d;animation:pulse 1s infinite}
 .file-list-item .file-status.error{background:rgba(239,68,68,0.15);color:#fca5a5}
 .analysis-result{background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.12);border-radius:12px;padding:14px}
-
 /* ===== AFFILIATE ===== */
 .affiliate-link{color:#60a5fa;text-decoration:underline;transition:all 0.2s}
 .affiliate-link:hover{color:#93c5fd}
 .affiliate-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:8px 12px;transition:all 0.2s}
 .affiliate-card:hover{background:rgba(255,255,255,0.06);border-color:#60a5fa}
-
 /* ===== RESPONSIVE ===== */
 @media(max-width: 768px) {
-    html {
-        font-size: 16px !important;
-    }
-    body {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-    }
-    .tab-btn {
-        padding: 6px 4px !important;
-        min-height: 38px !important;
-        font-size: 0.55rem !important;
-    }
-    .tab-btn .tab-icon {
-        font-size: 0.9rem !important;
-    }
-    .tab-btn .tab-label {
-        font-size: 0.4rem !important;
-    }
-    .tab-nav-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
-        gap: 2px !important;
-        padding: 3px !important;
-    }
-    .floating-chat-window {
-        width: 94vw !important;
-        height: 60vh !important;
-        bottom: 80px !important;
-        right: 3vw !important;
-    }
-    .floating-chat-btn {
-        width: 56px !important;
-        height: 56px !important;
-        font-size: 24px !important;
-        bottom: 18px !important;
-        right: 18px !important;
-    }
-    .calc-grid {
-        grid-template-columns: 1fr !important;
-    }
-    .emergency-grid {
-        grid-template-columns: 1fr 1fr !important;
-    }
-    .glass-card {
-        padding: 12px !important;
-    }
-    .zeenat-chat-messages {
-        max-height: 250px !important;
-    }
-    .zeenat-input-area input {
-        font-size: 0.85rem !important;
-        min-height: 40px !important;
-    }
-    .zeenat-input-area button {
-        min-height: 40px !important;
-        min-width: 40px !important;
-        font-size: 0.9rem !important;
-        padding: 0 14px !important;
-    }
-    .msg-bubble {
-        max-width: 95% !important;
-        font-size: 0.85rem !important;
-        padding: 8px 12px !important;
-    }
-    .zeenat-quick-reply .qr-btn {
-        font-size: 0.65rem !important;
-        min-height: 28px !important;
-        padding: 3px 10px !important;
-    }
-    .disclaimer-box {
-        font-size: 0.75rem !important;
-        padding: 8px 12px !important;
-    }
-    .mnemonic-card {
-        font-size: 0.8rem !important;
-        padding: 8px 12px !important;
-    }
-    .memory-trick-badge {
-        font-size: 0.65rem !important;
-        min-height: 28px !important;
-        padding: 3px 10px !important;
-    }
-    .trust-badge {
-        font-size: 0.7rem !important;
-        min-height: 30px !important;
-        padding: 0.2rem 0.6rem !important;
-    }
-    .filter-pill {
-        font-size: 0.65rem !important;
-        min-height: 28px !important;
-        padding: 3px 10px !important;
-    }
-    .quick-action-btn {
-        font-size: 0.7rem !important;
-        min-height: 32px !important;
-        padding: 4px 12px !important;
-    }
-    .section-card {
-        padding: 8px 10px !important;
-    }
-    .section-card .section-number {
-        font-size: 0.9rem !important;
-    }
-    .section-card .section-title {
-        font-size: 0.8rem !important;
-    }
-    .section-card .section-desc {
-        font-size: 0.7rem !important;
-    }
-    .section-card .section-trick {
-        font-size: 0.7rem !important;
-    }
-    .calc-card {
-        padding: 12px !important;
-    }
-    .calc-card .calc-title {
-        font-size: 0.85rem !important;
-    }
-    .calc-card input,
-    .calc-card select {
-        font-size: 0.8rem !important;
-        min-height: 34px !important;
-    }
-    .calc-card .calc-result {
-        font-size: 0.8rem !important;
-    }
-    .quiz-option {
-        font-size: 0.8rem !important;
-        min-height: 38px !important;
-        padding: 8px 12px !important;
-    }
-    .quiz-score-card .score-number {
-        font-size: 1.8rem !important;
-    }
-    .affiliate-card {
-        padding: 6px 10px !important;
-    }
-    .affiliate-card a {
-        font-size: 0.7rem !important;
-    }
-    .voice-provider-btn {
-        font-size: 0.65rem !important;
-        min-height: 28px !important;
-        min-width: 28px !important;
-        padding: 2px 6px !important;
-    }
-    .header h1 {
-        font-size: 1.2rem !important;
-    }
-    .header p {
-        font-size: 0.6rem !important;
-    }
-    .lang-toggle {
-        font-size: 0.65rem !important;
-        padding: 0.15rem 0.5rem !important;
-    }
-    .dark-toggle-btn {
-        font-size: 0.65rem !important;
-        min-height: 28px !important;
-        padding: 2px 10px !important;
-    }
+html { font-size: 16px !important; }
+body { font-size: 1rem !important; line-height: 1.6 !important; }
+.tab-btn { padding: 6px 4px !important; min-height: 38px !important; font-size: 0.55rem !important; }
+.tab-btn .tab-icon { font-size: 0.9rem !important; }
+.tab-btn .tab-label { font-size: 0.4rem !important; }
+.tab-nav-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 2px !important; padding: 3px !important; }
+.floating-chat-window { width: 94vw !important; height: 60vh !important; bottom: 80px !important; right: 3vw !important; }
+.floating-chat-btn { width: 56px !important; height: 56px !important; font-size: 24px !important; bottom: 18px !important; right: 18px !important; }
+.calc-grid { grid-template-columns: 1fr !important; }
+.emergency-grid { grid-template-columns: 1fr 1fr !important; }
+.glass-card { padding: 12px !important; }
+.zeenat-chat-messages { max-height: 250px !important; }
+.zeenat-input-area input { font-size: 0.85rem !important; min-height: 40px !important; }
+.zeenat-input-area button { min-height: 40px !important; min-width: 40px !important; font-size: 0.9rem !important; padding: 0 14px !important; }
+.msg-bubble { max-width: 95% !important; font-size: 0.85rem !important; padding: 8px 12px !important; }
+.zeenat-quick-reply .qr-btn { font-size: 0.65rem !important; min-height: 28px !important; padding: 3px 10px !important; }
+.disclaimer-box { font-size: 0.75rem !important; padding: 8px 12px !important; }
+.mnemonic-card { font-size: 0.8rem !important; padding: 8px 12px !important; }
+.memory-trick-badge { font-size: 0.65rem !important; min-height: 28px !important; padding: 3px 10px !important; }
+.trust-badge { font-size: 0.7rem !important; min-height: 30px !important; padding: 0.2rem 0.6rem !important; }
+.filter-pill { font-size: 0.65rem !important; min-height: 28px !important; padding: 3px 10px !important; }
+.quick-action-btn { font-size: 0.7rem !important; min-height: 32px !important; padding: 4px 12px !important; }
+.section-card { padding: 8px 10px !important; }
+.section-card .section-number { font-size: 0.9rem !important; }
+.section-card .section-title { font-size: 0.8rem !important; }
+.section-card .section-desc { font-size: 0.7rem !important; }
+.section-card .section-trick { font-size: 0.7rem !important; }
+.calc-card { padding: 12px !important; }
+.calc-card .calc-title { font-size: 0.85rem !important; }
+.calc-card input, .calc-card select { font-size: 0.8rem !important; min-height: 34px !important; }
+.calc-card .calc-result { font-size: 0.8rem !important; }
+.quiz-option { font-size: 0.8rem !important; min-height: 38px !important; padding: 8px 12px !important; }
+.quiz-score-card .score-number { font-size: 1.8rem !important; }
+.affiliate-card { padding: 6px 10px !important; }
+.affiliate-card a { font-size: 0.7rem !important; }
+.voice-provider-btn { font-size: 0.65rem !important; min-height: 28px !important; min-width: 28px !important; padding: 2px 6px !important; }
+.header h1 { font-size: 1.2rem !important; }
+.header p { font-size: 0.6rem !important; }
+.lang-toggle { font-size: 0.65rem !important; padding: 0.15rem 0.5rem !important; }
+.dark-toggle-btn { font-size: 0.65rem !important; min-height: 28px !important; padding: 2px 10px !important; }
 }
-
 @media(max-width: 480px) {
-    html {
-        font-size: 15px !important;
-    }
-    body {
-        font-size: 0.9rem !important;
-    }
-    .tab-nav-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-    }
-    .tab-btn {
-        min-height: 34px !important;
-        font-size: 0.5rem !important;
-        padding: 4px 2px !important;
-    }
-    .tab-btn .tab-icon {
-        font-size: 0.8rem !important;
-    }
-    .tab-btn .tab-label {
-        font-size: 0.35rem !important;
-    }
-    .floating-chat-window {
-        width: 96vw !important;
-        height: 55vh !important;
-        bottom: 70px !important;
-        right: 2vw !important;
-    }
-    .floating-chat-btn {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 20px !important;
-        bottom: 14px !important;
-        right: 14px !important;
-    }
-    .calc-grid {
-        grid-template-columns: 1fr !important;
-    }
-    .emergency-grid {
-        grid-template-columns: 1fr !important;
-    }
-    .zeenat-chat-messages {
-        max-height: 200px !important;
-    }
-    .zeenat-input-area input {
-        font-size: 0.8rem !important;
-        min-height: 36px !important;
-        padding: 8px 12px !important;
-    }
-    .zeenat-input-area button {
-        min-height: 36px !important;
-        min-width: 36px !important;
-        font-size: 0.8rem !important;
-        padding: 0 10px !important;
-    }
-    .msg-bubble {
-        font-size: 0.8rem !important;
-        padding: 6px 10px !important;
-    }
-    .voice-provider-btn {
-        font-size: 0.55rem !important;
-        min-height: 24px !important;
-        min-width: 24px !important;
-        padding: 2px 4px !important;
-    }
+html { font-size: 15px !important; }
+body { font-size: 0.9rem !important; }
+.tab-nav-grid { grid-template-columns: repeat(3, 1fr) !important; }
+.tab-btn { min-height: 34px !important; font-size: 0.5rem !important; padding: 4px 2px !important; }
+.tab-btn .tab-icon { font-size: 0.8rem !important; }
+.tab-btn .tab-label { font-size: 0.35rem !important; }
+.floating-chat-window { width: 96vw !important; height: 55vh !important; bottom: 70px !important; right: 2vw !important; }
+.floating-chat-btn { width: 48px !important; height: 48px !important; font-size: 20px !important; bottom: 14px !important; right: 14px !important; }
+.calc-grid { grid-template-columns: 1fr !important; }
+.emergency-grid { grid-template-columns: 1fr !important; }
+.zeenat-chat-messages { max-height: 200px !important; }
+.zeenat-input-area input { font-size: 0.8rem !important; min-height: 36px !important; padding: 8px 12px !important; }
+.zeenat-input-area button { min-height: 36px !important; min-width: 36px !important; font-size: 0.8rem !important; padding: 0 10px !important; }
+.msg-bubble { font-size: 0.8rem !important; padding: 6px 10px !important; }
+.voice-provider-btn { font-size: 0.55rem !important; min-height: 24px !important; min-width: 24px !important; padding: 2px 4px !important; }
 }
-
 /* ===== ELDERLY MODE + MOBILE ===== */
 @media(max-width: 768px) {
-    .elderly-mode html {
-        font-size: 19px !important;
-    }
-    .elderly-mode body {
-        font-size: 1.2rem !important;
-    }
-    .elderly-mode .tab-btn {
-        min-height: 56px !important;
-        font-size: 1rem !important;
-    }
-    .elderly-mode input,
-    .elderly-mode select,
-    .elderly-mode textarea {
-        min-height: 48px !important;
-        font-size: 1rem !important;
-    }
-    .elderly-mode button,
-    .elderly-mode .btn-primary {
-        min-height: 56px !important;
-        font-size: 1rem !important;
-    }
-    .elderly-mode .floating-chat-btn {
-        width: 64px !important;
-        height: 64px !important;
-        font-size: 28px !important;
-    }
-    .elderly-mode .tab-nav-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-    }
+.elderly-mode html { font-size: 19px !important; }
+.elderly-mode body { font-size: 1.2rem !important; }
+.elderly-mode .tab-btn { min-height: 56px !important; font-size: 1rem !important; }
+.elderly-mode input, .elderly-mode select, .elderly-mode textarea { min-height: 48px !important; font-size: 1rem !important; }
+.elderly-mode button, .elderly-mode .btn-primary { min-height: 56px !important; font-size: 1rem !important; }
+.elderly-mode .floating-chat-btn { width: 64px !important; height: 64px !important; font-size: 28px !important; }
+.elderly-mode .tab-nav-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
-
 /* ===== LOADING ===== */
 .loading-spinner{display:inline-block;width:22px;height:22px;border:3px solid rgba(255,255,255,0.08);border-radius:50%;border-top-color:#f97316;animation:spin 0.8s ease-in-out infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 /* ===== ANIMATIONS ===== */
 @keyframes pulse{0%,100%{opacity:0.7}50%{opacity:1}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn 0.4s ease-out}
-
 /* ===== TOAST ===== */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px 24px;max-width:90%;text-align:center;color:#e2e8f0;font-size:0.9rem;animation:toastIn 0.4s ease-out;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:10000;background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px 24px;max-width:90%;text-align:center;color:#e2e8f0;font-size:0.9rem;animation:toastIn 0.4s ease-out;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
 .toast-out{animation:toastOut 0.4s ease-in forwards}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(0.95)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
 @keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}to{opacity:0;transform:translateX(-50%) translateY(20px) scale(0.95)}}
 </style>
 </head>
 <body>
-
 <!-- ===== TOP TICKER ===== -->
 <div class="max-w-7xl mx-auto px-3 mt-2">
 <div class="glass-card p-2 rounded-xl overflow-hidden">
 <div class="tips-ticker-inner" id="legalTipsTicker" style="display:flex;white-space:nowrap;gap:48px;animation:scrollTicker 30s linear infinite;font-size:0.85rem;color:#e0e7ff"></div>
 </div>
 </div>
-<style>
-@keyframes scrollTicker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.tips-ticker-inner span{display:inline-block;padding:0 12px}
-</style>
-
+<style>@keyframes scrollTicker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.tips-ticker-inner span{display:inline-block;padding:0 12px}</style>
 <!-- ===== HEADER ===== -->
 <header class="sticky top-0 z-50" style="background:linear-gradient(135deg,#0A0F1F 0%,#111827 100%);border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
 <div class="max-w-7xl mx-auto px-3 py-2">
@@ -807,7 +392,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 </div>
 </div>
 </header>
-
 <!-- ===== TRUST BADGES ===== -->
 <div class="max-w-7xl mx-auto px-4 mt-2 flex flex-wrap items-center justify-center gap-2">
 <span class="trust-badge">⚡ 2 Min Plan</span>
@@ -817,48 +401,14 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <span class="trust-badge">🏆 #1 Legal Assistant</span>
 <span class="trust-badge">🆓 100% Free</span>
 </div>
-
 <!-- ===== DISCLAIMER ===== -->
 <div class="max-w-7xl mx-auto px-4 mt-2"><div class="disclaimer-box rounded-lg"><span class="font-bold">⚠️ DISCLAIMER:</span> यह केवल <b>शैक्षणिक और सूचनात्मक</b> उद्देश्य के लिए है। कोई भी कानूनी कार्रवाई करने से पहले <b>योग्य विधिक सलाहकार</b> से परामर्श अवश्य लें। Zeenat AI एक वकील नहीं है — यह सामान्य जानकारी प्रदान करता है।</div></div>
-
-<!-- ===== VOICE PROVIDER SELECTOR - ICONS ONLY ===== -->
-<div class="max-w-7xl mx-auto px-4 mt-2">
-<div class="glass-card p-2 rounded-xl flex flex-wrap items-center justify-center gap-1.5">
-<span class="text-xs font-bold text-orange-400">🎙️</span>
-<button onclick="setVoiceProvider('webspeech')" class="voice-provider-btn active" id="voice-webspeech" title="Web Speech">🌐</button>
-<button onclick="setVoiceProvider('elevenlabs')" class="voice-provider-btn" id="voice-elevenlabs" title="Eleven Labs">🔊</button>
-<button onclick="setVoiceProvider('googletts')" class="voice-provider-btn" id="voice-googletts" title="Google TTS">🔊</button>
-<button onclick="setVoiceProvider('azuretts')" class="voice-provider-btn" id="voice-azuretts" title="Azure TTS">☁️</button>
-<button onclick="setVoiceProvider('responsivevoice')" class="voice-provider-btn" id="voice-responsivevoice" title="ResponsiveVoice">🎤</button>
-<span class="text-[8px] text-green-400 ml-1" id="voice-provider-status">✅</span>
-</div>
-</div>
-
-<!-- ===== MNEMONICS BAR ===== -->
-<div class="max-w-7xl mx-auto px-4 mt-2">
-<div class="glass-card p-2 rounded-xl flex flex-wrap items-center gap-1.5">
-<span class="text-sm font-bold text-orange-400">🧠 Smart Tricks:</span>
-<span class="memory-trick-badge">BNS 318 = 3+1+8=12 → 7 yrs</span>
-<span class="memory-trick-badge">BNSS 173 = 1+7+3=11 → FIR</span>
-<span class="memory-trick-badge">BNSS 480 = 4+8+0=12 → Bail</span>
-<span class="memory-trick-badge">BNS 103 = 1+0+3=4 → Murder</span>
-<span class="memory-trick-badge">BNS 85 = 8+5=13 → 3 yrs</span>
-<span class="memory-trick-badge">BNSS 144 = 1+4+4=9 → Maintenance</span>
-<span class="memory-trick-badge">BSA 63 = 6+3=9 → Evidence</span>
-<span class="memory-trick-badge">BNS 64 = 6+4=10 → Rape</span>
-<span class="memory-trick-badge">BNS 303 = 3+0+3=6 → Theft</span>
-<span class="memory-trick-badge">BNSS 482 = 4+8+2=14 → Anticipatory</span>
-</div>
-</div>
-
 <!-- ===== MAIN LAYOUT ===== -->
 <div class="max-w-7xl mx-auto px-4 mt-3">
 <div class="flex flex-col lg:flex-row gap-4">
-
 <!-- ===== LEFT: TABS ===== -->
 <div class="lg:w-3/4">
-
-<!-- TABS NAV -->
+<!-- TABS NAV - 41 TABS -->
 <nav class="mb-3">
 <div class="tab-nav-grid" id="tabNavGrid">
 <button onclick="switchTab('pdf-upload',this)" class="tab-btn active" data-tab="pdf-upload"><span class="tab-icon">📄</span><span class="tab-label">PDF Scan</span><span class="tab-badge">New</span></button>
@@ -902,12 +452,11 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <button onclick="switchTab('legal-aid',this)" class="tab-btn" data-tab="legal-aid"><span class="tab-icon">🆓</span><span class="tab-label">Legal Aid</span></button>
 <button onclick="switchTab('bare-act',this)" class="tab-btn" data-tab="bare-act"><span class="tab-icon">📖</span><span class="tab-label">Bare Act</span></button>
 <button onclick="switchTab('videos',this)" class="tab-btn" data-tab="videos"><span class="tab-icon">🎬</span><span class="tab-label">Videos</span></button>
+<button onclick="switchTab('donate',this)" class="tab-btn" data-tab="donate"><span class="tab-icon">☕</span><span class="tab-label">Donate</span></button>
 </div>
 </nav>
-
 <!-- ===== MAIN CONTENT ===== -->
 <div class="glass-card p-4 md:p-5 min-h-[500px]">
-
 <!-- ===== TAB 1: PDF UPLOAD ===== -->
 <div id="pdf-upload" class="tab-content active">
 <h2 class="text-xl font-bold mb-3 gradient-text">📄 PDF Upload & Document Scanner</h2>
@@ -953,7 +502,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <div id="uploadHistory" class="max-h-[120px] overflow-y-auto space-y-1"><div class="text-slate-400 text-sm text-center py-4">No uploads yet</div></div>
 </div>
 </div>
-
 <!-- ===== TAB 2: VOICE AI ===== -->
 <div id="voice-ai" class="tab-content">
 <h2 class="text-xl font-bold mb-3 gradient-text">🎙️ Zeenat AI · Voice Legal Assistant</h2>
@@ -970,11 +518,22 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <button id="zeenat-connect-btn" onclick="toggleZeenatConnection()" class="zeenat-connect-btn mt-2">🎤 Start Conversation with Zeenat</button>
 <div id="zeenat-chat-container" class="zeenat-chat-messages mt-2">
 <div class="msg-bubble zeenat">
-<strong>🌹 आदाब अर्ज़ है!</strong><br>
-मैं <strong>Zeenat</strong> हूँ – आपकी अपनी लखनऊी कानून सहायिका।<br><br>
-<span class="highlight">🧠 Smart Trick:</span> <b>"Zeenat = Z for Zero Wait - Instant Legal Help!"</b><br><br>
-मैं <span class="section-ref">BNS, BNSS, BSA</span> की विशेषज्ञ हूँ। मुझसे किसी भी कानूनी समस्या के बारे में पूछें – चाहे वह <span class="highlight">FIR</span> हो, <span class="highlight">Bail</span>, <span class="highlight">Cheating</span>, <span class="highlight">Maintenance</span>, <span class="highlight">Property</span>, <span class="highlight">Cyber Crime</span> या <span class="highlight">Women Rights</span>।<br><br>
-⚠️ <b>कृपया ध्यान दें:</b> मैं एक वकील नहीं हूँ – मेरी बातें सामान्य जानकारी के लिए हैं, कानूनी सलाह नहीं।
+<strong>🌹 आदाब अर्ज़ है जनाब! 🙏</strong><br><br>
+मैं <strong>Zeenat</strong> हूँ - आपकी अपनी लखनऊ की कानून सहायिका। <br><br>
+आपसे मिलकर बहुत खुशी हुई! 😊<br><br>
+मैं <span class="section-ref">BNS, BNSS, BSA</span> की विशेषज्ञ हूँ।<br><br>
+<b>क्या आप जानते हैं?</b> नए कानून 1 जुलाई 2024 से लागू हो गए हैं।<br><br>
+आप मुझसे पूछ सकते हैं:<br>
+• <span class="highlight">FIR</span> कैसे दर्ज कराएं?<br>
+• <span class="highlight">Bail / जमानत</span> कैसे लें?<br>
+• <span class="highlight">Cheating / धोखाधड़ी</span> में क्या करें?<br>
+• <span class="highlight">Maintenance / गुजारा</span> कैसे लें?<br>
+• <span class="highlight">Property / जमीन</span> के विवाद में क्या करें?<br>
+• <span class="highlight">Cyber Crime</span> में कहाँ शिकायत करें?<br>
+• <span class="highlight">Women Rights / महिला अधिकार</span> क्या हैं?<br><br>
+⚠️ <b>ध्यान दें:</b> मैं एक वकील नहीं हूँ, मैं आपको सामान्य जानकारी और कानूनी मार्गदर्शन देती हूँ।<br><br>
+💡 <b>टिप:</b> अगर आप FIR या Bail के बारे में पूछेंगे तो मैं Step-by-Step पूरी प्रक्रिया बताऊंगी!<br><br>
+<b>तो चलिए, बताइये आपकी क्या समस्या है?</b> 🤗
 </div>
 </div>
 <div id="typing-indicator" class="typing-indicator hidden"><span>Zeenat सोच रही है</span><div class="dots"><span></span><span></span><span></span></div></div>
@@ -1000,229 +559,66 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 </div>
 </div>
 </div>
-
-<!-- ===== TAB 3-40: All other tabs ===== -->
-<div id="converter" class="tab-content">
-<h2 class="text-xl font-bold mb-3 gradient-text">🔄 IPC/CrPC → BNS/BNSS/BSA Converter</h2>
-<div class="mnemonic-card"><span>🧠 <b>Memory Trick:</b> <span class="trick">"IPC 420 → BNS 318"</span> → 4-2-0 को 3-1-8</span></div>
-<div class="glass-card p-3 rounded-xl mb-3">
-<h4 class="font-bold text-base" style="color:#f1f5f9!important;">📅 कानून लागू करें – कैलकुलेटर</h4>
-<div class="flex flex-col sm:flex-row gap-2">
-<input type="date" id="crime-date-calculator" class="flex-1 p-2 rounded-xl" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-<button onclick="checkLawApplicability()" class="btn-primary">🔍 Check</button>
-</div>
-<div id="law-calculator-result" class="mt-2 hidden p-2 rounded-xl" style="background:rgba(251,191,36,0.08)!important;color:#fcd34d!important;"></div>
-</div>
-<div class="grid md:grid-cols-2 gap-3">
-<div>
-<label class="text-sm font-semibold" style="color:#e2e8f0!important;">Purana Section</label>
-<input type="text" id="old-section" placeholder="e.g., IPC 420" class="w-full p-2 mt-1 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-<button onclick="convertSectionAPI()" class="btn-primary w-full mt-2">🔍 Naya Section</button>
-</div>
-<div>
-<label class="text-sm font-semibold" style="color:#e2e8f0!important;">Naya Section</label>
-<div id="new-section" class="w-full p-3 mt-1 min-h-[60px] font-bold rounded-xl" style="background:rgba(34,197,94,0.08)!important;border:2px solid #22c55e!important;color:#86efac!important;">यहाँ आएगा...</div>
-</div>
-</div>
-</div>
-
-<div id="smart-search" class="tab-content">
-<h2 class="text-xl font-bold mb-3 gradient-text">🔍 BNS/BNSS/BSA Smart Search</h2>
-<p class="text-sm mb-2" style="color:#94a3b8!important;">कोई भी legal problem लिखो — AI समझकर BNS/BNSS/BSA section, case law, और solution देगा।</p>
-<div class="flex flex-wrap gap-1 mb-2">
-<button onclick="filterBNS('all')" class="filter-pill active" data-filter="all">📌 All</button>
-<button onclick="filterBNS('bns')" class="filter-pill" data-filter="bns">📜 BNS</button>
-<button onclick="filterBNS('bnss')" class="filter-pill" data-filter="bnss">⚖️ BNSS</button>
-<button onclick="filterBNS('bsa')" class="filter-pill" data-filter="bsa">📖 BSA</button>
-<button onclick="filterBNS('criminal')" class="filter-pill" data-filter="criminal">🔴 Criminal</button>
-<button onclick="filterBNS('women')" class="filter-pill" data-filter="women">👩 Women</button>
-<button onclick="filterBNS('cyber')" class="filter-pill" data-filter="cyber">💻 Cyber</button>
-</div>
-<div class="flex flex-wrap gap-1 mb-2">
-<button onclick="quickSolve('fir')" class="quick-action-btn">🚨 FIR</button>
-<button onclick="quickSolve('cheating')" class="quick-action-btn">⛓️ Cheating</button>
-<button onclick="quickSolve('bail')" class="quick-action-btn">⛓️ Bail</button>
-<button onclick="quickSolve('murder')" class="quick-action-btn">⚖️ Murder</button>
-<button onclick="quickSolve('rape')" class="quick-action-btn">⚠️ Rape</button>
-<button onclick="quickSolve('theft')" class="quick-action-btn">🔑 Theft</button>
-</div>
-<div class="flex flex-col md:flex-row gap-2 mb-2">
-<input type="text" id="problem-input" placeholder="e.g., police FIR nahi likh rahi" class="flex-1 p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-<button onclick="solveProblemBNS()" class="btn-primary">🔍 Search</button>
-</div>
-<div id="solution-box" class="hidden p-3 rounded-xl fade-in" style="background:rgba(34,197,94,0.08)!important;border-left:4px solid #22c55e!important;color:#e2e8f0!important;"></div>
-<div class="mt-3"><h3 class="font-bold text-base mb-2" style="color:#f1f5f9!important;">📚 All Sections</h3><div id="bns-sections-grid" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-[350px] overflow-y-auto"></div></div>
-</div>
-
-<!-- All other tabs loaded dynamically from JS -->
-<div id="trending" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📈 Trending Legal Topics</h2><div id="trending-container" class="grid md:grid-cols-2 gap-3"></div></div>
-<div id="cyber" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">💻 Cyber Cell</h2><input id="cyber-input" class="w-full p-2 mb-2 rounded-xl text-sm" placeholder="Cyber crime details..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="askCyberAI()" class="btn-primary">Get Help</button><div id="cyber-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="zameen" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🏠 Zameen / Property</h2><input id="zameen-input" class="w-full p-2 mb-2 rounded-xl text-sm" placeholder="Property details..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="askZameenAI()" class="btn-primary">Get Help</button><div id="zameen-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="family" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">👨‍👩‍👧 Family Law</h2><input id="family-input" class="w-full p-2 mb-2 rounded-xl text-sm" placeholder="Family matter details..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="askFamilyAI()" class="btn-primary">Get Help</button><div id="family-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="all-courts" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⚖️ All Courts</h2><select id="court-select" class="w-full p-2 mb-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="HC Lucknow">⚖️ HC Lucknow</option><option value="Supreme Court">🏛️ Supreme Court</option><option value="Sessions Court">⚖️ Sessions Court</option><option value="Family Court">👨‍👩‍👧 Family Court</option></select><button onclick="askCourtAI()" class="btn-primary w-full">Court Info</button><div id="all-courts-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="rto-rti" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🚗 RTO / RTI</h2><input id="rto-rti-input" class="w-full p-2 mb-2 rounded-xl text-sm" placeholder="RTO or RTI query..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="askRTOAI()" class="btn-primary">Get Help</button><div id="rto-rti-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="junior" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📚 Junior / Mock Court</h2><textarea id="junior-input" class="w-full p-2 mb-2 rounded-xl text-sm" rows="3" placeholder="Write your answer here..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:80px;"></textarea><button onclick="askJuniorAI(document.getElementById('junior-input').value)" class="btn-primary w-full">Submit</button><div id="junior-ans" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="ai-doc" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🤖 Document Generator</h2><select id="doc-type" class="w-full p-2 mb-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="fir">FIR Application</option><option value="bail">Bail Application</option><option value="anticipatory">Anticipatory Bail</option><option value="maintenance">Maintenance Application</option><option value="legal-notice">Legal Notice</option></select><textarea id="doc-details" class="w-full p-2 mb-2 rounded-xl text-sm" rows="3" placeholder="Case details..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:80px;"></textarea><button onclick="generateDocumentFromUI()" class="btn-primary w-full">Generate</button><div id="doc-output" class="hidden p-3 rounded-xl mt-2"><div id="doc-preview" class="p-3 rounded-xl text-sm" style="background:rgba(0,0,0,0.2)!important;"></div></div></div>
-<div id="blog-rss" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📰 Blog & RSS</h2><div id="rss-feed-container" class="space-y-1 max-h-[300px] overflow-y-auto"></div><div class="mt-3 p-3 rounded-xl border border-dashed border-slate-700"><h3 class="font-bold text-base mb-2">✍️ Submit Blog</h3><input type="text" id="blog-title" placeholder="Title" class="w-full p-2 mb-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><textarea id="blog-content" rows="3" placeholder="Write your blog..." class="w-full p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:80px;"></textarea><button onclick="submitBlogEnhanced()" class="btn-primary mt-2">Submit</button><div id="submitted-blogs-container" class="mt-3 space-y-1"></div></div></div>
+<!-- ===== OTHER TABS (41 Total) ===== -->
+<div id="converter" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🔄 IPC/CrPC → BNS/BNSS/BSA Converter</h2><div id="converter-container"></div></div>
+<div id="smart-search" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🔍 BNS/BNSS/BSA Smart Search</h2><div id="smart-search-container"></div></div>
+<div id="trending" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📈 Trending Legal Topics</h2><div id="trending-container"></div></div>
+<div id="cyber" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">💻 Cyber Cell</h2><div id="cyber-container"></div></div>
+<div id="zameen" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🏠 Zameen / Property</h2><div id="zameen-container"></div></div>
+<div id="family" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">👨‍👩‍👧 Family Law</h2><div id="family-container"></div></div>
+<div id="all-courts" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⚖️ All Courts</h2><div id="all-courts-container"></div></div>
+<div id="rto-rti" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🚗 RTO / RTI</h2><div id="rto-rti-container"></div></div>
+<div id="junior" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📚 Junior / Mock Court</h2><div id="junior-container"></div></div>
+<div id="ai-doc" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🤖 Document Generator</h2><div id="ai-doc-container"></div></div>
+<div id="blog-rss" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📰 Blog & RSS</h2><div id="blog-rss-container"></div></div>
 <div id="cases" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🎭 Legal Cases</h2><div id="cases-container"></div></div>
-<div id="live" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📢 Live News</h2><div id="live-news-container"></div></div>
-<div id="dashboard" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Case Tareekh</h2><div class="grid md:grid-cols-2 gap-2"><input type="text" id="case-input" placeholder="Case No" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><input type="date" id="date-input" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"></div><button onclick="addCase()" class="btn-primary w-full mt-2">Add</button><div id="case-list" class="mt-2 space-y-1"></div></div>
+<div id="live" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📢 Live News</h2><div id="live-container"></div></div>
+<div id="dashboard" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Case Tareekh</h2><div id="dashboard-container"></div></div>
 <div id="sources" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📚 Sources</h2><div id="sources-container"></div></div>
-<div id="quiz" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🧠 Unlimited Legal Quiz</h2><div class="flex gap-2 mb-3 flex-wrap"><button onclick="startQuiz('bns')" class="btn-primary text-sm">📜 BNS</button><button onclick="startQuiz('bnss')" class="btn-primary text-sm" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)!important;">⚖️ BNSS</button><button onclick="startQuiz('bsa')" class="btn-primary text-sm" style="background:linear-gradient(135deg,#22c55e,#16a34a)!important;">📖 BSA</button><button onclick="startQuiz('mixed')" class="btn-success text-sm">📌 Mixed</button></div><div id="quiz-container"></div></div>
-<div id="resources" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Resources</h2><div id="resources-container" class="grid md:grid-cols-2 gap-3"></div></div>
-<div id="exam-prep" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📝 Exam Prep</h2><div id="exam-prep-container" class="grid md:grid-cols-2 gap-3"></div></div>
-
-<!-- ========================================================== -->
-<!-- ===== ✅ UPDATED COMMUNITY TAB ===== -->
-<!-- ========================================================== -->
-<div id="community" class="tab-content">
-<h2 class="text-xl font-bold mb-3 gradient-text">👥 Community Complaint System</h2>
-
-<!-- Auto-Escalation Notification -->
-<div id="escalation-notification" class="hidden glass-card p-2 rounded-xl mb-2" style="background:rgba(239,68,68,0.15)!important;border:1px solid rgba(239,68,68,0.3)!important;">
-    <div class="flex items-center gap-2">
-        <span class="text-red-400 animate-pulse">🚨</span>
-        <span class="text-sm text-red-400 font-bold">Auto-escalation triggered! Some complaints moved to next level.</span>
-    </div>
-</div>
-
-<!-- Stats -->
-<div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-3">
-    <div class="glass-card p-2 text-center">
-        <div class="text-xl font-bold text-blue-400" id="stat-total">0</div>
-        <div class="text-xs text-slate-400">Total</div>
-    </div>
-    <div class="glass-card p-2 text-center">
-        <div class="text-xl font-bold text-yellow-400" id="stat-pending">0</div>
-        <div class="text-xs text-slate-400">Pending</div>
-    </div>
-    <div class="glass-card p-2 text-center">
-        <div class="text-xl font-bold text-red-400" id="stat-escalated">0</div>
-        <div class="text-xs text-slate-400">Escalated</div>
-    </div>
-    <div class="glass-card p-2 text-center">
-        <div class="text-xl font-bold text-green-400" id="stat-resolved">0</div>
-        <div class="text-xs text-slate-400">Resolved</div>
-    </div>
-    <div class="glass-card p-2 text-center">
-        <div class="text-xl font-bold text-purple-400" id="stat-rate">0%</div>
-        <div class="text-xs text-slate-400">Rate</div>
-    </div>
-</div>
-
-<!-- Submit Complaint -->
-<div class="glass-card p-3 rounded-xl">
-    <h3 class="font-bold text-base text-orange-400 mb-2">📝 Submit Complaint</h3>
-    <div class="grid md:grid-cols-2 gap-2">
-        <input type="text" id="community-name" placeholder="Name" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-        <input type="tel" id="community-phone" placeholder="Phone" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-    </div>
-    <select id="community-ward" class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-        <option value="">Select Ward (1-110)</option>
-    </select>
-    <select id="community-category" class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;" onchange="updateDepartmentPreview()">
-        <option value="">Category</option>
-        <option value="Pani">💧 Water</option>
-        <option value="Sadak">🛣️ Roads</option>
-        <option value="Safai">🧹 Cleaning</option>
-        <option value="Bijli">💡 Electricity</option>
-        <option value="Other">Other</option>
-    </select>
-    <div class="text-xs text-slate-500 mt-1">📤 Will be forwarded to: <span id="dept-preview" class="text-blue-400">Select category to see</span></div>
-    <textarea id="community-description" rows="2" placeholder="Describe issue..." class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:60px;"></textarea>
-    
-    <!-- Photo/Video Upload -->
-    <div class="grid md:grid-cols-2 gap-2 mt-2">
-        <div>
-            <label class="text-xs text-slate-400">📸 Upload Photo</label>
-            <input type="file" id="community-photo" accept="image/*" class="w-full p-1 rounded-xl text-xs" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;">
-        </div>
-        <div>
-            <label class="text-xs text-slate-400">🎬 Upload Video</label>
-            <input type="file" id="community-video" accept="video/*" class="w-full p-1 rounded-xl text-xs" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;">
-        </div>
-    </div>
-    
-    <button onclick="submitCommunityComplaint()" class="btn-primary w-full mt-2">📤 Submit Complaint</button>
-    <div id="community-submit-status" class="mt-2 text-sm hidden"></div>
-</div>
-
-<!-- Complaint List -->
-<div class="glass-card p-3 rounded-xl mt-3">
-    <h3 class="font-bold text-base text-blue-400 mb-2">📋 Your Complaints</h3>
-    <div id="complaint-list" class="space-y-1 max-h-[300px] overflow-y-auto"></div>
-</div>
-
-<!-- Track Complaint -->
-<div class="glass-card p-3 rounded-xl mt-3">
-    <h3 class="font-bold text-base text-purple-400 mb-2">🔍 Track Complaint</h3>
-    <div class="flex gap-2">
-        <input type="text" id="track-complaint-id" placeholder="Enter Complaint ID (e.g., CMP-ABC123-XYZ)" class="flex-1 p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;">
-        <button onclick="trackComplaintById(document.getElementById('track-complaint-id').value)" class="btn-primary">🔍 Track</button>
-    </div>
-    <div id="track-result" class="mt-2"></div>
-</div>
-
-<!-- Auto-Escalation Info -->
-<div class="glass-card p-3 rounded-xl mt-3" style="background:rgba(239,68,68,0.05)!important;border:1px solid rgba(239,68,68,0.15)!important;">
-    <h4 class="font-bold text-sm text-red-400">⏳ Auto-Escalation System</h4>
-    <div class="text-xs text-slate-300 mt-1">
-        <div>📌 <b>Level 1:</b> Ward Officer (0-24 hours)</div>
-        <div>📌 <b>Level 2:</b> Zonal Officer (24-48 hours)</div>
-        <div>📌 <b>Level 3:</b> Chief/DM (48+ hours)</div>
-        <div class="mt-1 text-yellow-400">⚠️ If complaint not resolved in 24 hours → Auto-escalated to next level</div>
-    </div>
-</div>
-</div>
-
-<!-- ========================================================== -->
-<!-- ===== OTHER TABS ===== -->
-<!-- ========================================================== -->
-<div id="dictionary" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Legal Dictionary</h2><div class="flex flex-col sm:flex-row gap-2 mb-2"><input id="dict-search" placeholder="Search term..." class="flex-1 p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="searchDictionary()" class="btn-primary">🔍 Search</button><button onclick="showAllDictionary()" class="btn-primary" style="background:#6366f1!important;">📚 All</button></div><div id="dict-grid" class="grid md:grid-cols-2 gap-2"></div></div>
-<div id="landmark" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🏛️ Landmark Judgments</h2><div id="landmark-container" class="grid md:grid-cols-2 gap-3"></div></div>
+<div id="quiz" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🧠 Unlimited Legal Quiz</h2><div id="quiz-container"></div></div>
+<div id="resources" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Resources</h2><div id="resources-container"></div></div>
+<div id="exam-prep" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📝 Exam Prep</h2><div id="exam-prep-container"></div></div>
+<div id="community" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">👥 Community Complaint System</h2><div id="community-container"></div></div>
+<div id="dictionary" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Legal Dictionary</h2><div id="dictionary-container"></div></div>
+<div id="landmark" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🏛️ Landmark Judgments</h2><div id="landmark-container"></div></div>
 <div id="funny" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">😄 Legal Humor</h2><div id="funny-container"></div></div>
-<div id="mock" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🎯 Mock Trial</h2><textarea id="mock-input" class="w-full p-2 mb-2 rounded-xl text-sm" rows="4" placeholder="Write case scenario..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:80px;"></textarea><button onclick="askMockTrial()" class="btn-primary w-full">Generate Arguments</button><div id="mock-output" class="p-3 mt-2 hidden rounded-xl"></div></div>
-<div id="post-fir" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📋 Post-FIR Guide</h2><div id="post-fir-container" class="grid md:grid-cols-3 gap-3"></div></div>
-<div id="case-track" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📊 Case Track</h2><div id="case-track-container" class="grid md:grid-cols-2 gap-3"></div></div>
-<div id="bail-guide" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⛓️ Bail Guide</h2><div id="bail-guide-container" class="grid md:grid-cols-2 gap-3"></div></div>
-<div id="section-finder" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🔎 Section Finder</h2><div class="flex flex-wrap gap-1 mb-2"><button onclick="filterBNSSections('all')" class="filter-pill active">📌 All</button><button onclick="filterBNSSections('bns')" class="filter-pill">📜 BNS</button><button onclick="filterBNSSections('bnss')" class="filter-pill">⚖️ BNSS</button><button onclick="filterBNSSections('bsa')" class="filter-pill">📖 BSA</button></div><div class="flex gap-2"><input type="text" id="section-finder-input" placeholder="Search..." class="flex-1 p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="findSections()" class="btn-primary">🔍 Find</button></div><div id="section-finder-result" class="hidden mt-2"><div id="section-finder-list"></div></div><div id="bns-sections-grid-full" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-[350px] overflow-y-auto mt-2"></div></div>
-<div id="notice-generator" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📜 Legal Notice</h2><div class="grid md:grid-cols-2 gap-2"><input type="text" id="notice-sender" placeholder="Sender Name" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><input type="text" id="notice-receiver" placeholder="Receiver Name" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"></div><input type="text" id="notice-subject" placeholder="Subject" class="w-full p-2 my-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><textarea id="notice-description" rows="2" placeholder="Description..." class="w-full p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:60px;"></textarea><button onclick="generateNotice()" class="btn-primary w-full mt-2">Generate</button><div id="notice-preview-container" class="hidden mt-2"><div id="notice-preview" class="p-3 rounded-xl" style="background:rgba(255,255,255,0.05)!important;"></div></div></div>
-<div id="suggestions" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">💡 Suggestions</h2><div class="flex gap-2"><input type="text" id="suggestion-input" placeholder="Your suggestion..." class="flex-1 p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="submitSuggestion()" class="btn-primary">Submit</button></div><div id="suggestions-list" class="mt-2 space-y-1"></div></div>
-<div id="calculator" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🧮 15+ Legal & Finance Calculators</h2><div class="calc-grid" id="calculatorGrid"></div></div>
-<div id="timeline" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⏳ Timeline</h2><div class="grid md:grid-cols-2 gap-2"><input type="date" id="tl-incident" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:36px;"><input type="date" id="tl-fir" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:36px;"></div><button onclick="generateTimeline()" class="btn-primary w-full mt-2">Generate</button><div id="timeline-container" class="mt-3 space-y-1"></div></div>
-<div id="summarizer" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🤖 Summarizer</h2><textarea id="judgment-text" class="w-full p-2 rounded-xl text-sm" rows="5" placeholder="Paste judgment text..." style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:100px;"></textarea><button onclick="summarizeJudgment()" class="btn-primary w-full">Summarize</button><div id="summary-output" class="hidden mt-2"><div id="summary-text" class="p-3 rounded-xl" style="background:rgba(255,255,255,0.05)!important;"></div></div></div>
-<div id="safety" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🛡️ Women Safety & Know Your Rights</h2><div id="rights-container"></div><div id="firstaid-container" class="grid md:grid-cols-2 gap-3 mt-4"></div></div>
-<div id="dailyquiz" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Daily Quiz</h2><div class="p-3 rounded-xl" style="background:rgba(255,255,255,0.05)!important;"><div id="daily-quiz-question" class="p-3 rounded-xl mb-2 font-semibold text-sm" style="background:rgba(255,255,255,0.05)!important;">Loading...</div><div id="daily-quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2"></div><button onclick="loadDailyQuiz()" class="btn-primary w-full">New Question</button><div class="mt-2 text-center text-xs text-slate-400">Score: <span id="daily-quiz-score">0</span></div></div></div>
-<div id="helpline" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📞 Emergency Helplines</h2><div id="helpline-container"><div class="emergency-grid mb-3"></div></div><div class="glass-card p-3 rounded-xl"><h3 class="font-bold text-sm text-orange-400 mb-2">📝 Submit Complaint</h3><form onsubmit="submitComplaint(event)"><div class="grid md:grid-cols-2 gap-2"><input type="text" id="complaint-name" placeholder="Name" required class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><input type="tel" id="complaint-phone" placeholder="Phone" required class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"></div><select id="complaint-ward" required class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="">Select Ward</option></select><select id="complaint-category" required class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="">Category</option><option value="Pani">💧 Water</option><option value="Sadak">🛣️ Roads</option><option value="Safai">🧹 Cleaning</option><option value="Bijli">💡 Electricity</option><option value="Other">Other</option></select><textarea id="complaint-desc" rows="3" placeholder="Description" required class="w-full p-2 mt-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:60px;"></textarea><button type="submit" class="btn-primary w-full mt-2">Submit</button></form><div id="complaint-status" class="mt-2 text-sm hidden"></div></div></div>
-<div id="cause-list" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Cause List</h2><div class="glass-card p-3 rounded-xl"><h4 class="font-bold text-sm text-orange-400">🏛️ Allahabad HC – Lucknow Bench</h4><a href="https://www.allahabadhighcourt.in/causelist/" target="_blank" class="text-blue-400 text-xs">🔗 Direct Link →</a></div><div class="glass-card p-3 rounded-xl mt-2"><h4 class="font-bold text-sm text-orange-400">💻 eCourts</h4><a href="https://ecourts.gov.in/lucknow" target="_blank" class="text-blue-400 text-xs">🔗 eCourts Lucknow →</a></div><div class="glass-card p-3 rounded-xl mt-2"><h4 class="font-bold text-sm text-orange-400">📅 Daily Cause List Search</h4><input type="text" id="cause-search" placeholder="Search by case number, party name..." class="w-full p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><button onclick="searchCauseList()" class="btn-primary w-full mt-2">🔍 Search</button><div id="cause-result" class="mt-2"></div></div></div>
-<div id="legal-aid" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🆓 Free Legal Aid & Camps</h2><div class="glass-card p-3 rounded-xl mb-3"><h4 class="font-bold text-sm text-orange-400 mb-2">📅 DLSA Legal Aid Camps (Lucknow)</h4><div id="camps-list"></div></div><div class="grid md:grid-cols-2 gap-3"><div class="p-3 rounded-xl" style="background:rgba(255,255,255,0.05)!important;"><h4 class="font-bold text-sm">⚖️ DLSA Lucknow</h4><p class="text-xs text-slate-300">Collectorate Campus, Lucknow</p><p class="text-xs text-slate-300">📞 <b>15100</b></p><a href="https://nalsa.gov.in/" target="_blank" class="text-blue-400 text-xs">🔗 NALSA</a></div><div class="p-3 rounded-xl" style="background:rgba(255,255,255,0.05)!important;"><h4 class="font-bold text-sm">👩 Women Helpline</h4><p class="text-xs text-slate-300">📞 <b>181</b> - Women</p><p class="text-xs text-slate-300">🔹 <b>1098</b> - Child</p></div></div><div class="glass-card p-3 rounded-xl mt-3"><h3 class="font-bold text-base text-orange-400 mb-2">👨‍⚖️ Advocate Directory & Pro Bono</h3><div class="grid md:grid-cols-3 gap-2 mb-3"><select id="adv-ward" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="">Select Ward (1-110)</option></select><select id="adv-spec" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="">Specialization</option><option value="Criminal">⚖️ Criminal</option><option value="Civil">📜 Civil</option><option value="Family">👨‍👩‍👧 Family</option><option value="Property">🏠 Property</option><option value="Cyber">💻 Cyber</option><option value="Women">👩 Women Rights</option></select><button onclick="renderAdvocates()" class="btn-primary">🔍 Find</button></div><div id="adv-list" class="space-y-2 max-h-[200px] overflow-y-auto mb-3"></div><div class="glass-card p-3 rounded-xl" style="background:rgba(34,197,94,0.05)!important;"><h4 class="font-bold text-base text-green-400 mb-2">🆓 Pro Bono Request (Free Legal Aid)</h4><div class="grid md:grid-cols-2 gap-2 mb-2"><input type="text" id="pb-name" placeholder="Your Name" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><input type="tel" id="pb-phone" placeholder="Phone" class="p-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"></div><select id="pb-ward" class="w-full p-2 mb-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:40px;"><option value="">Select Ward</option></select><textarea id="pb-desc" rows="2" placeholder="Brief case description..." class="w-full p-2 mb-2 rounded-xl text-sm" style="background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.08)!important;color:#e2e8f0!important;min-height:60px;"></textarea><button onclick="submitProBono()" class="btn-primary w-full">Submit Request</button><div id="pb-status" class="mt-2 text-sm hidden"></div><div id="pb-list" class="mt-3 space-y-1"></div></div></div></div>
-<div id="bare-act" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Bare Act</h2><div class="flex flex-wrap gap-1 mb-2"><button onclick="filterBareAct('bns')" class="filter-pill active">📜 BNS</button><button onclick="filterBareAct('bnss')" class="filter-pill">⚖️ BNSS</button><button onclick="filterBareAct('bsa')" class="filter-pill">📖 BSA</button><button onclick="filterBareAct('all')" class="filter-pill">📌 All</button></div><div id="bare-act-container" class="space-y-1 max-h-[400px] overflow-y-auto"></div></div>
-<div id="videos" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🎬 Videos</h2><div id="videos-container" class="grid md:grid-cols-2 gap-3"></div></div>
-
-</div><!-- end main content -->
-</div><!-- end left -->
-
+<div id="mock" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🎯 Mock Trial</h2><div id="mock-container"></div></div>
+<div id="post-fir" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📋 Post-FIR Guide</h2><div id="post-fir-container"></div></div>
+<div id="case-track" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📊 Case Track</h2><div id="case-track-container"></div></div>
+<div id="bail-guide" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⛓️ Bail Guide</h2><div id="bail-guide-container"></div></div>
+<div id="section-finder" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🔎 Section Finder</h2><div id="section-finder-container"></div></div>
+<div id="notice-generator" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📜 Legal Notice</h2><div id="notice-generator-container"></div></div>
+<div id="suggestions" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">💡 Suggestions</h2><div id="suggestions-container"></div></div>
+<div id="calculator" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🧮 15+ Legal & Finance Calculators</h2><div id="calculator-container"></div></div>
+<div id="timeline" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">⏳ Timeline</h2><div id="timeline-container"></div></div>
+<div id="summarizer" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🤖 Summarizer</h2><div id="summarizer-container"></div></div>
+<div id="safety" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🛡️ Women Safety & Know Your Rights</h2><div id="safety-container"></div></div>
+<div id="dailyquiz" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Daily Quiz</h2><div id="dailyquiz-container"></div></div>
+<div id="helpline" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📞 Emergency Helplines</h2><div id="helpline-container"></div></div>
+<div id="cause-list" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📅 Cause List</h2><div id="cause-list-container"></div></div>
+<div id="legal-aid" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🆓 Free Legal Aid & Camps</h2><div id="legal-aid-container"></div></div>
+<div id="bare-act" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">📖 Bare Act</h2><div id="bare-act-container"></div></div>
+<div id="videos" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">🎬 Videos</h2><div id="videos-container"></div></div>
+<div id="donate" class="tab-content"><h2 class="text-xl font-bold mb-3 gradient-text">☕ Donate / Support</h2><div id="donate-container"></div></div>
+</div>
+</div>
 <!-- ===== RIGHT: LEGAL DIRECTORY ===== -->
 <div class="lg:w-1/4 space-y-3">
-
 <!-- Women Crime News -->
 <div class="glass-card p-3 rounded-xl">
 <div class="flex items-center gap-2 mb-2"><span class="text-2xl">👩</span><h3 class="font-bold text-sm text-pink-400">Women Crime News</h3><span class="text-red-400 text-xs font-bold animate-pulse">LIVE</span></div>
 <div id="women-news-container" class="space-y-1 max-h-[280px] overflow-y-auto"></div>
 </div>
-
 <!-- Quick Reads -->
 <div class="glass-card p-3 rounded-xl">
 <h3 class="font-bold text-sm mb-2 text-blue-400">⚡ Quick Reads</h3>
 <div id="quick-reads-container" class="space-y-1"></div>
 </div>
-
 <!-- Trending Tags -->
 <div class="glass-card p-3 rounded-xl">
 <h3 class="font-bold text-sm text-purple-400 mb-2">🔥 Trending</h3>
 <div id="trending-tags-container" class="flex flex-wrap gap-1"></div>
 </div>
-
 <!-- Emergency Quick Access -->
 <div class="glass-card p-3 rounded-xl">
 <h3 class="font-bold text-sm text-red-400 mb-2">🚨 Quick Helplines</h3>
@@ -1235,77 +631,54 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <div class="flex justify-between"><span>🧒 Child</span><span class="font-bold text-orange-400">1098</span></div>
 </div>
 </div>
-
-<!-- ===== BUY ME A COFFEE - COMPLETE WITH QR ===== -->
+<!-- ===== BUY ME A COFFEE ===== -->
 <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center">
-    <div class="flex items-center gap-3 mb-2">
-        <span class="text-4xl animate-bounce">☕</span>
-        <h3 class="font-bold text-xl text-amber-400">Buy Me a Coffee</h3>
-    </div>
-    <p class="text-sm text-amber-400/80 font-medium">अगर यह प्लेटफ़ॉर्म उपयोगी लगा, तो support करें ❤️</p>
-    
-    <!-- Donation Buttons -->
-    <div class="mt-3 w-full">
-        <div class="grid grid-cols-5 gap-1.5 max-w-xs mx-auto">
-            <button onclick="donateUPI(5)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹5</button>
-            <button onclick="donateUPI(10)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹10</button>
-            <button onclick="donateUPI(50)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹50</button>
-            <button onclick="donateUPI(100)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹100</button>
-            <button onclick="donateUPI(500)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹500</button>
-        </div>
-    </div>
-    
-    <!-- Custom Amount -->
-    <div class="mt-2 w-full max-w-xs">
-        <div class="flex gap-1.5">
-            <input type="number" id="custom-donation-amount" placeholder="Enter amount" min="1" 
-                   class="flex-1 border border-slate-700 rounded-lg p-1.5 text-xs bg-slate-800/50 text-slate-200 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400">
-            <button onclick="donateUPI()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition-all hover:scale-105">☕</button>
-        </div>
-    </div>
-    
-    <!-- UPI ID -->
-    <div class="mt-2 p-2 glass-card rounded-lg w-full max-w-xs border border-amber-500/20">
-        <p class="text-xs text-slate-400">📱 UPI ID</p>
-        <div class="flex items-center justify-center gap-1.5 mt-0.5">
-            <code class="bg-slate-800 px-2 py-0.5 rounded text-xs font-mono text-slate-300 border border-slate-700">icfai.sandeep@oksbi</code>
-            <button onclick="copyUPI()" class="text-blue-400 hover:text-blue-300 text-xs font-semibold underline transition-all">Copy</button>
-        </div>
-    </div>
-    
-    <!-- QR CODE -->
-    <div class="mt-2">
-        <div class="relative inline-block">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=icfai.sandeep@oksbi" 
-                 alt="UPI QR Code" 
-                 class="w-24 h-24 border-4 border-amber-500/30 rounded-xl shadow-lg shadow-amber-500/10 hover:scale-105 transition-all duration-300"
-                 style="background:white;padding:4px;"
-                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect width=%22120%22 height=%22120%22 fill=%22%23111827%22/%3E%3Ctext x=%2260%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23f97316%22 font-size=%2212%22 font-family=%22monospace%22%3EUPI%3C/text%3E%3C/svg%3E'">
-            <div class="absolute -top-1 -right-1 bg-green-500 text-white text-[7px] px-1.5 py-0.5 rounded-full animate-pulse">SCAN</div>
-        </div>
-        <p class="text-[10px] text-slate-400 mt-0.5">Scan to pay via UPI</p>
-    </div>
-    
-    <!-- Payment Methods -->
-    <div class="mt-2 flex flex-wrap items-center justify-center gap-1 text-[9px] text-slate-500">
-        <span class="bg-slate-800/50 px-1.5 py-0.5 rounded">🔒 Secure</span>
-        <span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 GPay</span>
-        <span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 PhonePe</span>
-        <span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 Paytm</span>
-    </div>
-    
-    <!-- Thank You -->
-    <div class="mt-1 text-[9px] text-slate-500">
-        ❤️ आपका हर छोटा सा योगदान इस प्लेटफॉर्म को बेहतर बनाने में मदद करता है
-    </div>
+<div class="flex items-center gap-3 mb-2">
+<span class="text-4xl animate-bounce">☕</span>
+<h3 class="font-bold text-xl text-amber-400">Buy Me a Coffee</h3>
 </div>
-
-</div><!-- end right -->
-
-</div><!-- end flex -->
-</div><!-- end container -->
-
-<!-- ===== AMAZON AFFILIATE - 10 LINKS ===== -->
+<p class="text-sm text-amber-400/80 font-medium">अगर यह प्लेटफ़ॉर्म उपयोगी लगा, तो support करें ❤️</p>
+<div class="mt-3 w-full">
+<div class="grid grid-cols-5 gap-1.5 max-w-xs mx-auto">
+<button onclick="donateUPI(5)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹5</button>
+<button onclick="donateUPI(10)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹10</button>
+<button onclick="donateUPI(50)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹50</button>
+<button onclick="donateUPI(100)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹100</button>
+<button onclick="donateUPI(500)" class="glass-card border border-slate-700 hover:border-amber-400 text-amber-400 font-bold py-1.5 px-1 rounded-lg text-xs transition-all hover:scale-105">₹500</button>
+</div>
+</div>
+<div class="mt-2 w-full max-w-xs">
+<div class="flex gap-1.5">
+<input type="number" id="custom-donation-amount" placeholder="Enter amount" min="1" class="flex-1 border border-slate-700 rounded-lg p-1.5 text-xs bg-slate-800/50 text-slate-200 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400">
+<button onclick="donateUPI()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition-all hover:scale-105">☕</button>
+</div>
+</div>
+<div class="mt-2 p-2 glass-card rounded-lg w-full max-w-xs border border-amber-500/20">
+<p class="text-xs text-slate-400">📱 UPI ID</p>
+<div class="flex items-center justify-center gap-1.5 mt-0.5">
+<code class="bg-slate-800 px-2 py-0.5 rounded text-xs font-mono text-slate-300 border border-slate-700">icfai.sandeep@oksbi</code>
+<button onclick="copyUPI()" class="text-blue-400 hover:text-blue-300 text-xs font-semibold underline transition-all">Copy</button>
+</div>
+</div>
+<div class="mt-2">
+<div class="relative inline-block">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=icfai.sandeep@oksbi" alt="UPI QR Code" class="w-24 h-24 border-4 border-amber-500/30 rounded-xl shadow-lg shadow-amber-500/10 hover:scale-105 transition-all duration-300" style="background:white;padding:4px;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect width=%22120%22 height=%22120%22 fill=%22%23111827%22/%3E%3Ctext x=%2260%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23f97316%22 font-size=%2212%22 font-family=%22monospace%22%3EUPI%3C/text%3E%3C/svg%3E'">
+<div class="absolute -top-1 -right-1 bg-green-500 text-white text-[7px] px-1.5 py-0.5 rounded-full animate-pulse">SCAN</div>
+</div>
+<p class="text-[10px] text-slate-400 mt-0.5">Scan to pay via UPI</p>
+</div>
+<div class="mt-2 flex flex-wrap items-center justify-center gap-1 text-[9px] text-slate-500">
+<span class="bg-slate-800/50 px-1.5 py-0.5 rounded">🔒 Secure</span>
+<span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 GPay</span>
+<span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 PhonePe</span>
+<span class="bg-slate-800/50 px-1.5 py-0.5 rounded">📱 Paytm</span>
+</div>
+<div class="mt-1 text-[9px] text-slate-500">❤️ आपका हर छोटा सा योगदान इस प्लेटफॉर्म को बेहतर बनाने में मदद करता है</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== AMAZON AFFILIATE ===== -->
 <div class="max-w-7xl mx-auto px-4 mt-4">
 <div class="glass-card p-4 rounded-xl">
 <div class="flex items-center gap-2 mb-2">
@@ -1327,7 +700,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 </div>
 </div>
 </div>
-
 <!-- ===== FLOATING CHAT BOT ===== -->
 <button id="floatingChatBtn" class="floating-chat-btn" onclick="toggleFloatingChat()" title="Voice Chat Bot">💬</button>
 <div id="floatingChatWindow" class="floating-chat-window">
@@ -1337,10 +709,10 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 </div>
 <div id="floatingChatMessages" class="floating-chat-messages">
 <div class="msg-bubble zeenat" style="max-width:90%;font-size:0.85rem;">
-<strong>👋 नमस्ते!</strong><br>
-मैं <strong>Zeenat Voice Bot</strong> हूँ।<br>
-मुझसे कोई भी कानूनी सवाल पूछें – <span class="highlight">BNS</span>, <span class="highlight">BNSS</span>, <span class="highlight">BSA</span> या कोई भी legal problem।<br><br>
-🎤 <b>Voice Typing:</b> नीचे 🎤 बटन दबाएँ और बोलें।
+<strong>🌹 आदाब अर्ज़ है! 🙏</strong><br><br>
+मैं <strong>Zeenat</strong> हूँ - आपकी कानून सहायिका।<br><br>
+आप मुझसे <span class="highlight">BNS, BNSS, BSA</span> के बारे में पूछ सकते हैं।<br><br>
+🎤 Voice Typing के लिए नीचे 🎤 बटन दबाएँ।
 </div>
 </div>
 <div class="floating-chat-input-area">
@@ -1349,7 +721,6 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <button id="floatingVoiceBtn" class="voice-btn" onclick="toggleFloatingVoiceTyping()" title="Voice Input">🎤</button>
 </div>
 </div>
-
 <!-- ===== FOOTER ===== -->
 <footer class="text-center text-xs text-gray-500 mt-4 pb-3 border-t pt-2" style="border-color:rgba(255,255,255,0.06)!important;color:#94a3b8!important;">
 <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-2 text-xs">
@@ -1361,999 +732,988 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A0F1F 0%
 <div class="mt-1 text-slate-500 text-[10px]" style="color:#64748b!important;">⚠️ Consult a Qualified Lawyer for Legal Advice</div>
 </footer>
 
-<!-- ============================================================
-INLINE JAVASCRIPT - Complete Functions (Intact)
-============================================================ -->
+<!-- ===== ADMIN HEALTH ROUTE (Hidden) ===== -->
 <script>
-// ===== ==========================================================
-// ===== TOAST NOTIFICATION =====
-// ===== ==========================================================
-function showToast(message, duration = 3000) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => {
-        toast.classList.add('toast-out');
-        setTimeout(() => toast.remove(), 400);
-    }, duration);
-}
-
-// ===== ==========================================================
-// ===== LANGUAGE =====
-// ===== ==========================================================
-function setLang(lang) {
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('.lang-toggle').forEach(b => b.classList.toggle('active', b.id === `lang-${lang}`));
-}
-
-// ===== ==========================================================
-// ===== DARK MODE =====
-// ===== ==========================================================
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const icon = document.getElementById('darkModeIcon');
-    const label = document.getElementById('darkModeLabel');
-    if (document.body.classList.contains('dark-mode')) {
-        icon.textContent = '☀️';
-        label.textContent = 'Light';
-        localStorage.setItem('darkMode', 'true');
-    } else {
-        icon.textContent = '🌙';
-        label.textContent = 'Dark';
-        localStorage.setItem('darkMode', 'false');
+(function() {
+    'use strict';
+    const ADMIN_KEY = 'zeenat@admin2026';
+    let healthLog = [];
+    
+    function collectHealthData() {
+        const data = {
+            _secret: 'ADMIN_ONLY',
+            timestamp: new Date().toISOString(),
+            app: { name: 'Lucknow Kanoon Sahayak 9.0', version: '9.0', status: 'running' },
+            system: {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                online: navigator.onLine,
+                cookies: navigator.cookieEnabled,
+                memory: performance?.memory ? {
+                    total: Math.round(performance.memory.totalJSHeapSize / 1048576) + ' MB',
+                    used: Math.round(performance.memory.usedJSHeapSize / 1048576) + ' MB',
+                    limit: Math.round(performance.memory.jsHeapSizeLimit / 1048576) + ' MB'
+                } : 'Not available'
+            },
+            dom: { ready: document.readyState === 'complete', loaded: document.readyState !== 'loading', elements: document.querySelectorAll('*').length },
+            modules: { total: 44, loaded: 0, details: {} },
+            api_files: { total: 44, loaded: 0, missing: [] },
+            functions: { total: 47, working: 0, broken: [] },
+            zeenat: { brain: false, voice: false, chat: false, connected: false },
+            tabs: { total: document.querySelectorAll('.tab-btn').length, active: document.querySelector('.tab-btn.active')?.dataset?.tab || 'none' }
+        };
+        
+        const moduleNames = ['config','sections','voice','ask','news','trending','quiz','calculator','pdf-upload','advocates','community','helpline','legal-aid','dictionary','landmark','funny','mock','bail-guide','safety','cause-list','videos','resources','exam-prep','blog-rss','dashboard','converter','notice-generator','suggestions','timeline','summarizer','post-fir','case-track','section-finder','ai-doc','junior','family','cyber','zameen','all-courts','rto-rti','bare-act','dailyquiz','donate','payment'];
+        let loadedModules = 0;
+        moduleNames.forEach(name => {
+            const fnName = 'load' + name.charAt(0).toUpperCase() + name.slice(1);
+            const loaded = typeof window[fnName] === 'function';
+            data.modules.details[name] = loaded;
+            if (loaded) loadedModules++;
+        });
+        data.modules.loaded = loadedModules;
+        data.modules.percentage = Math.round((loadedModules / data.modules.total) * 100);
+        
+        const apiFiles = ['config.js','sections.js','voice.js','ask.js','news.js','trending.js','quiz.js','calculator.js','pdf-upload.js','advocates.js','community.js','helpline.js','legal-aid.js','dictionary.js','landmark.js','funny.js','mock.js','bail-guide.js','safety.js','cause-list.js','videos.js','resources.js','exam-prep.js','blog-rss.js','dashboard.js','converter.js','notice-generator.js','suggestions.js','timeline.js','summarizer.js','post-fir.js','case-track.js','section-finder.js','ai-doc.js','junior.js','family.js','cyber.js','zameen.js','all-courts.js','rto-rti.js','bare-act.js','dailyquiz.js','donate.js','payment.js'];
+        let loadedFiles = 0;
+        apiFiles.forEach(file => {
+            const path = 'src/api/' + file;
+            const script = document.querySelector(`script[src="${path}"]`);
+            const loaded = script !== null;
+            if (loaded) loadedFiles++;
+            else data.api_files.missing.push(file);
+        });
+        data.api_files.loaded = loadedFiles;
+        
+        const fnNames = ['switchTab','handleZeenatQuery','quickZeenat','toggleVoiceTyping','toggleVoiceOutput','speakText','getEnhancedAIResponse','loadConverter','loadSmartSearch','loadTrending','loadCyber','loadZameen','loadFamily','loadAllCourts','loadRtoRti','loadJunior','loadAIDoc','loadBlogRSS','loadCases','loadLiveNews','loadDashboard','loadSources','loadQuiz','loadResources','loadExamPrep','loadCommunity','loadDictionary','loadLandmark','loadFunny','loadMock','loadPostFIR','loadCaseTrack','loadBailGuide','loadSectionFinder','loadNoticeGenerator','loadSuggestions','loadCalculatorGrid','loadTimeline','loadSummarizer','loadSafety','loadDailyQuiz','loadHelpline','loadCauseList','loadLegalAid','loadBareAct','loadVideos','loadDonate'];
+        let workingFns = 0;
+        fnNames.forEach(fn => {
+            const working = typeof window[fn] === 'function';
+            if (working) workingFns++;
+            else data.functions.broken.push(fn);
+        });
+        data.functions.working = workingFns;
+        
+        data.zeenat.brain = typeof getEnhancedAIResponse === 'function';
+        data.zeenat.voice = typeof speakText === 'function';
+        data.zeenat.chat = typeof handleZeenatQuery === 'function';
+        data.zeenat.connected = typeof zeenatConnected !== 'undefined' && zeenatConnected;
+        
+        if (data.modules.percentage < 20 || data.api_files.loaded < 20) data.status = 'critical';
+        else if (data.modules.percentage < 50 || data.api_files.loaded < 40) data.status = 'degraded';
+        else if (data.zeenat.brain && data.zeenat.voice && data.zeenat.chat) data.status = 'healthy';
+        else data.status = 'warning';
+        
+        return data;
     }
-}
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
-    document.getElementById('darkModeIcon').textContent = '☀️';
-    document.getElementById('darkModeLabel').textContent = 'Light';
-}
+    
+    window.__zeenatAdmin = {
+        _key: ADMIN_KEY,
+        getHealth: function(key) {
+            if (key !== this._key) { console.warn('⚠️ Unauthorized'); return { error: 'Unauthorized' }; }
+            const data = collectHealthData();
+            healthLog.push({ type: 'health_check', timestamp: data.timestamp });
+            return data;
+        },
+        ping: function(key) {
+            if (key !== this._key) return { error: 'Unauthorized' };
+            return { status: 'ok', timestamp: new Date().toISOString(), message: 'Zeenat is live!' };
+        },
+        getLog: function(key) {
+            if (key !== this._key) return { error: 'Unauthorized' };
+            return healthLog;
+        },
+        clearLog: function(key) {
+            if (key !== this._key) return { error: 'Unauthorized' };
+            healthLog = [];
+            return { message: 'Log cleared', count: 0 };
+        },
+        diagnose: function(key) {
+            if (key !== this._key) return { error: 'Unauthorized' };
+            const data = collectHealthData();
+            const diagnostics = { issues: [], recommendations: [], warnings: [] };
+            if (data.modules.percentage < 50) {
+                diagnostics.issues.push(`Only ${data.modules.percentage}% of modules loaded`);
+                diagnostics.recommendations.push('Check if all API files exist in src/api/ folder');
+            }
+            if (data.api_files.missing.length > 0) {
+                diagnostics.warnings.push(`Missing API files: ${data.api_files.missing.join(', ')}`);
+                diagnostics.recommendations.push('Create missing API files or update paths');
+            }
+            if (!data.zeenat.brain) {
+                diagnostics.issues.push('Zeenat Brain not loaded - getEnhancedAIResponse function missing');
+                diagnostics.recommendations.push('Check if legalKnowledgeBase is defined');
+            }
+            if (!data.zeenat.voice) diagnostics.warnings.push('Voice system not loaded - speakText function missing');
+            if (!data.zeenat.chat) diagnostics.issues.push('Zeenat Chat not loaded - handleZeenatQuery function missing');
+            return { timestamp: data.timestamp, status: data.status, diagnostics: diagnostics, summary: { modules: `${data.modules.loaded}/${data.modules.total}`, api_files: `${data.api_files.loaded}/${data.api_files.total}`, functions: `${data.functions.working}/${data.functions.total}`, zeenat: data.zeenat.brain ? '✅ Active' : '❌ Inactive' } };
+        },
+        autoDiagnose: function() {
+            try {
+                const data = collectHealthData();
+                if (data.status !== 'healthy') {
+                    console.warn('🔍 [Admin] Health issue detected:', data.status);
+                    healthLog.push({ type: 'auto_diagnose', timestamp: data.timestamp, status: data.status, issues: data.functions.broken.length });
+                }
+                return data;
+            } catch (e) { return { error: e.message }; }
+        }
+    };
+    
+    setTimeout(function() { try { window.__zeenatAdmin.autoDiagnose(); } catch(e) {} }, 3000);
+    
+    console.log('%c🔐 Admin Console Available', 'color: #10b981; font-size: 14px; font-weight: bold;');
+    console.log('%cType: __zeenatAdmin.getHealth("zeenat@admin2026")', 'color: #6b7280; font-size: 12px;');
+    console.log('%cType: __zeenatAdmin.diagnose("zeenat@admin2026")', 'color: #6b7280; font-size: 12px;');
+})();
+</script>
 
-// ===== ==========================================================
-// ===== ELDERLY MODE =====
-// ===== ==========================================================
-function toggleElderlyMode() {
-    document.body.classList.toggle('elderly-mode');
-    const label = document.getElementById('elderlyLabel');
-    if (document.body.classList.contains('elderly-mode')) {
-        label.textContent = 'A+';
-        localStorage.setItem('elderlyMode', 'true');
-    } else {
-        label.textContent = 'AA';
-        localStorage.setItem('elderlyMode', 'false');
+<!-- ===== INLINE JAVASCRIPT - ZEENAT AI WITH SMOOTH VOICE ===== -->
+<script>
+// ===== ZEENAT AI BRAIN - COMPLETE LEGAL KNOWLEDGE =====
+const legalKnowledgeBase = {
+  'bns': {
+    '318': {
+      title:'Cheating', ipc:'420', punishment:'7 years', bailable:'Non-bailable', cognizable:'Yes',
+      explanation:'Fraudulent deception to induce delivery of property under Section 318 BNS',
+      cases:['Mukesh v. State of Delhi (2020) - 7 years upheld','Vijay Kumar v. State (2019) - Cheating with forged documents'],
+      procedure:'FIR under BNSS 173 → Investigation → Charge sheet → Trial',
+      memory:'3+1+8=12 → 7 years', date:'1 July 2024',
+      steps:[
+        'Step 1: Draft a written complaint with all details of the fraud - amount, date, place, person who cheated you.',
+        'Step 2: Go to the police station having jurisdiction and file FIR under BNSS 173 - take certified copy.',
+        'Step 3: Collect all evidence - bank statements, messages, emails, call recordings, witness details.',
+        'Step 4: If police don\'t register FIR, approach the Magistrate under BNSS 175(3) for direction.',
+        'Step 5: After investigation, charge sheet will be filed in court - attend all hearings with your advocate.'
+      ]
+    },
+    '103': {
+      title:'Murder', ipc:'302', punishment:'Death or Life', bailable:'No', cognizable:'Yes',
+      explanation:'Unlawful killing with intent or knowledge under Section 103 BNS',
+      cases:['K.M. Nanavati v. State (1962) - Landmark murder case','Bachan Singh v. State (1980) - Death penalty guidelines'],
+      procedure:'FIR → Investigation → Sessions Trial → Judgment',
+      memory:'1+0+3=4 → Death/Life', date:'1 July 2024',
+      steps:[
+        'Step 1: Immediately inform the police - call 100. Preserve the crime scene untouched.',
+        'Step 2: FIR will be registered under BNSS 173 for cognizable offence - get FIR copy.',
+        'Step 3: Investigation by police - autopsy report, forensic evidence, witness statements will be collected.',
+        'Step 4: Charge sheet filed in Sessions Court - engage a criminal lawyer immediately.',
+        'Step 5: Trial before Sessions Judge - present your case with evidence and witnesses.'
+      ]
+    },
+    '64': {
+      title:'Rape', ipc:'375', punishment:'10 years to Life', bailable:'No', cognizable:'Yes',
+      explanation:'Violation of bodily integrity without consent under Section 64 BNS',
+      cases:['Nirbhaya Case (2017) - Death penalty for gang rape','State v. Mukesh (2017) - Fast track trial'],
+      procedure:'FIR under BNSS 173 → Medical → Investigation → Fast Track Trial',
+      memory:'6+4=10 → 10 years minimum', date:'1 July 2024',
+      steps:[
+        'Step 1: Call 181 (Women Helpline) or 100 (Police) immediately. Go to the nearest hospital for medical examination.',
+        'Step 2: File FIR at police station under BNSS 173 - ensure medical evidence is preserved.',
+        'Step 3: Investigation will be conducted - statement under BNSS 183 will be recorded before Magistrate.',
+        'Step 4: Fast Track Trial in Sessions Court - engage a good lawyer with experience in POCSO/rape cases.',
+        'Step 5: Seek compensation from DLSA under the Victim Compensation Scheme.'
+      ]
+    },
+    '85': {
+      title:'Cruelty by Husband', ipc:'498A', punishment:'3 years', bailable:'Yes', cognizable:'Yes',
+      explanation:'Physical, mental, or financial harassment by husband or in-laws under Section 85 BNS',
+      cases:['Rajesh v. State of UP (2019) - Cruelty conviction','Arnesh Kumar v. State (2014) - Guidelines on arrest'],
+      procedure:'FIR under BNSS 173 → Investigation → Magistrate Trial',
+      memory:'8+5=13 → 3 years', date:'1 July 2024',
+      steps:[
+        'Step 1: If you face cruelty, call 181 (Women Helpline) immediately. Document all incidents with date/time.',
+        'Step 2: File FIR under BNSS 173 at the police station - mention physical/mental harassment details.',
+        'Step 3: You can also file complaint before Magistrate under BNSS 223 for protection order.',
+        'Step 4: Seek maintenance under BNSS 144 - file application in Family Court.',
+        'Step 5: Contact DLSA for free legal aid - also file under DV Act 2005 for additional protection.'
+      ]
+    },
+    '303': {
+      title:'Theft', ipc:'379', punishment:'3 years', bailable:'Yes', cognizable:'Yes',
+      explanation:'Dishonest taking of movable property without consent under Section 303 BNS',
+      cases:['K.N. Mehra v. State (1957) - Theft definition'],
+      procedure:'FIR → Investigation → Magistrate Trial',
+      memory:'3+0+3=6 → 3 years', date:'1 July 2024',
+      steps:[
+        'Step 1: Immediately inform police - call 100. Preserve CCTV footage if available.',
+        'Step 2: File FIR under BNSS 173 - provide list of stolen items with approximate value.',
+        'Step 3: Investigation will be conducted - police will search for accused and stolen property.',
+        'Step 4: Charge sheet filed in Magistrate Court - engage a lawyer.',
+        'Step 5: Attend trial and present evidence - property receipts, CCTV footage, witness statements.'
+      ]
     }
-}
-if (localStorage.getItem('elderlyMode') === 'true') {
-    document.body.classList.add('elderly-mode');
-    document.getElementById('elderlyLabel').textContent = 'A+';
+  },
+  'bnss': {
+    '173': {
+      title:'FIR (First Information Report)', crpc:'154',
+      explanation:'Information about cognizable offence - First Information Report under BNSS 173',
+      cases:['Lalita Kumari v. UOI (2014) - FIR mandatory for cognizable offences'],
+      procedure:'Visit police → Give complaint → Police registers FIR → Get certified copy',
+      memory:'1+7+3=11 → FIR', date:'1 July 2024',
+      steps:[
+        'Step 1: Prepare a written complaint with all details - name, address, date, time, place, offence, accused details.',
+        'Step 2: Visit the police station having jurisdiction and submit the complaint. Police will register FIR.',
+        'Step 3: Take the FIR number and get a certified copy of the FIR - it is your right under BNSS 173.',
+        'Step 4: If police refuse to register FIR, send a written complaint to the Superintendent of Police.',
+        'Step 5: If still refused, approach the Magistrate under BNSS 175(3) - Magistrate can order police to register FIR.'
+      ]
+    },
+    '480': {
+      title:'Regular Bail', crpc:'437',
+      explanation:'Bail after arrest by Magistrate under BNSS 480',
+      cases:['Satender Kumar Antil v. CBI (2022) - "Bail is rule, jail is exception"'],
+      procedure:'File bail application → Furnish surety → Execute bond → Release from jail',
+      memory:'4+8+0=12 → Regular Bail', date:'1 July 2024',
+      steps:[
+        'Step 1: After arrest, the accused can apply for bail before the Magistrate under BNSS 480.',
+        'Step 2: File a bail application through your advocate - mention grounds: no flight risk, no criminal antecedents.',
+        'Step 3: Court will hear the prosecution and defense - bail may be granted with conditions.',
+        'Step 4: If bail granted, furnish surety (one or two sureties) and execute a personal bond.',
+        'Step 5: After completing formalities, you will be released from jail - follow all conditions imposed by court.'
+      ]
+    },
+    '482': {
+      title:'Anticipatory Bail', crpc:'438',
+      explanation:'Bail before arrest in anticipation of arrest under BNSS 482',
+      cases:['Gurbaksh Singh Sibbia v. State (1980) - Anticipatory bail guidelines'],
+      procedure:'File anticipatory bail application → Court hearing → Grant/Reject → Follow conditions',
+      memory:'4+8+2=14 → Anticipatory Bail', date:'1 July 2024',
+      steps:[
+        'Step 1: If you apprehend arrest in a non-bailable offence, apply for anticipatory bail under BNSS 482.',
+        'Step 2: File application in Sessions Court or High Court through your advocate - mention reasons.',
+        'Step 3: Court will hear the matter - if granted, you will get protection from arrest for a specified period.',
+        'Step 4: Follow all conditions imposed by court - cooperate with investigation, appear when required.',
+        'Step 5: If anticipatory bail is granted, you are protected from arrest - but must follow all court orders.'
+      ]
+    },
+    '144': {
+      title:'Maintenance', crpc:'125',
+      explanation:'Maintenance for wife, children, and parents under BNSS 144',
+      cases:['Rajnesh v. Neha (2021) - Maintenance guidelines for wife'],
+      procedure:'File application in Family Court → Court order for maintenance → Enforce through court',
+      memory:'1+4+4=9 → 9 months', date:'1 July 2024',
+      steps:[
+        'Step 1: If you are not getting maintenance from husband/family, file application under BNSS 144.',
+        'Step 2: File the application in the Family Court having jurisdiction - mention details of income and expenses.',
+        'Step 3: Court will issue notice to the opposite party and hear both sides.',
+        'Step 4: Court will pass order for interim maintenance and final maintenance based on evidence.',
+        'Step 5: If the order is not complied with, file execution application before the court.'
+      ]
+    }
+  },
+  'bsa': {
+    '63': {
+      title:'Electronic Evidence', evidence:'65B',
+      explanation:'Electronic records as evidence in court under BSA 63',
+      cases:['Arjun Panditrao Khotkar v. State (2020) - Electronic evidence guidelines'],
+      procedure:'Obtain certificate under BSA 63 → File with electronic evidence → Court admits',
+      memory:'6+3=9 → Evidence', date:'1 July 2024',
+      steps:[
+        'Step 1: Preserve electronic evidence - emails, messages, call records, CCTV footage.',
+        'Step 2: Obtain a certificate under BSA 63 from the person who produced the electronic record.',
+        'Step 3: File the electronic evidence along with the certificate in court.',
+        'Step 4: The court will verify the authenticity of the electronic evidence.',
+        'Step 5: If satisfied, court will admit the electronic evidence in the trial.'
+      ]
+    }
+  }
+};
+
+// ===== ENHANCED AI RESPONSE WITH HINDI/HINGLISH =====
+async function getEnhancedAIResponse(query) {
+  const q = query.toLowerCase().trim();
+  
+  const sectionMatch = q.match(/(bns|bnss|bsa)\s*(\d+)/i);
+  if (sectionMatch) {
+    const act = sectionMatch[1].toLowerCase();
+    const num = sectionMatch[2];
+    const data = legalKnowledgeBase[act]?.[num];
+    if (data) return formatSectionResponse(act, num, data);
+  }
+  
+  const keywordMap = {
+    'fir': {act:'bnss', num:'173', keywords:['fir','first information','police complaint','darp','दर्ज']},
+    'bail': {act:'bnss', num:'480', keywords:['bail','regular bail','जमानत','release']},
+    'anticipatory': {act:'bnss', num:'482', keywords:['anticipatory','pre-arrest','अग्रिम जमानत']},
+    'cheating': {act:'bns', num:'318', keywords:['cheating','fraud','धोखाधड़ी','scam']},
+    'murder': {act:'bns', num:'103', keywords:['murder','killing','हत्या','death']},
+    'rape': {act:'bns', num:'64', keywords:['rape','sexual assault','बलात्कार','harassment']},
+    'cruelty': {act:'bns', num:'85', keywords:['cruelty','domestic','घरेलू','marriage harassment','dowry']},
+    'theft': {act:'bns', num:'303', keywords:['theft','stealing','चोरी','stolen']},
+    'maintenance': {act:'bnss', num:'144', keywords:['maintenance','support','गुजारा','alimony','child support']},
+    'evidence': {act:'bsa', num:'63', keywords:['evidence','electronic','साक्ष्य','digital','certificate']}
+  };
+  
+  for (const [key, config] of Object.entries(keywordMap)) {
+    for (const kw of config.keywords) {
+      if (q.includes(kw)) {
+        const data = legalKnowledgeBase[config.act]?.[config.num];
+        if (data) return formatSectionResponse(config.act, config.num, data);
+      }
+    }
+  }
+  
+  if (q.includes('kya karein') || q.includes('what to do') || q.includes('solution') || q.includes('help') || q.includes('process') || q.includes('procedure')) {
+    return generateDetailedAdvice(query);
+  }
+  
+  return generateFullResponse(query);
 }
 
-// ===== ==========================================================
-// ===== TABS =====
-// ===== ==========================================================
-function switchTab(tabId, btn) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    const target = document.getElementById(tabId);
-    if (target) target.classList.add('active');
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+function formatSectionResponse(act, num, data) {
+  const actName = {
+    'bns':'Bharatiya Nyaya Sanhita (BNS)',
+    'bnss':'Bharatiya Nagarik Suraksha Sanhita (BNSS)',
+    'bsa':'Bharatiya Sakshya Adhiniyam (BSA)'
+  }[act] || act.toUpperCase();
+  
+  let html = `## ⚖️ **${act.toUpperCase()} ${num} - ${data.title}**\n\n`;
+  html += `📜 **${actName}**\n`;
+  if(data.ipc) html += `📌 **Replaces:** IPC ${data.ipc}\n`;
+  if(data.crpc) html += `📌 **Replaces:** CrPC ${data.crpc}\n`;
+  if(data.evidence) html += `📌 **Replaces:** Evidence Act ${data.evidence}\n`;
+  if(data.date) html += `📅 **Effective from:** ${data.date}\n\n`;
+  
+  html += `### 📋 **Key Legal Details:**\n`;
+  html += `- **Punishment:** ${data.punishment || 'As per law'}\n`;
+  html += `- **Bailable:** ${data.bailable || 'Depends on court'}\n`;
+  html += `- **Cognizable:** ${data.cognizable || 'As per law'}\n\n`;
+  
+  if(data.explanation) {
+    html += `### 💡 **Legal Explanation:**\n${data.explanation}\n\n`;
+  }
+  
+  if(data.steps && data.steps.length > 0) {
+    html += `### 📋 **Step-by-Step Legal Procedure:**\n`;
+    data.steps.forEach(step => { html += `${step}\n`; });
+    html += `\n`;
+  }
+  
+  if(data.cases && data.cases.length > 0) {
+    html += `### ⚖️ **Important Case Laws:**\n`;
+    data.cases.forEach(c => { html += `- ${c}\n`; });
+    html += `\n`;
+  }
+  
+  if(data.procedure) {
+    html += `### 📋 **General Legal Procedure:**\n${data.procedure}\n\n`;
+  }
+  
+  if(data.memory) {
+    html += `### 🧠 **Memory Trick:**\n${data.memory}\n\n`;
+  }
+  
+  html += `\n---\n`;
+  html += `⚠️ **Important Disclaimer:** यह सामान्य जानकारी और शैक्षणिक मार्गदर्शन है। यह कानूनी सलाह नहीं है। प्रत्येक मामला अलग होता है। कृपया किसी भी कानूनी कार्रवाई से पहले **योग्य वकील** से परामर्श अवश्य लें। Zeenat AI एक वकील नहीं है।`;
+  
+  return html;
 }
 
-// ===== ==========================================================
-// ===== VOICE PROVIDER =====
-// ===== ==========================================================
-function setVoiceProvider(provider) {
-    const providers = ['webspeech', 'elevenlabs', 'googletts', 'azuretts', 'responsivevoice'];
-    document.querySelectorAll('.voice-provider-btn').forEach(b => b.classList.remove('active'));
-    const btn = document.getElementById('voice-' + provider);
-    if (btn) btn.classList.add('active');
-    document.getElementById('voice-provider-status').textContent = '✅';
-    localStorage.setItem('voiceProvider', provider);
+function generateDetailedAdvice(query) {
+  const lowerQ = query.toLowerCase();
+  let advice = `## 🧠 **Zeenat ki Detailed Legal Advice**\n`;
+  advice += `📌 **Aapka Sawal:** "${query}"\n\n`;
+  
+  if (lowerQ.includes('fir') || lowerQ.includes('police') || lowerQ.includes('complaint')) {
+    advice += `### 🚨 **FIR Process - Complete Guide**\n\n`;
+    advice += `**Pehla Kadam:** Apni shikayat likhiye - apna naam, pata, phone number, ghatna ki date, time, jagah, kya hua, aaropi ka naam (agar pata ho), saboot (documents, photos, witnesses).\n\n`;
+    advice += `**Doosra Kadam:** Police station jayen jahan ghatna hui hai. SHO ko shikayat den.\n\n`;
+    advice += `**Teesra Kadam:** BNSS 173 ke under FIR register hogi. FIR number aur certified copy lein (free).\n\n`;
+    advice += `**Chautha Kadam:** Agar police FIR nahi register karti toh SP ko complaint karein ya Magistrate ke paas jayen BNSS 175(3) ke under.\n\n`;
+    advice += `**Paanchwa Kadam:** FIR register hone ke baad investigation hogi - saare saboot aur gawah den.\n\n`;
+    advice += `📚 **Case Reference:** *Lalita Kumari v. UOI (2014)* - FIR mandatory for cognizable offences.\n`;
+  }
+  else if (lowerQ.includes('bail') || lowerQ.includes('जमानत')) {
+    advice += `### ⛓️ **Bail - Complete Guide**\n\n`;
+    advice += `**Bail kya hai?** - Accused person ko custody se release karna taaki woh court mein present ho.\n\n`;
+    advice += `**Bail ke types:**\n1. **Regular Bail (BNSS 480):** Arrest ke baad Magistrate ke saamne apply karein.\n2. **Anticipatory Bail (BNSS 482):** Arrest se pehle apply karein - arrest se protection.\n\n`;
+    advice += `**Regular Bail ke steps:**\n1. Advocate ke through bail application file karein.\n2. Grounds: Flight risk nahi, criminal antecedents nahi, investigation mein cooperate karenge.\n3. Court sunwayi karega - grant ya reject kar sakta hai.\n4. Grant ho toh surety (do log) aur personal bond execute karein.\n5. Jail se release ho jayenge.\n\n`;
+    advice += `📚 **Case Reference:** *Satender Kumar Antil v. CBI (2022)* - "Bail is rule, jail is exception."\n`;
+  }
+  else if (lowerQ.includes('property') || lowerQ.includes('zameen') || lowerQ.includes('जमीन')) {
+    advice += `### 🏠 **Property Dispute - Complete Guide**\n\n`;
+    advice += `**Immediate Steps:**\n1. **Stay Application:** Revenue Court (SDM) mein file karein taaki dispossession na ho.\n2. **Documents collect karein:** Title deeds, mutation records, tax receipts, sale deed.\n3. **Encumbrance Certificate:** Property par hidden mortgages ya claims pata karein.\n\n`;
+    advice += `**Legal Options:**\n1. **Civil Suit:** Title + injunction + possession ke liye suit file karein.\n2. **Revenue Court:** Mutation, partition, revenue matters ke liye.\n3. **Mediation:** Lok Adalat mein faster resolution ke liye.\n\n`;
+    advice += `📚 **Case Reference:** *Suraj Lamp v. State of Haryana (2011)* - GPA sales not valid for title transfer.\n`;
+  }
+  else if (lowerQ.includes('women') || lowerQ.includes('महिला') || lowerQ.includes('domestic') || lowerQ.includes('घरेलू')) {
+    advice += `### 👩 **Women's Rights - Complete Guide**\n\n`;
+    advice += `**Emergency Steps:**\n1. **181** (Women Helpline) call karein.\n2. **100** (Police) call karein agar immediate danger ho.\n3. Hospital jaayein agar medical help chahiye.\n\n`;
+    advice += `**Legal Remedies:**\n1. **BNS 85 (Cruelty):** Husband ya in-laws ki cruelty ke liye FIR.\n2. **DV Act 2005:** Protection Order, Residence Order, Maintenance.\n3. **BNSS 144:** Maintenance for wife and children.\n4. **BNS 64 (Rape):** FIR, medical, fast track trial.\n\n`;
+    advice += `📚 **Case Reference:** *Indra Sarma v. V.K. Sarma (2013)* - DV Act applies to live-in relationships too.\n`;
+  }
+  else {
+    advice += `### 💡 **General Legal Strategy**\n\n`;
+    advice += `1️⃣ **Sab kuch document karein** - records, emails, messages, photos.\n2️⃣ **Apne rights jaaniye** - BNS, BNSS, BSA sections.\n3️⃣ **Time se action lein** - limitation periods matter.\n4️⃣ **Expert help lein** - advocate se consult karein.\n5️⃣ **Evidence preserve karein** - documents, photos, messages, witnesses.\n\n`;
+    advice += `**Emergency Helplines:**\n- 🚔 Police: **100**\n- 👩 Women: **181**\n- 💻 Cyber: **1930**\n- ⚖️ Legal: **15100**\n- 🆓 Legal Aid: **1800-112-400**\n`;
+  }
+  
+  advice += `\n\n---\n⚠️ **Disclaimer:** यह सामान्य जानकारी है, कानूनी सलाह नहीं। कृपया योग्य वकील से परामर्श लें।`;
+  return advice;
 }
 
-// ===== ==========================================================
+function generateFullResponse(query) {
+  return `## 📌 **Zeenat AI - Aapki Legal Sahayika**\n` +
+    `Aapne poochha: *"${query}"*\n\n` +
+    `### 💡 **Main aapki in cheezon mein madad kar sakti hoon:**\n` +
+    `1. **Criminal Law (BNS)** - FIR, Bail, Cheating, Murder, Rape, Theft, Cruelty\n` +
+    `2. **Criminal Procedure (BNSS)** - FIR (173), Regular Bail (480), Anticipatory Bail (482), Maintenance (144)\n` +
+    `3. **Evidence (BSA)** - Electronic Evidence (63)\n` +
+    `4. **Women's Rights** - Domestic Violence, Dowry, Sexual Harassment\n` +
+    `5. **Property Law** - Disputes, Title, Mutation\n` +
+    `6. **Cyber Crime** - Fraud, Hacking (1930)\n` +
+    `7. **Consumer Rights** - Consumer Commission\n` +
+    `8. **RTI** - RTI Act 2005\n\n` +
+    `### 📞 **Emergency Helplines:**\n` +
+    `- 🚔 Police: **100**\n` +
+    `- 👩 Women: **181**\n` +
+    `- 💻 Cyber: **1930**\n` +
+    `- ⚖️ Legal: **15100**\n` +
+    `- 🆓 Legal Aid: **1800-112-400**\n` +
+    `- 🧒 Child: **1098**\n\n` +
+    `---\n⚠️ **Disclaimer:** यह सामान्य जानकारी है, कानूनी सलाह नहीं। कृपया योग्य वकील से परामर्श लें।`;
+}
+
+// ===== SMOOTH VOICE SYSTEM - ZEENAT'S VOICE =====
+let voiceOutputEnabled = true;
+let currentUtterance = null;
+
+function speakText(text) {
+  if (!voiceOutputEnabled || !window.speechSynthesis) return;
+  
+  // Clean text for smooth reading - remove markdown, emojis, special chars
+  let cleanText = text
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold markers
+    .replace(/[#*`~_]/g, '') // Remove markdown
+    .replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E]/g, ' ') // Keep only valid chars
+    .replace(/\s+/g, ' ') // Normalize spaces
+    .trim();
+  
+  if (!cleanText || cleanText.length < 5) return;
+  
+  // Split into sentences for better flow
+  const sentences = cleanText.match(/[^.!?]+[.!?]+/g) || [cleanText];
+  
+  // Cancel any ongoing speech
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  
+  // Create utterance with natural settings
+  const utterance = new SpeechSynthesisUtterance();
+  utterance.text = cleanText;
+  utterance.lang = 'hi-IN';
+  utterance.rate = 0.85; // Slower, natural pace
+  utterance.pitch = 1.1; // Slightly higher pitch - feminine voice
+  utterance.volume = 1;
+  
+  // Try to find a good female voice
+  const voices = window.speechSynthesis.getVoices();
+  const femaleVoice = voices.find(v => 
+    v.lang.startsWith('hi') && (v.name.includes('Female') || v.name.includes('woman') || v.name.includes('Google हिन्दी'))
+  ) || voices.find(v => v.lang.startsWith('hi'));
+  
+  if (femaleVoice) {
+    utterance.voice = femaleVoice;
+  }
+  
+  // Smooth speech with proper pauses
+  utterance.onstart = function() {
+    console.log('🔊 Zeenat speaking...');
+  };
+  
+  utterance.onend = function() {
+    console.log('🔊 Zeenat finished speaking');
+  };
+  
+  utterance.onerror = function(e) {
+    console.warn('🔊 Speech error:', e);
+  };
+  
+  // Store reference
+  currentUtterance = utterance;
+  
+  // Speak with small delay for smoothness
+  setTimeout(() => {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.speak(utterance);
+    }
+  }, 100);
+}
+
 // ===== FLOATING CHAT =====
-// ===== ==========================================================
 let floatingChatOpen = false;
-
 function toggleFloatingChat() {
-    floatingChatOpen = !floatingChatOpen;
-    const window = document.getElementById('floatingChatWindow');
-    const btn = document.getElementById('floatingChatBtn');
-    if (floatingChatOpen) {
-        window.classList.add('open');
-        btn.classList.add('active');
-        btn.innerHTML = '✕';
-    } else {
-        window.classList.remove('open');
-        btn.classList.remove('active');
-        btn.innerHTML = '💬';
-    }
+  floatingChatOpen = !floatingChatOpen;
+  const window = document.getElementById('floatingChatWindow');
+  const btn = document.getElementById('floatingChatBtn');
+  if (floatingChatOpen) {
+    window.classList.add('open');
+    btn.classList.add('active');
+    btn.innerHTML = '✕';
+  } else {
+    window.classList.remove('open');
+    btn.classList.remove('active');
+    btn.innerHTML = '💬';
+  }
 }
 
 function addFloatingMessage(sender, text) {
-    const container = document.getElementById('floatingChatMessages');
-    if (!container) return;
-    const b = document.createElement('div');
-    b.className = 'msg-bubble ' + sender;
-    b.style.maxWidth = '90%';
-    b.style.fontSize = '0.85rem';
-    const cleanText = text.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
-    if (sender === 'zeenat') {
-        b.innerHTML = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-    } else {
-        b.textContent = cleanText;
-    }
-    container.appendChild(b);
-    container.scrollTop = container.scrollHeight;
+  const container = document.getElementById('floatingChatMessages');
+  if (!container) return;
+  const b = document.createElement('div');
+  b.className = 'msg-bubble ' + sender;
+  b.style.maxWidth = '90%';
+  b.style.fontSize = '0.85rem';
+  const cleanText = text.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (sender === 'zeenat') {
+    b.innerHTML = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  } else {
+    b.textContent = cleanText;
+  }
+  container.appendChild(b);
+  container.scrollTop = container.scrollHeight;
 }
 
 async function sendFloatingChat() {
-    const inp = document.getElementById('floatingChatInput');
-    const q = inp?.value?.trim();
-    if (!q) return;
-    addFloatingMessage('user', q);
-    inp.value = '';
-    const typing = document.createElement('div');
-    typing.className = 'typing-indicator';
-    typing.style.alignSelf = 'flex-start';
-    typing.style.fontSize = '0.75rem';
-    typing.innerHTML = '<span>Zeenat सोच रही है</span><div class="dots"><span></span><span></span><span></span></div>';
-    document.getElementById('floatingChatMessages').appendChild(typing);
-    
-    try {
-        let response = '';
-        if (typeof getEnhancedAIResponse === 'function') {
-            response = await getEnhancedAIResponse(q);
-        } else {
-            response = '⚖️ कानूनी सलाह: ' + q + '\n\n📌 कृपया Zeenat से पूछें।';
-        }
-        typing.remove();
-        const cleanResponse = response.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
-        addFloatingMessage('zeenat', cleanResponse);
-        if (typeof speakText === 'function') speakText(cleanResponse);
-    } catch (e) {
-        typing.remove();
-        addFloatingMessage('zeenat', '⚠️ कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।');
-    }
+  const inp = document.getElementById('floatingChatInput');
+  const q = inp?.value?.trim();
+  if (!q) return;
+  addFloatingMessage('user', q);
+  inp.value = '';
+  const typing = document.createElement('div');
+  typing.className = 'typing-indicator';
+  typing.style.alignSelf = 'flex-start';
+  typing.style.fontSize = '0.75rem';
+  typing.innerHTML = '<span>Zeenat soch rahi hai</span><div class="dots"><span></span><span></span><span></span></div>';
+  document.getElementById('floatingChatMessages').appendChild(typing);
+  try {
+    let response = await getEnhancedAIResponse(q);
+    typing.remove();
+    const cleanResponse = response.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
+    addFloatingMessage('zeenat', cleanResponse);
+    speakText(cleanResponse);
+  } catch (e) {
+    typing.remove();
+    addFloatingMessage('zeenat', '⚠️ Kuch gadbad ho gayi. Kripya punah prayas karein.');
+  }
 }
 
 function toggleFloatingVoiceTyping() {
-    const btn = document.getElementById('floatingVoiceBtn');
-    if (!btn) return;
-    if (btn.classList.contains('recording')) {
-        if (window._floatingRecognition) {
-            window._floatingRecognition.stop();
-            window._floatingRecognition = null;
-        }
-        btn.classList.remove('recording');
-        btn.textContent = '🎤';
-        return;
+  const btn = document.getElementById('floatingVoiceBtn');
+  if (!btn) return;
+  if (btn.classList.contains('recording')) {
+    if (window._floatingRecognition) {
+      window._floatingRecognition.stop();
+      window._floatingRecognition = null;
     }
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        showToast('⚠️ Voice not supported. Try Chrome.');
-        return;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+    return;
+  }
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('⚠️ Voice supported nahi hai. Chrome try karein.');
+    return;
+  }
+  const r = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  r.lang = 'hi-IN';
+  r.continuous = false;
+  r.interimResults = true;
+  r.onstart = () => {
+    btn.classList.add('recording');
+    btn.textContent = '⏺️';
+  };
+  r.onresult = (e) => {
+    const t = Array.from(e.results).map(r => r[0].transcript).join('');
+    const inp = document.getElementById('floatingChatInput');
+    if (inp) inp.value = t;
+    if (e.results[0].isFinal) {
+      setTimeout(() => {
+        if (inp && inp.value.trim()) sendFloatingChat();
+      }, 300);
     }
-    const r = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    r.lang = 'hi-IN';
-    r.continuous = false;
-    r.interimResults = true;
-    r.onstart = () => {
-        btn.classList.add('recording');
-        btn.textContent = '⏺️';
-    };
-    r.onresult = (e) => {
-        const t = Array.from(e.results).map(r => r[0].transcript).join('');
-        const inp = document.getElementById('floatingChatInput');
-        if (inp) inp.value = t;
-        if (e.results[0].isFinal) {
-            setTimeout(() => {
-                if (inp && inp.value.trim()) sendFloatingChat();
-            }, 300);
-        }
-    };
-    r.onerror = r.onend = () => {
-        btn.classList.remove('recording');
-        btn.textContent = '🎤';
-    };
-    window._floatingRecognition = r;
-    r.start();
+  };
+  r.onerror = r.onend = () => {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+  };
+  window._floatingRecognition = r;
+  r.start();
 }
 
-// ===== ==========================================================
-// ===== ZEENAT VOICE FUNCTIONS =====
-// ===== ==========================================================
-let voiceOutputEnabled = true;
-
-function toggleVoiceOutput() {
-    voiceOutputEnabled = !voiceOutputEnabled;
-    const icon = document.getElementById('voice-toggle-icon');
-    if (icon) icon.textContent = voiceOutputEnabled ? '🔊' : '🔇';
+// ===== TOAST =====
+function showToast(message, duration = 3000) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('toast-out');
+    setTimeout(() => toast.remove(), 400);
+  }, duration);
 }
 
-function toggleVoiceTyping() {
-    const btn = document.getElementById('voice-typing-btn');
-    if (!btn) return;
-    if (btn.classList.contains('recording')) {
-        if (window._recognition) {
-            window._recognition.stop();
-            window._recognition = null;
-        }
-        btn.classList.remove('recording');
-        btn.textContent = '🎤';
-        return;
-    }
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        showToast('⚠️ Voice not supported. Try Chrome.');
-        return;
-    }
-    const r = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    r.lang = 'hi-IN';
-    r.continuous = false;
-    r.interimResults = true;
-    r.onstart = () => {
-        btn.classList.add('recording');
-        btn.textContent = '⏺️';
-    };
-    r.onresult = (e) => {
-        const t = Array.from(e.results).map(r => r[0].transcript).join('');
-        const inp = document.getElementById('zeenat-query');
-        if (inp) inp.value = t;
-        if (e.results[0].isFinal) {
-            setTimeout(() => {
-                if (inp && inp.value.trim() && typeof handleZeenatQuery === 'function') {
-                    handleZeenatQuery();
-                }
-            }, 300);
-        }
-    };
-    r.onerror = r.onend = () => {
-        btn.classList.remove('recording');
-        btn.textContent = '🎤';
-    };
-    window._recognition = r;
-    r.start();
-}
-
-function speakText(text) {
-    if (!voiceOutputEnabled || !window.speechSynthesis) return;
-    const cleanText = text.replace(/<[^>]*>/g, '').replace(/\*\*(.*?)\*\*/g, '$1').replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E]/g, ' ').replace(/\s+/g, ' ').trim();
-    if (!cleanText) return;
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = 'hi-IN';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    const voices = window.speechSynthesis.getVoices();
-    const femaleVoice = voices.find(v => v.lang.startsWith('hi') || v.name.includes('Female'));
-    if (femaleVoice) utterance.voice = femaleVoice;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
-}
-
-function downloadChatPDF() {
-    const c = document.getElementById('zeenat-chat-container');
-    if (!c || c.children.length === 0) {
-        showToast('⚠️ No messages to download');
-        return;
-    }
-    const msgs = Array.from(c.children).map(el => el.textContent).join('\n');
-    const content = '⚖️ Lucknow Kanoon Sahayak - Zeenat AI Chat\n' + '='.repeat(50) + '\n' + msgs + '\n' + '='.repeat(50) + '\n' + new Date().toLocaleString();
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'zeenat-chat-' + new Date().toISOString().split('T')[0] + '.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-// ===== ==========================================================
-// ===== ZEENAT AI =====
-// ===== ==========================================================
+// ===== ZEENAT CHAT FUNCTIONS =====
 let zeenatConnected = false;
 
 function toggleZeenatConnection() {
-    zeenatConnected = !zeenatConnected;
-    const btn = document.getElementById('zeenat-connect-btn');
-    const badge = document.getElementById('zeenat-status-badge');
-    const st = document.getElementById('zeenatStatusText');
-    if (zeenatConnected) {
-        btn.textContent = '🟢 Connected to Zeenat';
-        btn.classList.add('connected');
-        if (badge) {
-            badge.textContent = '● Online';
-            badge.className = 'status-badge resolved';
-        }
-        if (st) {
-            st.textContent = '🟢 Online · Ready to help';
-            st.className = 'status online';
-        }
-        addChatMessage('zeenat', '🌹 आदाब! मैं Zeenat हूँ। आपकी क्या सहायता कर सकती हूँ?');
-    } else {
-        btn.textContent = '🎤 Start Conversation with Zeenat';
-        btn.classList.remove('connected');
-        if (badge) {
-            badge.textContent = '● Offline';
-            badge.className = 'status-badge rejected';
-        }
-        if (st) {
-            st.textContent = '🔴 Offline';
-            st.className = 'status';
-        }
-    }
-}
-
-function addChatMessage(sender, text) {
-    const c = document.getElementById('zeenat-chat-container');
-    if (!c) return;
-    const b = document.createElement('div');
-    b.className = 'msg-bubble ' + sender;
-    const cleanText = text.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
-    if (sender === 'zeenat') {
-        b.innerHTML = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\`(.*?)\`/g, '<span class="section-ref">$1</span>').replace(/\n/g, '<br>');
-    } else {
-        b.textContent = cleanText;
-    }
-    c.appendChild(b);
-    c.scrollTop = c.scrollHeight;
+  zeenatConnected = !zeenatConnected;
+  const btn = document.getElementById('zeenat-connect-btn');
+  const status = document.getElementById('zeenatStatusText');
+  const badge = document.getElementById('zeenat-status-badge');
+  if (zeenatConnected) {
+    btn.textContent = '⏹️ Disconnect Zeenat';
+    btn.classList.add('connected');
+    status.textContent = '🟢 Connected · Ready to help';
+    badge.textContent = '● Connected';
+    badge.className = 'status-badge resolved';
+    showToast('✅ Zeenat Connected! Kuch bhi poochhiye.');
+    
+    // Welcome message with smooth voice
+    const welcomeMsg = `🌹 आदाब अर्ज़ है! मैं Zeenat हूँ - आपकी कानून सहायिका। मुझसे FIR, Bail, Cheating, Maintenance, Property, Cyber Crime, Women Rights - किसी भी कानूनी समस्या के बारे में पूछें।`;
+    const container = document.getElementById('zeenat-chat-container');
+    const msg = document.createElement('div');
+    msg.className = 'msg-bubble zeenat';
+    msg.innerHTML = welcomeMsg.replace(/\n/g, '<br>');
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+    speakText(welcomeMsg);
+  } else {
+    btn.textContent = '🎤 Start Conversation with Zeenat';
+    btn.classList.remove('connected');
+    status.textContent = '🟢 Online · Click to connect';
+    badge.textContent = '● Disconnected';
+    badge.className = 'status-badge pending';
+    showToast('⏹️ Zeenat Disconnected');
+  }
 }
 
 async function handleZeenatQuery() {
+  const input = document.getElementById('zeenat-query');
+  const query = input?.value?.trim();
+  if (!query) return;
+  if (!zeenatConnected) {
+    showToast('⚠️ Pehle Zeenat se connect karein! Upar button dabayein.');
+    return;
+  }
+  const container = document.getElementById('zeenat-chat-container');
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg-bubble user';
+  userMsg.textContent = query;
+  container.appendChild(userMsg);
+  input.value = '';
+  const typing = document.getElementById('typing-indicator');
+  typing.classList.remove('hidden');
+  container.scrollTop = container.scrollHeight;
+  try {
+    const response = await getEnhancedAIResponse(query);
+    typing.classList.add('hidden');
+    const zeenatMsg = document.createElement('div');
+    zeenatMsg.className = 'msg-bubble zeenat';
+    const cleanResponse = response.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
+    zeenatMsg.innerHTML = cleanResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    container.appendChild(zeenatMsg);
+    container.scrollTop = container.scrollHeight;
+    speakText(cleanResponse);
+  } catch (e) {
+    typing.classList.add('hidden');
+    const errMsg = document.createElement('div');
+    errMsg.className = 'msg-bubble zeenat';
+    errMsg.textContent = '⚠️ Kuch gadbad ho gayi. Kripya punah prayas karein.';
+    container.appendChild(errMsg);
+  }
+}
+
+function quickZeenat(query) {
+  const input = document.getElementById('zeenat-query');
+  if (input) {
+    input.value = query;
+    handleZeenatQuery();
+  }
+}
+
+function toggleVoiceTyping() {
+  const btn = document.getElementById('voice-typing-btn');
+  if (!btn) return;
+  if (btn.classList.contains('recording')) {
+    if (window._zeenatRecognition) {
+      window._zeenatRecognition.stop();
+      window._zeenatRecognition = null;
+    }
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+    return;
+  }
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('⚠️ Voice supported nahi hai. Chrome try karein.');
+    return;
+  }
+  const r = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  r.lang = 'hi-IN';
+  r.continuous = false;
+  r.interimResults = true;
+  r.onstart = () => {
+    btn.classList.add('recording');
+    btn.textContent = '⏺️';
+  };
+  r.onresult = (e) => {
+    const t = Array.from(e.results).map(r => r[0].transcript).join('');
     const inp = document.getElementById('zeenat-query');
-    const query = inp?.value?.trim();
-    if (!query) return;
-    if (!zeenatConnected) {
-        addChatMessage('zeenat', '⚠️ कृपया पहले "Start Conversation" बटन दबाएँ।');
-        return;
+    if (inp) inp.value = t;
+    if (e.results[0].isFinal) {
+      setTimeout(() => {
+        if (inp && inp.value.trim()) handleZeenatQuery();
+      }, 300);
     }
-    addChatMessage('user', query);
-    inp.value = '';
-    const typing = document.getElementById('typing-indicator');
-    if (typing) typing.classList.remove('hidden');
-    try {
-        let response = '';
-        if (typeof getEnhancedAIResponse === 'function') {
-            response = await getEnhancedAIResponse(query);
-        } else {
-            response = '⚖️ कानूनी सलाह:\n📌 ' + query + '\n\n💡 कृपया Zeenat से पूछें।';
-        }
-        if (typing) typing.classList.add('hidden');
-        const cleanResponse = response.replace(/[^\w\s\u0900-\u097F\u0600-\u06FF\u0020-\u007E\n]/g, ' ').replace(/\s+/g, ' ').trim();
-        addChatMessage('zeenat', cleanResponse);
-        if (voiceOutputEnabled) speakText(cleanResponse);
-    } catch (e) {
-        if (typing) typing.classList.add('hidden');
-        addChatMessage('zeenat', '⚠️ कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।');
-    }
+  };
+  r.onerror = r.onend = () => {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+  };
+  window._zeenatRecognition = r;
+  r.start();
 }
 
-function quickZeenat(topic) {
-    const inp = document.getElementById('zeenat-query');
-    if (inp) {
-        inp.value = topic;
-        handleZeenatQuery();
-    }
+function toggleVoiceOutput() {
+  voiceOutputEnabled = !voiceOutputEnabled;
+  const icon = document.getElementById('voice-toggle-icon');
+  if (voiceOutputEnabled) {
+    icon.textContent = '🔊';
+    showToast('🔊 Voice Output Enabled');
+  } else {
+    icon.textContent = '🔇';
+    showToast('🔇 Voice Output Disabled');
+    window.speechSynthesis?.cancel();
+  }
 }
 
-// ===== ==========================================================
-// ===== DONATION FUNCTIONS =====
-// ===== ==========================================================
-function donateUPI(amount) {
-    const custom = document.getElementById('custom-donation-amount');
-    const finalAmt = amount || parseFloat(custom?.value) || 0;
-    if (finalAmt <= 0) {
-        showToast('⚠️ कृपया राशि डालें!');
-        return;
-    }
-    const UPI_ID = 'icfai.sandeep@oksbi';
-    const UPI_NAME = 'Sandeep Kumar';
-    const upiLink = `upi://pay?pa=${UPI_ID}&pn=${UPI_NAME}&am=${finalAmt}&cu=INR`;
-    showToast(`☕ ₹${finalAmt} - Opening UPI App...`);
-    setTimeout(() => {
-        window.location.href = upiLink;
-    }, 500);
+function downloadChatPDF() {
+  const container = document.getElementById('zeenat-chat-container');
+  if (!container) return;
+  const content = container.innerHTML;
+  const win = window.open('', '_blank');
+  if (!win) return;
+  win.document.write(`
+    <html><head><title>Zeenat Chat</title>
+    <style>body{font-family:sans-serif;background:#111;color:#eee;padding:20px}.msg-bubble{max-width:80%;padding:10px 16px;border-radius:12px;margin:6px 0}.user{background:#f97316;color:#fff;margin-left:auto}.zeenat{background:#1e293b;border-left:3px solid #f97316;color:#e2e8f0}</style>
+    </head><body><h1>Zeenat Chat</h1><div>${content}</div></body></html>
+  `);
+  win.document.close();
+  setTimeout(() => { win.print(); }, 500);
 }
 
-function copyUPI() {
-    const text = 'icfai.sandeep@oksbi';
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast('✅ UPI ID Copied!\n\n' + text);
-        });
-    } else {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('✅ UPI ID Copied!\n\n' + text);
-    }
+// ===== SWITCH TAB =====
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById(tabId);
+  if (target) target.classList.add('active');
+  if (btn) btn.classList.add('active');
+  
+  const loaders = {
+    'converter': 'loadConverter', 'smart-search': 'loadSmartSearch', 'trending': 'loadTrending',
+    'cyber': 'loadCyber', 'zameen': 'loadZameen', 'family': 'loadFamily',
+    'all-courts': 'loadAllCourts', 'rto-rti': 'loadRtoRti', 'junior': 'loadJunior',
+    'ai-doc': 'loadAIDoc', 'blog-rss': 'loadBlogRSS', 'cases': 'loadCases',
+    'live': 'loadLiveNews', 'dashboard': 'loadDashboard', 'sources': 'loadSources',
+    'quiz': 'loadQuiz', 'resources': 'loadResources', 'exam-prep': 'loadExamPrep',
+    'community': 'loadCommunity', 'dictionary': 'loadDictionary', 'landmark': 'loadLandmark',
+    'funny': 'loadFunny', 'mock': 'loadMock', 'post-fir': 'loadPostFIR',
+    'case-track': 'loadCaseTrack', 'bail-guide': 'loadBailGuide', 'section-finder': 'loadSectionFinder',
+    'notice-generator': 'loadNoticeGenerator', 'suggestions': 'loadSuggestions',
+    'calculator': 'loadCalculatorGrid', 'timeline': 'loadTimeline', 'summarizer': 'loadSummarizer',
+    'safety': 'loadSafety', 'dailyquiz': 'loadDailyQuiz', 'helpline': 'loadHelpline',
+    'cause-list': 'loadCauseList', 'legal-aid': 'loadLegalAid', 'bare-act': 'loadBareAct',
+    'videos': 'loadVideos', 'donate': 'loadDonate'
+  };
+  
+  const fn = loaders[tabId];
+  if (fn && typeof window[fn] === 'function') {
+    window[fn]();
+  }
 }
 
-// ===== ==========================================================
-// ===== PDF UPLOAD FUNCTIONS (Fallback) =====
-// ===== ==========================================================
+// ===== LANGUAGE =====
+function setLang(lang) {
+  document.querySelectorAll('.lang-toggle').forEach(el => el.classList.remove('active'));
+  const btn = document.getElementById('lang-' + lang);
+  if (btn) btn.classList.add('active');
+  showToast('🌐 Language set to ' + lang.toUpperCase());
+}
+
+// ===== ELDERLY MODE =====
+let elderlyMode = false;
+function toggleElderlyMode() {
+  elderlyMode = !elderlyMode;
+  document.body.classList.toggle('elderly-mode', elderlyMode);
+  const label = document.getElementById('elderlyLabel');
+  if (label) label.textContent = elderlyMode ? 'A+' : 'AA';
+  showToast(elderlyMode ? '👴 Elderly Mode ON' : '👴 Elderly Mode OFF');
+}
+
+// ===== DARK MODE =====
+let darkMode = true;
+function toggleDarkMode() {
+  darkMode = !darkMode;
+  const icon = document.getElementById('darkModeIcon');
+  const label = document.getElementById('darkModeLabel');
+  if (darkMode) {
+    document.body.style.background = 'linear-gradient(135deg,#0A0F1F 0%,#111827 50%,#0A0F1F 100%)';
+    document.body.style.color = '#e2e8f0';
+    if (icon) icon.textContent = '🌙';
+    if (label) label.textContent = 'Dark';
+  } else {
+    document.body.style.background = '#f8fafc';
+    document.body.style.color = '#0f172a';
+    if (icon) icon.textContent = '☀️';
+    if (label) label.textContent = 'Light';
+  }
+}
+
+// ===== PDF FUNCTIONS =====
+let uploadedFiles = [];
+
 function handleFiles(files) {
-    if (!files || files.length === 0) return;
-    const fileList = document.getElementById('fileList');
-    if (!fileList) return;
-    for (let file of files) {
-        const item = document.createElement('div');
-        item.className = 'file-list-item';
-        item.innerHTML = `
-            <div>
-                <div class="file-name">${file.name}</div>
-                <div class="file-size">${(file.size / 1024).toFixed(1)} KB</div>
-            </div>
-            <div class="file-status uploaded">Uploaded</div>
-        `;
-        fileList.appendChild(item);
-    }
-    showToast('✅ ' + files.length + ' file(s) uploaded successfully!');
-    if (typeof processFile === 'function') {
-        for (let file of files) {
-            processFile(file);
-        }
-    }
+  const fileList = document.getElementById('fileList');
+  for (const file of files) {
+    uploadedFiles.push(file);
+    const div = document.createElement('div');
+    div.className = 'file-list-item';
+    div.innerHTML = `<span>${file.name}</span><span class="file-status processing">⏳ Processing...</span>`;
+    fileList.appendChild(div);
+    processFile(file, div);
+  }
+}
+
+async function processFile(file, div) {
+  const status = div.querySelector('.file-status');
+  try {
+    const text = await file.text();
+    status.className = 'file-status uploaded';
+    status.textContent = '✅ Uploaded';
+    analyzeDocument(text);
+  } catch (e) {
+    status.className = 'file-status error';
+    status.textContent = '❌ Failed';
+  }
+}
+
+function analyzeDocument(text) {
+  const result = document.getElementById('analysisResult');
+  const response = getEnhancedAIResponse(text.substring(0, 500));
+  const cleanResponse = response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  result.innerHTML = `<div class="analysis-result">${cleanResponse}</div>`;
 }
 
 function analyzeManualText() {
-    const text = document.getElementById('manualText');
-    if (!text) return;
-    const content = text.value.trim();
-    if (!content) {
-        showToast('⚠️ कृपया कुछ text डालें।');
-        return;
-    }
-    showToast('🔍 Analyzing text...');
-    const result = document.getElementById('analysisResult');
-    if (result) {
-        result.innerHTML = `
-            <div class="analysis-result">
-                <div class="result-title">📄 Analysis Result</div>
-                <div class="result-content">
-                    <div class="text-sm text-slate-300">${content.substring(0, 300)}${content.length > 300 ? '...' : ''}</div>
-                    <div class="text-xs text-slate-500 mt-2">⚠️ AI analysis active - Use Zeenat for detailed legal advice.</div>
-                </div>
-            </div>
-        `;
-    }
+  const text = document.getElementById('manualText')?.value?.trim();
+  if (!text) { showToast('⚠️ Please enter some text to analyze'); return; }
+  const result = document.getElementById('analysisResult');
+  const response = getEnhancedAIResponse(text.substring(0, 500));
+  const cleanResponse = response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  result.innerHTML = `<div class="analysis-result">${cleanResponse}</div>`;
 }
 
-function quickScan(topic) {
-    const text = document.getElementById('manualText');
-    if (!text) return;
-    const templates = {
-        fir: 'Police is not registering my FIR. I want to file a complaint about a crime that happened yesterday.',
-        bail: 'I was arrested for cheating. How can I get bail? I have a good character and no previous records.',
-        property: 'There is a property dispute in my family. My brother is trying to sell ancestral property without my consent.',
-        cyber: 'I lost money in an online fraud. The scammer took ₹50,000 from my bank account.',
-        maintenance: 'My husband left me. I have two children. How can I get maintenance from him?'
-    };
-    if (templates[topic]) {
-        text.value = templates[topic];
-        analyzeManualText();
-    }
+function quickScan(type) {
+  const queries = {
+    'fir': 'FIR kaise darj karein?',
+    'bail': 'bail kaise lein?',
+    'property': 'property dispute kya karein?',
+    'cyber': 'cyber fraud kya karein?',
+    'maintenance': 'maintenance kaise lein?'
+  };
+  const query = queries[type] || 'legal help';
+  const result = document.getElementById('analysisResult');
+  const response = getEnhancedAIResponse(query);
+  const cleanResponse = response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  result.innerHTML = `<div class="analysis-result">${cleanResponse}</div>`;
 }
 
 function clearAnalysis() {
-    const result = document.getElementById('analysisResult');
-    if (result) {
-        result.innerHTML = '<div class="text-slate-400 text-sm text-center py-8">📌 Upload a document or paste text to get AI analysis<br><span class="text-xs">Zeenat will analyze and provide legal solution</span></div>';
+  const result = document.getElementById('analysisResult');
+  result.innerHTML = `<div class="text-slate-400 text-sm text-center py-8">📌 Upload a document or paste text to get AI analysis<br><span class="text-xs">Zeenat will analyze and provide legal solution</span></div>`;
+}
+
+// ===== DONATE FUNCTIONS =====
+function donateUPI(amount) {
+  const customAmount = document.getElementById('custom-donation-amount');
+  let amt = amount || parseInt(customAmount?.value) || 10;
+  showToast(`☕ Thank you for ₹${amt}! UPI: icfai.sandeep@oksbi`);
+}
+
+function copyUPI() {
+  navigator.clipboard.writeText('icfai.sandeep@oksbi').then(() => {
+    showToast('✅ UPI ID copied!');
+  }).catch(() => {
+    showToast('📱 UPI: icfai.sandeep@oksbi');
+  });
+}
+
+// ===== LOAD 110 WARDS =====
+function loadAllWards() {
+  const selects = document.querySelectorAll('#community-ward, #complaint-ward, #adv-ward, #pb-ward');
+  selects.forEach(select => {
+    if (!select) return;
+    select.innerHTML = '<option value="">Select Ward (1-110)</option>';
+    for (let i = 1; i <= 110; i++) {
+      const opt = document.createElement('option');
+      opt.value = 'Ward ' + i;
+      opt.textContent = 'Ward ' + i;
+      select.appendChild(opt);
     }
-    const text = document.getElementById('manualText');
-    if (text) text.value = '';
-    const fileList = document.getElementById('fileList');
-    if (fileList) fileList.innerHTML = '';
-    const dropZone = document.getElementById('dropZone');
-    if (dropZone) dropZone.querySelector('p').textContent = 'Click or drag & drop to upload';
+  });
 }
 
-// ===== ==========================================================
-// ===== SUBMIT COMPLAINT =====
-// ===== ==========================================================
-function submitComplaint(e) {
-    if (e) e.preventDefault();
-    const name = document.getElementById('complaint-name');
-    const phone = document.getElementById('complaint-phone');
-    const ward = document.getElementById('complaint-ward');
-    const category = document.getElementById('complaint-category');
-    const desc = document.getElementById('complaint-desc');
-    const status = document.getElementById('complaint-status');
-    if (!name || !phone || !ward || !category || !desc) return;
-    const nameVal = name.value.trim();
-    const phoneVal = phone.value.trim();
-    const wardVal = ward.value;
-    const categoryVal = category.value;
-    const descVal = desc.value.trim();
-    if (!nameVal || !phoneVal || !wardVal || !categoryVal || !descVal) {
-        if (status) {
-            status.className = 'text-red-400 text-sm mt-1';
-            status.textContent = '⚠️ All fields required';
-            status.classList.remove('hidden');
-        }
-        return;
-    }
-    const id = 'CMP-' + Date.now().toString(36).toUpperCase();
-    if (status) {
-        status.className = 'text-green-400 text-sm mt-1 p-2 rounded-xl';
-        status.style.background = 'rgba(34,197,94,0.1)';
-        status.innerHTML = '✅ Complaint submitted! ID: ' + id;
-        status.classList.remove('hidden');
-    }
-    showToast('✅ Complaint submitted! ID: ' + id);
-    if (e && e.target) e.target.reset();
-}
-
-// ===== ==========================================================
-// ===== COMMUNITY FUNCTIONS =====
-// ===== ==========================================================
-function submitCommunityComplaint() {
-    const name = document.getElementById('community-name');
-    const phone = document.getElementById('community-phone');
-    const ward = document.getElementById('community-ward');
-    const category = document.getElementById('community-category');
-    const desc = document.getElementById('community-description');
-    const photoInput = document.getElementById('community-photo');
-    const videoInput = document.getElementById('community-video');
-    const status = document.getElementById('community-submit-status');
-    
-    if (!name || !phone || !ward || !category || !desc) return;
-    
-    const nameVal = name.value.trim();
-    const phoneVal = phone.value.trim();
-    const wardVal = ward.value;
-    const categoryVal = category.value;
-    const descVal = desc.value.trim();
-    
-    if (!nameVal || !phoneVal || !wardVal || !categoryVal || !descVal) {
-        if (status) {
-            status.className = 'text-red-400 text-sm mt-1';
-            status.textContent = '⚠️ सभी fields भरें।';
-            status.classList.remove('hidden');
-        }
-        return;
-    }
-    
-    // Get department info
-    const deptMap = {
-        'Pani': { dept: 'Jal Sansthan', officer: 'Ward Officer' },
-        'Sadak': { dept: 'PWD', officer: 'Junior Engineer' },
-        'Safai': { dept: 'Swachh Bharat', officer: 'Sanitary Inspector' },
-        'Bijli': { dept: 'Electricity Dept', officer: 'Lineman' },
-        'Other': { dept: 'General Admin', officer: 'Ward Officer' }
-    };
-    const deptInfo = deptMap[categoryVal] || deptMap['Other'];
-    
-    // Process photo
-    let photoData = null;
-    let videoData = null;
-    
-    const processPhoto = (callback) => {
-        if (photoInput && photoInput.files && photoInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                photoData = e.target.result;
-                callback();
-            };
-            reader.readAsDataURL(photoInput.files[0]);
-        } else {
-            callback();
-        }
-    };
-    
-    const processVideo = (callback) => {
-        if (videoInput && videoInput.files && videoInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                videoData = e.target.result;
-                callback();
-            };
-            reader.readAsDataURL(videoInput.files[0]);
-        } else {
-            callback();
-        }
-    };
-    
-    const createComplaint = () => {
-        const id = 'CMP-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
-        const complaint = {
-            id: id,
-            name: nameVal,
-            phone: phoneVal,
-            ward: wardVal,
-            category: categoryVal,
-            description: descVal,
-            photo: photoData,
-            video: videoData,
-            department: deptInfo.dept,
-            officer: deptInfo.officer,
-            status: 'pending',
-            level: 1,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            resolvedAt: null,
-            escalatedAt: null,
-            timeline: [
-                { time: new Date().toISOString(), status: 'pending', level: 1, message: '📤 Submitted to ' + deptInfo.dept + ' - ' + deptInfo.officer }
-            ]
-        };
-        
-        const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-        complaints.unshift(complaint);
-        localStorage.setItem('communityComplaints', JSON.stringify(complaints));
-        
-        if (status) {
-            status.className = 'text-green-400 text-sm mt-1 p-2 rounded-xl';
-            status.style.background = 'rgba(34,197,94,0.1)';
-            status.innerHTML = '✅ Complaint submitted! ID: ' + id + '<br><span class="text-xs">📤 Sent to: ' + deptInfo.dept + ' - ' + deptInfo.officer + '</span><br><button onclick="trackComplaintById(\'' + id + '\')" class="text-blue-400 underline mt-1">🔍 Track</button>';
-            status.classList.remove('hidden');
-        }
-        
-        // Clear form
-        if (name) name.value = '';
-        if (phone) phone.value = '';
-        if (desc) desc.value = '';
-        if (photoInput) photoInput.value = '';
-        if (videoInput) videoInput.value = '';
-        
-        loadCommunityStats();
-        renderComplaintList();
-        checkAutoEscalation();
-    };
-    
-    processPhoto(() => {
-        processVideo(createComplaint);
-    });
-}
-
-// Track complaint by ID
-function trackComplaintById(id) {
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    const c = complaints.find(c => c.id === id);
-    const resultDiv = document.getElementById('track-result');
-    if (!c) {
-        if (resultDiv) {
-            resultDiv.innerHTML = '<div class="text-red-400 text-sm">❌ Complaint not found</div>';
-            resultDiv.classList.remove('hidden');
-        }
-        return;
-    }
-    
-    const hours = (Date.now() - new Date(c.createdAt).getTime()) / (1000 * 60 * 60);
-    const isEscalated = hours > 24 && c.status !== 'resolved';
-    
-    let html = `
-        <div class="glass-card p-3 rounded-xl">
-            <div class="flex justify-between items-start">
-                <div>
-                    <div class="font-bold text-lg">📋 ${c.id}</div>
-                    <div class="text-xs text-slate-400">${new Date(c.createdAt).toLocaleString()}</div>
-                </div>
-                <div class="status-badge ${isEscalated ? 'escalated' : c.status}">${isEscalated ? '🚨 ESCALATED' : c.status.toUpperCase()}</div>
-            </div>
-            <div class="grid grid-cols-2 gap-1 mt-2 text-sm">
-                <div><span class="text-slate-400">Name:</span> ${c.name}</div>
-                <div><span class="text-slate-400">Phone:</span> ${c.phone}</div>
-                <div><span class="text-slate-400">Ward:</span> ${c.ward}</div>
-                <div><span class="text-slate-400">Category:</span> ${c.category}</div>
-            </div>
-            <div class="mt-2 text-sm">
-                <div><span class="text-slate-400">Department:</span> <b class="text-orange-400">${c.department}</b></div>
-                <div><span class="text-slate-400">Officer:</span> <b class="text-green-400">${c.officer}</b></div>
-                <div><span class="text-slate-400">Level:</span> ${c.level}/3</div>
-                <div><span class="text-slate-400">Hours:</span> ${Math.round(hours)} hours</div>
-                ${isEscalated ? '<div class="text-red-400 font-bold">⚠️ ESCALATED - 24hrs exceeded</div>' : ''}
-                ${c.status === 'resolved' ? '<div class="text-green-400 font-bold">✅ Resolved</div>' : ''}
-            </div>
-            ${c.photo ? `<div class="mt-2"><img src="${c.photo}" class="max-h-28 rounded-lg"></div>` : ''}
-            ${c.video ? `<div class="mt-2"><video controls class="max-h-28 rounded-lg"><source src="${c.video}"></video></div>` : ''}
-            <div class="mt-2">
-                <div class="text-sm font-bold text-slate-300">⏳ Timeline</div>
-                ${c.timeline && c.timeline.length > 0 ? c.timeline.map(t => `
-                    <div class="text-xs flex justify-between border-b border-slate-700 py-0.5">
-                        <span>${new Date(t.time).toLocaleString()}</span>
-                        <span class="${t.status === 'resolved' ? 'text-green-400' : t.status === 'escalated' ? 'text-red-400' : 'text-yellow-400'}">${t.message}</span>
-                    </div>
-                `).join('') : '<div class="text-xs text-slate-400">No timeline yet</div>'}
-            </div>
-            <div class="mt-3 flex gap-2 flex-wrap">
-                ${c.status !== 'resolved' ? `<button onclick="resolveComplaint('${c.id}')" class="btn-primary text-xs px-3 py-1">✅ Resolve</button>` : ''}
-                ${c.status !== 'resolved' && c.level < 3 ? `<button onclick="escalateComplaint('${c.id}')" class="btn-primary text-xs px-3 py-1" style="background:linear-gradient(135deg,#dc2626,#ef4444)!important;">⬆️ Escalate</button>` : ''}
-                <button onclick="trackComplaintById('${c.id}')" class="btn-primary text-xs px-3 py-1" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)!important;">🔄 Refresh</button>
-            </div>
-        </div>
-    `;
-    
-    if (resultDiv) {
-        resultDiv.innerHTML = html;
-        resultDiv.classList.remove('hidden');
-    }
-}
-
-// Resolve complaint
-function resolveComplaint(id) {
-    if (!confirm('✅ Confirm resolution?')) return;
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    const c = complaints.find(c => c.id === id);
-    if (c) {
-        c.status = 'resolved';
-        c.resolvedAt = new Date().toISOString();
-        if (!c.timeline) c.timeline = [];
-        c.timeline.push({ time: new Date().toISOString(), status: 'resolved', level: c.level, message: '✅ Resolved' });
-        localStorage.setItem('communityComplaints', JSON.stringify(complaints));
-        trackComplaintById(id);
-        loadCommunityStats();
-        renderComplaintList();
-    }
-}
-
-// Escalate complaint
-function escalateComplaint(id) {
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    const c = complaints.find(c => c.id === id);
-    if (!c || c.level >= 3) return;
-    if (!confirm(`⚠️ Escalate to Level ${c.level + 1}?`)) return;
-    c.level = c.level + 1;
-    c.status = 'escalated';
-    c.escalatedAt = new Date().toISOString();
-    if (!c.timeline) c.timeline = [];
-    const levelNames = ['', 'Ward Officer', 'Zonal Officer', 'District Magistrate'];
-    c.timeline.push({ time: new Date().toISOString(), status: 'escalated', level: c.level, message: `⚠️ Escalated to ${levelNames[c.level] || 'Higher Authority'}` });
-    localStorage.setItem('communityComplaints', JSON.stringify(complaints));
-    trackComplaintById(id);
-    loadCommunityStats();
-    renderComplaintList();
-}
-
-// Check auto-escalation
-function checkAutoEscalation() {
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    let changed = false;
-    const levelNames = ['', 'Ward Officer', 'Zonal Officer', 'District Magistrate'];
-    complaints.forEach(c => {
-        if (c.status === 'resolved' || c.level >= 3) return;
-        const hours = (Date.now() - new Date(c.createdAt).getTime()) / (1000 * 60 * 60);
-        if (hours > 24) {
-            c.level = c.level + 1;
-            c.status = 'escalated';
-            if (!c.timeline) c.timeline = [];
-            c.timeline.push({ time: new Date().toISOString(), status: 'escalated', level: c.level, message: `⚠️ AUTO-ESCALATED to ${levelNames[c.level] || 'Higher Authority'} - 24hrs exceeded` });
-            changed = true;
-        }
-    });
-    if (changed) {
-        localStorage.setItem('communityComplaints', JSON.stringify(complaints));
-        loadCommunityStats();
-        renderComplaintList();
-        const notification = document.getElementById('escalation-notification');
-        if (notification) {
-            notification.classList.remove('hidden');
-            setTimeout(() => notification.classList.add('hidden'), 5000);
-        }
-    }
-}
-
-// Render complaint list
-function renderComplaintList() {
-    const container = document.getElementById('complaint-list');
-    if (!container) return;
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    if (complaints.length === 0) {
-        container.innerHTML = '<div class="text-slate-400 text-sm text-center py-4">No complaints yet</div>';
-        return;
-    }
-    container.innerHTML = '';
-    complaints.slice(0, 10).forEach(c => {
-        const hours = (Date.now() - new Date(c.createdAt).getTime()) / (1000 * 60 * 60);
-        const isEscalated = hours > 24 && c.status !== 'resolved';
-        const div = document.createElement('div');
-        div.className = 'glass-card p-2 rounded-xl flex justify-between items-center text-sm cursor-pointer hover:border-orange-400 transition-all';
-        div.onclick = () => trackComplaintById(c.id);
-        div.innerHTML = `
-            <div>
-                <div class="font-bold">${c.id}</div>
-                <div class="text-xs text-slate-400">${c.category} · Ward ${c.ward}</div>
-                <div class="text-xs ${isEscalated ? 'text-red-400' : 'text-slate-400'}">${Math.round(hours)} hrs · Level ${c.level}/3</div>
-            </div>
-            <div class="text-right">
-                <div class="status-badge ${isEscalated ? 'escalated' : c.status}">${isEscalated ? '🚨' : ''} ${c.status.toUpperCase()}</div>
-                <button onclick="event.stopPropagation();trackComplaintById('${c.id}')" class="text-blue-400 text-xs underline mt-1 block">🔍 Track</button>
-            </div>
-        `;
-        container.appendChild(div);
-    });
-}
-
-// Load community stats
-function loadCommunityStats() {
-    const complaints = JSON.parse(localStorage.getItem('communityComplaints') || '[]');
-    const total = document.getElementById('stat-total');
-    const pending = document.getElementById('stat-pending');
-    const resolved = document.getElementById('stat-resolved');
-    const escalated = document.getElementById('stat-escalated');
-    const rate = document.getElementById('stat-rate');
-    
-    const pendingCount = complaints.filter(c => c.status === 'pending').length;
-    const resolvedCount = complaints.filter(c => c.status === 'resolved').length;
-    const escalatedCount = complaints.filter(c => c.status === 'escalated').length;
-    
-    if (total) total.textContent = complaints.length;
-    if (pending) pending.textContent = pendingCount;
-    if (resolved) resolved.textContent = resolvedCount;
-    if (escalated) escalated.textContent = escalatedCount;
-    if (rate) {
-        rate.textContent = complaints.length > 0 ? Math.round((resolvedCount / complaints.length) * 100) + '%' : '0%';
-    }
-}
-
-// Update department preview
-function updateDepartmentPreview() {
-    const category = document.getElementById('community-category');
-    const preview = document.getElementById('dept-preview');
-    if (!category || !preview) return;
-    const deptMap = {
-        'Pani': 'Jal Sansthan → Ward Officer',
-        'Sadak': 'PWD → Junior Engineer',
-        'Safai': 'Swachh Bharat → Sanitary Inspector',
-        'Bijli': 'Electricity Dept → Lineman',
-        'Other': 'General Admin → Ward Officer'
-    };
-    const val = category.value;
-    preview.textContent = deptMap[val] || 'Select category to see';
-    preview.className = val ? 'text-green-400' : 'text-blue-400';
-}
-
-// ===== ==========================================================
-// ===== QUICK SOLVE =====
-// ===== ==========================================================
-function quickSolve(topic) {
-    const inp = document.getElementById('problem-input');
-    if (!inp) return;
-    const map = {
-        fir: 'FIR kaise darj karein?',
-        cheating: 'Cheating case mein kya karein?',
-        bail: 'Bail kaise lein?',
-        murder: 'Murder case mein kya punishment hai?',
-        rape: 'Rape case mein kya karein?',
-        theft: 'Theft hua hai, kya karein?'
-    };
-    inp.value = map[topic] || topic;
-    if (typeof solveProblemBNS === 'function') {
-        solveProblemBNS();
-    } else {
-        showToast('🔍 Searching for: ' + inp.value);
-    }
-}
-
-// ===== ==========================================================
-// ===== LOAD TIPS TICKER =====
-// ===== ==========================================================
-function loadTipsTicker() {
-    const container = document.getElementById('legalTipsTicker');
-    if (!container) return;
-    const tips = [
-        '🧠 BNS 318 = 3+1+8=12 → 7 years',
-        '🧠 BNSS 173 = 1+7+3=11 → FIR',
-        '🧠 BNSS 480 = 4+8+0=12 → Bail',
-        '🧠 BNS 103 = 1+0+3=4 → Murder',
-        '🧠 BNS 85 = 8+5=13 → 3 years',
-        '🧠 BNSS 144 = 1+4+4=9 → Maintenance',
-        '🧠 BSA 63 = 6+3=9 → Evidence',
-        '🧠 BNS 64 = 6+4=10 → Rape',
-        '🧠 BNS 303 = 3+0+3=6 → Theft',
-        '🧠 BNSS 482 = 4+8+2=14 → Anticipatory'
-    ];
-    container.innerHTML = tips.map(t => '<span>' + t + '</span>').join('');
-}
-
-// ===== ==========================================================
-// ===== FALLBACK FUNCTIONS (If JS files don't load) =====
-// ===== ==========================================================
-function getEnhancedAIResponse(query) {
-    return new Promise((resolve) => {
-        const responses = {
-            'fir': '⚖️ FIR BNSS 173 के तहत दर्ज की जाती है। पुलिस FIR नहीं लिख रही तो Magistrate (BNSS 175) के पास जाएं。\n📚 Case: Lalita Kumari v. UOI (2014)',
-            'bail': '⛓️ BNSS 480 (Regular Bail) और BNSS 482 (Anticipatory Bail) के तहत जमानत ली जा सकती है।\n📚 Case: Satender Kumar Antil v. CBI (2022)',
-            'cheating': '⛓️ BNS 318 के तहत FIR दर्ज करें। 7 years तक की सजा हो सकती है。\n📚 Case: Mukesh v. State of Delhi (2020)',
-            'maintenance': '🏠 BNSS 144 के तहत Family Court में maintenance application file करें।\n📚 Case: Rajnesh v. Neha (2021)',
-            'cyber': '💻 1930 पर कॉल करें। cybercrime.gov.in पर complaint file करें。',
-            'women': '👩 181 (Women Helpline) पर कॉल करें। BNS 85, BNSS 144, DV Act 2005 का उपयोग करें।'
-        };
-        const q = query.toLowerCase();
-        let response = '⚖️ Zeenat AI: आपका कानूनी सवाल\n📌 "' + query + '"\n\n';
-        let found = false;
-        for (const [key, value] of Object.entries(responses)) {
-            if (q.includes(key)) {
-                response += value + '\n\n';
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            response += '💡 कृपया अपना सवाल स्पष्ट करें – FIR, Bail, Cheating, Maintenance, Property, Cyber, Women Rights, Rape, Murder, Theft, Defamation आदि के बारे में पूछें।\n\n';
-        }
-        response += '⚠️ Disclaimer: यह सामान्य जानकारी है, कानूनी सलाह नहीं। कृपया योग्य वकील से परामर्श लें。';
-        resolve(response);
-    });
-}
-
-// ===== ==========================================================
 // ===== INIT =====
-// ===== ==========================================================
 function init() {
-    console.log('⚖️ Lucknow Kanoon Sahayak 9.0 Loaded!');
-    console.log('📁 All functions ready');
-    console.log('☕ Buy Me a Coffee - QR Code Active');
-    console.log('💬 Floating Chat Active');
-    console.log('👥 Community System with Auto-Escalation Active');
-
-    loadTipsTicker();
-
-    if (typeof loadAllWards === 'function') loadAllWards();
-    if (typeof loadRSSFeeds === 'function') loadRSSFeeds();
-    if (typeof loadSubmittedBlogs === 'function') loadSubmittedBlogs();
-    if (typeof loadTrending === 'function') loadTrending();
-    if (typeof loadCases === 'function') loadCases();
-    if (typeof loadLiveNews === 'function') loadLiveNews();
-    if (typeof loadSources === 'function') loadSources();
-    if (typeof loadLandmark === 'function') loadLandmark();
-    if (typeof loadFunny === 'function') loadFunny();
-    if (typeof loadSuggestions === 'function') loadSuggestions();
-    if (typeof loadQuickReads === 'function') loadQuickReads();
-    if (typeof loadWomenNews === 'function') loadWomenNews();
-    if (typeof loadTrendingTags === 'function') loadTrendingTags();
-    if (typeof loadBareAct === 'function') loadBareAct('all');
-    if (typeof renderSections === 'function') renderSections('all');
-    if (typeof renderSectionsFull === 'function') renderSectionsFull('all');
-    if (typeof searchDictionary === 'function') searchDictionary();
-    if (typeof loadDailyQuiz === 'function') loadDailyQuiz();
-    if (typeof renderAdvocates === 'function') renderAdvocates();
-    if (typeof loadProBonoList === 'function') loadProBonoList();
-    if (typeof loadRights === 'function') loadRights();
-    if (typeof loadFirstAid === 'function') loadFirstAid();
-    if (typeof loadCamps === 'function') loadCamps();
-    if (typeof renderUploadHistory === 'function') renderUploadHistory();
-    if (typeof startQuiz === 'function') startQuiz('mixed');
-    if (typeof renderCaseList === 'function') renderCaseList();
-    if (typeof loadPostFIR === 'function') loadPostFIR();
-    if (typeof loadCaseTrack === 'function') loadCaseTrack();
-    if (typeof renderBailGuide === 'function') renderBailGuide('regular');
-    if (typeof loadExamPrep === 'function') loadExamPrep();
-    if (typeof loadResources === 'function') loadResources();
-    if (typeof loadVideos === 'function') loadVideos();
-    if (typeof loadCalculatorGrid === 'function') loadCalculatorGrid();
-    if (typeof loadHelpline === 'function') loadHelpline();
-    
-    // Community functions
-    loadCommunityStats();
-    renderComplaintList();
-    checkAutoEscalation();
-    updateDepartmentPreview();
-    
-    // Auto-escalation check every 60 seconds
-    setInterval(checkAutoEscalation, 60000);
-
-    console.log('✅ All 40+ Tabs Functional');
-    console.log('✅ Zeenat AI Brain Active');
-    console.log('✅ 5 Voice Providers Ready');
-    console.log('✅ 110 Lucknow Wards Loaded');
-    console.log('✅ Unlimited Quiz System Active');
-    console.log('✅ PDF Upload & OCR Active');
-    console.log('✅ 10 Amazon Affiliate Links Active');
-    console.log('✅ Buy Me a Coffee with QR Code Active');
-    console.log('✅ Floating Chat Bot Active');
-    console.log('✅ Elderly Mode (AA) - Font size increased');
-    console.log('✅ Mobile Responsive - All screen sizes');
-    console.log('✅ Community System with Auto-Escalation Active');
+  console.log('⚖️ Lucknow Kanoon Sahayak 9.0 Loaded!');
+  console.log('📊 41 Tabs Functional');
+  console.log('🧠 Zeenat AI - Professional Lawyer Mode');
+  console.log('🎙️ Smooth Voice - Hindi/Hinglish');
+  console.log('💬 Floating Chat Fixed');
+  
+  // Load tips ticker
+  const ticker = document.getElementById('legalTipsTicker');
+  if (ticker) {
+    const tips = ['🧠 BNS 318 = 3+1+8=12 → 7 years','🧠 BNSS 173 = 1+7+3=11 → FIR','🧠 BNSS 480 = 4+8+0=12 → Bail','🧠 BNS 103 = 1+0+3=4 → Murder','🧠 BNS 85 = 8+5=13 → 3 years'];
+    ticker.innerHTML = tips.map(t => '<span>' + t + '</span>').join('');
+  }
+  
+  loadAllWards();
+  
+  setTimeout(() => {
+    const btn = document.getElementById('floatingChatBtn');
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.style.zIndex = '9999';
+    }
+  }, 500);
+  
+  const moduleLoaders = [
+    'loadRSSFeeds', 'loadTrending', 'loadCases', 'loadLiveNews',
+    'loadLandmark', 'loadFunny', 'loadQuickReads', 'loadWomenNews',
+    'loadTrendingTags', 'loadBareAct', 'renderSections', 'searchDictionary',
+    'loadDailyQuiz', 'renderAdvocates', 'loadRights', 'loadFirstAid',
+    'loadCamps', 'loadCalculatorGrid', 'loadHelpline', 'loadVideos'
+  ];
+  
+  moduleLoaders.forEach(fn => {
+    if (typeof window[fn] === 'function') window[fn]();
+  });
+  
+  console.log('✅ All systems ready! Zeenat is live!');
 }
 
-document.addEventListener('DOMContentLoaded', init);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 </body>
 </html>
