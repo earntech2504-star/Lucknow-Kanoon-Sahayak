@@ -20,6 +20,52 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
     </script>
 
+    <!-- JSON-LD Schema for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Lucknow Kanoon Sahayak 9.0",
+        "description": "AI Voice Legal Assistant for BNS/BNSS/BSA",
+        "applicationCategory": "Legal",
+        "operatingSystem": "All",
+        "browserRequirements": "Modern browser with JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "BNS 318 kya hai?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BNS 318 Cheating (धोखाधड़ी) का section है - IPC 420 की जगह, अधिकतम 7 साल की सजा।"
+            }
+        }, {
+            "@type": "Question",
+            "name": "FIR kaise darj karein?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BNSS 173 के तहत FIR दर्ज करना पुलिस का अनिवार्य कर्तव्य है। SHO को लिखित शिकायत दें।"
+            }
+        }, {
+            "@type": "Question",
+            "name": "BNSS 480 kya hai?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BNSS 480 Bail (ज़मानत) का section है - CrPC 437 की जगह, Magistrate bail दे सकता है।"
+            }
+        }]
+    }
+    </script>
+
     <style>
         /* ============================================================
            COMPLETE STYLES — सभी पुराने स्टाइल + नए (Stamp, EMI, ROI, Tax, GST, Dynamic Tabs, BNS Sections)
@@ -1052,6 +1098,32 @@
                 font-size: 0.85rem;
                 padding: 6px 14px;
                 min-height: 38px;
+            }
+            /* Mobile responsive fixes */
+            .complaint-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .helpline-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .message-bubble,
+            .complaint-box {
+                word-break: break-word !important;
+                white-space: pre-wrap !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            #voice-complaint-btn,
+            #voice-typing-btn {
+                min-height: 60px !important;
+                font-size: 1.2rem !important;
+                padding: 16px 24px !important;
+            }
+            .voice-driving-btn {
+                min-height: 70px !important;
+                font-size: 1.4rem !important;
+                border-radius: 50px !important;
+                width: 100% !important;
             }
         }
 
@@ -3185,6 +3257,17 @@
             background: rgba(255, 255, 255, 0.12);
             border-color: #f97316;
         }
+
+        /* Complaint status styles */
+        .status-pending {
+            color: #f59e0b;
+        }
+        .status-in-progress {
+            color: #3b82f6;
+        }
+        .status-resolved {
+            color: #22c55e;
+        }
     </style>
 </head>
 <body>
@@ -3308,8 +3391,7 @@
                         <button onclick="switchTab('summarizer', this)" class="tab-btn">🤖 Summary</button>
                         <button onclick="switchTab('safety', this)" class="tab-btn">🛡️ Safety</button>
                         <button onclick="switchTab('dailyquiz', this)" class="tab-btn">📅 Quiz</button>
-                        <!-- Community Helpline -->
-                        <button onclick="switchTab('community-helpline', this)" class="tab-btn">📞 Helpline</button>
+                        <button onclick="switchTab('helpline', this)" class="tab-btn">📞 Helpline</button>
                     </div>
                 </nav>
 
@@ -3474,6 +3556,97 @@
                         <div class="mt-4">
                             <h3 class="font-bold text-lg text-slate-800 mb-3" style="color:#f1f5f9 !important;">📚 All BNS/BNSS/BSA Sections</h3>
                             <div id="bns-sections-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[500px] overflow-y-auto scrollbar-hide"></div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================================
+                    COMMUNITY TAB (NEW)
+                    ========================================================== -->
+                    <div id="community" class="tab-content">
+                        <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">👥 Community Complaint System</h2>
+                        <p class="text-base text-gray-600 mb-3" style="color:#94a3b8 !important;">अपने इलाके की समस्या दर्ज करें। 110 wards में से चुनें और complaint submit करें।</p>
+                        
+                        <div class="bg-slate-800/20 p-4 rounded-xl border border-slate-700">
+                            <form id="community-complaint-form" onsubmit="submitCommunityComplaint(event)">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-sm font-medium" style="color:#e2e8f0 !important;">Select Ward *</label>
+                                        <select id="community-ward" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                            <option value="">— Select Ward —</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium" style="color:#e2e8f0 !important;">Category *</label>
+                                        <select id="community-category" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                            <option value="">Select Category</option>
+                                            <option value="Jal Vibhag">💧 Pani / Water</option>
+                                            <option value="PWD / Sadak">🛣️ Sadak / Roads</option>
+                                            <option value="Swachhata / Safai">🧹 Safai / Sanitation</option>
+                                            <option value="Bijli / Street Light">💡 Bijli / Electricity</option>
+                                            <option value="Atikraman">🏗️ Atikraman / Encroachment</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="text-sm font-medium" style="color:#e2e8f0 !important;">Mobile Number *</label>
+                                    <input type="tel" id="community-mobile" placeholder="10-digit mobile number" pattern="[0-9]{10}" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                </div>
+                                <div class="mt-3">
+                                    <label class="text-sm font-medium" style="color:#e2e8f0 !important;">Complaint Description *</label>
+                                    <textarea id="community-text" rows="4" placeholder="Describe your problem in detail..." required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="text-sm font-medium" style="color:#e2e8f0 !important;">Upload Photo (optional)</label>
+                                    <input type="file" id="community-photo" accept="image/*" class="w-full border border-slate-300 rounded-xl p-2 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                    <div id="community-photo-preview" class="mt-2"></div>
+                                </div>
+                                <div class="mt-3 flex flex-wrap gap-3">
+                                    <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-xl text-base hover:bg-indigo-700 transition font-bold">📤 Submit Complaint</button>
+                                    <button type="button" onclick="startVoiceComplaint()" class="bg-green-600 text-white px-6 py-3 rounded-xl text-base hover:bg-green-700 transition font-bold flex items-center gap-2">🎤 <span id="voice-complaint-label">Voice Input</span></button>
+                                </div>
+                                <div id="driving-mode-container" class="mt-4">
+                                    <button id="driving-mode-btn" onclick="toggleDrivingMode()" class="bg-indigo-600 text-white px-6 py-4 rounded-full text-lg font-bold w-full">
+                                        🚗 Driving Mode OFF
+                                    </button>
+                                    <p class="text-sm text-slate-400 mt-2">Tap to enable hands-free voice complaint submission</p>
+                                </div>
+                            </form>
+                            <div id="community-result" class="mt-4 text-base hidden"></div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================================
+                    HELPLINE TAB (NEW)
+                    ========================================================== -->
+                    <div id="helpline" class="tab-content">
+                        <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">📞 Helpline & Status Check</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Left: Tracking -->
+                            <div class="bg-slate-800/20 p-4 rounded-xl border border-slate-700">
+                                <h3 class="font-bold text-lg text-indigo-400 mb-3">🔍 Track Complaint Status</h3>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <input type="text" id="helpline-tracking-id" placeholder="Enter Tracking ID (e.g., LKO202607151234)" class="flex-1 border border-slate-300 rounded-xl p-3 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                    <button onclick="trackComplaintStatus()" class="bg-blue-600 text-white px-6 py-3 rounded-xl text-base hover:bg-blue-700 transition font-bold">🔍 Track</button>
+                                </div>
+                                <div id="tracking-result" class="mt-3"></div>
+                            </div>
+                            
+                            <!-- Right: Department Helplines -->
+                            <div class="bg-slate-800/20 p-4 rounded-xl border border-slate-700">
+                                <h3 class="font-bold text-lg text-indigo-400 mb-3">📞 Department Helplines</h3>
+                                <div id="helpline-departments" class="space-y-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- BNS Section Search -->
+                        <div class="mt-4 bg-slate-800/20 p-4 rounded-xl border border-slate-700">
+                            <h3 class="font-bold text-lg text-indigo-400 mb-3">📜 BNS / BNSS / BSA Section Search</h3>
+                            <div class="flex gap-3">
+                                <input type="text" id="helpline-section-search" placeholder="Search legal sections (e.g., BNS 318, Cheating)" class="flex-1 border border-slate-300 rounded-xl p-3 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
+                                <button onclick="searchHelplineSections()" class="bg-purple-600 text-white px-6 py-3 rounded-xl text-base hover:bg-purple-700 transition font-bold">🔍 Search</button>
+                            </div>
+                            <div id="helpline-section-results" class="mt-3 max-h-[300px] overflow-y-auto"></div>
                         </div>
                     </div>
 
@@ -3684,7 +3857,7 @@
                     </div>
 
                     <!-- ==========================================================
-                    CASES, LIVE, DASHBOARD, SOURCES, QUIZ, RESOURCES, EXAM PREP, COMMUNITY, DICTIONARY, LANDMARK, FUNNY, MOCK, POST-FIR, CASE-TRACK, BAIL-GUIDE, SECTION-FINDER, NOTICE-GENERATOR, SUGGESTIONS
+                    CASES, LIVE, DASHBOARD, SOURCES, QUIZ, RESOURCES, EXAM PREP, DICTIONARY, LANDMARK, FUNNY, MOCK, POST-FIR, CASE-TRACK, BAIL-GUIDE, SECTION-FINDER, NOTICE-GENERATOR, SUGGESTIONS
                     ========================================================== -->
                     <div id="cases" class="tab-content">
                         <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">🎭 Entertaining & Latest Legal Cases</h2>
@@ -3805,18 +3978,6 @@
                         </div>
                     </div>
 
-                    <div id="community" class="tab-content">
-                        <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">👥 Community</h2>
-                        <div id="community-container" class="space-y-3 max-h-[500px] overflow-y-scroll scrollbar-hide"></div>
-                        <div class="mt-3">
-                            <div class="flex gap-3">
-                                <input type="text" id="community-tip-input" placeholder="Share a tip..." class="border border-slate-300 rounded-xl p-3 flex-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
-                                <button onclick="addCommunityTip()" class="bg-purple-600 text-white px-6 py-3 rounded-xl text-base hover:bg-purple-700 font-bold">Post</button>
-                            </div>
-                            <p class="text-sm text-slate-400 mt-1" style="color:#94a3b8 !important;">💡 Tips saved locally</p>
-                        </div>
-                    </div>
-
                     <div id="dictionary" class="tab-content">
                         <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">📖 Legal Dictionary · 50+ Terms</h2>
                         <p class="text-sm text-gray-500 mb-3" style="color:#94a3b8 !important;">पूरी कानूनी शब्दावली – Definitions, Sections, Case Laws, और Practical Use के साथ।</p>
@@ -3907,7 +4068,7 @@
                     </div>
 
                     <!-- ==========================================================
-                    SECTION FINDER — Enhanced with all BNS sections
+                    SECTION FINDER
                     ========================================================== -->
                     <div id="section-finder" class="tab-content">
                         <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">🔎 BNS/BNSS/BSA Section Finder</h2>
@@ -3990,7 +4151,7 @@
                     </div>
 
                     <!-- ==========================================================
-                    CALCULATOR TAB — All 8 Calculators (Court Fees, Interest, Limitation, Stamp Duty, EMI, ROI, Income Tax, GST)
+                    CALCULATOR TAB
                     ========================================================== -->
                     <div id="calculator" class="tab-content">
                         <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">🧮 Legal & Financial Calculators</h2>
@@ -4138,52 +4299,6 @@
                             <div id="daily-quiz-result" class="mt-2 text-base"></div>
                             <button onclick="loadDailyQuiz()" class="bg-indigo-600 text-white px-6 py-3 rounded-xl text-base hover:bg-indigo-700 transition w-full font-bold">🔄 New Question</button>
                             <div class="mt-3 text-center text-sm text-slate-400" style="color:#94a3b8 !important;">📊 Your Score: <span id="daily-quiz-score">0</span> correct</div>
-                        </div>
-                    </div>
-
-                    <!-- ==========================================================
-                    COMMUNITY HELPLINE — Complete with 110 Lucknow Wards
-                    ========================================================== -->
-                    <div id="community-helpline" class="tab-content">
-                        <h2 class="text-xl font-bold mb-4 text-slate-800 court-font" style="color:#f1f5f9 !important;">📞 Community Helpline · 110 Wards</h2>
-                        <p class="text-base text-gray-600 mb-3" style="color:#94a3b8 !important;">अपने इलाके की समस्या दर्ज करें – Pani, Sadak, Safai, Nal, Bijli, Stray Dogs, Parking। <b>110 wards</b> में से चुनें, auto ID, status tracking, admin view।</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <button onclick="switchHelplineTab('submit', this)" class="tab-btn active" style="border-bottom-width:2px;font-size:0.9rem;padding:8px 16px;min-height:40px;">📝 Submit Complaint</button>
-                            <button onclick="switchHelplineTab('track', this)" class="tab-btn" style="border-bottom-width:2px;font-size:0.9rem;padding:8px 16px;min-height:40px;">🔍 Track Complaint</button>
-                            <button onclick="switchHelplineTab('admin', this)" class="tab-btn" style="border-bottom-width:2px;font-size:0.9rem;padding:8px 16px;min-height:40px;">👑 Admin View</button>
-                        </div>
-                        <!-- Submit -->
-                        <div id="helpline-submit" class="helpline-tab-content">
-                            <form id="complaint-form" onsubmit="submitComplaint(event)">
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Your Name *</label><input type="text" id="complaint-name" placeholder="Full name" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"></div>
-                                    <div><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Phone Number *</label><input type="tel" id="complaint-phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"></div>
-                                    <div><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Ward * (110 Wards)</label><select id="complaint-ward" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;max-height:300px;"><option value="">— Select Ward —</option></select></div>
-                                    <div><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Category *</label><select id="complaint-category" required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"><option value="">Select Category</option><option value="Pani">💧 Pani (Water)</option><option value="Sadak">🛣️ Sadak (Roads)</option><option value="Safai">🧹 Safai (Cleaning)</option><option value="Nal">🚰 Nal (Tap/Borewell)</option><option value="Bijli">💡 Bijli (Electricity)</option><option value="Stray Dogs">🐕 Stray Dogs</option><option value="Parking">🅿️ Parking</option><option value="Other">Other</option></select></div>
-                                </div>
-                                <div class="mt-3"><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Description *</label><textarea id="complaint-desc" rows="4" placeholder="Describe your issue in detail..." required class="w-full border border-slate-300 rounded-xl p-3 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"></textarea></div>
-                                <div class="mt-3"><label class="text-sm font-medium" style="color:#e2e8f0 !important;">Upload Photo (optional)</label><input type="file" id="complaint-photo" accept="image/*" class="w-full border border-slate-300 rounded-xl p-2 mt-1 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;"><div id="photo-preview" class="mt-2"></div></div>
-                                <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-xl text-base hover:bg-indigo-700 transition w-full mt-4 font-bold">📤 Submit Complaint</button>
-                            </form>
-                            <div id="complaint-submit-status" class="mt-3 text-base hidden"></div>
-                        </div>
-                        <!-- Track -->
-                        <div id="helpline-track" class="helpline-tab-content hidden">
-                            <div class="flex flex-col sm:flex-row gap-3 mb-3">
-                                <input type="text" id="track-complaint-id" placeholder="Enter Complaint ID (e.g., CMP-12345)" class="flex-1 border border-slate-300 rounded-xl p-3 text-base" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;">
-                                <button onclick="trackComplaint()" class="bg-blue-600 text-white px-6 py-3 rounded-xl text-base hover:bg-blue-700 transition font-bold">🔍 Track</button>
-                            </div>
-                            <div id="track-result" class="mt-3"></div>
-                        </div>
-                        <!-- Admin -->
-                        <div id="helpline-admin" class="helpline-tab-content hidden">
-                            <div class="flex flex-wrap gap-3 mb-3 items-center">
-                                <span class="text-sm font-medium" style="color:#e2e8f0 !important;">Filter by Ward:</span>
-                                <select id="admin-ward-filter" class="border border-slate-300 rounded-xl p-2 text-sm" style="background:rgba(255,255,255,0.06) !important;border-color:rgba(255,255,255,0.08) !important;color:#e2e8f0 !important;max-height:300px;" onchange="renderAdminComplaints()"><option value="all">All Wards</option></select>
-                                <button onclick="exportCSV()" class="bg-green-600 text-white px-4 py-2 rounded-xl text-sm hover:bg-green-700 transition font-bold">📥 Export CSV</button>
-                                <span id="admin-count" class="text-sm text-slate-400 ml-auto" style="color:#94a3b8 !important;">0 complaints</span>
-                            </div>
-                            <div id="admin-complaints-list" class="space-y-2 max-h-[500px] overflow-y-auto scrollbar-hide"></div>
                         </div>
                     </div>
 
@@ -7062,7 +7177,437 @@
         }
 
         // ============================================================
-        // 11. DASHBOARD (Case Tareekh)
+        // COMMUNITY COMPLAINT FUNCTIONS
+        // ============================================================
+
+        // Load wards into dropdown
+        async function loadCommunityWards() {
+            try {
+                const response = await fetch('/api/sections/wards');
+                const wards = await response.json();
+                const select = document.getElementById('community-ward');
+                if (select) {
+                    select.innerHTML = '<option value="">— Select Ward —</option>' + 
+                        wards.map(w => `<option value="${w.number}">${w.label}</option>`).join('');
+                }
+            } catch (e) {
+                console.error('Error loading wards:', e);
+            }
+        }
+
+        // Submit community complaint
+        async function submitCommunityComplaint(event) {
+            event.preventDefault();
+            
+            const ward = document.getElementById('community-ward').value;
+            const category = document.getElementById('community-category').value;
+            const userMobile = document.getElementById('community-mobile').value;
+            const complaintText = document.getElementById('community-text').value.trim();
+            const photoInput = document.getElementById('community-photo');
+            const resultDiv = document.getElementById('community-result');
+            
+            if (!ward || !category || !userMobile || !complaintText) {
+                resultDiv.className = 'mt-4 text-base text-red-400 bg-red-900/20 p-3 rounded-xl';
+                resultDiv.innerHTML = '⚠️ Please fill all required fields!';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            let photoBase64 = null;
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoBase64 = e.target.result;
+                    sendComplaint(ward, category, complaintText, photoBase64, userMobile);
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                sendComplaint(ward, category, complaintText, null, userMobile);
+            }
+        }
+
+        async function sendComplaint(ward, category, complaintText, photoBase64, userMobile) {
+            const resultDiv = document.getElementById('community-result');
+            resultDiv.className = 'mt-4 text-base text-slate-300 bg-slate-800/20 p-3 rounded-xl';
+            resultDiv.innerHTML = '⏳ Submitting complaint...';
+            resultDiv.classList.remove('hidden');
+            
+            try {
+                const response = await fetch('/api/sections', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ward, category, complaintText, photoBase64, userMobile })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'mt-4 text-base text-green-400 bg-green-900/20 p-4 rounded-xl border border-green-700';
+                    resultDiv.innerHTML = `
+                        ✅ <b>Complaint Submitted Successfully!</b><br>
+                        📋 <b>Tracking ID:</b> <span class="font-mono text-lg">${data.trackingId}</span><br>
+                        🏛️ <b>Department:</b> ${data.department}<br>
+                        📍 <b>Ward:</b> ${data.ward}<br>
+                        📊 <b>Status:</b> ${data.status}<br>
+                        <p class="text-sm text-slate-400 mt-2">Use this Tracking ID to check status in the Helpline tab.</p>
+                    `;
+                    
+                    // Reset form
+                    document.getElementById('community-complaint-form').reset();
+                    document.getElementById('community-photo-preview').innerHTML = '';
+                    
+                    // Auto-fill tracking in helpline tab
+                    document.getElementById('helpline-tracking-id').value = data.trackingId;
+                } else {
+                    resultDiv.className = 'mt-4 text-base text-red-400 bg-red-900/20 p-3 rounded-xl';
+                    resultDiv.innerHTML = '❌ Failed to submit complaint. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error submitting complaint:', error);
+                resultDiv.className = 'mt-4 text-base text-red-400 bg-red-900/20 p-3 rounded-xl';
+                resultDiv.innerHTML = '❌ Network error. Please try again.';
+            }
+        }
+
+        // ============================================================
+        // HELPLINE FUNCTIONS
+        // ============================================================
+
+        // Track complaint status
+        async function trackComplaintStatus() {
+            const trackingId = document.getElementById('helpline-tracking-id').value.trim();
+            const resultDiv = document.getElementById('tracking-result');
+            
+            if (!trackingId) {
+                resultDiv.innerHTML = '<div class="text-red-400 text-base">⚠️ Please enter a Tracking ID</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="text-slate-300 text-base">⏳ Fetching status...</div>';
+            
+            try {
+                const response = await fetch(`/api/sections/${trackingId}`);
+                if (!response.ok) {
+                    throw new Error('Complaint not found');
+                }
+                const data = await response.json();
+                
+                const statusColors = {
+                    'PENDING': 'text-yellow-400 bg-yellow-900/20',
+                    'IN PROGRESS': 'text-blue-400 bg-blue-900/20',
+                    'RESOLVED': 'text-green-400 bg-green-900/20'
+                };
+                
+                const statusClass = statusColors[data.status] || 'text-slate-300 bg-slate-700/20';
+                const date = new Date(data.submittedAt).toLocaleString();
+                
+                resultDiv.innerHTML = `
+                    <div class="bg-slate-700/30 p-4 rounded-xl border border-slate-600">
+                        <div class="flex justify-between items-start flex-wrap gap-2">
+                            <div>
+                                <span class="font-mono text-lg text-indigo-400">${data.trackingId}</span>
+                                <span class="ml-2 px-3 py-1 rounded-full text-sm ${statusClass}">${data.status}</span>
+                            </div>
+                            <span class="text-sm text-slate-400">📅 ${date}</span>
+                        </div>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                            <div><b>Ward:</b> ${data.ward}</div>
+                            <div><b>Department:</b> ${data.department}</div>
+                            <div><b>Priority:</b> ${data.priority}</div>
+                            <div><b>Category:</b> ${data.category}</div>
+                        </div>
+                        <div class="mt-2 text-sm"><b>Complaint:</b> ${data.complaintText}</div>
+                        ${data.photoBase64 ? `<img src="${data.photoBase64}" alt="Complaint Photo" class="mt-2 max-w-[200px] max-h-[200px] rounded-lg">` : ''}
+                        <div class="mt-3 flex gap-2 flex-wrap">
+                            <a href="tel:${data.userMobile}" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700">📞 Call Back</a>
+                            <a href="https://wa.me/91${data.userMobile}?text=Your%20complaint%20${data.trackingId}%20is%20${data.status}" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600">💬 WhatsApp</a>
+                            <button onclick="reopenComplaint('${data.trackingId}')" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-700">🔄 Reopen</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="text-red-400 text-base">❌ ${error.message}</div>`;
+            }
+        }
+
+        // Search legal sections in helpline
+        function searchHelplineSections() {
+            const query = document.getElementById('helpline-section-search').value.trim().toLowerCase();
+            const resultDiv = document.getElementById('helpline-section-results');
+            
+            if (!query) {
+                resultDiv.innerHTML = '<div class="text-slate-400 text-sm">Please enter a search term</div>';
+                return;
+            }
+            
+            const allSections = ALL_SECTIONS || [];
+            const results = allSections.filter(s => 
+                s.number.toLowerCase().includes(query) ||
+                s.title.toLowerCase().includes(query) ||
+                s.desc.toLowerCase().includes(query)
+            ).slice(0, 10);
+            
+            if (results.length === 0) {
+                resultDiv.innerHTML = '<div class="text-slate-400 text-sm">No sections found</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = results.map(s => `
+                <div class="border-b border-slate-700 p-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="font-bold text-indigo-400">${s.number}</span>
+                        <span class="text-xs text-slate-400">${s.old || 'New Law'}</span>
+                    </div>
+                    <div class="text-slate-300">${s.title}</div>
+                    <div class="text-slate-400 text-xs">${s.desc}</div>
+                    ${s.trick ? `<div class="text-amber-400 text-xs mt-1">💡 ${s.trick}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Reopen complaint
+        async function reopenComplaint(trackingId) {
+            try {
+                const response = await fetch(`/api/sections/${trackingId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: 'PENDING', notes: 'Reopened by user' })
+                });
+                if (response.ok) {
+                    alert('✅ Complaint reopened successfully!');
+                    trackComplaintStatus();
+                }
+            } catch (e) {
+                alert('❌ Failed to reopen complaint');
+            }
+        }
+
+        // Load helpline departments
+        async function loadHelplineDepartments() {
+            try {
+                const response = await fetch('/api/sections/departments');
+                const depts = await response.json();
+                const container = document.getElementById('helpline-departments');
+                if (container && depts.length > 0) {
+                    container.innerHTML = depts.map(d => `
+                        <div class="flex justify-between items-center p-2 bg-slate-700/30 rounded-lg">
+                            <span>${d.name}</span>
+                            <div class="flex gap-2">
+                                <span class="text-sm text-slate-300">${d.phone}</span>
+                                <a href="tel:${d.phone}" class="bg-green-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-700">📞 Call</a>
+                                <a href="https://wa.me/91${d.phone.replace(/[^0-9]/g, '')}" target="_blank" class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-600">💬 WhatsApp</a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {
+                console.error('Error loading departments:', e);
+            }
+        }
+
+        // ============================================================
+        // VOICE COMPLAINT FUNCTIONS
+        // ============================================================
+
+        let isVoiceComplaintListening = false;
+        let voiceComplaintRecognition = null;
+
+        function startVoiceComplaint() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('🔊 Voice input is not supported in your browser. Please use Chrome/Edge.');
+                return;
+            }
+            
+            const btn = document.querySelector('#voice-complaint-label');
+            if (isVoiceComplaintListening) {
+                if (voiceComplaintRecognition) {
+                    try { voiceComplaintRecognition.stop(); } catch (e) {}
+                }
+                isVoiceComplaintListening = false;
+                btn.textContent = 'Voice Input';
+                document.getElementById('voice-complaint-label').style.color = '';
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            voiceComplaintRecognition = new SpeechRecognition();
+            voiceComplaintRecognition.lang = 'hi-IN';
+            voiceComplaintRecognition.interimResults = true;
+            voiceComplaintRecognition.continuous = false;
+            
+            btn.textContent = '🔴 Listening...';
+            document.getElementById('voice-complaint-label').style.color = '#ef4444';
+            isVoiceComplaintListening = true;
+            
+            voiceComplaintRecognition.onresult = function(event) {
+                let final = '';
+                let interim = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) {
+                        final += event.results[i][0].transcript;
+                    } else {
+                        interim += event.results[i][0].transcript;
+                    }
+                }
+                const textArea = document.getElementById('community-text');
+                if (textArea) {
+                    if (final) {
+                        textArea.value = (textArea.value ? textArea.value + ' ' : '') + final;
+                        // Auto-submit if driving mode is on
+                        if (isDrivingMode) {
+                            document.getElementById('community-complaint-form').requestSubmit();
+                        }
+                    } else if (interim) {
+                        textArea.value = (textArea.value ? textArea.value + ' ' : '') + interim;
+                    }
+                }
+            };
+            
+            voiceComplaintRecognition.onerror = function(event) {
+                console.warn('Speech error:', event.error);
+                isVoiceComplaintListening = false;
+                btn.textContent = 'Voice Input';
+                document.getElementById('voice-complaint-label').style.color = '';
+                if (event.error === 'not-allowed') {
+                    alert('🔊 Microphone access was denied. Please allow microphone access and try again.');
+                }
+            };
+            
+            voiceComplaintRecognition.onend = function() {
+                isVoiceComplaintListening = false;
+                btn.textContent = 'Voice Input';
+                document.getElementById('voice-complaint-label').style.color = '';
+            };
+            
+            try { voiceComplaintRecognition.start(); } catch (e) {
+                isVoiceComplaintListening = false;
+                btn.textContent = 'Voice Input';
+                document.getElementById('voice-complaint-label').style.color = '';
+            }
+        }
+
+        // ============================================================
+        // DRIVING MODE
+        // ============================================================
+
+        let isDrivingMode = false;
+
+        function toggleDrivingMode() {
+            isDrivingMode = !isDrivingMode;
+            const btn = document.getElementById('driving-mode-btn');
+            if (isDrivingMode) {
+                btn.innerHTML = '🚗 Driving Mode ON - Tap to Speak';
+                btn.className = 'bg-red-600 text-white px-6 py-4 rounded-full text-lg font-bold animate-pulse w-full';
+            } else {
+                btn.innerHTML = '🚗 Driving Mode OFF';
+                btn.className = 'bg-indigo-600 text-white px-6 py-4 rounded-full text-lg font-bold w-full';
+            }
+        }
+
+        // ============================================================
+        // MISSING FUNCTIONS - Placeholder implementations
+        // ============================================================
+
+        function searchIndianKanoon(inputId) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const query = input.value.trim();
+            if (!query) { alert('कृपया कुछ लिखें!'); return; }
+            window.open(`https://www.indiankanoon.org/search/?formInput=${encodeURIComponent(query)}`, '_blank');
+        }
+
+        function generateNotice() {
+            const sender = document.getElementById('notice-sender').value.trim();
+            const senderAddr = document.getElementById('notice-sender-address').value.trim();
+            const receiver = document.getElementById('notice-receiver').value.trim();
+            const receiverAddr = document.getElementById('notice-receiver-address').value.trim();
+            const subject = document.getElementById('notice-subject').value.trim();
+            const description = document.getElementById('notice-description').value.trim();
+            
+            if (!sender || !receiver || !subject || !description) {
+                alert('कृपया सभी fields भरें!');
+                return;
+            }
+            
+            const preview = document.getElementById('notice-preview');
+            const container = document.getElementById('notice-preview-container');
+            
+            preview.innerHTML = `
+                <div class="header">
+                    <h1>LEGAL NOTICE</h1>
+                    <p style="margin:5px 0;">Under BNSS/BNS/BSA 2023</p>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <p><strong>From:</strong> ${sender}</p>
+                    <p>${senderAddr}</p>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <p><strong>To:</strong> ${receiver}</p>
+                    <p>${receiverAddr}</p>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <p><strong>Subject:</strong> ${subject}</p>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <p>${description}</p>
+                </div>
+                <div style="margin-top:20px;border-top:1px solid #ccc;padding-top:10px;">
+                    <p>Date: ${new Date().toLocaleDateString()}</p>
+                    <p style="margin-top:10px;">Yours sincerely,<br>${sender}</p>
+                </div>
+            `;
+            
+            container.classList.remove('hidden');
+            document.getElementById('notice-download-btn').disabled = false;
+        }
+
+        function downloadNoticePDF() {
+            alert('📥 PDF download coming soon!');
+        }
+
+        function selectFreeDraft() {
+            document.getElementById('doc-type').value = 'free';
+            generateDocBNS();
+        }
+
+        function generateDocBNS() {
+            const docType = document.getElementById('doc-type').value;
+            const details = document.getElementById('doc-details').value.trim();
+            const outputDiv = document.getElementById('doc-output');
+            const previewDiv = document.getElementById('doc-preview');
+            
+            if (!details) { alert('कृपया Case Details भरें!'); return; }
+            
+            outputDiv.classList.remove('hidden');
+            previewDiv.innerHTML = `
+                <div class="header">
+                    <h1>${docType === 'free' ? 'FIR Application (BNSS 173)' : 'Legal Draft'}</h1>
+                </div>
+                <div style="margin-top: 10px;">
+                    <p><strong>Case Details:</strong></p>
+                    <p style="white-space:pre-wrap;">${details}</p>
+                </div>
+                <div class="prayer" style="margin-top: 15px;">
+                    <p><strong>Prayer:</strong> It is therefore prayed that the concerned authority may take appropriate action in the matter.</p>
+                </div>
+                <p style="margin-top: 15px;">Date: ${new Date().toLocaleDateString()}</p>
+            `;
+            
+            const statusSpan = document.getElementById('draft-status');
+            statusSpan.textContent = '✅ Free Draft';
+            statusSpan.className = 'text-sm font-bold px-4 py-1 rounded-full draft-status-free';
+            
+            document.getElementById('download-free-btn').style.display = 'block';
+        }
+
+        function clearDraft() {
+            document.getElementById('doc-output').classList.add('hidden');
+            document.getElementById('doc-details').value = '';
+            document.getElementById('doc-type').value = 'free';
+        }
+
+        // ============================================================
+        // DASHBOARD (Case Tareekh)
         // ============================================================
         let casesList = [];
         try { casesList = JSON.parse(localStorage.getItem('lko_cases_bns')) || []; } catch (e) { casesList = []; }
@@ -7100,7 +7645,7 @@
         renderCasesList();
 
         // ============================================================
-        // 12. SOURCES
+        // SOURCES
         // ============================================================
         const sourcesData = [
             { name: "SCC Online", desc: "Supreme Court Cases", url: "https://www.scconline.com", tags: ["Case Law"] },
@@ -7118,7 +7663,7 @@
         }
 
         // ============================================================
-        // 13. QUIZ — 50 Questions
+        // QUIZ — 50 Questions
         // ============================================================
         const QUIZ_DATA_FINAL = [
             { question: "BNS 318 (Cheating) ki maximum saza kya hai?", options: ["7 years", "10 years", "3 years",
@@ -7378,7 +7923,7 @@
         loadQuiz();
 
         // ============================================================
-        // 14. DICTIONARY — 50+ Terms
+        // DICTIONARY — 50+ Terms
         // ============================================================
         const DICTIONARY_DATA = [
             { term: 'BNS', full: 'Bharatiya Nyaya Sanhita', def: 'भारतीय न्याय संहिता - 1 July 2024 से लागू',
@@ -7595,7 +8140,7 @@
             document.getElementById('dict-detail-panel')?.classList.add('hidden'); }
 
         // ============================================================
-        // 15. FUNNY STORIES
+        // FUNNY STORIES
         // ============================================================
         const FUNNY_STORIES = [
             { id: 1, title: '🍵 चाय तलाक – शादी के 2 घंटे बाद तलाक',
@@ -7692,7 +8237,7 @@
         }
 
         // ============================================================
-        // 16. SUGGESTIONS
+        // SUGGESTIONS
         // ============================================================
         let suggestions = [];
         try { const saved = localStorage.getItem('suggestions'); if (saved) suggestions = JSON.parse(saved); } catch (e) {}
@@ -7738,7 +8283,7 @@
         }
 
         // ============================================================
-        // 17. RSS FEED — Dynamic with fallback
+        // RSS FEED — Dynamic with fallback
         // ============================================================
         const RSS_FEEDS = [
             { name: 'LiveLaw', url: 'https://www.livelaw.in/rss', category: 'breaking' },
@@ -7870,7 +8415,7 @@
         }
 
         // ============================================================
-        // 18. WOMEN NEWS SIDEBAR
+        // WOMEN NEWS SIDEBAR
         // ============================================================
         async function refreshWomenNews() {
             const container = document.getElementById('women-news-container');
@@ -7896,7 +8441,7 @@
         }
 
         // ============================================================
-        // 19. QUICK READS SIDEBAR
+        // QUICK READS SIDEBAR
         // ============================================================
         function loadQuickReads() {
             const container = document.getElementById('quick-reads-container');
@@ -7913,7 +8458,7 @@
         }
 
         // ============================================================
-        // 20. TRENDING TAGS SIDEBAR
+        // TRENDING TAGS SIDEBAR
         // ============================================================
         function loadTrendingTags() {
             const container = document.getElementById('trending-tags-container');
@@ -7925,7 +8470,7 @@
         }
 
         // ============================================================
-        // 21. CASES — Dynamic from RSS
+        // CASES — Dynamic from RSS
         // ============================================================
         let allCaseItems = [];
         let currentCaseFilter = 'all';
@@ -7971,7 +8516,7 @@
             renderCaseList(); }
 
         // ============================================================
-        // 22. LIVE NEWS
+        // LIVE NEWS
         // ============================================================
         let liveNewsItems = [];
 
@@ -8001,7 +8546,7 @@
         }
 
         // ============================================================
-        // 23. COMMUNITY
+        // COMMUNITY
         // ============================================================
         let communityTips = [];
         try { communityTips = JSON.parse(localStorage.getItem('communityTips')) || [
@@ -8030,7 +8575,7 @@
         }
 
         // ============================================================
-        // 24. MOCK TRIAL
+        // MOCK TRIAL
         // ============================================================
         async function askMockTrial() {
             const input = document.getElementById('mock-input').value.trim();
@@ -8052,7 +8597,7 @@
         }
 
         // ============================================================
-        // 25. BLOG SUBMIT
+        // BLOG SUBMIT
         // ============================================================
         let submittedBlogs = [];
         try { submittedBlogs = JSON.parse(localStorage.getItem('submitted_blogs')) || []; } catch (e) { submittedBlogs = []; }
@@ -8077,9 +8622,36 @@
             if (index < 0 || index >= submittedBlogs.length) return;
             submittedBlogs[index].status = 'rejected';
             localStorage.setItem('submitted_blogs', JSON.stringify(submittedBlogs));
-            renderSubmittedBlogs();
             updateBlogCounter();
             alert('❌ Blog Rejected.');
+        }
+
+        function viewBlog(index) {
+            const blog = submittedBlogs[index];
+            if (!blog) return;
+
+            blog.views = (blog.views || 0) + 1;
+            localStorage.setItem('submitted_blogs', JSON.stringify(submittedBlogs));
+            renderSubmittedBlogs();
+
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top:0; left:0; width:100%; height:100%;
+                background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+                display: flex; align-items: center; justify-content: center;
+                z-index: 10000; padding: 20px;
+            `;
+            modal.innerHTML = `
+                <div style="background: #1e293b; border: 1px solid #4f46e5; border-radius: 20px; padding: 30px; max-width: 700px; width:100%; max-height:90vh; overflow-y:auto; color: #e2e8f0; position:relative;">
+                    <button onclick="this.closest('div[style]').parentElement.remove()" style="position:absolute; top:15px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#94a3b8; font-size:1.5rem; cursor:pointer;">✕</button>
+                    <h2 style="font-size:1.8rem; font-weight:700; color:#f1f5f9;">${blog.title}</h2>
+                    <p style="color:#94a3b8; font-size:0.9rem;">👤 ${blog.name} · 📚 ${blog.category} · 👁️ ${blog.views} views</p>
+                    <div style="border-top:1px solid #334155; margin: 15px 0; padding-top:15px; font-size:1.1rem; line-height:1.8; white-space:pre-wrap;">${blog.content}</div>
+                    <div style="font-size:0.85rem; color:#64748b;">📝 ${blog.wordCount} words · Submitted: ${new Date(blog.submittedAt).toLocaleString()}</div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.addEventListener('click', function(e) { if (e.target === this) this.remove(); });
         }
 
         function submitBlog() {
@@ -8091,21 +8663,36 @@
             const agree = document.getElementById('blog-agree').checked;
             const statusDiv = document.getElementById('blog-submit-status');
             const toast = document.getElementById('blog-toast-success');
+
             if (!name) { alert('कृपया अपना नाम डालें!'); return; }
             if (!email || !email.includes('@')) { alert('कृपया सही email डालें!'); return; }
             if (!title || title.length < 5) { alert('Blog title कम से कम 5 अक्षर का हो!'); return; }
             if (!category) { alert('Category select करें!'); return; }
             if (!content || content.length < 100) { alert('Blog content कम से कम 100 शब्दों का हो!'); return; }
             if (!agree) { alert('✅ Please confirm this is your original work!'); return; }
+
             const wordCount = content.trim().split(/\s+/).filter(w => w.length > 0).length;
             if (wordCount < 100) { alert('कम से कम 100 शब्द लिखें!'); return; }
-            const blogData = { name, email, title, category, content, wordCount, status: 'pending', submittedAt: new Date()
-                    .toISOString() };
+
+            const blogData = {
+                name: name,
+                email: email,
+                title: title,
+                category: category,
+                content: content,
+                wordCount: wordCount,
+                status: 'pending',
+                submittedAt: new Date().toISOString(),
+                views: 0
+            };
+
             submittedBlogs.unshift(blogData);
             localStorage.setItem('submitted_blogs', JSON.stringify(submittedBlogs));
+
             toast.classList.remove('hidden');
             document.getElementById('blog-toast-title').textContent = `"${title}"`;
             toast.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
             document.getElementById('blog-author-name').value = '';
             document.getElementById('blog-author-email').value = '';
             document.getElementById('blog-title').value = '';
@@ -8113,9 +8700,11 @@
             document.getElementById('blog-content').value = '';
             document.getElementById('blog-agree').checked = false;
             document.getElementById('blog-word-count').textContent = 'Words: 0 (Minimum 100)';
+
             statusDiv.className = 'mt-2 text-base text-green-700 bg-green-50 p-3 rounded-xl';
             statusDiv.innerHTML = `✅ Blog "${title}" सबमिट हो गया! 📩 Under Review में है।`;
             statusDiv.classList.remove('hidden');
+
             renderSubmittedBlogs();
             updateBlogCounter();
             setTimeout(() => { toast.classList.add('hidden'); }, 5000);
@@ -8141,7 +8730,10 @@
                         <div class="flex justify-between items-start gap-2 flex-wrap">
                             <div class="flex-1">
                                 <div class="blog-title">${b.title}</div>
-                                <div class="blog-meta">👤 ${b.name} · 📚 ${b.category} · 📅 ${date} ${time}</div>
+                                <div class="blog-meta">
+                                    👤 ${b.name} · 📚 ${b.category} · 📅 ${date} ${time}
+                                    <span class="ml-2 text-sm text-blue-400">👁️ ${b.views || 0} views</span>
+                                </div>
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
                                 <span class="text-sm ${statusClass} px-3 py-1 rounded-full font-semibold">${statusLabel}</span>
@@ -8151,6 +8743,7 @@
                         </div>
                         <div class="blog-content-preview">${b.content.slice(0, 120)}${b.content.length > 120 ? '…' : ''}</div>
                         <div class="text-xs text-slate-400 mt-1" style="color:#94a3b8 !important;">📝 ${b.wordCount || 0} words</div>
+                        <button onclick="viewBlog(${idx})" class="btn-readmore mt-2">📖 Read Full Blog</button>
                     </div>
                 `;
             }).join('');
@@ -8166,7 +8759,7 @@
         }
 
         // ============================================================
-        // 26. UPI DONATION
+        // UPI DONATION
         // ============================================================
         function donateUPI(amount) {
             if (!amount) {
@@ -8197,7 +8790,7 @@
         }
 
         // ============================================================
-        // 27. CALCULATOR FUNCTIONS (Existing + New)
+        // CALCULATOR FUNCTIONS
         // ============================================================
         function calculateCourtFee() {
             const type = document.getElementById('court-fee-type').value;
@@ -8250,7 +8843,6 @@
             `;
         }
 
-        // ---- New Calculators ----
         function calculateStampDuty() {
             const propertyType = document.getElementById('stamp-property-type').value;
             const value = parseFloat(document.getElementById('stamp-value').value) || 0;
@@ -8368,7 +8960,7 @@
         }
 
         // ============================================================
-        // 28. TIMELINE
+        // TIMELINE
         // ============================================================
         function generateTimeline() {
             const container = document.getElementById('timeline-container');
@@ -8413,7 +9005,7 @@
         }
 
         // ============================================================
-        // 29. SUMMARIZER
+        // SUMMARIZER
         // ============================================================
         function summarizeJudgment() {
             const text = document.getElementById('judgment-text').value.trim();
@@ -8452,7 +9044,7 @@
         }
 
         // ============================================================
-        // 30. SAFETY
+        // SAFETY
         // ============================================================
         function safetyAction(type) {
             const map = {
@@ -8469,7 +9061,7 @@
         }
 
         // ============================================================
-        // 31. DAILY QUIZ
+        // DAILY QUIZ
         // ============================================================
         const DAILY_QUIZ_POOL = [
             { question: "BNS 318 (Cheating) ki maximum saza kya hai?", options: ["7 years", "10 years", "3 years",
@@ -8588,7 +9180,7 @@
         }
 
         // ============================================================
-        // 32. ABOUT / PRIVACY / TERMS / CONTACT MODALS
+        // ABOUT / PRIVACY / TERMS / CONTACT MODALS
         // ============================================================
         function showAboutModal() {
             const modal = document.createElement('div');
@@ -8751,7 +9343,7 @@
         }
 
         // ============================================================
-        // 33. TRENDING TAB — Dynamic from API
+        // TRENDING TAB — Dynamic from API
         // ============================================================
         let trendingData = [];
 
@@ -8770,22 +9362,25 @@
                 }
             } catch (e) {
                 trendingData = [
-                    { title: 'BNS 318 vs IPC 420 — Cheating', views: '12.5K', link: '#' },
-                    { title: 'BNSS 173 — FIR process explained', views: '8.7K', link: '#' },
-                    { title: 'Women Helpline 181 — Know your rights', views: '6.3K', link: '#' },
-                    { title: 'Cyber fraud — How to report 1930', views: '5.1K', link: '#' },
-                    { title: 'SC landmark — Bail is rule', views: '4.8K', link: '#' },
-                    { title: 'Maintenance under BNSS 144', views: '3.9K', link: '#' }
+                    { topic: 'BNS 318 vs IPC 420 — Cheating', views: '12.5K' },
+                    { topic: 'BNSS 173 — FIR process explained', views: '8.7K' },
+                    { topic: 'Women Helpline 181 — Know your rights', views: '6.3K' },
+                    { topic: 'Cyber fraud — How to report 1930', views: '5.1K' },
+                    { topic: 'SC landmark — Bail is rule', views: '4.8K' },
+                    { topic: 'Maintenance under BNSS 144', views: '3.9K' }
                 ];
             }
-           container.innerHTML = trendingData.map(t =>
-    `<div ...><h4 class="...">📌 ${t.topic}</h4><p class="...">👁️ ${t.views} views</p></div>`
-).join('');
+            container.innerHTML = trendingData.map(t => `
+                <div class="bg-slate-700/20 p-3 rounded-xl">
+                    <h4 class="font-semibold text-base text-slate-200">📌 ${t.topic}</h4>
+                    <p class="text-sm text-slate-400">👁️ ${t.views} views</p>
+                </div>
+            `).join('');
             if (updateSpan) updateSpan.textContent = `🔄 Updated: ${new Date().toLocaleTimeString()}`;
         }
 
         // ============================================================
-        // 34. VOICE TYPING (Web Speech)
+        // VOICE TYPING (Web Speech)
         // ============================================================
         let isListening = false;
         let recognition = null;
@@ -8854,305 +9449,7 @@
         }
 
         // ============================================================
-        // 35. COMMUNITY HELPLINE — COMPLAINT SYSTEM (with 110 wards)
-        // ============================================================
-        let complaints = [];
-        try { const stored = localStorage.getItem('community_complaints'); if (stored) complaints = JSON.parse(stored); } catch (
-            e) { complaints = []; }
-
-        function generateComplaintID() {
-            const timestamp = Date.now().toString(36).toUpperCase();
-            const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-            return `CMP-${timestamp.slice(-4)}${random}`;
-        }
-
-        function submitComplaint(e) {
-            e.preventDefault();
-            const name = document.getElementById('complaint-name').value.trim();
-            const phone = document.getElementById('complaint-phone').value.trim();
-            const ward = document.getElementById('complaint-ward').value;
-            const category = document.getElementById('complaint-category').value;
-            const desc = document.getElementById('complaint-desc').value.trim();
-            const photoInput = document.getElementById('complaint-photo');
-            const statusDiv = document.getElementById('complaint-submit-status');
-
-            if (!name || !phone || !ward || !category || !desc) {
-                statusDiv.className = 'mt-3 text-base text-red-400 bg-red-900/20 p-3 rounded-xl';
-                statusDiv.textContent = '⚠️ कृपया सभी आवश्यक fields भरें!';
-                statusDiv.classList.remove('hidden');
-                return;
-            }
-
-            let photoData = null;
-            if (photoInput.files && photoInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    photoData = ev.target.result;
-                    saveComplaint(name, phone, ward, category, desc, photoData);
-                };
-                reader.readAsDataURL(photoInput.files[0]);
-            } else {
-                saveComplaint(name, phone, ward, category, desc, null);
-            }
-
-            document.getElementById('complaint-form').reset();
-            document.getElementById('photo-preview').innerHTML = '';
-        }
-
-        function saveComplaint(name, phone, ward, category, desc, photoData) {
-            const id = generateComplaintID();
-            const complaint = {
-                id,
-                name,
-                phone,
-                ward,
-                category,
-                desc,
-                photo: photoData,
-                status: 'pending',
-                submittedAt: new Date().toISOString(),
-                resolvedAt: null
-            };
-            complaints.unshift(complaint);
-            localStorage.setItem('community_complaints', JSON.stringify(complaints));
-
-            const statusDiv = document.getElementById('complaint-submit-status');
-            statusDiv.className = 'mt-3 text-base text-green-400 bg-green-900/20 p-3 rounded-xl';
-            statusDiv.innerHTML = `
-                ✅ Complaint submitted successfully!<br>
-                <span class="font-mono text-sm">ID: ${id}</span><br>
-                <span class="text-sm opacity-80">Use this ID to track status.</span>
-            `;
-            statusDiv.classList.remove('hidden');
-
-            forwardComplaint(complaint);
-            renderAdminComplaints();
-        }
-
-        function forwardComplaint(complaint) {
-            const { id, name, phone, ward, category, desc } = complaint;
-            const subject = `Complaint ${id} - ${category} in ${ward}`;
-            const body =
-                `Complaint ID: ${id}\nName: ${name}\nPhone: ${phone}\nWard: ${ward}\nCategory: ${category}\nDescription: ${desc}\n\nPlease take action.`;
-
-            const whatsappNumber = '919999999999';
-            const whatsappUrl =
-                `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`*Complaint ${id}*%0A%0A${body.replace(/\n/g, '%0A')}`)}`;
-
-            const email = 'nagarnigam@lucknow.gov.in';
-            const emailUrl =
-                `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            const statusDiv = document.getElementById('complaint-submit-status');
-            statusDiv.innerHTML += `
-                <div class="mt-3 flex flex-wrap gap-2">
-                    <a href="${whatsappUrl}" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-xl text-sm hover:bg-green-700 transition font-bold">📱 Send via WhatsApp</a>
-                    <a href="${emailUrl}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm hover:bg-blue-700 transition font-bold">📧 Send via Email</a>
-                </div>
-                <p class="text-xs opacity-70 mt-2">Click to forward to the concerned department.</p>
-            `;
-        }
-
-        function trackComplaint() {
-            const id = document.getElementById('track-complaint-id').value.trim();
-            const resultDiv = document.getElementById('track-result');
-            if (!id) { resultDiv.innerHTML =
-                '<div class="text-red-400 text-base">⚠️ Please enter a Complaint ID.</div>'; return; }
-            const complaint = complaints.find(c => c.id === id);
-            if (!complaint) {
-                resultDiv.innerHTML = `<div class="text-red-400 text-base">❌ No complaint found with ID: ${id}</div>`;
-                return;
-            }
-            const statusClass = complaint.status === 'pending' ? 'pending' :
-                complaint.status === 'resolved' ? 'resolved' : 'rejected';
-            const statusLabel = complaint.status.charAt(0).toUpperCase() + complaint.status.slice(1);
-            const date = new Date(complaint.submittedAt).toLocaleString();
-            resultDiv.innerHTML = `
-                <div class="bg-slate-800/20 p-4 rounded-xl border border-slate-700">
-                    <div class="flex justify-between items-start flex-wrap gap-2">
-                        <span class="font-mono text-sm">${complaint.id}</span>
-                        <span class="status-badge ${statusClass}">${statusLabel}</span>
-                    </div>
-                    <div class="mt-2 text-sm"><b>Name:</b> ${complaint.name}</div>
-                    <div class="text-sm"><b>Ward:</b> ${complaint.ward}</div>
-                    <div class="text-sm"><b>Category:</b> ${complaint.category}</div>
-                    <div class="text-sm mt-1">${complaint.desc}</div>
-                    ${complaint.photo ? `<img src="${complaint.photo}" alt="Photo" class="upload-preview mt-2">` : ''}
-                    <div class="text-xs text-slate-400 mt-2">Submitted: ${date}</div>
-                    ${complaint.resolvedAt ? `<div class="text-xs text-green-400 mt-1">Resolved: ${new Date(complaint.resolvedAt).toLocaleString()}</div>` : ''}
-                </div>
-            `;
-        }
-
-        function renderAdminComplaints() {
-            const container = document.getElementById('admin-complaints-list');
-            const countSpan = document.getElementById('admin-count');
-            if (!container) return;
-
-            const wardFilter = document.getElementById('admin-ward-filter').value;
-            let filtered = complaints;
-            if (wardFilter !== 'all') {
-                filtered = complaints.filter(c => c.ward === wardFilter);
-            }
-
-            countSpan.textContent = `${filtered.length} complaints`;
-
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="text-center text-slate-400 text-base py-4">No complaints found.</div>';
-                return;
-            }
-
-            container.innerHTML = filtered.map((c, idx) => {
-                const statusClass = c.status === 'pending' ? 'pending' :
-                    c.status === 'resolved' ? 'resolved' : 'rejected';
-                const statusLabel = c.status.charAt(0).toUpperCase() + c.status.slice(1);
-                const date = new Date(c.submittedAt).toLocaleString();
-                return `
-                    <div class="complaint-card">
-                        <div class="flex justify-between items-start flex-wrap gap-2">
-                            <div>
-                                <span class="font-mono text-sm bg-slate-700/50 px-2 py-0.5 rounded">${c.id}</span>
-                                <span class="status-badge ${statusClass} ml-2">${statusLabel}</span>
-                            </div>
-                            <div class="flex gap-2 flex-wrap">
-                                <button onclick="updateComplaintStatus('${c.id}', 'resolved')" class="bg-green-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-700 transition">✅ Resolve</button>
-                                <button onclick="updateComplaintStatus('${c.id}', 'rejected')" class="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition">❌ Reject</button>
-                                <button onclick="deleteComplaint('${c.id}')" class="bg-slate-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-slate-700 transition">🗑️</button>
-                            </div>
-                        </div>
-                        <div class="mt-2 text-sm"><b>${c.name}</b> (${c.phone})</div>
-                        <div class="text-sm"><b>Ward:</b> ${c.ward} · <b>Category:</b> ${c.category}</div>
-                        <div class="text-sm mt-1">${c.desc}</div>
-                        ${c.photo ? `<img src="${c.photo}" alt="Photo" class="upload-preview mt-2">` : ''}
-                        <div class="text-xs text-slate-400 mt-2">Submitted: ${date}</div>
-                        ${c.resolvedAt ? `<div class="text-xs text-green-400">Resolved: ${new Date(c.resolvedAt).toLocaleString()}</div>` : ''}
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function updateComplaintStatus(id, status) {
-            const complaint = complaints.find(c => c.id === id);
-            if (!complaint) return;
-            complaint.status = status;
-            if (status === 'resolved') {
-                complaint.resolvedAt = new Date().toISOString();
-            } else {
-                complaint.resolvedAt = null;
-            }
-            localStorage.setItem('community_complaints', JSON.stringify(complaints));
-            renderAdminComplaints();
-            alert(`✅ Complaint ${id} marked as ${status}.`);
-        }
-
-        function deleteComplaint(id) {
-            if (!confirm(`Delete complaint ${id}?`)) return;
-            complaints = complaints.filter(c => c.id !== id);
-            localStorage.setItem('community_complaints', JSON.stringify(complaints));
-            renderAdminComplaints();
-            alert(`🗑️ Complaint ${id} deleted.`);
-        }
-
-        function exportCSV() {
-            if (complaints.length === 0) { alert('No complaints to export.'); return; }
-            const headers = ['ID', 'Name', 'Phone', 'Ward', 'Category', 'Description', 'Status', 'Submitted At',
-                'Resolved At'
-            ];
-            const rows = complaints.map(c => [
-                c.id, c.name, c.phone, c.ward, c.category, c.desc, c.status, c.submittedAt, c.resolvedAt || ''
-            ]);
-            let csv = headers.join(',') + '\n' + rows.map(row => row.map(field =>
-                `"${field.replace(/"/g, '""')}"`).join(',')).join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `complaints_${new Date().toISOString().slice(0,10)}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function switchHelplineTab(tabId, btnElement) {
-            document.querySelectorAll('.helpline-tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('#community-helpline .tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`helpline-${tabId}`).classList.remove('hidden');
-            btnElement.classList.add('active');
-            if (tabId === 'admin') renderAdminComplaints();
-        }
-
-        document.getElementById('complaint-photo')?.addEventListener('change', function(e) {
-            const preview = document.getElementById('photo-preview');
-            if (this.files && this.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    preview.innerHTML = `<img src="${ev.target.result}" alt="Preview" class="upload-preview">`;
-                };
-                reader.readAsDataURL(this.files[0]);
-            } else {
-                preview.innerHTML = '';
-            }
-        });
-
-        // ============================================================
-        // 36. GENERATE 110 WARDS & POPULATE DROPDOWNS
-        // ============================================================
-        function generateWards() {
-            const wardNames = [
-                "Alambagh", "Aishbagh", "Aminabad", "Ashiyana", "Bakshi Ka Talab",
-                "Balaganj", "Banthra", "Bazarkhala", "Behta", "Bijnor",
-                "Chak", "Chandernagar", "Charbagh", "Chinhat", "Daliganj",
-                "Dariyabad", "Daudpur", "Dubagga", "Engineer Enclave", "Faizullaganj",
-                "Ganeshganj", "Ghaus Nagar", "Gomti Nagar", "Gudamba", "Haidergarh",
-                "Hasanpur", "Hazratganj", "Indira Nagar", "Itaunja", "Jankipuram",
-                "Jharai", "Juggaur", "Kakori", "Kalyanpur", "Kamlapuri",
-                "Kashimkheda", "Katra", "Kazman", "Kesar Bagh", "Khagra",
-                "Khanjarpur", "Khargapur", "Krishna Nagar", "Kukrail", "Kurasi",
-                "Lal Bagh", "Lal Kuan", "Laxmanpur", "Lucknow Cantt", "Madhoganj",
-                "Maharajnagar", "Mahanagar", "Maheshwariganj", "Malihabad", "Manak Nagar",
-                "Maneeya", "Maniram Bagh", "Marui", "Maryadpura", "Matiyari",
-                "Mohanlalganj", "Mubarakpur", "Munshipuliya", "Nagram", "Naka Hindola",
-                "Narhi", "Nawabganj", "Newalganj", "Nishatganj", "Pandesara",
-                "Parag", "Para", "Pata Nala", "Pratap Nagar", "Purana Quila",
-                "Qaisar Bagh", "Rahim Nagar", "Raipur", "Rajajipuram", "Rajendra Nagar",
-                "Rakabganj", "Ramnagar", "Rampur", "Rasoolpur", "Ratan Khand",
-                "Riverside", "Sahabganj", "Saida", "Saket", "Sandila",
-                "Sangrampur", "Saraswati Nagar", "Sarojini Nagar", "Sector 1", "Sector 2",
-                "Sector 3", "Sector 4", "Sector 5", "Shah Najaf", "Shahpur",
-                "Shakti Nagar", "Shiwala", "Sikandarpur", "Singar Nagar", "Sitapur Road",
-                "Sultanpur", "Sumerpur", "Takrohi", "Telibagh", "Thakurganj",
-                "Tikaitnagar", "Tilak Nagar", "Triveni Nagar", "Uttarath", "Vijay Nagar"
-            ];
-            const wards = [];
-            for (let i = 0; i < 110; i++) {
-                const num = i + 1;
-                const name = wardNames[i] || `Ward ${num}`;
-                wards.push({ value: `Ward ${num} - ${name}`, label: `Ward ${num} - ${name}` });
-            }
-            return wards;
-        }
-
-        const ALL_WARDS = generateWards();
-
-        function populateWardDropdowns() {
-            const complaintWard = document.getElementById('complaint-ward');
-            const adminWard = document.getElementById('admin-ward-filter');
-            if (!complaintWard) return;
-
-            const wards = ALL_WARDS.map(w => `<option value="${w.value}">${w.label}</option>`).join('');
-
-            const complaintSelect = document.getElementById('complaint-ward');
-            if (complaintSelect) {
-                complaintSelect.innerHTML = `<option value="">— Select Ward —</option>${wards}`;
-            }
-
-            const adminSelect = document.getElementById('admin-ward-filter');
-            if (adminSelect) {
-                adminSelect.innerHTML = `<option value="all">All Wards</option>${wards}`;
-            }
-        }
-
-        // ============================================================
-        // 37. DYNAMIC TRENDING TABS — Auto-generate new tabs every 10 min
+        // DYNAMIC TRENDING TABS — Auto-generate new tabs every 10 min
         // ============================================================
         let dynamicTabs = [];
         let seenTopics = [];
@@ -9343,12 +9640,14 @@
         setTimeout(checkAndAddDynamicTabs, 5000);
 
         // ============================================================
-        // 38. INITIALIZATION — Load all dynamic content
+        // INITIALIZATION — Load all dynamic content
         // ============================================================
         async function initApp() {
             console.log('⚖️ Lucknow Kanoon Sahayak 9.0 — Full Dynamic Version');
 
-            populateWardDropdowns();
+            // Load wards and helpline departments
+            loadCommunityWards();
+            loadHelplineDepartments();
 
             renderSources();
             renderCasesList();
@@ -9375,7 +9674,6 @@
             await refreshTrending();
 
             showLiveNews();
-            renderAdminComplaints();
 
             console.log('✅ All dynamic content loaded!');
             console.log('📡 RSS feeds: ' + allRSSItems.length + ' items');
@@ -9386,14 +9684,14 @@
         }
 
         // ============================================================
-        // 39. AUTO-UPDATE TRENDING KEYWORDS (every 5 minutes)
+        // AUTO-UPDATE TRENDING KEYWORDS (every 5 minutes)
         // ============================================================
         setInterval(async () => {
             await refreshTrending();
         }, 300000);
 
         // ============================================================
-        // 40. START THE APP
+        // START THE APP
         // ============================================================
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => setTimeout(initApp, 200));
@@ -9402,7 +9700,7 @@
         }
 
         // ============================================================
-        // 41. PERIODIC REFRESH OF RSS & NEWS (every 2 minutes)
+        // PERIODIC REFRESH OF RSS & NEWS (every 2 minutes)
         // ============================================================
         setInterval(async () => {
             await loadRSSFeeds();
@@ -9410,104 +9708,6 @@
             await refreshWomenNews();
             await updateLiveNewsFromRSS();
         }, 120000);
-
-        // ============================================================
-        // 42. EXPOSE FUNCTIONS TO GLOBAL SCOPE
-        // ============================================================
-        window.switchTab = switchTab;
-        window.toggleDarkMode = toggleDarkMode;
-        window.toggleVoiceOutput = toggleVoiceOutput;
-        window.toggleZeenatConnection = toggleZeenatConnection;
-        window.handleZeenatQuery = handleZeenatQuery;
-        window.quickZeenat = quickZeenat;
-        window.downloadChatPDF = downloadChatPDF;
-        window.checkLawApplicability = checkLawApplicability;
-        window.convertSection = convertSection;
-        window.solveProblemBNS = solveProblemBNS;
-        window.quickSolve = quickSolve;
-        window.searchIndianKanoon = searchIndianKanoon;
-        window.findSections = findSections;
-        window.generateNotice = generateNotice;
-        window.downloadNoticePDF = downloadNoticePDF;
-        window.selectFreeDraft = selectFreeDraft;
-        window.generateDocBNS = generateDocBNS;
-        window.clearDraft = clearDraft;
-        window.addCase = addCase;
-        window.deleteCase = deleteCase;
-        window.refreshTrending = refreshTrending;
-        window.askUniversalAI = askUniversalAI;
-        window.toggleVoiceTyping = toggleVoiceTyping;
-        window.submitBlog = submitBlog;
-        window.approveBlog = approveBlog;
-        window.rejectBlog = rejectBlog;
-        window.filterRSS = filterRSS;
-        window.refreshAllFeeds = refreshAllFeeds;
-        window.filterCases = filterCases;
-        window.refreshCases = refreshCases;
-        window.updateLiveNewsFromRSS = updateLiveNewsFromRSS;
-        window.addCommunityTip = addCommunityTip;
-        window.filterFunny = filterFunny;
-        window.voteFunny = voteFunny;
-        window.shareFunny = shareFunny;
-        window.searchDictionary = searchDictionary;
-        window.showAllDictionary = showAllDictionary;
-        window.selectSuggestion = selectSuggestion;
-        window.submitSuggestion = submitSuggestion;
-        window.calculateCourtFee = calculateCourtFee;
-        window.calculateInterest = calculateInterest;
-        window.calculateLimitation = calculateLimitation;
-        window.calculateStampDuty = calculateStampDuty;
-        window.calculateEMI = calculateEMI;
-        window.calculateROI = calculateROI;
-        window.calculateTax = calculateTax;
-        window.calculateGST = calculateGST;
-        window.generateTimeline = generateTimeline;
-        window.summarizeJudgment = summarizeJudgment;
-        window.safetyAction = safetyAction;
-        window.loadDailyQuiz = loadDailyQuiz;
-        window.answerDailyQuiz = answerDailyQuiz;
-        window.donateUPI = donateUPI;
-        window.copyUPI = copyUPI;
-        window.showAboutModal = showAboutModal;
-        window.showPrivacyModal = showPrivacyModal;
-        window.showTermsModal = showTermsModal;
-        window.showContactModal = showContactModal;
-        window.sendContactFeedback = sendContactFeedback;
-        window.submitComplaint = submitComplaint;
-        window.trackComplaint = trackComplaint;
-        window.updateComplaintStatus = updateComplaintStatus;
-        window.deleteComplaint = deleteComplaint;
-        window.exportCSV = exportCSV;
-        window.switchHelplineTab = switchHelplineTab;
-        window.renderAdminComplaints = renderAdminComplaints;
-        window.filterBNS = filterBNS;
-        window.filterBNSSections = filterBNSSections;
-        window.renderBNSSections = renderBNSSections;
-
-        window.loadQuiz = loadQuiz;
-        window.selectQuizAnswer = selectQuizAnswer;
-        window.nextQuizQuestion = nextQuizQuestion;
-        window.resetQuiz = resetQuiz;
-
-        // ============================================================
-        // 43. SAMPLE DATA FOR DEMO (if no complaints)
-        // ============================================================
-        if (complaints.length === 0) {
-            const sample = {
-                id: 'CMP-DEMO001',
-                name: 'Demo User',
-                phone: '9876543210',
-                ward: 'Ward 1 - Alambagh',
-                category: 'Pani',
-                desc: 'गली में पानी भरा हुआ है, नाली बंद हो गई है।',
-                photo: null,
-                status: 'pending',
-                submittedAt: new Date().toISOString(),
-                resolvedAt: null
-            };
-            complaints.push(sample);
-            localStorage.setItem('community_complaints', JSON.stringify(complaints));
-        }
 
         console.log('🚀 Lucknow Kanoon Sahayak 9.0 is ready!');
         console.log('💡 Dynamic trending tabs will auto-generate every 10 minutes.');
