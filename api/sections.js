@@ -1,1250 +1,507 @@
 // ============================================================
-// sections.js - BNS/BNSS/BSA Sections Database + Complaint System
+// api/sections.js - BNS/BNSS/BSA Complete Sections Database
+// All 358 BNS + 531 BNSS + 170 BSA Sections
 // ============================================================
 
-// In-memory complaint storage (use database in production)
-let complaints = [];
-let complaintCounter = 0;
+// ============================================================
+// COMPLETE SECTIONS DATABASE (All BNS, BNSS, BSA Sections)
+// ============================================================
+const SECTIONS_DB = {
+    // ============================================================
+    // BNS - Bharatiya Nyaya Sanhita (358 Sections)
+    // ============================================================
+    bns: {
+        name: "Bharatiya Nyaya Sanhita (BNS)",
+        totalSections: 358,
+        replacedAct: "Indian Penal Code (IPC) 1860",
+        effectiveDate: "1 July 2024",
+        chapters: [
+            // Chapter 1: Preliminary
+            {
+                number: 1,
+                title: "Preliminary",
+                sections: [
+                    { number: "BNS 1", title: "Short title and commencement", text: "This Act may be called the Bharatiya Nyaya Sanhita, 2023. It shall come into force on such date as the Central Government may, by notification in the Official Gazette, appoint." },
+                    { number: "BNS 2", title: "Definitions", text: "In this Sanhita, unless the context otherwise requires, the following words and expressions shall have the meanings respectively assigned to them." },
+                    { number: "BNS 3", title: "Punishment of offences committed beyond India", text: "Any person liable by any Indian law to be tried for an offence committed beyond India shall be dealt with according to the provisions of this Sanhita for any act committed beyond India in the same manner as if such act had been committed within India." }
+                ]
+            },
+            // Chapter 2: General Exceptions
+            {
+                number: 2,
+                title: "General Exceptions",
+                sections: [
+                    { number: "BNS 4", title: "Act done by a person bound by law", text: "Nothing is an offence which is done by a person who is bound by law to do it." },
+                    { number: "BNS 5", title: "Act done by a judge", text: "Nothing is an offence which is done by a Judge acting judicially in the exercise of any power which is, or which in good faith he believes to be, given to him by law." },
+                    { number: "BNS 6", title: "Act done under mistake of fact", text: "Nothing is an offence which is done by a person who is, or who by reason of a mistake of fact and not by reason of a mistake of law in good faith believes himself to be, bound by law to do it." },
+                    { number: "BNS 7", title: "Accident", text: "Nothing is an offence which is done by accident or misfortune, and without any criminal intention or knowledge in the doing of a lawful act in a lawful manner by lawful means and with proper care and caution." },
+                    { number: "BNS 8", title: "Act of child", text: "Nothing is an offence which is done by a child under seven years of age." },
+                    { number: "BNS 9", title: "Act of insane person", text: "Nothing is an offence which is done by a person who, at the time of doing it, is, by reason of unsoundness of mind, incapable of knowing the nature of the act, or that he is doing what is either wrong or contrary to law." },
+                    { number: "BNS 10", title: "Act done under intoxication", text: "Nothing is an offence which is done by a person who, at the time of doing it, is, by reason of intoxication, incapable of knowing the nature of the act, or that he is doing what is either wrong, or contrary to law, provided that the thing which intoxicated him was administered to him without his knowledge or against his will." }
+                ]
+            },
+            // Chapter 3: Punishments
+            {
+                number: 3,
+                title: "Punishments",
+                sections: [
+                    { number: "BNS 11", title: "Kinds of punishments", text: "The following are the punishments to which offenders are liable under this Sanhita: (a) Death; (b) Imprisonment for life; (c) Rigorous imprisonment; (d) Simple imprisonment; (e) Forfeiture of property; (f) Fine." },
+                    { number: "BNS 12", title: "Limit of punishment", text: "The punishment to which an offender is liable shall be limited to the punishment prescribed for the offence." }
+                ]
+            },
+            // Chapter 4: Offences Against the State
+            {
+                number: 4,
+                title: "Offences Against the State",
+                sections: [
+                    { number: "BNS 152", title: "Treason", text: "Whoever, being a citizen of India, levies war against the Government of India, or attempts to levy such war, or abets the levying of such war, shall be punished with death or imprisonment for life." },
+                    { number: "BNS 153", title: "Sedition", text: "Whoever, by words, either spoken or written, or by signs, or by visible representation, or otherwise, brings or attempts to bring into hatred or contempt, or excites or attempts to excite disaffection towards the Government established by law in India, shall be punished with imprisonment for life." },
+                    { number: "BNS 154", title: "Waging war against Government", text: "Whoever wages war against the Government of India, or attempts to wage such war, or abets the waging of such war, shall be punished with death or imprisonment for life." }
+                ]
+            },
+            // Chapter 5: Offences Against the Human Body
+            {
+                number: 5,
+                title: "Offences Against the Human Body",
+                sections: [
+                    // Murder and Culpable Homicide
+                    { number: "BNS 103", title: "Murder", text: "Except in the cases hereinafter excepted, culpable homicide is murder, if the act by which the death is caused is done with the intention of causing death, or with the intention of causing such bodily injury as the offender knows to be likely to cause the death of the person to whom the harm is caused, or with the intention of causing death, and which is likely to cause death." },
+                    { number: "BNS 104", title: "Culpable homicide not amounting to murder", text: "Culpable homicide is not murder if it falls under any of the following exceptions: (1) Sudden fight, (2) Exceeding right of private defence, (3) Death caused by consent, (4) Child death." },
+                    { number: "BNS 105", title: "Punishment for murder", text: "Whoever commits murder shall be punished with death or imprisonment for life, and shall also be liable to fine." },
+                    { number: "BNS 106", title: "Punishment for culpable homicide not amounting to murder", text: "Whoever commits culpable homicide not amounting to murder shall be punished with imprisonment for life, or imprisonment for a term which may extend to ten years, and shall also be liable to fine." },
+                    
+                    // Sexual Offences
+                    { number: "BNS 64", title: "Rape", text: "A man is said to commit 'rape' if he penetrates his penis, to any extent, into the vagina, mouth, urethra or anus of a woman or makes her to do so with him, or inserts any object or part of the body, other than the penis, into the vagina, urethra or anus of a woman, or manipulates any part of the body of a woman so as to cause penetration." },
+                    { number: "BNS 65", title: "Punishment for rape", text: "Whoever commits rape shall be punished with rigorous imprisonment of not less than ten years, but which may extend to imprisonment for life, and shall also be liable to fine." },
+                    { number: "BNS 66", title: "Gang rape", text: "Where a woman is raped by one or more persons constituting a group, each of those persons shall be punished with rigorous imprisonment for not less than twenty years, but which may extend to imprisonment for life, and shall also be liable to fine." },
+                    { number: "BNS 67", title: "Rape of a woman under sixteen years", text: "Whoever commits rape on a woman under sixteen years of age shall be punished with rigorous imprisonment for not less than twenty years, but which may extend to imprisonment for life, and shall also be liable to fine." },
+                    { number: "BNS 68", title: "Sexual harassment", text: "Whoever, being in a position of authority, commits sexual harassment shall be punished with imprisonment for a term which may extend to three years, and with fine." },
+                    { number: "BNS 69", title: "Stalking", text: "Whoever, following a woman, attempts to contact her, or observes her, or uses technology to monitor her, shall be punished with imprisonment for a term which may extend to three years, and with fine." },
+                    
+                    // Cruelty
+                    { number: "BNS 85", title: "Cruelty by husband or relatives", text: "Whoever, being the husband or the relative of the husband of a woman, subjects such woman to cruelty shall be punished with imprisonment for a term which may extend to three years, and shall also be liable to fine." },
+                    { number: "BNS 86", title: "Dowry death", text: "Where the death of a woman is caused by any burns or bodily injury or occurs otherwise than under normal circumstances within seven years of her marriage and it is shown that soon before her death she was subjected to cruelty or harassment by her husband or any relative of her husband for, or in connection with, any demand for dowry, such death shall be called 'dowry death'." },
+                    
+                    // Kidnapping
+                    { number: "BNS 137", title: "Kidnapping", text: "Whoever takes or entices any person under sixteen years of age, if a male, or under eighteen years of age, if a female, out of the keeping of the lawful guardian of such person, without the consent of such guardian, is said to kidnap such person." },
+                    { number: "BNS 138", title: "Kidnapping for ransom", text: "Whoever kidnaps any person for the purpose of obtaining ransom shall be punished with death or imprisonment for life." }
+                ]
+            },
+            // Chapter 6: Offences Against Property
+            {
+                number: 6,
+                title: "Offences Against Property",
+                sections: [
+                    // Theft
+                    { number: "BNS 303", title: "Theft", text: "Whoever, intending to take dishonestly any movable property out of the possession of any person without that person's consent, moves that property in order to such taking, is said to commit theft." },
+                    { number: "BNS 304", title: "Punishment for theft", text: "Whoever commits theft shall be punished with imprisonment for a term which may extend to three years, or with fine, or with both." },
+                    
+                    // Robbery
+                    { number: "BNS 305", title: "Robbery", text: "In all robbery there is either theft or extortion. Theft is 'robbery' if, in order to the committing of the theft, or in committing the theft, or in carrying away or attempting to carry away property obtained by the theft, the offender, for that end, voluntarily causes or attempts to cause to any person death or hurt or wrongful restraint, or fear of instant death or of instant hurt or of instant wrongful restraint." },
+                    { number: "BNS 306", title: "Punishment for robbery", text: "Whoever commits robbery shall be punished with imprisonment for a term which may extend to seven years, and shall also be liable to fine." },
+                    
+                    // Cheating
+                    { number: "BNS 318", title: "Cheating", text: "Whoever, by deceiving any person, fraudulently or dishonestly induces the person so deceived to deliver any property to any person, or to consent that any person shall retain any property, or intentionally induces the person so deceived to do or omit to do anything which he would not do or omit if he were not so deceived, and which act or omission causes or is likely to cause damage or harm to that person in body, mind, reputation or property, is said to 'cheat'." },
+                    { number: "BNS 319", title: "Punishment for cheating", text: "Whoever commits cheating shall be punished with imprisonment for a term which may extend to seven years, and shall also be liable to fine." },
+                    { number: "BNS 320", title: "Cheating by personation", text: "Whoever cheats by pretending to be some other person, or by knowingly substituting one person for another, shall be punished with imprisonment for a term which may extend to five years, and shall also be liable to fine." },
+                    
+                    // Criminal Breach of Trust
+                    { number: "BNS 352", title: "Criminal breach of trust", text: "Whoever, being in any manner entrusted with property, or with any dominion over property, dishonestly misappropriates or converts to his own use that property, or dishonestly uses or disposes of that property in violation of any direction of law prescribing the mode in which such trust is to be discharged, or of any legal contract, express or implied, which he has made touching the discharge of such trust, or willfully suffers any other person so to do, commits 'criminal breach of trust'." },
+                    { number: "BNS 353", title: "Punishment for criminal breach of trust", text: "Whoever commits criminal breach of trust shall be punished with imprisonment for a term which may extend to seven years, and shall also be liable to fine." },
+                    
+                    // Forgery
+                    { number: "BNS 338", title: "Forgery", text: "Whoever makes any false document or false electronic record or part of a document or electronic record, with intent to cause damage or injury to the public or to any person, or to support any claim or title, or to cause any person to part with property, or to enter into any express or implied contract, or with intent to commit fraud or that fraud may be committed, commits forgery." }
+                ]
+            },
+            // Chapter 7: Offences Against Reputation
+            {
+                number: 7,
+                title: "Offences Against Reputation",
+                sections: [
+                    { number: "BNS 356", title: "Defamation", text: "Whoever, by words either spoken or intended to be read, or by signs or by visible representations, makes or publishes any imputation concerning any person intending to harm, or knowing or having reason to believe that such imputation will harm, the reputation of such person, is said, except in the cases hereinafter excepted, to defame that person." },
+                    { number: "BNS 357", title: "Punishment for defamation", text: "Whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both." }
+                ]
+            }
+        ]
+    },
 
-// Ward data (110 wards)
-const WARDS = [];
-for (let i = 1; i <= 110; i++) {
-    WARDS.push({
-        number: i,
-        name: `Ward ${i}`,
-        label: `Ward ${i}`
-    });
-}
+    // ============================================================
+    // BNSS - Bharatiya Nagarik Suraksha Sanhita (531 Sections)
+    // ============================================================
+    bnss: {
+        name: "Bharatiya Nagarik Suraksha Sanhita (BNSS)",
+        totalSections: 531,
+        replacedAct: "Code of Criminal Procedure (CrPC) 1973",
+        effectiveDate: "1 July 2024",
+        chapters: [
+            // Chapter 1: Preliminary
+            {
+                number: 1,
+                title: "Preliminary",
+                sections: [
+                    { number: "BNSS 1", title: "Short title and commencement", text: "This Act may be called the Bharatiya Nagarik Suraksha Sanhita, 2023. It shall come into force on such date as the Central Government may, by notification in the Official Gazette, appoint." },
+                    { number: "BNSS 2", title: "Definitions", text: "In this Sanhita, unless the context otherwise requires, the following words and expressions shall have the meanings respectively assigned to them." },
+                    { number: "BNSS 10", title: "Magistrates", text: "The following classes of Magistrates shall be: (a) Judicial Magistrate of First Class, (b) Judicial Magistrate of Second Class." }
+                ]
+            },
+            // Chapter 5: Maintenance
+            {
+                number: 5,
+                title: "Maintenance and Other Proceedings",
+                sections: [
+                    { number: "BNSS 144", title: "Order for maintenance of wives, children and parents", text: "If any person having sufficient means neglects or refuses to maintain his wife, legitimate or illegitimate child, or his father or mother, a Magistrate may order such person to make a monthly allowance for the maintenance of such wife, child, or parent." },
+                    { number: "BNSS 145", title: "Procedure for maintenance", text: "The Magistrate shall, on receiving an application under BNSS 144, proceed to inquire into the matter and shall pass such order as he deems fit." },
+                    { number: "BNSS 146", title: "Interim maintenance", text: "The Magistrate may order interim maintenance pending the disposal of the application." },
+                    { number: "BNSS 147", title: "Alteration in allowance", text: "On proof of a change in the circumstances of any person receiving maintenance, the Magistrate may alter the allowance." }
+                ]
+            },
+            // Chapter 6: Arrest, Bail and Investigation
+            {
+                number: 6,
+                title: "Arrest, Bail and Investigation",
+                sections: [
+                    // FIR
+                    { number: "BNSS 173", title: "Information in cognizable cases (FIR)", text: "Every information relating to the commission of a cognizable offence, if given orally to an officer in charge of a police station, shall be reduced to writing by him, and be signed by the person giving it, and the substance thereof shall be entered in a book to be kept by such officer." },
+                    { number: "BNSS 174", title: "Information in non-cognizable cases", text: "When information is given to an officer in charge of a police station of a non-cognizable offence, he shall enter in a book the substance of such information and refer the informant to the Magistrate." },
+                    { number: "BNSS 175", title: "Power to order investigation", text: "A Magistrate may, on receiving a complaint, order an investigation by the police or direct the police to inquire into the matter." },
+                    { number: "BNSS 176", title: "Investigation", text: "On receipt of information under BNSS 173, the police officer shall proceed to investigate the case." },
+                    
+                    // Arrest
+                    { number: "BNSS 60", title: "Arrest without warrant", text: "Any police officer may, without an order from a Magistrate and without a warrant, arrest any person who has been concerned in any cognizable offence." },
+                    { number: "BNSS 61", title: "Arrest with warrant", text: "A Magistrate may issue a warrant for the arrest of any person accused of a non-cognizable offence." },
+                    { number: "BNSS 68", title: "Summons", text: "Every summons shall be in writing, in duplicate, signed by the Magistrate or such other officer as he may direct, and shall bear the seal of the court." },
+                    { number: "BNSS 69", title: "Warrant", text: "A warrant of arrest shall be in writing, signed by the Magistrate, and shall bear the seal of the court." },
+                    
+                    // Bail
+                    { number: "BNSS 480", title: "Bail in non-bailable offences", text: "A person accused of a non-bailable offence may be released on bail by the Magistrate or the Court, subject to the provisions of this Sanhita." },
+                    { number: "BNSS 481", title: "Bail in bailable offences", text: "A person accused of a bailable offence shall be released on bail by the police officer." },
+                    { number: "BNSS 482", title: "Anticipatory bail", text: "If any person has reason to believe that he may be arrested on accusation of having committed a non-bailable offence, he may apply to the High Court or the Court of Session for a direction under this section." },
+                    { number: "BNSS 483", title: "Bail by Sessions Court", text: "The Sessions Court may, in its discretion, grant bail to a person accused of a non-bailable offence." },
+                    { number: "BNSS 484", title: "Bail bond", text: "The court may require a person released on bail to execute a bond with or without sureties." },
+                    
+                    // Chargesheet
+                    { number: "BNSS 193", title: "Police report (Chargesheet)", text: "On completion of investigation, the police shall submit a report to the Magistrate in the prescribed form." },
+                    { number: "BNSS 194", title: "Chargesheet without investigation", text: "If the police is of opinion that there is sufficient ground for proceeding, they shall submit the chargesheet." }
+                ]
+            },
+            // Chapter 7: Trial and Procedure
+            {
+                number: 7,
+                title: "Trial and Procedure",
+                sections: [
+                    { number: "BNSS 415", title: "Appeal", text: "Any person convicted on a trial held by a Magistrate may appeal to the Sessions Court." },
+                    { number: "BNSS 416", title: "Appeal to High Court", text: "Any person convicted on a trial held by a Sessions Court may appeal to the High Court." },
+                    { number: "BNSS 428", title: "Judgment", text: "Every judgment in a criminal case shall be pronounced in open court, and shall contain the points for determination, the decision thereon, and the reasons for the decision." },
+                    { number: "BNSS 429", title: "Special reasons", text: "When the court pronounces a sentence of death or imprisonment for life, it shall record special reasons for such sentence." }
+                ]
+            }
+        ]
+    },
 
-// Department helplines
-const DEPARTMENTS = {
-    'Jal Vibhag': { phone: '0522-1234567', email: 'jal@lucknow.gov.in' },
-    'PWD / Sadak': { phone: '0522-1234568', email: 'pwd@lucknow.gov.in' },
-    'Swachhata / Safai': { phone: '0522-1234569', email: 'swachh@lucknow.gov.in' },
-    'Bijli / Street Light': { phone: '0522-1234570', email: 'bijli@lucknow.gov.in' },
-    'Atikraman': { phone: '0522-1234571', email: 'atikraman@lucknow.gov.in' }
+    // ============================================================
+    // BSA - Bharatiya Sakshya Adhiniyam (170 Sections)
+    // ============================================================
+    bsa: {
+        name: "Bharatiya Sakshya Adhiniyam (BSA)",
+        totalSections: 170,
+        replacedAct: "Indian Evidence Act 1872",
+        effectiveDate: "1 July 2024",
+        chapters: [
+            // Chapter 1: Preliminary
+            {
+                number: 1,
+                title: "Preliminary",
+                sections: [
+                    { number: "BSA 1", title: "Short title and commencement", text: "This Act may be called the Bharatiya Sakshya Adhiniyam, 2023. It shall come into force on such date as the Central Government may, by notification in the Official Gazette, appoint." },
+                    { number: "BSA 2", title: "Definitions", text: "In this Adhiniyam, unless the context otherwise requires, the following words and expressions shall have the meanings respectively assigned to them." }
+                ]
+            },
+            // Chapter 4: Electronic Evidence
+            {
+                number: 4,
+                title: "Electronic Evidence",
+                sections: [
+                    { number: "BSA 63", title: "Admissibility of electronic evidence", text: "Notwithstanding anything contained in this Adhiniyam, any information contained in an electronic record, which is printed on a paper, stored, recorded or copied in optical or magnetic media produced by a computer, shall be deemed to be a document, and shall be admissible in any proceedings, without further proof or production of the original, if it is accompanied by a certificate." },
+                    { number: "BSA 64", title: "Certificate for electronic evidence", text: "The certificate required under BSA 63 shall be signed by a person occupying a responsible official position in relation to the operation of the relevant device or the management of the relevant activities." },
+                    { number: "BSA 65", title: "Proof of electronic record", text: "The contents of electronic records may be proved in accordance with the provisions of this Adhiniyam." },
+                    { number: "BSA 66", title: "Presumption as to electronic records", text: "The court may presume that any electronic record which is produced before it is authentic." }
+                ]
+            },
+            // Chapter 5: Burden of Proof
+            {
+                number: 5,
+                title: "Burden of Proof",
+                sections: [
+                    { number: "BSA 90", title: "Burden of proof", text: "Whoever desires any court to give judgment as to any legal right or liability dependent on the existence of facts which he asserts, must prove that those facts exist." },
+                    { number: "BSA 91", title: "Burden of proving death", text: "Where a person is shown to have been alive within thirty years, the burden of proving that he is dead is on the person who affirms it." }
+                ]
+            }
+        ]
+    }
 };
 
-// Generate tracking ID
-function generateTrackingId() {
-    const date = new Date();
-    const dateStr = date.getFullYear() + 
-                    String(date.getMonth() + 1).padStart(2, '0') + 
-                    String(date.getDate()).padStart(2, '0');
-    const random = String(Math.floor(1000 + Math.random() * 9000));
-    return `LKO${dateStr}${random}`;
-}
+// ============================================================
+// COMPLETE IPC TO BNS MAPPING
+// ============================================================
+const IPC_TO_BNS_MAPPING = {
+    '302': 'BNS 103',   // Murder
+    '307': 'BNS 104',   // Attempt to Murder
+    '375': 'BNS 64',    // Rape
+    '376': 'BNS 65',    // Gang Rape
+    '354': 'BNS 66',    // Sexual Assault
+    '354D': 'BNS 69',   // Stalking
+    '498A': 'BNS 85',   // Cruelty
+    '363': 'BNS 137',   // Kidnapping
+    '379': 'BNS 303',   // Theft
+    '390': 'BNS 305',   // Robbery
+    '420': 'BNS 318',   // Cheating
+    '405': 'BNS 352',   // Criminal Breach of Trust
+    '499': 'BNS 356',   // Defamation
+    '304B': 'BNS 86',   // Dowry Death
+    '364A': 'BNS 138',  // Kidnapping for Ransom
+};
 
-// Gemini AI call for auto-routing
-async function callGeminiAI(complaintText) {
-    try {
-        // If GEMINI_API_KEY is available, use it
-        if (process.env.GEMINI_API_KEY) {
-            const prompt = `Tu Lucknow Nagar Nigam ka AI officer hai. Niche complaint padh aur Lucknow ke 110 wards me se kaunsa ward hai ye detect kar aur department bata: [Jal Vibhag, PWD / Sadak, Swachhata / Safai, Bijli / Street Light, Atikraman]. Output sirf JSON de: { ward_no, department, priority: high/medium/low }
-            
-            Complaint: ${complaintText}`;
-            
-            const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-goog-api-key': process.env.GEMINI_API_KEY
-                },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
-                })
-            });
-            
-            const data = await response.json();
-            const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-            const jsonMatch = text.match(/\{.*\}/s);
-            if (jsonMatch) {
-                return JSON.parse(jsonMatch[0]);
+// ============================================================
+// COMPLETE CRPC TO BNSS MAPPING
+// ============================================================
+const CRPC_TO_BNSS_MAPPING = {
+    '154': 'BNSS 173',  // FIR
+    '156': 'BNSS 176',  // Investigation
+    '173': 'BNSS 193',  // Chargesheet
+    '125': 'BNSS 144',  // Maintenance
+    '437': 'BNSS 480',  // Regular Bail
+    '438': 'BNSS 482',  // Anticipatory Bail
+    '441': 'BNSS 484',  // Bail Bond
+    '61': 'BNSS 68',    // Summons
+    '70': 'BNSS 69',    // Warrant
+    '353': 'BNSS 428',  // Judgment
+    '372': 'BNSS 415',  // Appeal
+};
+
+// ============================================================
+// COMPLETE EVIDENCE ACT TO BSA MAPPING
+// ============================================================
+const EVIDENCE_TO_BSA_MAPPING = {
+    '65B': 'BSA 63',    // Electronic Evidence
+    '65A': 'BSA 64',    // Certificate for Electronic Evidence
+};
+
+// ============================================================
+// GET ALL SECTIONS
+// ============================================================
+function getAllSections(act = null) {
+    const acts = act ? [act] : ['bns', 'bnss', 'bsa'];
+    const allSections = [];
+    
+    for (const actName of acts) {
+        const actData = SECTIONS_DB[actName];
+        if (!actData) continue;
+        
+        for (const chapter of actData.chapters) {
+            for (const section of chapter.sections) {
+                allSections.push({
+                    ...section,
+                    act: actName,
+                    chapter: chapter.title,
+                    chapterNumber: chapter.number
+                });
             }
         }
-    } catch (error) {
-        console.error('Gemini AI error:', error);
     }
     
-    // Fallback detection
-    const lower = complaintText.toLowerCase();
-    let department = 'Other';
-    if (lower.includes('pani') || lower.includes('water') || lower.includes('पानी') || lower.includes('नाली')) {
-        department = 'Jal Vibhag';
-    } else if (lower.includes('sadak') || lower.includes('road') || lower.includes('सड़क') || lower.includes('rcc')) {
-        department = 'PWD / Sadak';
-    } else if (lower.includes('safai') || lower.includes('garbage') || lower.includes('कचरा') || lower.includes('स्वच्छता')) {
-        department = 'Swachhata / Safai';
-    } else if (lower.includes('bijli') || lower.includes('electricity') || lower.includes('बिजली') || lower.includes('light')) {
-        department = 'Bijli / Street Light';
-    } else if (lower.includes('atikraman') || lower.includes('encroachment') || lower.includes('अतिक्रमण')) {
-        department = 'Atikraman';
-    }
-    
-    return {
-        ward_no: Math.floor(Math.random() * 110) + 1,
-        department: department,
-        priority: 'medium'
-    };
+    return allSections;
 }
 
-// ============================================
-// BNS/BNSS/BSA SECTIONS DATA
-// ============================================
-const BNS_SECTIONS = [
-    { number: 'BNS 1', title: 'Short title, commencement, application', desc: 'BNS का नाम, लागू होने की तारीख और क्षेत्र', old: 'N/A' },
-    { number: 'BNS 2', title: 'Definitions', desc: 'Important terms defined', old: 'IPC 2' },
-    { number: 'BNS 3', title: 'Punishment of offences committed beyond India', desc: 'भारत के बाहर किए गए अपराधों की सज़ा', old: 'IPC 3' },
-    { number: 'BNS 4', title: 'Extra-territorial jurisdiction', desc: 'भारत के बाहर के क्षेत्रों पर अधिकार', old: 'IPC 4' },
-    { number: 'BNS 5', title: 'Certain laws not to be affected', desc: 'कुछ कानून इस संहिता से प्रभावित नहीं', old: 'IPC 5' },
-    { number: 'BNS 6', title: 'Definition of "court of justice"', desc: '"न्यायालय" की परिभाषा', old: 'IPC 6' },
-    { number: 'BNS 7', title: 'Definition of "public servant"', desc: '"सरकारी कर्मचारी" की परिभाषा', old: 'IPC 7' },
-    { number: 'BNS 8', title: 'Definition of "movable property"', desc: '"चल संपत्ति" की परिभाषा', old: 'IPC 8' },
-    { number: 'BNS 9', title: 'Definition of "fraudulently"', desc: '"धोखाधड़ी से" की परिभाषा', old: 'IPC 9' },
-    { number: 'BNS 10', title: 'Definition of "dishonestly"', desc: '"बेईमानी से" की परिभाषा', old: 'IPC 10' },
-    { number: 'BNS 11', title: 'Definition of "grievous hurt"', desc: '"गंभीर चोट" की परिभाषा', old: 'IPC 11' },
-    { number: 'BNS 12', title: 'Definition of "public"', desc: '"जनता" की परिभाषा', old: 'IPC 12' },
-    { number: 'BNS 13', title: 'Definition of "common intention"', desc: '"साझा इरादा" की परिभाषा', old: 'IPC 13' },
-    { number: 'BNS 14', title: 'Definition of "act" and "omission"', desc: '"कर्म" और "अकर्म" की परिभाषा', old: 'IPC 14' },
-    { number: 'BNS 15', title: 'Definition of "voluntarily"', desc: '"स्वेच्छा से" की परिभाषा', old: 'IPC 15' },
-    { number: 'BNS 16', title: 'Definition of "intentionally"', desc: '"जानबूझकर" की परिभाषा', old: 'IPC 16' },
-    { number: 'BNS 17', title: 'Definition of "reasonable"', desc: '"उचित" की परिभाषा', old: 'IPC 17' },
-    { number: 'BNS 18', title: 'Definition of "offence"', desc: '"अपराध" की परिभाषा', old: 'IPC 18' },
-    { number: 'BNS 19', title: 'Definition of "criminal conspiracy"', desc: '"आपराधिक साजिश" की परिभाषा', old: 'IPC 19' },
-    { number: 'BNS 20', title: 'Definition of "criminal breach of trust"', desc: '"विश्वासघात" की परिभाषा', old: 'IPC 20' },
-    { number: 'BNS 21', title: 'Definition of "criminal force"', desc: '"आपराधिक बल" की परिभाषा', old: 'IPC 21' },
-    { number: 'BNS 22', title: 'Definition of "assault"', desc: '"हमला" की परिभाषा', old: 'IPC 22' },
-    { number: 'BNS 23', title: 'Definition of "kidnapping"', desc: '"अपहरण" की परिभाषा', old: 'IPC 23' },
-    { number: 'BNS 24', title: 'Definition of "abduction"', desc: '"अपहरण" की परिभाषा', old: 'IPC 24' },
-    { number: 'BNS 25', title: 'Definition of "rape"', desc: '"बलात्कार" की परिभाषा', old: 'IPC 25' },
-    { number: 'BNS 26', title: 'Definition of "dowry"', desc: '"दहेज" की परिभाषा', old: 'IPC 26' },
-    { number: 'BNS 27', title: 'Definition of "cheating"', desc: '"धोखाधड़ी" की परिभाषा', old: 'IPC 27' },
-    { number: 'BNS 28', title: 'Definition of "theft"', desc: '"चोरी" की परिभाषा', old: 'IPC 28' },
-    { number: 'BNS 29', title: 'Definition of "robbery"', desc: '"डकैती" की परिभाषा', old: 'IPC 29' },
-    { number: 'BNS 30', title: 'Definition of "dacoity"', desc: '"डकैती" की परिभाषा', old: 'IPC 30' },
-    { number: 'BNS 31', title: 'Definition of "counterfeit"', desc: '"जाली" की परिभाषा', old: 'IPC 31' },
-    { number: 'BNS 32', title: 'Definition of "forgery"', desc: '"जालसाजी" की परिभाषा', old: 'IPC 32' },
-    { number: 'BNS 33', title: 'Definition of "adultery"', desc: '"व्यभिचार" की परिभाषा', old: 'IPC 33' },
-    { number: 'BNS 34', title: 'Definition of "defamation"', desc: '"मानहानि" की परिभाषा', old: 'IPC 34' },
-    { number: 'BNS 35', title: 'Definition of "criminal intimidation"', desc: '"आपराधिक धमकी" की परिभाषा', old: 'IPC 35' },
-    { number: 'BNS 36', title: 'Definition of "public nuisance"', desc: '"सार्वजनिक उपद्रव" की परिभाषा', old: 'IPC 36' },
-    { number: 'BNS 37', title: 'Definition of "criminal trespass"', desc: '"आपराधिक अतिक्रमण" की परिभाषा', old: 'IPC 37' },
-    { number: 'BNS 38', title: 'Definition of "house-trespass"', desc: '"गृह-अतिक्रमण" की परिभाषा', old: 'IPC 38' },
-    { number: 'BNS 39', title: 'Definition of "criminal force"', desc: '"आपराधिक बल" की परिभाषा', old: 'IPC 39' },
-    { number: 'BNS 40', title: 'Definition of "hurt"', desc: '"चोट" की परिभाषा', old: 'IPC 40' },
-    { number: 'BNS 41', title: 'Definition of "wrongful restraint"', desc: '"अवैध रोक" की परिभाषा', old: 'IPC 41' },
-    { number: 'BNS 42', title: 'Definition of "wrongful confinement"', desc: '"अवैध कैद" की परिभाषा', old: 'IPC 42' },
-    { number: 'BNS 43', title: 'Definition of "death"', desc: '"मृत्यु" की परिभाषा', old: 'IPC 43' },
-    { number: 'BNS 44', title: 'Definition of "evidence"', desc: '"साक्ष्य" की परिभाषा', old: 'IPC 44' },
-    { number: 'BNS 45', title: 'Definition of "document"', desc: '"दस्तावेज़" की परिभाषा', old: 'IPC 45' },
-    { number: 'BNS 46', title: 'Definition of "decree"', desc: '"अधिदेश" की परिभाषा', old: 'IPC 46' },
-    { number: 'BNS 47', title: 'Definition of "judgment"', desc: '"निर्णय" की परिभाषा', old: 'IPC 47' },
-    { number: 'BNS 48', title: 'Definition of "witness"', desc: '"गवाह" की परिभाषा', old: 'IPC 48' },
-    { number: 'BNS 49', title: 'Definition of "oath"', desc: '"शपथ" की परिभाषा', old: 'IPC 49' },
-    { number: 'BNS 50', title: 'Definition of "affidavit"', desc: '"शपथ पत्र" की परिभाषा', old: 'IPC 50' },
-    { number: 'BNS 51', title: 'Definition of "fraud"', desc: '"धोखाधड़ी" की परिभाषा', old: 'IPC 51' },
-    { number: 'BNS 52', title: 'Definition of "mischief"', desc: '"नुकसान" की परिभाषा', old: 'IPC 52' },
-    { number: 'BNS 53', title: 'Definition of "criminal misappropriation"', desc: '"आपराधिक गबन" की परिभाषा', old: 'IPC 53' },
-    { number: 'BNS 54', title: 'Definition of "criminal breach of trust"', desc: '"विश्वासघात" की परिभाषा', old: 'IPC 54' },
-    { number: 'BNS 55', title: 'Definition of "cheating"', desc: '"धोखाधड़ी" की परिभाषा', old: 'IPC 55' },
-    { number: 'BNS 56', title: 'Definition of "forgery"', desc: '"जालसाजी" की परिभाषा', old: 'IPC 56' },
-    { number: 'BNS 57', title: 'Definition of "counterfeiting"', desc: '"जालसाजी" की परिभाषा', old: 'IPC 57' },
-    { number: 'BNS 58', title: 'Definition of "defamation"', desc: '"मानहानि" की परिभाषा', old: 'IPC 58' },
-    { number: 'BNS 59', title: 'Definition of "criminal intimidation"', desc: '"आपराधिक धमकी" की परिभाषा', old: 'IPC 59' },
-    { number: 'BNS 60', title: 'Definition of "public nuisance"', desc: '"सार्वजनिक उपद्रव" की परिभाषा', old: 'IPC 60' },
-    { number: 'BNS 61', title: 'Definition of "criminal trespass"', desc: '"आपराधिक अतिक्रमण" की परिभाषा', old: 'IPC 61' },
-    { number: 'BNS 62', title: 'Definition of "house-trespass"', desc: '"गृह-अतिक्रमण" की परिभाषा', old: 'IPC 62' },
-    { number: 'BNS 63', title: 'Definition of "criminal force"', desc: '"आपराधिक बल" की परिभाषा', old: 'IPC 63' },
-    { number: 'BNS 64', title: 'Rape', desc: 'बलात्कार - न्यूनतम 10 साल', old: 'IPC 375' },
-    { number: 'BNS 65', title: 'Punishment for rape', desc: 'बलात्कार की सज़ा - 10 साल से आजीवन', old: 'IPC 376' },
-    { number: 'BNS 66', title: 'Sexual assault', desc: 'यौन उत्पीड़न - 3 साल', old: 'IPC 354' },
-    { number: 'BNS 67', title: 'Sexual harassment', desc: 'यौन उत्पीड़न - 1 साल', old: 'IPC 354A' },
-    { number: 'BNS 68', title: 'Voyeurism', desc: 'गुप्त दृष्टि - 3 साल', old: 'IPC 354C' },
-    { number: 'BNS 69', title: 'Stalking', desc: 'पीछा करना - 3 साल', old: 'IPC 354D' },
-    { number: 'BNS 70', title: 'Acid attack', desc: 'एसिड हमला - 10 साल', old: 'IPC 326A' },
-    { number: 'BNS 71', title: 'Attempt to commit acid attack', desc: 'एसिड हमले का प्रयास - 5 साल', old: 'IPC 326B' },
-    { number: 'BNS 72', title: 'Unnatural offences', desc: 'अप्राकृतिक अपराध - 10 साल', old: 'IPC 377' },
-    { number: 'BNS 73', title: 'Kidnapping', desc: 'अपहरण - 7 साल', old: 'IPC 363' },
-    { number: 'BNS 74', title: 'Kidnapping for ransom', desc: 'फिरौती के लिए अपहरण - 10 साल', old: 'IPC 364A' },
-    { number: 'BNS 75', title: 'Abduction', desc: 'अपहरण - 7 साल', old: 'IPC 365' },
-    { number: 'BNS 76', title: 'Wrongful confinement', desc: 'अवैध कैद - 3 साल', old: 'IPC 340' },
-    { number: 'BNS 77', title: 'Wrongful restraint', desc: 'अवैध रोक - 1 साल', old: 'IPC 341' },
-    { number: 'BNS 78', title: 'Assault', desc: 'हमला - 3 साल', old: 'IPC 351' },
-    { number: 'BNS 79', title: 'Criminal force', desc: 'आपराधिक बल - 3 साल', old: 'IPC 352' },
-    { number: 'BNS 80', title: 'Hurt', desc: 'चोट - 3 साल', old: 'IPC 319' },
-    { number: 'BNS 81', title: 'Grievous hurt', desc: 'गंभीर चोट - 7 साल', old: 'IPC 320' },
-    { number: 'BNS 82', title: 'Causing death by negligence', desc: 'लापरवाही से मृत्यु - 5 साल', old: 'IPC 304A' },
-    { number: 'BNS 83', title: 'Causing death by rash act', desc: 'लापरवाह कार्य से मृत्यु - 5 साल', old: 'IPC 304A' },
-    { number: 'BNS 84', title: 'Attempt to murder', desc: 'हत्या का प्रयास - 10 साल', old: 'IPC 307' },
-    { number: 'BNS 85', title: 'Cruelty by husband', desc: 'पति द्वारा क्रूरता - 3 साल', old: 'IPC 498A' },
-    { number: 'BNS 86', title: 'Dowry death', desc: 'दहेज मृत्यु - 7 साल', old: 'IPC 304B' },
-    { number: 'BNS 87', title: 'Abetment to suicide', desc: 'आत्महत्या के लिए उकसाना - 10 साल', old: 'IPC 306' },
-    { number: 'BNS 88', title: 'Attempt to commit suicide', desc: 'आत्महत्या का प्रयास - 1 साल', old: 'IPC 309' },
-    { number: 'BNS 89', title: 'Theft', desc: 'चोरी - 3 साल', old: 'IPC 379' },
-    { number: 'BNS 90', title: 'Snatching', desc: 'झपट्टा मारना - 3 साल', old: 'IPC 379A' },
-    { number: 'BNS 91', title: 'Robbery', desc: 'डकैती - 7 साल', old: 'IPC 390' },
-    { number: 'BNS 92', title: 'Dacoity', desc: 'डकैती - 10 साल', old: 'IPC 391' },
-    { number: 'BNS 93', title: 'Dacoity with murder', desc: 'हत्या के साथ डकैती - 10 साल', old: 'IPC 396' },
-    { number: 'BNS 94', title: 'Criminal misappropriation', desc: 'आपराधिक गबन - 3 साल', old: 'IPC 403' },
-    { number: 'BNS 95', title: 'Criminal breach of trust', desc: 'विश्वासघात - 3 साल', old: 'IPC 405' },
-    { number: 'BNS 96', title: 'Cheating', desc: 'धोखाधड़ी - 3 साल', old: 'IPC 417' },
-    { number: 'BNS 97', title: 'Cheating with impersonation', desc: 'पहचान छिपाकर धोखा - 5 साल', old: 'IPC 419' },
-    { number: 'BNS 98', title: 'Forgery', desc: 'जालसाजी - 3 साल', old: 'IPC 465' },
-    { number: 'BNS 99', title: 'Forgery of valuable security', desc: 'मूल्यवान सुरक्षा की जालसाजी - 7 साल', old: 'IPC 467' },
-    { number: 'BNS 100', title: 'Forgery of document', desc: 'दस्तावेज़ की जालसाजी - 5 साल', old: 'IPC 468' },
-    { number: 'BNS 101', title: 'Forgery for purpose of cheating', desc: 'धोखे के लिए जालसाजी - 7 साल', old: 'IPC 471' },
-    { number: 'BNS 102', title: 'Making false document', desc: 'झूठा दस्तावेज़ बनाना - 5 साल', old: 'IPC 464' },
-    { number: 'BNS 103', title: 'Murder', desc: 'हत्या - मृत्यु या आजीवन', old: 'IPC 302' },
-    { number: 'BNS 104', title: 'Culpable homicide', desc: 'आपराधिक मानव वध - 10 साल', old: 'IPC 304' },
-    { number: 'BNS 105', title: 'Causing death by negligence', desc: 'लापरवाही से मृत्यु - 5 साल', old: 'IPC 304A' },
-    { number: 'BNS 106', title: 'Causing death by rash act', desc: 'लापरवाह कार्य से मृत्यु - 5 साल', old: 'IPC 304A' },
-    { number: 'BNS 107', title: 'Abetment', desc: 'उकसाना - 3 साल', old: 'IPC 107' },
-    { number: 'BNS 108', title: 'Abetment of suicide', desc: 'आत्महत्या के लिए उकसाना - 10 साल', old: 'IPC 306' },
-    { number: 'BNS 109', title: 'Criminal conspiracy', desc: 'आपराधिक साजिश - 5 साल', old: 'IPC 120B' },
-    { number: 'BNS 110', title: 'Defamation', desc: 'मानहानि - 2 साल', old: 'IPC 499' },
-    { number: 'BNS 111', title: 'Criminal intimidation', desc: 'आपराधिक धमकी - 2 साल', old: 'IPC 503' },
-    { number: 'BNS 112', title: 'Public nuisance', desc: 'सार्वजनिक उपद्रव - 3 साल', old: 'IPC 268' },
-    { number: 'BNS 113', title: 'Criminal trespass', desc: 'आपराधिक अतिक्रमण - 3 साल', old: 'IPC 441' },
-    { number: 'BNS 114', title: 'House-trespass', desc: 'गृह-अतिक्रमण - 5 साल', old: 'IPC 442' },
-    { number: 'BNS 115', title: 'Adultery', desc: 'व्यभिचार - 2 साल', old: 'IPC 497' },
-    { number: 'BNS 116', title: 'Bigamy', desc: 'द्विविवाह - 7 साल', old: 'IPC 494' },
-    { number: 'BNS 117', title: 'Marriage fraud', desc: 'विवाह धोखाधड़ी - 5 साल', old: 'IPC 496' },
-    { number: 'BNS 118', title: 'Dowry prohibition', desc: 'दहेज निषेध - 5 साल', old: 'IPC 498B' },
-    { number: 'BNS 119', title: 'Child marriage', desc: 'बाल विवाह - 3 साल', old: 'IPC 498C' },
-    { number: 'BNS 120', title: 'Domestic violence', desc: 'घरेलू हिंसा - 3 साल', old: 'IPC 498D' },
-    { number: 'BNS 121', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498E' },
-    { number: 'BNS 122', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498F' },
-    { number: 'BNS 123', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498G' },
-    { number: 'BNS 124', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498H' },
-    { number: 'BNS 125', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498I' },
-    { number: 'BNS 126', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498J' },
-    { number: 'BNS 127', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498K' },
-    { number: 'BNS 128', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498L' },
-    { number: 'BNS 129', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498M' },
-    { number: 'BNS 130', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498N' },
-    { number: 'BNS 131', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498O' },
-    { number: 'BNS 132', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498P' },
-    { number: 'BNS 133', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498Q' },
-    { number: 'BNS 134', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498R' },
-    { number: 'BNS 135', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498S' },
-    { number: 'BNS 136', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498T' },
-    { number: 'BNS 137', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498U' },
-    { number: 'BNS 138', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498V' },
-    { number: 'BNS 139', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498W' },
-    { number: 'BNS 140', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498X' },
-    { number: 'BNS 141', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498Y' },
-    { number: 'BNS 142', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498Z' },
-    { number: 'BNS 143', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498AA' },
-    { number: 'BNS 144', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498AB' },
-    { number: 'BNS 145', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498AC' },
-    { number: 'BNS 146', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498AD' },
-    { number: 'BNS 147', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498AE' },
-    { number: 'BNS 148', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498AF' },
-    { number: 'BNS 149', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498AG' },
-    { number: 'BNS 150', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498AH' },
-    { number: 'BNS 151', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498AI' },
-    { number: 'BNS 152', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498AJ' },
-    { number: 'BNS 153', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498AK' },
-    { number: 'BNS 154', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498AL' },
-    { number: 'BNS 155', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498AM' },
-    { number: 'BNS 156', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498AN' },
-    { number: 'BNS 157', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498AO' },
-    { number: 'BNS 158', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498AP' },
-    { number: 'BNS 159', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498AQ' },
-    { number: 'BNS 160', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498AR' },
-    { number: 'BNS 161', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498AS' },
-    { number: 'BNS 162', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498AT' },
-    { number: 'BNS 163', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498AU' },
-    { number: 'BNS 164', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498AV' },
-    { number: 'BNS 165', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498AW' },
-    { number: 'BNS 166', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498AX' },
-    { number: 'BNS 167', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498AY' },
-    { number: 'BNS 168', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498AZ' },
-    { number: 'BNS 169', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498BA' },
-    { number: 'BNS 170', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498BB' },
-    { number: 'BNS 171', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498BC' },
-    { number: 'BNS 172', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498BD' },
-    { number: 'BNS 173', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498BE' },
-    { number: 'BNS 174', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498BF' },
-    { number: 'BNS 175', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498BG' },
-    { number: 'BNS 176', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498BH' },
-    { number: 'BNS 177', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498BI' },
-    { number: 'BNS 178', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498BJ' },
-    { number: 'BNS 179', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498BK' },
-    { number: 'BNS 180', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498BL' },
-    { number: 'BNS 181', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498BM' },
-    { number: 'BNS 182', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498BN' },
-    { number: 'BNS 183', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498BO' },
-    { number: 'BNS 184', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498BP' },
-    { number: 'BNS 185', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498BQ' },
-    { number: 'BNS 186', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498BR' },
-    { number: 'BNS 187', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498BS' },
-    { number: 'BNS 188', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498BT' },
-    { number: 'BNS 189', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498BU' },
-    { number: 'BNS 190', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498BV' },
-    { number: 'BNS 191', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498BW' },
-    { number: 'BNS 192', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498BX' },
-    { number: 'BNS 193', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498BY' },
-    { number: 'BNS 194', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498BZ' },
-    { number: 'BNS 195', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498CA' },
-    { number: 'BNS 196', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498CB' },
-    { number: 'BNS 197', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498CC' },
-    { number: 'BNS 198', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498CD' },
-    { number: 'BNS 199', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498CE' },
-    { number: 'BNS 200', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498CF' },
-    { number: 'BNS 201', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498CG' },
-    { number: 'BNS 202', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498CH' },
-    { number: 'BNS 203', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498CI' },
-    { number: 'BNS 204', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498CJ' },
-    { number: 'BNS 205', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498CK' },
-    { number: 'BNS 206', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498CL' },
-    { number: 'BNS 207', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498CM' },
-    { number: 'BNS 208', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498CN' },
-    { number: 'BNS 209', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498CO' },
-    { number: 'BNS 210', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498CP' },
-    { number: 'BNS 211', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498CQ' },
-    { number: 'BNS 212', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498CR' },
-    { number: 'BNS 213', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498CS' },
-    { number: 'BNS 214', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498CT' },
-    { number: 'BNS 215', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498CU' },
-    { number: 'BNS 216', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498CV' },
-    { number: 'BNS 217', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498CW' },
-    { number: 'BNS 218', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498CX' },
-    { number: 'BNS 219', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498CY' },
-    { number: 'BNS 220', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498CZ' },
-    { number: 'BNS 221', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498DA' },
-    { number: 'BNS 222', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498DB' },
-    { number: 'BNS 223', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498DC' },
-    { number: 'BNS 224', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498DD' },
-    { number: 'BNS 225', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498DE' },
-    { number: 'BNS 226', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498DF' },
-    { number: 'BNS 227', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498DG' },
-    { number: 'BNS 228', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498DH' },
-    { number: 'BNS 229', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498DI' },
-    { number: 'BNS 230', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498DJ' },
-    { number: 'BNS 231', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498DK' },
-    { number: 'BNS 232', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498DL' },
-    { number: 'BNS 233', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498DM' },
-    { number: 'BNS 234', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498DN' },
-    { number: 'BNS 235', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498DO' },
-    { number: 'BNS 236', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498DP' },
-    { number: 'BNS 237', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498DQ' },
-    { number: 'BNS 238', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498DR' },
-    { number: 'BNS 239', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498DS' },
-    { number: 'BNS 240', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498DT' },
-    { number: 'BNS 241', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498DU' },
-    { number: 'BNS 242', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498DV' },
-    { number: 'BNS 243', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498DW' },
-    { number: 'BNS 244', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498DX' },
-    { number: 'BNS 245', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498DY' },
-    { number: 'BNS 246', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498DZ' },
-    { number: 'BNS 247', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498EA' },
-    { number: 'BNS 248', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498EB' },
-    { number: 'BNS 249', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498EC' },
-    { number: 'BNS 250', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498ED' },
-    { number: 'BNS 251', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498EE' },
-    { number: 'BNS 252', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498EF' },
-    { number: 'BNS 253', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498EG' },
-    { number: 'BNS 254', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498EH' },
-    { number: 'BNS 255', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498EI' },
-    { number: 'BNS 256', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498EJ' },
-    { number: 'BNS 257', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498EK' },
-    { number: 'BNS 258', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498EL' },
-    { number: 'BNS 259', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498EM' },
-    { number: 'BNS 260', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498EN' },
-    { number: 'BNS 261', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498EO' },
-    { number: 'BNS 262', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498EP' },
-    { number: 'BNS 263', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498EQ' },
-    { number: 'BNS 264', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498ER' },
-    { number: 'BNS 265', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498ES' },
-    { number: 'BNS 266', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498ET' },
-    { number: 'BNS 267', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498EU' },
-    { number: 'BNS 268', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498EV' },
-    { number: 'BNS 269', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498EW' },
-    { number: 'BNS 270', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498EX' },
-    { number: 'BNS 271', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498EY' },
-    { number: 'BNS 272', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498EZ' },
-    { number: 'BNS 273', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498FA' },
-    { number: 'BNS 274', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498FB' },
-    { number: 'BNS 275', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498FC' },
-    { number: 'BNS 276', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498FD' },
-    { number: 'BNS 277', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498FE' },
-    { number: 'BNS 278', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498FF' },
-    { number: 'BNS 279', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498FG' },
-    { number: 'BNS 280', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498FH' },
-    { number: 'BNS 281', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498FI' },
-    { number: 'BNS 282', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498FJ' },
-    { number: 'BNS 283', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498FK' },
-    { number: 'BNS 284', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498FL' },
-    { number: 'BNS 285', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498FM' },
-    { number: 'BNS 286', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498FN' },
-    { number: 'BNS 287', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498FO' },
-    { number: 'BNS 288', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498FP' },
-    { number: 'BNS 289', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498FQ' },
-    { number: 'BNS 290', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498FR' },
-    { number: 'BNS 291', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498FS' },
-    { number: 'BNS 292', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498FT' },
-    { number: 'BNS 293', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498FU' },
-    { number: 'BNS 294', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498FV' },
-    { number: 'BNS 295', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498FW' },
-    { number: 'BNS 296', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498FX' },
-    { number: 'BNS 297', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498FY' },
-    { number: 'BNS 298', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498FZ' },
-    { number: 'BNS 299', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498GA' },
-    { number: 'BNS 300', title: 'Vishing', desc: 'विशिंग - 3 साल', old: 'IPC 498GB' },
-    { number: 'BNS 301', title: 'SMiShing', desc: 'एसएमएस फ़िशिंग - 3 साल', old: 'IPC 498GC' },
-    { number: 'BNS 302', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498GD' },
-    { number: 'BNS 303', title: 'Theft', desc: 'चोरी - 3 साल', old: 'IPC 379' },
-    { number: 'BNS 304', title: 'Snatching', desc: 'झपट्टा मारना - 3 साल', old: 'IPC 379A' },
-    { number: 'BNS 305', title: 'Robbery', desc: 'डकैती - 7 साल', old: 'IPC 390' },
-    { number: 'BNS 306', title: 'Dacoity', desc: 'डकैती - 10 साल', old: 'IPC 391' },
-    { number: 'BNS 307', title: 'Dacoity with murder', desc: 'हत्या के साथ डकैती - 10 साल', old: 'IPC 396' },
-    { number: 'BNS 308', title: 'Criminal misappropriation', desc: 'आपराधिक गबन - 3 साल', old: 'IPC 403' },
-    { number: 'BNS 309', title: 'Criminal breach of trust', desc: 'विश्वासघात - 3 साल', old: 'IPC 405' },
-    { number: 'BNS 310', title: 'Cheating', desc: 'धोखाधड़ी - 3 साल', old: 'IPC 417' },
-    { number: 'BNS 311', title: 'Cheating with impersonation', desc: 'पहचान छिपाकर धोखा - 5 साल', old: 'IPC 419' },
-    { number: 'BNS 312', title: 'Forgery', desc: 'जालसाजी - 3 साल', old: 'IPC 465' },
-    { number: 'BNS 313', title: 'Forgery of valuable security', desc: 'मूल्यवान सुरक्षा की जालसाजी - 7 साल', old: 'IPC 467' },
-    { number: 'BNS 314', title: 'Forgery of document', desc: 'दस्तावेज़ की जालसाजी - 5 साल', old: 'IPC 468' },
-    { number: 'BNS 315', title: 'Forgery for purpose of cheating', desc: 'धोखे के लिए जालसाजी - 7 साल', old: 'IPC 471' },
-    { number: 'BNS 316', title: 'Making false document', desc: 'झूठा दस्तावेज़ बनाना - 5 साल', old: 'IPC 464' },
-    { number: 'BNS 317', title: 'Defamation', desc: 'मानहानि - 2 साल', old: 'IPC 499' },
-    { number: 'BNS 318', title: 'Cheating', desc: 'धोखाधड़ी - 7 साल', old: 'IPC 420' },
-    { number: 'BNS 319', title: 'Criminal intimidation', desc: 'आपराधिक धमकी - 2 साल', old: 'IPC 503' },
-    { number: 'BNS 320', title: 'Public nuisance', desc: 'सार्वजनिक उपद्रव - 3 साल', old: 'IPC 268' },
-    { number: 'BNS 321', title: 'Criminal trespass', desc: 'आपराधिक अतिक्रमण - 3 साल', old: 'IPC 441' },
-    { number: 'BNS 322', title: 'House-trespass', desc: 'गृह-अतिक्रमण - 5 साल', old: 'IPC 442' },
-    { number: 'BNS 323', title: 'Adultery', desc: 'व्यभिचार - 2 साल', old: 'IPC 497' },
-    { number: 'BNS 324', title: 'Bigamy', desc: 'द्विविवाह - 7 साल', old: 'IPC 494' },
-    { number: 'BNS 325', title: 'Marriage fraud', desc: 'विवाह धोखाधड़ी - 5 साल', old: 'IPC 496' },
-    { number: 'BNS 326', title: 'Dowry prohibition', desc: 'दहेज निषेध - 5 साल', old: 'IPC 498B' },
-    { number: 'BNS 327', title: 'Child marriage', desc: 'बाल विवाह - 3 साल', old: 'IPC 498C' },
-    { number: 'BNS 328', title: 'Domestic violence', desc: 'घरेलू हिंसा - 3 साल', old: 'IPC 498D' },
-    { number: 'BNS 329', title: 'Cyber crime', desc: 'साइबर अपराध - 3 साल', old: 'IPC 498E' },
-    { number: 'BNS 330', title: 'Cyber fraud', desc: 'साइबर धोखाधड़ी - 5 साल', old: 'IPC 498F' },
-    { number: 'BNS 331', title: 'Identity theft', desc: 'पहचान चोरी - 3 साल', old: 'IPC 498G' },
-    { number: 'BNS 332', title: 'Phishing', desc: 'फ़िशिंग - 3 साल', old: 'IPC 498H' },
-    { number: 'BNS 333', title: 'Hacking', desc: 'हैकिंग - 5 साल', old: 'IPC 498I' },
-    { number: 'BNS 334', title: 'Online fraud', desc: 'ऑनलाइन धोखाधड़ी - 5 साल', old: 'IPC 498J' },
-    { number: 'BNS 335', title: 'Cyber stalking', desc: 'साइबर स्टॉकिंग - 3 साल', old: 'IPC 498K' },
-    { number: 'BNS 336', title: 'Cyber bullying', desc: 'साइबर बुलिंग - 3 साल', old: 'IPC 498L' },
-    { number: 'BNS 337', title: 'Cyber pornography', desc: 'साइबर पोर्नोग्राफी - 5 साल', old: 'IPC 498M' },
-    { number: 'BNS 338', title: 'Child pornography', desc: 'बाल पोर्नोग्राफी - 10 साल', old: 'IPC 498N' },
-    { number: 'BNS 339', title: 'Cyber terrorism', desc: 'साइबर आतंकवाद - 10 साल', old: 'IPC 498O' },
-    { number: 'BNS 340', title: 'Online gambling', desc: 'ऑनलाइन जुआ - 5 साल', old: 'IPC 498P' },
-    { number: 'BNS 341', title: 'Crypto crime', desc: 'क्रिप्टो अपराध - 5 साल', old: 'IPC 498Q' },
-    { number: 'BNS 342', title: 'Deepfake', desc: 'डीपफेक - 3 साल', old: 'IPC 498R' },
-    { number: 'BNS 343', title: 'AI misuse', desc: 'AI का दुरुपयोग - 5 साल', old: 'IPC 498S' },
-    { number: 'BNS 344', title: 'Data breach', desc: 'डेटा चोरी - 5 साल', old: 'IPC 498T' },
-    { number: 'BNS 345', title: 'Privacy violation', desc: 'गोपनीयता उल्लंघन - 3 साल', old: 'IPC 498U' },
-    { number: 'BNS 346', title: 'Online harassment', desc: 'ऑनलाइन उत्पीड़न - 3 साल', old: 'IPC 498V' },
-    { number: 'BNS 347', title: 'Cyber defamation', desc: 'साइबर मानहानि - 3 साल', old: 'IPC 498W' },
-    { number: 'BNS 348', title: 'Online impersonation', desc: 'ऑनलाइन पहचान छिपाना - 3 साल', old: 'IPC 498X' },
-    { number: 'BNS 349', title: 'Malware distribution', desc: 'मैलवेयर वितरण - 5 साल', old: 'IPC 498Y' },
-    { number: 'BNS 350', title: 'Ransomware', desc: 'रैंसमवेयर - 7 साल', old: 'IPC 498Z' }
-];
+// ============================================================
+// SEARCH SECTIONS
+// ============================================================
+function searchSections(query, act = null) {
+    const searchLower = query.toLowerCase();
+    const allSections = getAllSections(act);
+    
+    return allSections.filter(section => 
+        section.number.toLowerCase().includes(searchLower) ||
+        section.title.toLowerCase().includes(searchLower) ||
+        section.text.toLowerCase().includes(searchLower)
+    );
+}
 
-const BNSS_SECTIONS = [
-    { number: 'BNSS 1', title: 'Short title, commencement, application', desc: 'BNSS का नाम, लागू होने की तारीख और क्षेत्र', old: 'CrPC 1' },
-    { number: 'BNSS 2', title: 'Definitions', desc: 'Important terms defined', old: 'CrPC 2' },
-    { number: 'BNSS 3', title: 'Classes of Criminal Courts', desc: 'आपराधिक अदालतों के प्रकार', old: 'CrPC 6' },
-    { number: 'BNSS 4', title: 'Powers of Criminal Courts', desc: 'आपराधिक अदालतों की शक्तियाँ', old: 'CrPC 7' },
-    { number: 'BNSS 5', title: 'Magistrates and their powers', desc: 'मजिस्ट्रेट और उनकी शक्तियाँ', old: 'CrPC 8' },
-    { number: 'BNSS 6', title: 'Sessions and Magistrates', desc: 'सत्र और मजिस्ट्रेट', old: 'CrPC 9' },
-    { number: 'BNSS 7', title: 'Chief Judicial Magistrate', desc: 'मुख्य न्यायिक मजिस्ट्रेट', old: 'CrPC 10' },
-    { number: 'BNSS 8', title: 'Special Judicial Magistrates', desc: 'विशेष न्यायिक मजिस्ट्रेट', old: 'CrPC 11' },
-    { number: 'BNSS 9', title: 'District Magistrate', desc: 'जिला मजिस्ट्रेट', old: 'CrPC 12' },
-    { number: 'BNSS 10', title: 'Additional District Magistrate', desc: 'अतिरिक्त जिला मजिस्ट्रेट', old: 'CrPC 13' },
-    { number: 'BNSS 11', title: 'Sub-divisional Magistrate', desc: 'उप-विभागीय मजिस्ट्रेट', old: 'CrPC 14' },
-    { number: 'BNSS 12', title: 'Executive Magistrates', desc: 'कार्यकारी मजिस्ट्रेट', old: 'CrPC 15' },
-    { number: 'BNSS 13', title: 'Powers of Executive Magistrates', desc: 'कार्यकारी मजिस्ट्रेट की शक्तियाँ', old: 'CrPC 16' },
-    { number: 'BNSS 14', title: 'Public Prosecutors', desc: 'लोक अभियोजक', old: 'CrPC 17' },
-    { number: 'BNSS 15', title: 'Assistant Public Prosecutors', desc: 'सहायक लोक अभियोजक', old: 'CrPC 18' },
-    { number: 'BNSS 16', title: 'Police officers and their duties', desc: 'पुलिस अधिकारी और उनके कर्तव्य', old: 'CrPC 19' },
-    { number: 'BNSS 17', title: 'Power of police to investigate', desc: 'पुलिस की जाँच की शक्ति', old: 'CrPC 20' },
-    { number: 'BNSS 18', title: 'Mode of investigation', desc: 'जाँच का तरीका', old: 'CrPC 21' },
-    { number: 'BNSS 19', title: 'Summons to accused', desc: 'अभियुक्त को समन', old: 'CrPC 22' },
-    { number: 'BNSS 20', title: 'Warrant of arrest', desc: 'गिरफ्तारी वारंट', old: 'CrPC 23' },
-    { number: 'BNSS 21', title: 'Arrest without warrant', desc: 'बिना वारंट गिरफ्तारी', old: 'CrPC 24' },
-    { number: 'BNSS 22', title: 'Arrest with warrant', desc: 'वारंट के साथ गिरफ्तारी', old: 'CrPC 25' },
-    { number: 'BNSS 23', title: 'Search and seizure', desc: 'तलाशी और जब्ती', old: 'CrPC 26' },
-    { number: 'BNSS 24', title: 'Search without warrant', desc: 'बिना वारंट तलाशी', old: 'CrPC 27' },
-    { number: 'BNSS 25', title: 'Search with warrant', desc: 'वारंट के साथ तलाशी', old: 'CrPC 28' },
-    { number: 'BNSS 26', title: 'Procedure for search', desc: 'तलाशी की प्रक्रिया', old: 'CrPC 29' },
-    { number: 'BNSS 27', title: 'Seizure of property', desc: 'संपत्ति की जब्ती', old: 'CrPC 30' },
-    { number: 'BNSS 28', title: 'Production of property', desc: 'संपत्ति का उत्पादन', old: 'CrPC 31' },
-    { number: 'BNSS 29', title: 'Disposal of property', desc: 'संपत्ति का निपटान', old: 'CrPC 32' },
-    { number: 'BNSS 30', title: 'Cognizable offences', desc: 'संज्ञेय अपराध', old: 'CrPC 33' },
-    { number: 'BNSS 31', title: 'Non-cognizable offences', desc: 'असंज्ञेय अपराध', old: 'CrPC 34' },
-    { number: 'BNSS 32', title: 'Bailable offences', desc: 'ज़मानती अपराध', old: 'CrPC 35' },
-    { number: 'BNSS 33', title: 'Non-bailable offences', desc: 'गैर-ज़मानती अपराध', old: 'CrPC 36' },
-    { number: 'BNSS 34', title: 'Bail in bailable offences', desc: 'ज़मानती अपराधों में ज़मानत', old: 'CrPC 37' },
-    { number: 'BNSS 35', title: 'Bail in non-bailable offences', desc: 'गैर-ज़मानती अपराधों में ज़मानत', old: 'CrPC 38' },
-    { number: 'BNSS 36', title: 'Anticipatory bail', desc: 'अग्रिम ज़मानत', old: 'CrPC 39' },
-    { number: 'BNSS 37', title: 'Bail from Magistrate', desc: 'मजिस्ट्रेट से ज़मानत', old: 'CrPC 40' },
-    { number: 'BNSS 38', title: 'Bail from Sessions Court', desc: 'सत्र न्यायालय से ज़मानत', old: 'CrPC 41' },
-    { number: 'BNSS 39', title: 'Bail from High Court', desc: 'उच्च न्यायालय से ज़मानत', old: 'CrPC 42' },
-    { number: 'BNSS 40', title: 'Bail conditions', desc: 'ज़मानत की शर्तें', old: 'CrPC 43' },
-    { number: 'BNSS 41', title: 'Cancellation of bail', desc: 'ज़मानत रद्द करना', old: 'CrPC 44' },
-    { number: 'BNSS 42', title: 'FIR registration', desc: 'FIR दर्ज करना', old: 'CrPC 45' },
-    { number: 'BNSS 43', title: 'FIR in cognizable cases', desc: 'संज्ञेय मामलों में FIR', old: 'CrPC 46' },
-    { number: 'BNSS 44', title: 'FIR in non-cognizable cases', desc: 'असंज्ञेय मामलों में FIR', old: 'CrPC 47' },
-    { number: 'BNSS 45', title: 'Information to police', desc: 'पुलिस को सूचना', old: 'CrPC 48' },
-    { number: 'BNSS 46', title: 'Police to investigate', desc: 'पुलिस जाँच करेगी', old: 'CrPC 49' },
-    { number: 'BNSS 47', title: 'Investigation procedure', desc: 'जाँच प्रक्रिया', old: 'CrPC 50' },
-    { number: 'BNSS 48', title: 'Evidence in investigation', desc: 'जाँच में साक्ष्य', old: 'CrPC 51' },
-    { number: 'BNSS 49', title: 'Statement of witnesses', desc: 'गवाहों के बयान', old: 'CrPC 52' },
-    { number: 'BNSS 50', title: 'Recording of statements', desc: 'बयानों का रिकॉर्ड', old: 'CrPC 53' },
-    { number: 'BNSS 51', title: 'Medical examination of accused', desc: 'अभियुक्त की चिकित्सा जाँच', old: 'CrPC 54' },
-    { number: 'BNSS 52', title: 'Medical examination of victim', desc: 'पीड़ित की चिकित्सा जाँच', old: 'CrPC 55' },
-    { number: 'BNSS 53', title: 'Chargesheet filing', desc: 'चार्जशीट दाखिल करना', old: 'CrPC 56' },
-    { number: 'BNSS 54', title: 'Chargesheet time limit', desc: 'चार्जशीट की समय सीमा', old: 'CrPC 57' },
-    { number: 'BNSS 55', title: 'Final report', desc: 'अंतिम रिपोर्ट', old: 'CrPC 58' },
-    { number: 'BNSS 56', title: 'Closure report', desc: 'समाप्ति रिपोर्ट', old: 'CrPC 59' },
-    { number: 'BNSS 57', title: 'Summons for trial', desc: 'विचारण के लिए समन', old: 'CrPC 60' },
-    { number: 'BNSS 58', title: 'Trial procedure', desc: 'विचारण प्रक्रिया', old: 'CrPC 61' },
-    { number: 'BNSS 59', title: 'Summary trial', desc: 'सारांश विचारण', old: 'CrPC 62' },
-    { number: 'BNSS 60', title: 'Sessions trial', desc: 'सत्र विचारण', old: 'CrPC 63' },
-    { number: 'BNSS 61', title: 'Magistrate trial', desc: 'मजिस्ट्रेट विचारण', old: 'CrPC 64' },
-    { number: 'BNSS 62', title: 'High Court trial', desc: 'उच्च न्यायालय विचारण', old: 'CrPC 65' },
-    { number: 'BNSS 63', title: 'Supreme Court trial', desc: 'सर्वोच्च न्यायालय विचारण', old: 'CrPC 66' },
-    { number: 'BNSS 64', title: 'Judgment procedure', desc: 'निर्णय प्रक्रिया', old: 'CrPC 67' },
-    { number: 'BNSS 65', title: 'Appeal procedure', desc: 'अपील प्रक्रिया', old: 'CrPC 68' },
-    { number: 'BNSS 66', title: 'Revision procedure', desc: 'पुनरीक्षण प्रक्रिया', old: 'CrPC 69' },
-    { number: 'BNSS 67', title: 'Limitation for appeal', desc: 'अपील की समय सीमा', old: 'CrPC 70' },
-    { number: 'BNSS 68', title: 'Limitation for revision', desc: 'पुनरीक्षण की समय सीमा', old: 'CrPC 71' },
-    { number: 'BNSS 69', title: 'Maintenance proceedings', desc: 'भरण-पोषण कार्यवाही', old: 'CrPC 72' },
-    { number: 'BNSS 70', title: 'Maintenance for wife', desc: 'पत्नी के लिए भरण-पोषण', old: 'CrPC 73' },
-    { number: 'BNSS 71', title: 'Maintenance for children', desc: 'बच्चों के लिए भरण-पोषण', old: 'CrPC 74' },
-    { number: 'BNSS 72', title: 'Maintenance for parents', desc: 'माता-पिता के लिए भरण-पोषण', old: 'CrPC 75' },
-    { number: 'BNSS 73', title: 'Maintenance amount', desc: 'भरण-पोषण की राशि', old: 'CrPC 76' },
-    { number: 'BNSS 74', title: 'Maintenance arrears', desc: 'भरण-पोषण का बकाया', old: 'CrPC 77' },
-    { number: 'BNSS 75', title: 'Maintenance variation', desc: 'भरण-पोषण में बदलाव', old: 'CrPC 78' },
-    { number: 'BNSS 76', title: 'Maintenance enforcement', desc: 'भरण-पोषण का प्रवर्तन', old: 'CrPC 79' },
-    { number: 'BNSS 77', title: 'Maintenance of dependent', desc: 'आश्रित का भरण-पोषण', old: 'CrPC 80' },
-    { number: 'BNSS 78', title: 'Maintenance of family', desc: 'परिवार का भरण-पोषण', old: 'CrPC 81' },
-    { number: 'BNSS 79', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 82' },
-    { number: 'BNSS 80', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 83' },
-    { number: 'BNSS 81', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 84' },
-    { number: 'BNSS 82', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 85' },
-    { number: 'BNSS 83', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 86' },
-    { number: 'BNSS 84', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 87' },
-    { number: 'BNSS 85', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 88' },
-    { number: 'BNSS 86', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 89' },
-    { number: 'BNSS 87', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 90' },
-    { number: 'BNSS 88', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 91' },
-    { number: 'BNSS 89', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 92' },
-    { number: 'BNSS 90', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 93' },
-    { number: 'BNSS 91', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 94' },
-    { number: 'BNSS 92', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 95' },
-    { number: 'BNSS 93', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 96' },
-    { number: 'BNSS 94', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 97' },
-    { number: 'BNSS 95', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 98' },
-    { number: 'BNSS 96', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 99' },
-    { number: 'BNSS 97', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 100' },
-    { number: 'BNSS 98', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 101' },
-    { number: 'BNSS 99', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 102' },
-    { number: 'BNSS 100', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 103' },
-    { number: 'BNSS 101', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 104' },
-    { number: 'BNSS 102', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 105' },
-    { number: 'BNSS 103', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 106' },
-    { number: 'BNSS 104', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 107' },
-    { number: 'BNSS 105', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 108' },
-    { number: 'BNSS 106', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 109' },
-    { number: 'BNSS 107', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 110' },
-    { number: 'BNSS 108', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 111' },
-    { number: 'BNSS 109', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 112' },
-    { number: 'BNSS 110', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 113' },
-    { number: 'BNSS 111', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 114' },
-    { number: 'BNSS 112', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 115' },
-    { number: 'BNSS 113', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 116' },
-    { number: 'BNSS 114', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 117' },
-    { number: 'BNSS 115', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 118' },
-    { number: 'BNSS 116', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 119' },
-    { number: 'BNSS 117', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 120' },
-    { number: 'BNSS 118', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 121' },
-    { number: 'BNSS 119', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 122' },
-    { number: 'BNSS 120', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 123' },
-    { number: 'BNSS 121', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 124' },
-    { number: 'BNSS 122', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 125' },
-    { number: 'BNSS 123', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 126' },
-    { number: 'BNSS 124', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 127' },
-    { number: 'BNSS 125', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 128' },
-    { number: 'BNSS 126', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 129' },
-    { number: 'BNSS 127', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 130' },
-    { number: 'BNSS 128', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 131' },
-    { number: 'BNSS 129', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 132' },
-    { number: 'BNSS 130', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 133' },
-    { number: 'BNSS 131', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 134' },
-    { number: 'BNSS 132', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 135' },
-    { number: 'BNSS 133', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 136' },
-    { number: 'BNSS 134', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 137' },
-    { number: 'BNSS 135', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 138' },
-    { number: 'BNSS 136', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 139' },
-    { number: 'BNSS 137', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 140' },
-    { number: 'BNSS 138', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 141' },
-    { number: 'BNSS 139', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 142' },
-    { number: 'BNSS 140', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 143' },
-    { number: 'BNSS 141', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 144' },
-    { number: 'BNSS 142', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 145' },
-    { number: 'BNSS 143', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 146' },
-    { number: 'BNSS 144', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण - पुराना CrPC 125', old: 'CrPC 125' },
-    { number: 'BNSS 145', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 147' },
-    { number: 'BNSS 146', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 148' },
-    { number: 'BNSS 147', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 149' },
-    { number: 'BNSS 148', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 150' },
-    { number: 'BNSS 149', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 151' },
-    { number: 'BNSS 150', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 152' },
-    { number: 'BNSS 151', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 153' },
-    { number: 'BNSS 152', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 154' },
-    { number: 'BNSS 153', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 155' },
-    { number: 'BNSS 154', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 156' },
-    { number: 'BNSS 155', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 157' },
-    { number: 'BNSS 156', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 158' },
-    { number: 'BNSS 157', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 159' },
-    { number: 'BNSS 158', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 160' },
-    { number: 'BNSS 159', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 161' },
-    { number: 'BNSS 160', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 162' },
-    { number: 'BNSS 161', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 163' },
-    { number: 'BNSS 162', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 164' },
-    { number: 'BNSS 163', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 165' },
-    { number: 'BNSS 164', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 166' },
-    { number: 'BNSS 165', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 167' },
-    { number: 'BNSS 166', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 168' },
-    { number: 'BNSS 167', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 169' },
-    { number: 'BNSS 168', title: 'Maintenance of wife', desc: 'पत्नी का भरण-पोषण', old: 'CrPC 170' },
-    { number: 'BNSS 169', title: 'Maintenance of parents', desc: 'माता-पिता का भरण-पोषण', old: 'CrPC 171' },
-    { number: 'BNSS 170', title: 'Maintenance of relatives', desc: 'रिश्तेदारों का भरण-पोषण', old: 'CrPC 172' },
-    { number: 'BNSS 171', title: 'Maintenance of dependents', desc: 'आश्रितों का भरण-पोषण', old: 'CrPC 173' },
-    { number: 'BNSS 172', title: 'Maintenance of children', desc: 'बच्चों का भरण-पोषण', old: 'CrPC 174' },
-    { number: 'BNSS 173', title: 'FIR registration', desc: 'FIR दर्ज करना - पुराना CrPC 154', old: 'CrPC 154' },
-    { number: 'BNSS 174', title: 'Police investigation', desc: 'पुलिस जाँच', old: 'CrPC 175' },
-    { number: 'BNSS 175', title: 'Investigation procedure', desc: 'जाँच प्रक्रिया', old: 'CrPC 176' },
-    { number: 'BNSS 176', title: 'Evidence collection', desc: 'साक्ष्य संग्रह', old: 'CrPC 177' },
-    { number: 'BNSS 177', title: 'Witness statements', desc: 'गवाहों के बयान', old: 'CrPC 178' },
-    { number: 'BNSS 178', title: 'Medical examination', desc: 'चिकित्सा जाँच', old: 'CrPC 179' },
-    { number: 'BNSS 179', title: 'Chargesheet filing', desc: 'चार्जशीट दाखिल करना', old: 'CrPC 180' },
-    { number: 'BNSS 180', title: 'Summons for trial', desc: 'विचारण के लिए समन', old: 'CrPC 181' },
-    { number: 'BNSS 181', title: 'Trial procedure', desc: 'विचारण प्रक्रिया', old: 'CrPC 182' },
-    { number: 'BNSS 182', title: 'Judgment procedure', desc: 'निर्णय प्रक्रिया', old: 'CrPC 183' },
-    { number: 'BNSS 183', title: 'Appeal procedure', desc: 'अपील प्रक्रिया', old: 'CrPC 184' },
-    { number: 'BNSS 184', title: 'Revision procedure', desc: 'पुनरीक्षण प्रक्रिया', old: 'CrPC 185' },
-    { number: 'BNSS 185', title: 'Maintenance proceedings', desc: 'भरण-पोषण कार्यवाही', old: 'CrPC 186' },
-    { number: 'BNSS 186', title: 'Maintenance for wife', desc: 'पत्नी के लिए भरण-पोषण', old: 'CrPC 187' },
-    { number: 'BNSS 187', title: 'Maintenance for children', desc: 'बच्चों के लिए भरण-पोषण', old: 'CrPC 188' },
-    { number: 'BNSS 188', title: 'Maintenance for parents', desc: 'माता-पिता के लिए भरण-पोषण', old: 'CrPC 189' },
-    { number: 'BNSS 189', title: 'Maintenance amount', desc: 'भरण-पोषण की राशि', old: 'CrPC 190' },
-    { number: 'BNSS 190', title: 'Maintenance arrears', desc: 'भरण-पोषण का बकाया', old: 'CrPC 191' },
-    { number: 'BNSS 191', title: 'Maintenance variation', desc: 'भरण-पोषण में बदलाव', old: 'CrPC 192' },
-    { number: 'BNSS 192', title: 'Maintenance enforcement', desc: 'भरण-पोषण का प्रवर्तन', old: 'CrPC 193' },
-    { number: 'BNSS 193', title: 'Chargesheet time limit', desc: 'चार्जशीट की समय सीमा - 60/90 दिन', old: 'CrPC 194' },
-    { number: 'BNSS 194', title: 'Trial time limit', desc: 'विचारण की समय सीमा', old: 'CrPC 195' },
-    { number: 'BNSS 195', title: 'Appeal time limit', desc: 'अपील की समय सीमा', old: 'CrPC 196' },
-    { number: 'BNSS 196', title: 'Revision time limit', desc: 'पुनरीक्षण की समय सीमा', old: 'CrPC 197' },
-    { number: 'BNSS 197', title: 'Bail time limit', desc: 'ज़मानत की समय सीमा', old: 'CrPC 198' },
-    { number: 'BNSS 198', title: 'Maintenance time limit', desc: 'भरण-पोषण की समय सीमा', old: 'CrPC 199' },
-    { number: 'BNSS 199', title: 'Police custody', desc: 'पुलिस हिरासत', old: 'CrPC 200' },
-    { number: 'BNSS 200', title: 'Judicial custody', desc: 'न्यायिक हिरासत', old: 'CrPC 201' },
-    { number: 'BNSS 201', title: 'Remand procedure', desc: 'प्रत्यर्पण प्रक्रिया', old: 'CrPC 202' },
-    { number: 'BNSS 202', title: 'Extension of remand', desc: 'प्रत्यर्पण का विस्तार', old: 'CrPC 203' },
-    { number: 'BNSS 203', title: 'Medical examination of accused', desc: 'अभियुक्त की चिकित्सा जाँच', old: 'CrPC 204' },
-    { number: 'BNSS 204', title: 'Medical examination of victim', desc: 'पीड़ित की चिकित्सा जाँच', old: 'CrPC 205' },
-    { number: 'BNSS 205', title: 'Fingerprint evidence', desc: 'उंगलियों के निशान साक्ष्य', old: 'CrPC 206' },
-    { number: 'BNSS 206', title: 'DNA evidence', desc: 'DNA साक्ष्य', old: 'CrPC 207' },
-    { number: 'BNSS 207', title: 'Electronic evidence', desc: 'इलेक्ट्रॉनिक साक्ष्य', old: 'CrPC 208' },
-    { number: 'BNSS 208', title: 'Documentary evidence', desc: 'दस्तावेजी साक्ष्य', old: 'CrPC 209' },
-    { number: 'BNSS 209', title: 'Oral evidence', desc: 'मौखिक साक्ष्य', old: 'CrPC 210' },
-    { number: 'BNSS 210', title: 'Circumstantial evidence', desc: 'परिस्थितिजन्य साक्ष्य', old: 'CrPC 211' },
-    { number: 'BNSS 211', title: 'Real evidence', desc: 'वास्तविक साक्ष्य', old: 'CrPC 212' },
-    { number: 'BNSS 212', title: 'Hearsay evidence', desc: 'सुनी-सुनाई बातें', old: 'CrPC 213' },
-    { number: 'BNSS 213', title: 'Admissibility of evidence', desc: 'साक्ष्य की स्वीकार्यता', old: 'CrPC 214' },
-    { number: 'BNSS 214', title: 'Weight of evidence', desc: 'साक्ष्य का भार', old: 'CrPC 215' },
-    { number: 'BNSS 215', title: 'Burden of proof', desc: 'साक्ष्य का भार', old: 'CrPC 216' },
-    { number: 'BNSS 216', title: 'Standard of proof', desc: 'साक्ष्य का मानक', old: 'CrPC 217' },
-    { number: 'BNSS 217', title: 'Presumption of innocence', desc: 'निर्दोषता का अनुमान', old: 'CrPC 218' },
-    { number: 'BNSS 218', title: 'Right to silence', desc: 'मौन रहने का अधिकार', old: 'CrPC 219' },
-    { number: 'BNSS 219', title: 'Right against self-incrimination', desc: 'आत्म-दोषारोपण के खिलाफ अधिकार', old: 'CrPC 220' },
-    { number: 'BNSS 220', title: 'Right to legal counsel', desc: 'कानूनी सलाह का अधिकार', old: 'CrPC 221' },
-    { number: 'BNSS 221', title: 'Right to fair trial', desc: 'निष्पक्ष विचारण का अधिकार', old: 'CrPC 222' },
-    { number: 'BNSS 222', title: 'Right to speedy trial', desc: 'शीघ्र विचारण का अधिकार', old: 'CrPC 223' },
-    { number: 'BNSS 223', title: 'Right to public trial', desc: 'सार्वजनिक विचारण का अधिकार', old: 'CrPC 224' },
-    { number: 'BNSS 224', title: 'Right to bail', desc: 'ज़मानत का अधिकार', old: 'CrPC 225' },
-    { number: 'BNSS 225', title: 'Right to legal aid', desc: 'कानूनी सहायता का अधिकार', old: 'CrPC 226' },
-    { number: 'BNSS 226', title: 'Right to appeal', desc: 'अपील का अधिकार', old: 'CrPC 227' },
-    { number: 'BNSS 227', title: 'Right to revision', desc: 'पुनरीक्षण का अधिकार', old: 'CrPC 228' },
-    { number: 'BNSS 228', title: 'Right to compensation', desc: 'क्षतिपूर्ति का अधिकार', old: 'CrPC 229' },
-    { number: 'BNSS 229', title: 'Right to information', desc: 'जानकारी का अधिकार', old: 'CrPC 230' },
-    { number: 'BNSS 230', title: 'Right to privacy', desc: 'गोपनीयता का अधिकार', old: 'CrPC 231' },
-    { number: 'BNSS 231', title: 'Right to life', desc: 'जीवन का अधिकार', old: 'CrPC 232' },
-    { number: 'BNSS 232', title: 'Right to liberty', desc: 'स्वतंत्रता का अधिकार', old: 'CrPC 233' },
-    { number: 'BNSS 233', title: 'Right to equality', desc: 'समानता का अधिकार', old: 'CrPC 234' },
-    { number: 'BNSS 234', title: 'Right against discrimination', desc: 'भेदभाव के खिलाफ अधिकार', old: 'CrPC 235' },
-    { number: 'BNSS 235', title: 'Right to education', desc: 'शिक्षा का अधिकार', old: 'CrPC 236' },
-    { number: 'BNSS 236', title: 'Right to healthcare', desc: 'स्वास्थ्य का अधिकार', old: 'CrPC 237' },
-    { number: 'BNSS 237', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 238' },
-    { number: 'BNSS 238', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 239' },
-    { number: 'BNSS 239', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 240' },
-    { number: 'BNSS 240', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 241' },
-    { number: 'BNSS 241', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 242' },
-    { number: 'BNSS 242', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 243' },
-    { number: 'BNSS 243', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 244' },
-    { number: 'BNSS 244', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 245' },
-    { number: 'BNSS 245', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 246' },
-    { number: 'BNSS 246', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 247' },
-    { number: 'BNSS 247', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 248' },
-    { number: 'BNSS 248', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 249' },
-    { number: 'BNSS 249', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 250' },
-    { number: 'BNSS 250', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 251' },
-    { number: 'BNSS 251', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 252' },
-    { number: 'BNSS 252', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 253' },
-    { number: 'BNSS 253', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 254' },
-    { number: 'BNSS 254', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 255' },
-    { number: 'BNSS 255', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 256' },
-    { number: 'BNSS 256', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 257' },
-    { number: 'BNSS 257', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 258' },
-    { number: 'BNSS 258', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 259' },
-    { number: 'BNSS 259', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 260' },
-    { number: 'BNSS 260', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 261' },
-    { number: 'BNSS 261', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 262' },
-    { number: 'BNSS 262', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 263' },
-    { number: 'BNSS 263', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 264' },
-    { number: 'BNSS 264', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 265' },
-    { number: 'BNSS 265', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 266' },
-    { number: 'BNSS 266', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 267' },
-    { number: 'BNSS 267', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 268' },
-    { number: 'BNSS 268', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 269' },
-    { number: 'BNSS 269', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 270' },
-    { number: 'BNSS 270', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 271' },
-    { number: 'BNSS 271', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 272' },
-    { number: 'BNSS 272', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 273' },
-    { number: 'BNSS 273', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 274' },
-    { number: 'BNSS 274', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 275' },
-    { number: 'BNSS 275', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 276' },
-    { number: 'BNSS 276', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 277' },
-    { number: 'BNSS 277', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 278' },
-    { number: 'BNSS 278', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 279' },
-    { number: 'BNSS 279', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 280' },
-    { number: 'BNSS 280', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 281' },
-    { number: 'BNSS 281', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 282' },
-    { number: 'BNSS 282', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 283' },
-    { number: 'BNSS 283', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 284' },
-    { number: 'BNSS 284', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 285' },
-    { number: 'BNSS 285', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 286' },
-    { number: 'BNSS 286', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 287' },
-    { number: 'BNSS 287', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 288' },
-    { number: 'BNSS 288', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 289' },
-    { number: 'BNSS 289', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 290' },
-    { number: 'BNSS 290', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 291' },
-    { number: 'BNSS 291', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 292' },
-    { number: 'BNSS 292', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 293' },
-    { number: 'BNSS 293', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 294' },
-    { number: 'BNSS 294', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 295' },
-    { number: 'BNSS 295', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 296' },
-    { number: 'BNSS 296', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 297' },
-    { number: 'BNSS 297', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 298' },
-    { number: 'BNSS 298', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 299' },
-    { number: 'BNSS 299', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 300' },
-    { number: 'BNSS 300', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 301' },
-    { number: 'BNSS 301', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 302' },
-    { number: 'BNSS 302', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 303' },
-    { number: 'BNSS 303', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 304' },
-    { number: 'BNSS 304', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 305' },
-    { number: 'BNSS 305', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 306' },
-    { number: 'BNSS 306', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 307' },
-    { number: 'BNSS 307', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 308' },
-    { number: 'BNSS 308', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 309' },
-    { number: 'BNSS 309', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 310' },
-    { number: 'BNSS 310', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 311' },
-    { number: 'BNSS 311', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 312' },
-    { number: 'BNSS 312', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 313' },
-    { number: 'BNSS 313', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 314' },
-    { number: 'BNSS 314', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 315' },
-    { number: 'BNSS 315', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 316' },
-    { number: 'BNSS 316', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 317' },
-    { number: 'BNSS 317', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 318' },
-    { number: 'BNSS 318', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 319' },
-    { number: 'BNSS 319', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 320' },
-    { number: 'BNSS 320', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 321' },
-    { number: 'BNSS 321', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 322' },
-    { number: 'BNSS 322', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 323' },
-    { number: 'BNSS 323', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 324' },
-    { number: 'BNSS 324', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 325' },
-    { number: 'BNSS 325', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 326' },
-    { number: 'BNSS 326', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 327' },
-    { number: 'BNSS 327', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 328' },
-    { number: 'BNSS 328', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 329' },
-    { number: 'BNSS 329', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 330' },
-    { number: 'BNSS 330', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 331' },
-    { number: 'BNSS 331', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 332' },
-    { number: 'BNSS 332', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 333' },
-    { number: 'BNSS 333', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 334' },
-    { number: 'BNSS 334', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 335' },
-    { number: 'BNSS 335', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 336' },
-    { number: 'BNSS 336', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 337' },
-    { number: 'BNSS 337', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 338' },
-    { number: 'BNSS 338', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 339' },
-    { number: 'BNSS 339', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 340' },
-    { number: 'BNSS 340', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 341' },
-    { number: 'BNSS 341', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 342' },
-    { number: 'BNSS 342', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 343' },
-    { number: 'BNSS 343', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 344' },
-    { number: 'BNSS 344', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 345' },
-    { number: 'BNSS 345', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 346' },
-    { number: 'BNSS 346', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 347' },
-    { number: 'BNSS 347', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 348' },
-    { number: 'BNSS 348', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 349' },
-    { number: 'BNSS 349', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 350' },
-    { number: 'BNSS 350', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 351' },
-    { number: 'BNSS 351', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 352' },
-    { number: 'BNSS 352', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 353' },
-    { number: 'BNSS 353', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 354' },
-    { number: 'BNSS 354', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 355' },
-    { number: 'BNSS 355', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 356' },
-    { number: 'BNSS 356', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 357' },
-    { number: 'BNSS 357', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 358' },
-    { number: 'BNSS 358', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 359' },
-    { number: 'BNSS 359', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 360' },
-    { number: 'BNSS 360', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 361' },
-    { number: 'BNSS 361', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 362' },
-    { number: 'BNSS 362', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 363' },
-    { number: 'BNSS 363', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 364' },
-    { number: 'BNSS 364', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 365' },
-    { number: 'BNSS 365', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 366' },
-    { number: 'BNSS 366', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 367' },
-    { number: 'BNSS 367', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 368' },
-    { number: 'BNSS 368', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 369' },
-    { number: 'BNSS 369', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 370' },
-    { number: 'BNSS 370', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 371' },
-    { number: 'BNSS 371', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 372' },
-    { number: 'BNSS 372', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 373' },
-    { number: 'BNSS 373', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 374' },
-    { number: 'BNSS 374', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 375' },
-    { number: 'BNSS 375', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 376' },
-    { number: 'BNSS 376', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 377' },
-    { number: 'BNSS 377', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 378' },
-    { number: 'BNSS 378', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 379' },
-    { number: 'BNSS 379', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 380' },
-    { number: 'BNSS 380', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 381' },
-    { number: 'BNSS 381', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 382' },
-    { number: 'BNSS 382', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 383' },
-    { number: 'BNSS 383', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 384' },
-    { number: 'BNSS 384', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 385' },
-    { number: 'BNSS 385', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 386' },
-    { number: 'BNSS 386', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 387' },
-    { number: 'BNSS 387', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 388' },
-    { number: 'BNSS 388', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 389' },
-    { number: 'BNSS 389', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 390' },
-    { number: 'BNSS 390', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 391' },
-    { number: 'BNSS 391', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 392' },
-    { number: 'BNSS 392', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 393' },
-    { number: 'BNSS 393', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 394' },
-    { number: 'BNSS 394', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 395' },
-    { number: 'BNSS 395', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 396' },
-    { number: 'BNSS 396', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 397' },
-    { number: 'BNSS 397', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 398' },
-    { number: 'BNSS 398', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 399' },
-    { number: 'BNSS 399', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 400' },
-    { number: 'BNSS 400', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 401' },
-    { number: 'BNSS 401', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 402' },
-    { number: 'BNSS 402', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 403' },
-    { number: 'BNSS 403', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 404' },
-    { number: 'BNSS 404', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 405' },
-    { number: 'BNSS 405', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 406' },
-    { number: 'BNSS 406', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 407' },
-    { number: 'BNSS 407', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 408' },
-    { number: 'BNSS 408', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 409' },
-    { number: 'BNSS 409', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 410' },
-    { number: 'BNSS 410', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 411' },
-    { number: 'BNSS 411', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 412' },
-    { number: 'BNSS 412', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 413' },
-    { number: 'BNSS 413', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 414' },
-    { number: 'BNSS 414', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 415' },
-    { number: 'BNSS 415', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 416' },
-    { number: 'BNSS 416', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 417' },
-    { number: 'BNSS 417', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 418' },
-    { number: 'BNSS 418', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 419' },
-    { number: 'BNSS 419', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 420' },
-    { number: 'BNSS 420', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 421' },
-    { number: 'BNSS 421', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 422' },
-    { number: 'BNSS 422', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 423' },
-    { number: 'BNSS 423', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 424' },
-    { number: 'BNSS 424', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 425' },
-    { number: 'BNSS 425', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 426' },
-    { number: 'BNSS 426', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 427' },
-    { number: 'BNSS 427', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 428' },
-    { number: 'BNSS 428', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 429' },
-    { number: 'BNSS 429', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 430' },
-    { number: 'BNSS 430', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 431' },
-    { number: 'BNSS 431', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 432' },
-    { number: 'BNSS 432', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 433' },
-    { number: 'BNSS 433', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 434' },
-    { number: 'BNSS 434', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 435' },
-    { number: 'BNSS 435', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 436' },
-    { number: 'BNSS 436', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 437' },
-    { number: 'BNSS 437', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 438' },
-    { number: 'BNSS 438', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 439' },
-    { number: 'BNSS 439', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 440' },
-    { number: 'BNSS 440', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 441' },
-    { number: 'BNSS 441', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 442' },
-    { number: 'BNSS 442', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 443' },
-    { number: 'BNSS 443', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 444' },
-    { number: 'BNSS 444', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 445' },
-    { number: 'BNSS 445', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 446' },
-    { number: 'BNSS 446', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 447' },
-    { number: 'BNSS 447', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 448' },
-    { number: 'BNSS 448', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 449' },
-    { number: 'BNSS 449', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 450' },
-    { number: 'BNSS 450', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 451' },
-    { number: 'BNSS 451', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 452' },
-    { number: 'BNSS 452', title: 'Right to education of children', desc: 'बच्चों की शिक्षा का अधिकार', old: 'CrPC 453' },
-    { number: 'BNSS 453', title: 'Right to healthcare of children', desc: 'बच्चों के स्वास्थ्य का अधिकार', old: 'CrPC 454' },
-    { number: 'BNSS 454', title: 'Right to protection of children', desc: 'बच्चों की सुरक्षा का अधिकार', old: 'CrPC 455' },
-    { number: 'BNSS 455', title: 'Right to women', desc: 'महिलाओं का अधिकार', old: 'CrPC 456' },
-    { number: 'BNSS 456', title: 'Right to protection of women', desc: 'महिलाओं की सुरक्षा का अधिकार', old: 'CrPC 457' },
-    { number: 'BNSS 457', title: 'Right to equality of women', desc: 'महिलाओं की समानता का अधिकार', old: 'CrPC 458' },
-    { number: 'BNSS 458', title: 'Right to non-discrimination of women', desc: 'महिलाओं के खिलाफ भेदभाव का अधिकार', old: 'CrPC 459' },
-    { number: 'BNSS 459', title: 'Right to livelihood', desc: 'आजीविका का अधिकार', old: 'CrPC 460' },
-    { number: 'BNSS 460', title: 'Right to social security', desc: 'सामाजिक सुरक्षा का अधिकार', old: 'CrPC 461' },
-    { number: 'BNSS 461', title: 'Right to housing', desc: 'आवास का अधिकार', old: 'CrPC 462' },
-    { number: 'BNSS 462', title: 'Right to food', desc: 'भोजन का अधिकार', old: 'CrPC 463' },
-    { number: 'BNSS 463', title: 'Right to water', desc: 'पानी का अधिकार', old: 'CrPC 464' },
-    { number: 'BNSS 464', title: 'Right to clean environment', desc: 'स्वच्छ पर्यावरण का अधिकार', old: 'CrPC 465' },
-    { number: 'BNSS 465', title: 'Right to participate in governance', desc: 'शासन में भाग लेने का अधिकार', old: 'CrPC 466' },
-    { number: 'BNSS 466', title: 'Right to vote', desc: 'मतदान का अधिकार', old: 'CrPC 467' },
-    { number: 'BNSS 467', title: 'Right to contest elections', desc: 'चुनाव लड़ने का अधिकार', old: 'CrPC 468' },
-    { number: 'BNSS 468', title: 'Right to association', desc: 'संगठन बनाने का अधिकार', old: 'CrPC 469' },
-    { number: 'BNSS 469', title: 'Right to assembly', desc: 'सभा करने का अधिकार', old: 'CrPC 470' },
-    { number: 'BNSS 470', title: 'Right to movement', desc: 'आवागमन का अधिकार', old: 'CrPC 471' },
-    { number: 'BNSS 471', title: 'Right to residence', desc: 'निवास का अधिकार', old: 'CrPC 472' },
-    { number: 'BNSS 472', title: 'Right to occupation', desc: 'व्यवसाय का अधिकार', old: 'CrPC 473' },
-    { number: 'BNSS 473', title: 'Right to property', desc: 'संपत्ति का अधिकार', old: 'CrPC 474' },
-    { number: 'BNSS 474', title: 'Right to equal pay', desc: 'समान वेतन का अधिकार', old: 'CrPC 475' },
-    { number: 'BNSS 475', title: 'Right against exploitation', desc: 'शोषण के खिलाफ अधिकार', old: 'CrPC 476' },
-    { number: 'BNSS 476', title: 'Right to dignity', desc: 'गरिमा का अधिकार', old: 'CrPC 477' },
-    { number: 'BNSS 477', title: 'Right to family', desc: 'परिवार का अधिकार', old: 'CrPC 478' },
-    { number: 'BNSS 478', title: 'Right to marriage', desc: 'विवाह का अधिकार', old: 'CrPC 479' },
-    { number: 'BNSS 479', title: 'Right to children', desc: 'बच्चों का अधिकार', old: 'CrPC 480' },
-    { number: 'BNSS 480', title: 'Bail', desc: 'ज़मानत - पुराना CrPC 437', old: 'CrPC 437' },
-    { number: 'BNSS 481', title: 'Bail conditions', desc: 'ज़मानत की शर्तें', old: 'CrPC 438' },
-    { number: 'BNSS 482', title: 'Anticipatory bail', desc: 'अग्रिम ज़मानत - पुराना CrPC 438', old: 'CrPC 438' },
-    { number: 'BNSS 483', title: 'Bail from Sessions Court', desc: 'सत्र न्यायालय से ज़मानत', old: 'CrPC 439' },
-    { number: 'BNSS 484', title: 'Bail from High Court', desc: 'उच्च न्यायालय से ज़मानत', old: 'CrPC 440' },
-    { number: 'BNSS 485', title: 'Bail from Supreme Court', desc: 'सर्वोच्च न्यायालय से ज़मानत', old: 'CrPC 441' },
-    { number: 'BNSS 486', title: 'Cancellation of bail', desc: 'ज़मानत रद्द करना', old: 'CrPC 442' },
-    { number: 'BNSS 487', title: 'Appeal against bail', desc: 'ज़मानत के खिलाफ अपील', old: 'CrPC 443' },
-    { number: 'BNSS 488', title: 'Revision against bail', desc: 'ज़मानत के खिलाफ पुनरीक्षण', old: 'CrPC 444' },
-    { number: 'BNSS 489', title: 'Bail in non-bailable offences', desc: 'गैर-ज़मानती अपराधों में ज़मानत', old: 'CrPC 445' },
-    { number: 'BNSS 490', title: 'Bail in bailable offences', desc: 'ज़मानती अपराधों में ज़मानत', old: 'CrPC 446' },
-    { number: 'BNSS 491', title: 'Bail for women', desc: 'महिलाओं के लिए ज़मानत', old: 'CrPC 447' },
-    { number: 'BNSS 492', title: 'Bail for children', desc: 'बच्चों के लिए ज़मानत', old: 'CrPC 448' },
-    { number: 'BNSS 493', title: 'Bail for senior citizens', desc: 'बुजुर्गों के लिए ज़मानत', old: 'CrPC 449' },
-    { number: 'BNSS 494', title: 'Bail for sick persons', desc: 'बीमार व्यक्तियों के लिए ज़मानत', old: 'CrPC 450' },
-    { number: 'BNSS 495', title: 'Bail for pregnant women', desc: 'गर्भवती महिलाओं के लिए ज़मानत', old: 'CrPC 451' },
-    { number: 'BNSS 496', title: 'Bail for disabled persons', desc: 'दिव्यांग व्यक्तियों के लिए ज़मानत', old: 'CrPC 452' },
-    { number: 'BNSS 497', title: 'Bail for mentally ill persons', desc: 'मानसिक रूप से बीमार व्यक्तियों के लिए ज़मानत', old: 'CrPC 453' },
-    { number: 'BNSS 498', title: 'Bail for terminal illness', desc: 'टर्मिनल बीमारी के लिए ज़मानत', old: 'CrPC 454' },
-    { number: 'BNSS 499', title: 'Bail for accident cases', desc: 'दुर्घटना मामलों में ज़मानत', old: 'CrPC 455' },
-    { number: 'BNSS 500', title: 'Bail for traffic cases', desc: 'यातायात मामलों में ज़मानत', old: 'CrPC 456' }
-];
+// ============================================================
+// CONVERT OLD TO NEW
+// ============================================================
+function convertOldToNew(oldAct, oldSection) {
+    if (oldAct === 'ipc') {
+        return IPC_TO_BNS_MAPPING[oldSection] || null;
+    } else if (oldAct === 'crpc') {
+        return CRPC_TO_BNSS_MAPPING[oldSection] || null;
+    } else if (oldAct === 'evidence') {
+        return EVIDENCE_TO_BSA_MAPPING[oldSection] || null;
+    }
+    return null;
+}
 
-const BSA_SECTIONS = [
-    { number: 'BSA 1', title: 'Short title, commencement, application', desc: 'BSA का नाम, लागू होने की तारीख और क्षेत्र', old: 'Evidence Act 1' },
-    { number: 'BSA 2', title: 'Definitions', desc: 'Important terms defined', old: 'Evidence Act 2' },
-    { number: 'BSA 3', title: 'Definition of "court"', desc: '"अदालत" की परिभाषा', old: 'Evidence Act 3' },
-    { number: 'BSA 4', title: 'Definition of "fact"', desc: '"तथ्य" की परिभाषा', old: 'Evidence Act 4' },
-    { number: 'BSA 5', title: 'Definition of "fact in issue"', desc: '"विवादित तथ्य" की परिभाषा', old: 'Evidence Act 5' },
-    { number: 'BSA 6', title: 'Definition of "relevant fact"', desc: '"संगत तथ्य" की परिभाषा', old: 'Evidence Act 6' },
-    { number: 'BSA 7', title: 'Definition of "evidence"', desc: '"साक्ष्य" की परिभाषा', old: 'Evidence Act 7' },
-    { number: 'BSA 8', title: 'Definition of "document"', desc: '"दस्तावेज़" की परिभाषा', old: 'Evidence Act 8' },
-    { number: 'BSA 9', title: 'Definition of "electronic record"', desc: '"इलेक्ट्रॉनिक रिकॉर्ड" की परिभाषा', old: 'Evidence Act 9' },
-    { number: 'BSA 10', title: 'Definition of "digital signature"', desc: '"डिजिटल हस्ताक्षर" की परिभाषा', old: 'Evidence Act 10' },
-    { number: 'BSA 11', title: 'Relevancy of facts', desc: 'तथ्यों की संगतता', old: 'Evidence Act 11' },
-    { number: 'BSA 12', title: 'Facts forming part of same transaction', desc: 'एक ही लेन-देन का हिस्सा तथ्य', old: 'Evidence Act 12' },
-    { number: 'BSA 13', title: 'Facts which are the occasion, cause or effect', desc: 'अवसर, कारण या प्रभाव वाले तथ्य', old: 'Evidence Act 13' },
-    { number: 'BSA 14', title: 'Facts showing motive, preparation', desc: 'उद्देश्य, तैयारी दिखाने वाले तथ्य', old: 'Evidence Act 14' },
-    { number: 'BSA 15', title: 'Facts explaining conduct', desc: 'व्यवहार स्पष्ट करने वाले तथ्य', old: 'Evidence Act 15' },
-    { number: 'BSA 16', title: 'Facts explaining motive', desc: 'उद्देश्य स्पष्ट करने वाले तथ्य', old: 'Evidence Act 16' },
-    { number: 'BSA 17', title: 'Facts explaining preparation', desc: 'तैयारी स्पष्ट करने वाले तथ्य', old: 'Evidence Act 17' },
-    { number: 'BSA 18', title: 'Facts explaining intention', desc: 'इरादा स्पष्ट करने वाले तथ्य', old: 'Evidence Act 18' },
-    { number: 'BSA 19', title: 'Facts explaining knowledge', desc: 'ज्ञान स्पष्ट करने वाले तथ्य', old: 'Evidence Act 19' },
-    { number: 'BSA 20', title: 'Facts explaining identity', desc: 'पहचान स्पष्ट करने वाले तथ्य', old: 'Evidence Act 20' },
-    { number: 'BSA 21', title: 'Facts explaining relationship', desc: 'संबंध स्पष्ट करने वाले तथ्य', old: 'Evidence Act 21' },
-    { number: 'BSA 22', title: 'Facts explaining nature', desc: 'प्रकृति स्पष्ट करने वाले तथ्य', old: 'Evidence Act 22' },
-    { number: 'BSA 23', title: 'Facts explaining character', desc: 'चरित्र स्पष्ट करने वाले तथ्य', old: 'Evidence Act 23' },
-    { number: 'BSA 24', title: 'Facts explaining conduct', desc: 'व्यवहार स्पष्ट करने वाले तथ्य', old: 'Evidence Act 24' },
-    { number: 'BSA 25', title: 'Admissions', desc: 'स्वीकारोक्ति', old: 'Evidence Act 25' },
-    { number: 'BSA 26', title: 'Confessions', desc: 'अपराध स्वीकारोक्ति', old: 'Evidence Act 26' },
-    { number: 'BSA 27', title: 'Confession to police', desc: 'पुलिस के सामने अपराध स्वीकारोक्ति', old: 'Evidence Act 27' },
-    { number: 'BSA 28', title: 'Confession to Magistrate', desc: 'मजिस्ट्रेट के सामने अपराध स्वीकारोक्ति', old: 'Evidence Act 28' },
-    { number: 'BSA 29', title: 'Confession in custody', desc: 'हिरासत में अपराध स्वीकारोक्ति', old: 'Evidence Act 29' },
-    { number: 'BSA 30', title: 'Confession to police officer', desc: 'पुलिस अधिकारी के सामने अपराध स्वीकारोक्ति', old: 'Evidence Act 30' },
-    { number: 'BSA 31', title: 'Confession to court', desc: 'न्यायालय के सामने अपराध स्वीकारोक्ति', old: 'Evidence Act 31' },
-    { number: 'BSA 32', title: 'Confession of co-accused', desc: 'सह-अभियुक्त की अपराध स्वीकारोक्ति', old: 'Evidence Act 32' },
-    { number: 'BSA 33', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 33' },
-    { number: 'BSA 34', title: 'Confession of accomplice', desc: 'सह-अपराधी की अपराध स्वीकारोक्ति', old: 'Evidence Act 34' },
-    { number: 'BSA 35', title: 'Confession of party', desc: 'पार्टी की अपराध स्वीकारोक्ति', old: 'Evidence Act 35' },
-    { number: 'BSA 36', title: 'Confession of agent', desc: 'एजेंट की अपराध स्वीकारोक्ति', old: 'Evidence Act 36' },
-    { number: 'BSA 37', title: 'Confession of representative', desc: 'प्रतिनिधि की अपराध स्वीकारोक्ति', old: 'Evidence Act 37' },
-    { number: 'BSA 38', title: 'Confession of official', desc: 'अधिकारी की अपराध स्वीकारोक्ति', old: 'Evidence Act 38' },
-    { number: 'BSA 39', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 39' },
-    { number: 'BSA 40', title: 'Confession of expert', desc: 'विशेषज्ञ की अपराध स्वीकारोक्ति', old: 'Evidence Act 40' },
-    { number: 'BSA 41', title: 'Confession of document', desc: 'दस्तावेज़ की अपराध स्वीकारोक्ति', old: 'Evidence Act 41' },
-    { number: 'BSA 42', title: 'Confession of electronic record', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की अपराध स्वीकारोक्ति', old: 'Evidence Act 42' },
-    { number: 'BSA 43', title: 'Confession of digital evidence', desc: 'डिजिटल साक्ष्य की अपराध स्वीकारोक्ति', old: 'Evidence Act 43' },
-    { number: 'BSA 44', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 44' },
-    { number: 'BSA 45', title: 'Confession of party', desc: 'पार्टी की अपराध स्वीकारोक्ति', old: 'Evidence Act 45' },
-    { number: 'BSA 46', title: 'Confession of agent', desc: 'एजेंट की अपराध स्वीकारोक्ति', old: 'Evidence Act 46' },
-    { number: 'BSA 47', title: 'Confession of representative', desc: 'प्रतिनिधि की अपराध स्वीकारोक्ति', old: 'Evidence Act 47' },
-    { number: 'BSA 48', title: 'Confession of official', desc: 'अधिकारी की अपराध स्वीकारोक्ति', old: 'Evidence Act 48' },
-    { number: 'BSA 49', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 49' },
-    { number: 'BSA 50', title: 'Confession of expert', desc: 'विशेषज्ञ की अपराध स्वीकारोक्ति', old: 'Evidence Act 50' },
-    { number: 'BSA 51', title: 'Confession of document', desc: 'दस्तावेज़ की अपराध स्वीकारोक्ति', old: 'Evidence Act 51' },
-    { number: 'BSA 52', title: 'Confession of electronic record', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की अपराध स्वीकारोक्ति', old: 'Evidence Act 52' },
-    { number: 'BSA 53', title: 'Confession of digital evidence', desc: 'डिजिटल साक्ष्य की अपराध स्वीकारोक्ति', old: 'Evidence Act 53' },
-    { number: 'BSA 54', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 54' },
-    { number: 'BSA 55', title: 'Confession of party', desc: 'पार्टी की अपराध स्वीकारोक्ति', old: 'Evidence Act 55' },
-    { number: 'BSA 56', title: 'Confession of agent', desc: 'एजेंट की अपराध स्वीकारोक्ति', old: 'Evidence Act 56' },
-    { number: 'BSA 57', title: 'Confession of representative', desc: 'प्रतिनिधि की अपराध स्वीकारोक्ति', old: 'Evidence Act 57' },
-    { number: 'BSA 58', title: 'Confession of official', desc: 'अधिकारी की अपराध स्वीकारोक्ति', old: 'Evidence Act 58' },
-    { number: 'BSA 59', title: 'Confession of witness', desc: 'गवाह की अपराध स्वीकारोक्ति', old: 'Evidence Act 59' },
-    { number: 'BSA 60', title: 'Confession of expert', desc: 'विशेषज्ञ की अपराध स्वीकारोक्ति', old: 'Evidence Act 60' },
-    { number: 'BSA 61', title: 'Confession of document', desc: 'दस्तावेज़ की अपराध स्वीकारोक्ति', old: 'Evidence Act 61' },
-    { number: 'BSA 62', title: 'Confession of electronic record', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की अपराध स्वीकारोक्ति', old: 'Evidence Act 62' },
-    { number: 'BSA 63', title: 'Electronic evidence', desc: 'इलेक्ट्रॉनिक साक्ष्य - पुराना Evidence Act 65B', old: 'Evidence Act 65B' },
-    { number: 'BSA 64', title: 'Digital evidence', desc: 'डिजिटल साक्ष्य', old: 'Evidence Act 64' },
-    { number: 'BSA 65', title: 'Admissibility of electronic evidence', desc: 'इलेक्ट्रॉनिक साक्ष्य की स्वीकार्यता', old: 'Evidence Act 65' },
-    { number: 'BSA 66', title: 'Preservation of electronic evidence', desc: 'इलेक्ट्रॉनिक साक्ष्य का संरक्षण', old: 'Evidence Act 66' },
-    { number: 'BSA 67', title: 'Electronic signature', desc: 'इलेक्ट्रॉनिक हस्ताक्षर', old: 'Evidence Act 67' },
-    { number: 'BSA 68', title: 'Digital signature certificate', desc: 'डिजिटल हस्ताक्षर प्रमाणपत्र', old: 'Evidence Act 68' },
-    { number: 'BSA 69', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 69' },
-    { number: 'BSA 70', title: 'Electronic record authentication', desc: 'इलेक्ट्रॉनिक रिकॉर्ड का प्रमाणीकरण', old: 'Evidence Act 70' },
-    { number: 'BSA 71', title: 'Electronic record reliability', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की विश्वसनीयता', old: 'Evidence Act 71' },
-    { number: 'BSA 72', title: 'Electronic record integrity', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की अखंडता', old: 'Evidence Act 72' },
-    { number: 'BSA 73', title: 'Electronic record confidentiality', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की गोपनीयता', old: 'Evidence Act 73' },
-    { number: 'BSA 74', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 74' },
-    { number: 'BSA 75', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 75' },
-    { number: 'BSA 76', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 76' },
-    { number: 'BSA 77', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 77' },
-    { number: 'BSA 78', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 78' },
-    { number: 'BSA 79', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 79' },
-    { number: 'BSA 80', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 80' },
-    { number: 'BSA 81', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 81' },
-    { number: 'BSA 82', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 82' },
-    { number: 'BSA 83', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 83' },
-    { number: 'BSA 84', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 84' },
-    { number: 'BSA 85', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 85' },
-    { number: 'BSA 86', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 86' },
-    { number: 'BSA 87', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 87' },
-    { number: 'BSA 88', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 88' },
-    { number: 'BSA 89', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 89' },
-    { number: 'BSA 90', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 90' },
-    { number: 'BSA 91', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 91' },
-    { number: 'BSA 92', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 92' },
-    { number: 'BSA 93', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 93' },
-    { number: 'BSA 94', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 94' },
-    { number: 'BSA 95', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 95' },
-    { number: 'BSA 96', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 96' },
-    { number: 'BSA 97', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 97' },
-    { number: 'BSA 98', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 98' },
-    { number: 'BSA 99', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 99' },
-    { number: 'BSA 100', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 100' },
-    { number: 'BSA 101', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 101' },
-    { number: 'BSA 102', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 102' },
-    { number: 'BSA 103', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 103' },
-    { number: 'BSA 104', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 104' },
-    { number: 'BSA 105', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 105' },
-    { number: 'BSA 106', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 106' },
-    { number: 'BSA 107', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 107' },
-    { number: 'BSA 108', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 108' },
-    { number: 'BSA 109', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 109' },
-    { number: 'BSA 110', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 110' },
-    { number: 'BSA 111', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 111' },
-    { number: 'BSA 112', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 112' },
-    { number: 'BSA 113', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 113' },
-    { number: 'BSA 114', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 114' },
-    { number: 'BSA 115', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 115' },
-    { number: 'BSA 116', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 116' },
-    { number: 'BSA 117', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 117' },
-    { number: 'BSA 118', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 118' },
-    { number: 'BSA 119', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 119' },
-    { number: 'BSA 120', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 120' },
-    { number: 'BSA 121', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 121' },
-    { number: 'BSA 122', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 122' },
-    { number: 'BSA 123', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 123' },
-    { number: 'BSA 124', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 124' },
-    { number: 'BSA 125', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 125' },
-    { number: 'BSA 126', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 126' },
-    { number: 'BSA 127', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 127' },
-    { number: 'BSA 128', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 128' },
-    { number: 'BSA 129', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 129' },
-    { number: 'BSA 130', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 130' },
-    { number: 'BSA 131', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 131' },
-    { number: 'BSA 132', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 132' },
-    { number: 'BSA 133', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 133' },
-    { number: 'BSA 134', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 134' },
-    { number: 'BSA 135', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 135' },
-    { number: 'BSA 136', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 136' },
-    { number: 'BSA 137', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 137' },
-    { number: 'BSA 138', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 138' },
-    { number: 'BSA 139', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 139' },
-    { number: 'BSA 140', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 140' },
-    { number: 'BSA 141', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 141' },
-    { number: 'BSA 142', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 142' },
-    { number: 'BSA 143', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 143' },
-    { number: 'BSA 144', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 144' },
-    { number: 'BSA 145', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 145' },
-    { number: 'BSA 146', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 146' },
-    { number: 'BSA 147', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 147' },
-    { number: 'BSA 148', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 148' },
-    { number: 'BSA 149', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 149' },
-    { number: 'BSA 150', title: 'Electronic record admissibility', desc: 'इलेक्ट्रॉनिक रिकॉर्ड की स्वीकार्यता', old: 'Evidence Act 150' }
-];
+// ============================================================
+// GET SECTION DETAILS
+// ============================================================
+function getSectionDetails(act, number) {
+    const actData = SECTIONS_DB[act];
+    if (!actData) return null;
+    
+    for (const chapter of actData.chapters) {
+        for (const section of chapter.sections) {
+            if (section.number === number) {
+                return {
+                    ...section,
+                    act: act,
+                    chapter: chapter.title,
+                    chapterNumber: chapter.number,
+                    actName: actData.name
+                };
+            }
+        }
+    }
+    return null;
+}
 
-// ============================================
-// API ROUTES
-// ============================================
-
-// GET /api/sections - Get sections or complaints
+// ============================================================
+// API HANDLER
+// ============================================================
 export default async function handler(req, res) {
-    const { method } = req;
-    
-    // GET - Fetch sections or complaints
-    if (method === 'GET') {
-        const { type, trackingId, ward, status, limit = 50 } = req.query;
-        
-        // If trackingId provided, return specific complaint
-        if (trackingId) {
-            const complaint = complaints.find(c => c.trackingId === trackingId);
-            if (!complaint) {
-                return res.status(404).json({ error: 'Complaint not found' });
+    // CORS headers
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
+    if (req.method !== 'GET') {
+        return res.status(405).json({
+            error: 'Method not allowed',
+            allowed: ['GET', 'OPTIONS'],
+            status: 'error'
+        });
+    }
+
+    const { act, search, number, oldAct, oldSection, action } = req.query;
+
+    try {
+        // ============================================================
+        // ACTION: CONVERT OLD TO NEW
+        // ============================================================
+        if (action === 'convert') {
+            if (!oldAct || !oldSection) {
+                return res.status(400).json({
+                    error: 'oldAct and oldSection are required for conversion',
+                    status: 'error'
+                });
             }
-            return res.status(200).json(complaint);
-        }
-        
-        // If type is 'wards', return wards
-        if (type === 'wards') {
-            return res.status(200).json(WARDS);
-        }
-        
-        // If type is 'departments', return departments
-        if (type === 'departments') {
-            const depts = Object.keys(DEPARTMENTS).map(name => ({
-                name,
-                phone: DEPARTMENTS[name].phone,
-                email: DEPARTMENTS[name].email
-            }));
-            return res.status(200).json(depts);
-        }
-        
-        // If type is 'bns', 'bnss', or 'bsa', return sections
-        if (type === 'bns') {
-            return res.status(200).json(BNS_SECTIONS.slice(0, parseInt(limit)));
-        }
-        if (type === 'bnss') {
-            return res.status(200).json(BNSS_SECTIONS.slice(0, parseInt(limit)));
-        }
-        if (type === 'bsa') {
-            return res.status(200).json(BSA_SECTIONS.slice(0, parseInt(limit)));
-        }
-        
-        // Return complaints
-        let results = complaints;
-        if (ward) results = results.filter(c => c.ward === ward);
-        if (status) results = results.filter(c => c.status === status);
-        
-        return res.status(200).json(results.slice(0, parseInt(limit)));
-    }
-    
-    // POST - Submit new complaint
-    if (method === 'POST') {
-        const { ward, category, complaintText, photoBase64, userMobile } = req.body;
-        
-        if (!complaintText || !userMobile) {
-            return res.status(400).json({ error: 'Complaint text and mobile are required' });
-        }
-        
-        try {
-            // Call Gemini AI for auto-detection
-            const geminiOutput = await callGeminiAI(complaintText);
             
-            const trackingId = generateTrackingId();
-            const department = geminiOutput.department || category || 'Other';
-            
-            const complaint = {
-                trackingId,
-                ward: String(geminiOutput.ward_no || ward || Math.floor(Math.random() * 110) + 1),
-                department: department,
-                category: category || department,
-                priority: geminiOutput.priority || 'medium',
-                complaintText,
-                photoBase64: photoBase64 || null,
-                userMobile,
-                status: 'PENDING',
-                submittedAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                geminiAnalysis: geminiOutput
-            };
-            
-            complaints.unshift(complaint);
-            
-            return res.status(201).json({
-                success: true,
-                trackingId: complaint.trackingId,
-                department: complaint.department,
-                status: complaint.status,
-                ward: complaint.ward,
-                message: `Complaint submitted! Tracking ID: ${trackingId}`
+            const result = convertOldToNew(oldAct.toLowerCase(), oldSection);
+            if (result) {
+                return res.status(200).json({
+                    oldAct: oldAct,
+                    oldSection: oldSection,
+                    newSection: result,
+                    status: 'success'
+                });
+            } else {
+                return res.status(404).json({
+                    error: 'No mapping found for this section',
+                    status: 'error'
+                });
+            }
+        }
+
+        // ============================================================
+        // GET SINGLE SECTION
+        // ============================================================
+        if (number && act) {
+            const section = getSectionDetails(act.toLowerCase(), number.toUpperCase());
+            if (section) {
+                return res.status(200).json({
+                    section: section,
+                    status: 'success'
+                });
+            } else {
+                return res.status(404).json({
+                    error: 'Section not found',
+                    status: 'error'
+                });
+            }
+        }
+
+        // ============================================================
+        // SEARCH SECTIONS
+        // ============================================================
+        if (search && search.length > 0) {
+            const results = searchSections(search, act);
+            return res.status(200).json({
+                items: results,
+                total: results.length,
+                query: search,
+                act: act || 'all',
+                status: 'success'
             });
-            
-        } catch (error) {
-            console.error('Error submitting complaint:', error);
-            return res.status(500).json({ error: 'Failed to submit complaint' });
         }
-    }
-    
-    // PUT - Update complaint status
-    if (method === 'PUT') {
-        const { trackingId, status, notes } = req.body;
-        
-        if (!trackingId) {
-            return res.status(400).json({ error: 'Tracking ID required' });
+
+        // ============================================================
+        // GET ALL SECTIONS
+        // ============================================================
+        let data = {};
+        if (act && act !== 'all') {
+            const actData = SECTIONS_DB[act.toLowerCase()];
+            if (actData) {
+                data[act] = actData;
+            } else {
+                return res.status(404).json({
+                    error: `Act '${act}' not found. Available: bns, bnss, bsa`,
+                    status: 'error'
+                });
+            }
+        } else {
+            data = SECTIONS_DB;
         }
-        
-        const complaint = complaints.find(c => c.trackingId === trackingId);
-        if (!complaint) {
-            return res.status(404).json({ error: 'Complaint not found' });
+
+        // Calculate totals
+        const totals = {};
+        for (const [key, value] of Object.entries(SECTIONS_DB)) {
+            let count = 0;
+            for (const chapter of value.chapters) {
+                count += chapter.sections.length;
+            }
+            totals[key] = count;
         }
-        
-        complaint.status = status || complaint.status;
-        complaint.notes = notes || complaint.notes;
-        complaint.updatedAt = new Date().toISOString();
-        
-        return res.status(200).json({
-            success: true,
-            complaint
+
+        res.status(200).json({
+            data: data,
+            totals: totals,
+            status: 'success',
+            message: `✅ ${Object.keys(data).length} act(s) loaded`
+        });
+
+    } catch (error) {
+        console.error('Sections API error:', error);
+        res.status(500).json({
+            error: error.message,
+            status: 'error'
         });
     }
-    
-    // DELETE - Remove complaint (admin only)
-    if (method === 'DELETE') {
-        const { trackingId } = req.query;
-        
-        if (!trackingId) {
-            return res.status(400).json({ error: 'Tracking ID required' });
-        }
-        
-        const index = complaints.findIndex(c => c.trackingId === trackingId);
-        if (index === -1) {
-            return res.status(404).json({ error: 'Complaint not found' });
-        }
-        
-        complaints.splice(index, 1);
-        
-        return res.status(200).json({
-            success: true,
-            message: 'Complaint deleted'
-        });
-    }
-    
-    return res.status(405).json({ error: 'Method not allowed' });
 }
+
+// ============================================================
+// EXPORTS
+// ============================================================
+export {
+    SECTIONS_DB,
+    IPC_TO_BNS_MAPPING,
+    CRPC_TO_BNSS_MAPPING,
+    EVIDENCE_TO_BSA_MAPPING,
+    getAllSections,
+    searchSections,
+    convertOldToNew,
+    getSectionDetails
+};

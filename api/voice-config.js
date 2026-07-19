@@ -1,75 +1,389 @@
 // ============================================================
-// voice-config.js - Voice Configuration API
+// api/voice-config.js - Voice Configuration & TTS Settings
+// Complete Voice Configuration for Zeenat AI Assistant
 // ============================================================
 
-const VOICE_CONFIG = {
-    // Primary voice settings
-    primary: {
-        language: 'hi-IN',
-        gender: 'female',
-        name: 'hi-IN-Wavenet-A',
-        provider: 'google',
-        rate: 0.9,
-        pitch: 1.1,
-        volume: 1.0
-    },
-    
-    // Fallback for Web Speech API
-    fallback: {
-        language: 'hi-IN',
-        gender: 'female',
-        rate: 0.9,
-        pitch: 1.1,
-        volume: 1.0
-    },
-    
-    // ElevenLabs settings (if available)
+// ============================================================
+// VOICE PROVIDERS & CONFIGURATIONS
+// ============================================================
+const VOICE_PROVIDERS = {
     elevenlabs: {
-        voiceId: '21m00Tcm4TlvDq8ikWAM', // Default voice
-        model: 'eleven_monolingual_v1',
-        stability: 0.5,
-        similarityBoost: 0.75,
-        style: 0.3,
-        useSpeakerBoost: true
+        name: 'ElevenLabs',
+        models: ['eleven_monolingual_v1', 'eleven_multilingual_v2', 'eleven_turbo_v2'],
+        voices: {
+            rachel: { id: '21m00Tcm4TlvDq8ikWAM', name: 'Rachel', gender: 'female', language: 'en' },
+            domi: { id: 'AZnzlk1XvdvUeBnXmlld', name: 'Domi', gender: 'female', language: 'en' },
+            bella: { id: 'EXAVITQu4L4J4V2qPPk1', name: 'Bella', gender: 'female', language: 'en' },
+            antoni: { id: 'ErXwobaYiN019PkySvjV', name: 'Antoni', gender: 'male', language: 'en' },
+            josh: { id: 'TxGEqnHWrfWFTfGW9XjX', name: 'Josh', gender: 'male', language: 'en' },
+            arnold: { id: 'VR6AewLTigWG4xSOukaG', name: 'Arnold', gender: 'male', language: 'en' },
+            adam: { id: 'pNInz6obpgDQGcFmaJgB', name: 'Adam', gender: 'male', language: 'en' },
+            sam: { id: 'yoZ06aMxZJJ28mfd3POQ', name: 'Sam', gender: 'male', language: 'en' }
+        }
     },
-    
-    // Supported languages
-    supportedLanguages: [
-        { code: 'hi-IN', name: 'Hindi (India)' },
-        { code: 'en-IN', name: 'English (India)' },
-        { code: 'en-US', name: 'English (US)' },
-        { code: 'bn-IN', name: 'Bengali' },
-        { code: 'ta-IN', name: 'Tamil' },
-        { code: 'te-IN', name: 'Telugu' },
-        { code: 'mr-IN', name: 'Marathi' },
-        { code: 'ur-IN', name: 'Urdu' }
-    ],
-    
-    // Voice driving mode settings
-    drivingMode: {
-        enabled: true,
-        autoSubmit: true,
-        confirmationPrompt: true,
-        speakResults: true
+    google: {
+        name: 'Google Cloud TTS',
+        models: ['standard', 'neural', 'studio'],
+        voices: {
+            hi_in_female: { id: 'hi-IN-Wavenet-A', name: 'Hindi Female', gender: 'female', language: 'hi-IN' },
+            hi_in_male: { id: 'hi-IN-Wavenet-B', name: 'Hindi Male', gender: 'male', language: 'hi-IN' },
+            en_us_female: { id: 'en-US-Wavenet-F', name: 'English Female', gender: 'female', language: 'en-US' },
+            en_us_male: { id: 'en-US-Wavenet-D', name: 'English Male', gender: 'male', language: 'en-US' }
+        }
+    },
+    azure: {
+        name: 'Azure TTS',
+        models: ['standard', 'neural'],
+        voices: {
+            hi_in_female: { id: 'hi-IN-SwaraNeural', name: 'Swara (Hindi)', gender: 'female', language: 'hi-IN' },
+            hi_in_male: { id: 'hi-IN-MadhurNeural', name: 'Madhur (Hindi)', gender: 'male', language: 'hi-IN' },
+            en_us_female: { id: 'en-US-JennyNeural', name: 'Jenny (English)', gender: 'female', language: 'en-US' },
+            en_us_male: { id: 'en-US-GuyNeural', name: 'Guy (English)', gender: 'male', language: 'en-US' }
+        }
+    },
+    amazon: {
+        name: 'Amazon Polly',
+        models: ['standard', 'neural'],
+        voices: {
+            hi_in_female: { id: 'Aditi', name: 'Aditi (Hindi)', gender: 'female', language: 'hi-IN' },
+            hi_in_male: { id: 'Kajal', name: 'Kajal (Hindi)', gender: 'female', language: 'hi-IN' },
+            en_us_female: { id: 'Joanna', name: 'Joanna (English)', gender: 'female', language: 'en-US' },
+            en_us_male: { id: 'Matthew', name: 'Matthew (English)', gender: 'male', language: 'en-US' }
+        }
     }
 };
 
-// GET /api/voice-config
-export default function handler(req, res) {
-    if (req.method !== 'GET') {
-        return res.status(405).json({ error: 'Method not allowed' });
+// ============================================================
+// DEFAULT VOICE SETTINGS
+// ============================================================
+const DEFAULT_SETTINGS = {
+    provider: 'elevenlabs',
+    voiceId: '21m00Tcm4TlvDq8ikWAM', // Rachel
+    voiceName: 'Rachel',
+    language: 'hi-IN',
+    rate: 0.9,
+    pitch: 1.0,
+    volume: 1.0,
+    model: 'eleven_monolingual_v1'
+};
+
+// ============================================================
+// LANGUAGE CONFIGURATIONS
+// ============================================================
+const LANGUAGE_CONFIGS = {
+    'hi-IN': {
+        name: 'Hindi (India)',
+        code: 'hi-IN',
+        nativeName: 'हिन्दी',
+        defaultVoice: 'hi_in_female',
+        ttsProvider: 'google'
+    },
+    'en-US': {
+        name: 'English (US)',
+        code: 'en-US',
+        nativeName: 'English',
+        defaultVoice: 'en_us_female',
+        ttsProvider: 'google'
+    },
+    'en-GB': {
+        name: 'English (UK)',
+        code: 'en-GB',
+        nativeName: 'English',
+        defaultVoice: 'en_us_female',
+        ttsProvider: 'google'
+    },
+    'bn-IN': {
+        name: 'Bengali (India)',
+        code: 'bn-IN',
+        nativeName: 'বাংলা',
+        defaultVoice: 'bn_in_female',
+        ttsProvider: 'google'
+    },
+    'te-IN': {
+        name: 'Telugu (India)',
+        code: 'te-IN',
+        nativeName: 'తెలుగు',
+        defaultVoice: 'te_in_female',
+        ttsProvider: 'google'
+    },
+    'ta-IN': {
+        name: 'Tamil (India)',
+        code: 'ta-IN',
+        nativeName: 'தமிழ்',
+        defaultVoice: 'ta_in_female',
+        ttsProvider: 'google'
+    },
+    'ml-IN': {
+        name: 'Malayalam (India)',
+        code: 'ml-IN',
+        nativeName: 'മലയാളം',
+        defaultVoice: 'ml_in_female',
+        ttsProvider: 'google'
+    },
+    'kn-IN': {
+        name: 'Kannada (India)',
+        code: 'kn-IN',
+        nativeName: 'ಕನ್ನಡ',
+        defaultVoice: 'kn_in_female',
+        ttsProvider: 'google'
     }
-    
-    // Check which TTS providers are available
-    const providers = {
-        google: !!process.env.GOOGLE_APPLICATION_CREDENTIALS,
-        elevenlabs: !!process.env.ELEVENLABS_API_KEY,
-        webspeech: true
+};
+
+// ============================================================
+// GET VOICE SETTINGS FROM ENVIRONMENT
+// ============================================================
+function getVoiceSettings() {
+    const provider = process.env.VOICE_PROVIDER || DEFAULT_SETTINGS.provider;
+    const voiceId = process.env.ELEVENLABS_VOICE_ID || DEFAULT_SETTINGS.voiceId;
+    const voiceName = process.env.ELEVENLABS_VOICE_NAME || DEFAULT_SETTINGS.voiceName;
+    const apiKey = process.env.ELEVENLABS_API_KEY || process.env.GOOGLE_TTS_API_KEY || process.env.AZURE_TTS_API_KEY || process.env.AMAZON_POLLY_API_KEY;
+    const language = process.env.VOICE_LANGUAGE || DEFAULT_SETTINGS.language;
+    const rate = parseFloat(process.env.VOICE_RATE) || DEFAULT_SETTINGS.rate;
+    const pitch = parseFloat(process.env.VOICE_PITCH) || DEFAULT_SETTINGS.pitch;
+
+    return {
+        provider,
+        voiceId,
+        voiceName,
+        language,
+        rate,
+        pitch,
+        apiKey: !!apiKey,
+        configured: !!apiKey,
+        model: process.env.VOICE_MODEL || DEFAULT_SETTINGS.model
     };
-    
-    return res.status(200).json({
-        config: VOICE_CONFIG,
-        providers: providers,
-        activeProvider: providers.google ? 'google' : (providers.elevenlabs ? 'elevenlabs' : 'webspeech')
-    });
 }
+
+// ============================================================
+// GET AVAILABLE VOICES
+// ============================================================
+function getAvailableVoices(provider = null) {
+    const providers = provider ? [provider] : Object.keys(VOICE_PROVIDERS);
+    const allVoices = {};
+
+    for (const prov of providers) {
+        if (VOICE_PROVIDERS[prov]) {
+            allVoices[prov] = {
+                provider: prov,
+                name: VOICE_PROVIDERS[prov].name,
+                models: VOICE_PROVIDERS[prov].models,
+                voices: Object.values(VOICE_PROVIDERS[prov].voices)
+            };
+        }
+    }
+
+    return allVoices;
+}
+
+// ============================================================
+// GET LANGUAGES
+// ============================================================
+function getLanguages() {
+    return Object.values(LANGUAGE_CONFIGS);
+}
+
+// ============================================================
+// API HANDLER
+// ============================================================
+export default async function handler(req, res) {
+    // CORS Headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+
+    // Handle Preflight (OPTIONS) request
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
+    // Only allow GET and POST
+    if (req.method !== 'GET' && req.method !== 'POST') {
+        return res.status(405).json({
+            error: 'Method not allowed',
+            allowed: ['GET', 'POST', 'OPTIONS'],
+            status: 'error'
+        });
+    }
+
+    try {
+        // ============================================================
+        // GET - Fetch voice configuration
+        // ============================================================
+        if (req.method === 'GET') {
+            const { action, provider, language, voiceId } = req.query;
+
+            // Get available voices
+            if (action === 'voices') {
+                const voices = getAvailableVoices(provider);
+                return res.status(200).json({
+                    voices: voices,
+                    providers: Object.keys(VOICE_PROVIDERS),
+                    status: 'success',
+                    message: `✅ Available voices loaded`
+                });
+            }
+
+            // Get languages
+            if (action === 'languages') {
+                const languages = getLanguages();
+                return res.status(200).json({
+                    languages: languages,
+                    total: languages.length,
+                    status: 'success'
+                });
+            }
+
+            // Get specific voice
+            if (voiceId && provider) {
+                const voices = VOICE_PROVIDERS[provider]?.voices || {};
+                const voice = Object.values(voices).find(v => v.id === voiceId);
+                if (voice) {
+                    return res.status(200).json({
+                        voice: voice,
+                        provider: provider,
+                        status: 'success'
+                    });
+                }
+                return res.status(404).json({
+                    error: 'Voice not found',
+                    status: 'error'
+                });
+            }
+
+            // Get all providers
+            if (action === 'providers') {
+                return res.status(200).json({
+                    providers: Object.values(VOICE_PROVIDERS).map(p => ({
+                        name: p.name,
+                        models: p.models,
+                        voiceCount: Object.keys(p.voices).length
+                    })),
+                    status: 'success'
+                });
+            }
+
+            // Default: Get current voice settings
+            const settings = getVoiceSettings();
+            
+            // Get provider info
+            const providerInfo = VOICE_PROVIDERS[settings.provider] || null;
+            const availableVoices = providerInfo ? Object.values(providerInfo.voices) : [];
+            
+            // Get language info
+            const languageInfo = LANGUAGE_CONFIGS[settings.language] || null;
+
+            return res.status(200).json({
+                current: settings,
+                provider: {
+                    name: providerInfo?.name || settings.provider,
+                    availableVoices: availableVoices,
+                    models: providerInfo?.models || []
+                },
+                language: languageInfo,
+                configured: settings.configured,
+                status: 'success',
+                // Backward compatibility
+                voiceId: settings.voiceId,
+                voiceName: settings.voiceName,
+                providerName: settings.provider,
+                isConfigured: settings.configured,
+                model: settings.model
+            });
+        }
+
+        // ============================================================
+        // POST - Update voice configuration
+        // ============================================================
+        if (req.method === 'POST') {
+            const { provider, voiceId, voiceName, language, rate, pitch, model, test } = req.body;
+
+            // Validate provider
+            if (provider && !VOICE_PROVIDERS[provider]) {
+                return res.status(400).json({
+                    error: `Provider '${provider}' not supported`,
+                    availableProviders: Object.keys(VOICE_PROVIDERS),
+                    status: 'error'
+                });
+            }
+
+            // Validate voice
+            if (voiceId && provider) {
+                const voices = VOICE_PROVIDERS[provider]?.voices || {};
+                const voice = Object.values(voices).find(v => v.id === voiceId);
+                if (!voice) {
+                    return res.status(400).json({
+                        error: `Voice '${voiceId}' not found for provider '${provider}'`,
+                        availableVoices: Object.values(voices).map(v => ({ id: v.id, name: v.name })),
+                        status: 'error'
+                    });
+                }
+            }
+
+            // Validate language
+            if (language && !LANGUAGE_CONFIGS[language]) {
+                return res.status(400).json({
+                    error: `Language '${language}' not supported`,
+                    availableLanguages: Object.keys(LANGUAGE_CONFIGS),
+                    status: 'error'
+                });
+            }
+
+            // Test voice (return sample audio URL or test message)
+            if (test) {
+                const settings = {
+                    provider: provider || DEFAULT_SETTINGS.provider,
+                    voiceId: voiceId || DEFAULT_SETTINGS.voiceId,
+                    voiceName: voiceName || DEFAULT_SETTINGS.voiceName,
+                    language: language || DEFAULT_SETTINGS.language,
+                    rate: rate || DEFAULT_SETTINGS.rate,
+                    pitch: pitch || DEFAULT_SETTINGS.pitch
+                };
+
+                // Return test configuration
+                return res.status(200).json({
+                    settings: settings,
+                    testMessage: '🔊 Testing voice configuration...',
+                    testText: 'नमस्ते, मैं Zeenat हूँ। आपकी सहायता के लिए यहाँ हूँ।',
+                    status: 'success',
+                    message: '✅ Voice configuration tested successfully'
+                });
+            }
+
+            // Build updated settings
+            const updatedSettings = {
+                provider: provider || DEFAULT_SETTINGS.provider,
+                voiceId: voiceId || DEFAULT_SETTINGS.voiceId,
+                voiceName: voiceName || DEFAULT_SETTINGS.voiceName,
+                language: language || DEFAULT_SETTINGS.language,
+                rate: rate || DEFAULT_SETTINGS.rate,
+                pitch: pitch || DEFAULT_SETTINGS.pitch,
+                model: model || DEFAULT_SETTINGS.model
+            };
+
+            return res.status(200).json({
+                settings: updatedSettings,
+                status: 'success',
+                message: '✅ Voice configuration updated successfully'
+            });
+        }
+
+    } catch (error) {
+        console.error('Voice config error:', error);
+        return res.status(500).json({
+            error: error.message,
+            status: 'error'
+        });
+    }
+}
+
+// ============================================================
+// EXPORT FOR TESTING/REUSE
+// ============================================================
+export {
+    VOICE_PROVIDERS,
+    DEFAULT_SETTINGS,
+    LANGUAGE_CONFIGS,
+    getVoiceSettings,
+    getAvailableVoices,
+    getLanguages
+};

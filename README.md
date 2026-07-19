@@ -1,52 +1,32 @@
-\# Lucknow Kanoon Sahayak 9.0
+# ⚖️ Lucknow Kanoon Sahayak 9.0
 
+## India's #1 Free AI Legal Assistant
 
+### Features
+- 🎙️ Voice AI Legal Assistant (Zeenat)
+- 🔄 IPC/CrPC to BNS/BNSS Converter
+- 🔍 Smart Legal Search
+- 📅 Cause List & Case Tracker
+- 🆓 Free Legal Aid Information
+- 📖 Full Bare Act (BNS/BNSS/BSA)
+- 🧠 Legal Quiz & Exam Prep
+- 📞 Community Helpline System
+- 🧮 14 Legal/Financial Calculators
+- 💰 UPI Donation Support
 
-AI Voice Legal Assistant for BNS/BNSS/BSA – Deployed on Vercel.
+### Tech Stack
+- HTML5, CSS3, JavaScript
+- Tailwind CSS (CDN)
+- Google Gemini AI API
+- Web Speech API
+- LocalStorage (data persistence)
 
+### Setup
+1. Clone the repository
+2. Open `index.html` in your browser
+3. No build process required!
 
-
-\## Features
-
-\- Voice/Text AI assistant (Zeenat)
-
-\- IPC → BNS converter
-
-\- Legal draft generator (free \& premium)
-
-\- Live RSS feeds from top legal sources
-
-\- Comprehensive legal dictionary
-
-\- Quiz, mock court, case tracker, and more
-
-
-
-\## Deployment
-
-1\. Clone repo
-
-2\. Copy `.env.example` to `.env.local` and fill API keys
-
-3\. Run `vercel --prod` to deploy
-
-
-
-\## API Endpoints
-
-\- `/api/ask` – POST (Gemini AI)
-
-\- `/api/feed` – GET (live feed)
-
-\- `/api/news` – GET (RSS news)
-
-\- `/api/payments` – POST (payment verification)
-
-\- `/api/voice-config` – GET (ElevenLabs config)
-
-
-
-\## License
-
-Educational Purpose Only – Not a substitute for legal advice.
-
+### API Key
+Add your Gemini API key in `api/ask.js`:
+```javascript
+const API_KEY = 'YOUR_API_KEY_HERE';

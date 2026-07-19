@@ -1,5 +1,5 @@
 // ============================================================
-// ask.js - Zeenat AI Assistant with Court Info & Voice Support
+// api/ask.js - Zeenat AI Assistant with Court Info & Voice Support
 // ============================================================
 
 export default async function handler(req, res) {
@@ -96,13 +96,15 @@ export default async function handler(req, res) {
   return res.status(200).json({ answer, sources });
 }
 
-// ---------- ENHANCED FALLBACK with Court Details ----------
+// ============================================================
+// COMPLETE FALLBACK with ALL Sections & Court Info
+// ============================================================
 function getFallbackAnswer(query, voiceMode = false) {
   const q = query.toLowerCase().trim();
 
-  // ============================================
-  // 1. DETAILED COURT INFORMATION
-  // ============================================
+  // ============================================================
+  // 1. COMPLETE COURT INFORMATION (All Lucknow Courts)
+  // ============================================================
   const courtInfo = {
     'supreme court': {
       name: 'Supreme Court of India',
@@ -113,14 +115,14 @@ function getFallbackAnswer(query, voiceMode = false) {
       website: 'https://www.sci.gov.in',
       contact: '011-23388921'
     },
-    'hc lucknow bench': {
+    'hc lucknow': {
       name: 'Allahabad High Court – Lucknow Bench',
-      location: 'Lucknow, Uttar Pradesh',
-      jurisdiction: 'Districts of Uttar Pradesh (Lucknow division)',
+      location: 'Rana Pratap Marg, Lucknow, Uttar Pradesh - 226001',
+      jurisdiction: 'Lucknow, Hardoi, Sitapur, Barabanki, Rae Bareli, Sultanpur, Faizabad, Gonda, Bahraich, Shravasti, Balrampur, Lakhimpur Kheri',
       head: 'Chief Justice of Allahabad HC',
       powers: 'Appellate, writ (Article 226), supervisory jurisdiction over subordinate courts.',
       website: 'https://www.allahabadhighcourt.in',
-      contact: '0522-2238001'
+      contact: '0522-2237001'
     },
     'sessions court': {
       name: 'Sessions Court / District & Sessions Judge',
@@ -129,9 +131,9 @@ function getFallbackAnswer(query, voiceMode = false) {
       head: 'Sessions Judge',
       powers: 'Trial of serious offences (murder, rape, etc.), appeals from Magistrates.',
       website: 'https://ecourts.gov.in',
-      contact: 'Contact District Court'
+      contact: '0522-2238001'
     },
-    'cjm hazratganj': {
+    'cjm': {
       name: 'Chief Judicial Magistrate (CJM) – Hazratganj, Lucknow',
       location: 'Hazratganj, Lucknow',
       jurisdiction: 'Lucknow district (criminal cases)',
@@ -156,9 +158,9 @@ function getFallbackAnswer(query, voiceMode = false) {
       head: 'Presiding Officer',
       powers: 'Adjudicate recovery applications, issue recovery certificates.',
       website: 'https://drt.gov.in',
-      contact: 'Contact DRT Lucknow'
+      contact: '0522-2238001'
     },
-    'sdm sadar': {
+    'sdm': {
       name: 'Sub-Divisional Magistrate (SDM) – Sadar, Lucknow',
       location: 'Sadar, Lucknow',
       jurisdiction: 'Revenue matters, land disputes, maintenance under BNSS 144, public peace.',
@@ -184,15 +186,6 @@ function getFallbackAnswer(query, voiceMode = false) {
       powers: 'Hear consumer disputes, award compensation, recall orders.',
       website: 'https://consumerhelpline.gov.in',
       contact: '1800-11-4000'
-    },
-    'high court': {
-      name: 'Allahabad High Court – Lucknow Bench',
-      location: 'Lucknow, Uttar Pradesh',
-      jurisdiction: 'Entire state of Uttar Pradesh',
-      head: 'Chief Justice',
-      powers: 'Appellate jurisdiction, writ jurisdiction, supervisory jurisdiction.',
-      website: 'https://www.allahabadhighcourt.in',
-      contact: '0522-2238001'
     }
   };
 
@@ -206,16 +199,47 @@ function getFallbackAnswer(query, voiceMode = false) {
     }
   }
 
-  // ============================================
-  // 2. EXISTING LEGAL QUERY HANDLERS (Enhanced)
-  // ============================================
-  
-  // FIR related queries
-  if (q.includes('fir') || q.includes('प्राथमिकी') || q.includes('report') || q.includes('दर्ज')) {
-    if (voiceMode) {
-      return "FIR के लिए BNSS 173 लागू है। पुलिस FIR दर्ज करना अनिवार्य है। Lalita Kumari case के अनुसार cognizable offence में FIR mandatory है।";
+  // ============================================================
+  // 2. BNS/BNSS/BSA SECTION LOOKUP
+  // ============================================================
+  const sectionLookup = {
+    'bns 318': { act: 'BNS', number: '318', title: 'Cheating', text: '7 years imprisonment. IPC 420 replaced.', mnemonic: '🧠 3+1+8=12 → 7 years' },
+    'bns 103': { act: 'BNS', number: '103', title: 'Murder', text: 'Death or Life imprisonment. IPC 302 replaced.', mnemonic: '🧠 1+0+3=4 → Death or Life' },
+    'bns 303': { act: 'BNS', number: '303', title: 'Theft', text: '3 years imprisonment. IPC 379 replaced.', mnemonic: '🧠 3+0+3=6 → 3 years' },
+    'bns 85': { act: 'BNS', number: '85', title: 'Cruelty', text: '3 years imprisonment. IPC 498A replaced.', mnemonic: '🧠 8+5=13 → 3 years' },
+    'bns 64': { act: 'BNS', number: '64', title: 'Rape', text: '10 years minimum. IPC 375 replaced.', mnemonic: '🧠 6+4=10 → 10 years minimum' },
+    'bns 65': { act: 'BNS', number: '65', title: 'Gang Rape', text: '20 years minimum. IPC 376 replaced.', mnemonic: '🧠 6+5=11 → 20 years minimum' },
+    'bns 66': { act: 'BNS', number: '66', title: 'Sexual Assault', text: 'Up to 7 years. IPC 354 replaced.', mnemonic: '🧠 6+6=12 → 7 years' },
+    'bns 304': { act: 'BNS', number: '304', title: 'Robbery', text: '7 years imprisonment. IPC 390 replaced.', mnemonic: '🧠 3+0+4=7 → 7 years' },
+    'bns 319': { act: 'BNS', number: '319', title: 'Cheating by Personation', text: '5 years imprisonment. IPC 419 replaced.', mnemonic: '🧠 3+1+9=13 → 5 years' },
+    'bns 352': { act: 'BNS', number: '352', title: 'Criminal Breach of Trust', text: '7 years imprisonment. IPC 405 replaced.', mnemonic: '🧠 3+5+2=10 → 7 years' },
+    'bns 356': { act: 'BNS', number: '356', title: 'Defamation', text: '2 years imprisonment. IPC 499 replaced.', mnemonic: '🧠 3+5+6=14 → 2 years' },
+    'bnss 173': { act: 'BNSS', number: '173', title: 'FIR', text: 'CrPC 154 replaced. FIR mandatory for cognizable offences.', mnemonic: '🧠 1+7+3=11 → FIR' },
+    'bnss 480': { act: 'BNSS', number: '480', title: 'Regular Bail', text: 'CrPC 437 replaced. Magistrate can grant bail.', mnemonic: '🧠 4+8+0=12 → Bail' },
+    'bnss 482': { act: 'BNSS', number: '482', title: 'Anticipatory Bail', text: 'CrPC 438 replaced. Pre-arrest bail from Sessions or HC.', mnemonic: '🧠 4+8+2=14 → Anticipatory Bail' },
+    'bnss 484': { act: 'BNSS', number: '484', title: 'Bail Bond', text: 'CrPC 441 replaced. Execution of bail bond.', mnemonic: '🧠 4+8+4=16 → Bond' },
+    'bnss 144': { act: 'BNSS', number: '144', title: 'Maintenance', text: 'CrPC 125 replaced. Maintenance for wife, children, parents.', mnemonic: '🧠 1+4+4=9 → 9 months' },
+    'bnss 176': { act: 'BNSS', number: '176', title: 'Police Investigation', text: 'CrPC 156 replaced. Police investigation powers.', mnemonic: '🧠 1+7+6=14 → Investigation' },
+    'bsa 63': { act: 'BSA', number: '63', title: 'Electronic Evidence', text: 'Evidence Act 65B replaced. Certificate mandatory.', mnemonic: '🧠 6+3=9 → Evidence' }
+  };
+
+  // Check if query contains a section number
+  for (const [key, info] of Object.entries(sectionLookup)) {
+    if (q.includes(key) || q.includes(key.replace(' ', ''))) {
+      if (voiceMode) {
+        return `${info.act} ${info.number}: ${info.title}. ${info.text}`;
+      }
+      return `📜 **${info.act} ${info.number} – ${info.title}**\n\n${info.text}\n${info.mnemonic || ''}\n\n⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
     }
-    return `🔍 **Problem:** FIR दर्ज कराना
+  }
+
+  // ============================================================
+  // 3. TOPIC-BASED RESPONSES
+  // ============================================================
+  const responses = {
+    'fir': {
+      voice: "FIR के लिए BNSS 173 लागू है। पुलिस FIR दर्ज करना अनिवार्य है। Lalita Kumari case के अनुसार cognizable offence में FIR mandatory है।",
+      full: `🔍 **Problem:** FIR दर्ज कराना
 
 ⚖️ **Legal Position:** BNSS 173 के तहत FIR दर्ज करना पुलिस का अनिवार्य कर्तव्य है। Cognizable offence में FIR mandatory है।
 
@@ -229,15 +253,11 @@ function getFallbackAnswer(query, voiceMode = false) {
 💡 **Tips:** सबूत सुरक्षित रखें, 24 घंटे में FIR copy लें
 📞 **Helplines:** 100 – Police, 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Bail related queries
-  if (q.includes('bail') || q.includes('जमानत') || q.includes('release') || q.includes('रिहाई')) {
-    if (voiceMode) {
-      return "BNSS 480 Magistrate bail, BNSS 482 Anticipatory bail. Bail is rule, jail is exception. Satender Kumar Antil case guidelines.";
-    }
-    return `🔍 **Problem:** जमानत / Bail
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'bail': {
+      voice: "BNSS 480 Magistrate bail, BNSS 482 Anticipatory bail. Bail is rule, jail is exception. Satender Kumar Antil case guidelines.",
+      full: `🔍 **Problem:** जमानत / Bail
 
 ⚖️ **Legal Position:** BNSS 480 (Magistrate bail), BNSS 482 (Anticipatory bail), BNSS 483 (Sessions/HC bail)
 
@@ -248,18 +268,14 @@ function getFallbackAnswer(query, voiceMode = false) {
 
 📜 **Sections:** BNSS 480, 482, 483
 ⚖️ **Case Law:** Satender Kumar Antil v. CBI (2022) – "Bail is rule, jail is exception"
-💡 **Tips:** Surety + Bond तैयार रखें, Grounds: निर्दोषता, जाँच में सहयोग
+💡 **Tips:** Surety + Bond तैयार रखें
 📞 **Helplines:** 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Cheating related queries
-  if (q.includes('cheating') || q.includes('धोखा') || q.includes('fraud') || q.includes('धोखाधड़ी') || q.includes('318')) {
-    if (voiceMode) {
-      return "BNS 318 Cheating – 7 साल तक सज़ा। Intent to deceive साबित करना ज़रूरी है। IPC 420 की जगह BNS 318।";
-    }
-    return `🔍 **Problem:** Cheating / धोखाधड़ी
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'cheating': {
+      voice: "BNS 318 Cheating – 7 साल तक सज़ा। Intent to deceive साबित करना ज़रूरी है। IPC 420 की जगह BNS 318।",
+      full: `🔍 **Problem:** Cheating / धोखाधड़ी
 
 ⚖️ **Legal Position:** BNS 318 – Cheating (धोखाधड़ी)
 
@@ -273,15 +289,11 @@ function getFallbackAnswer(query, voiceMode = false) {
 💡 **Tips:** Intent to deceive साबित करना ज़रूरी है
 📞 **Helplines:** 100 – Police, 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Cyber crime related queries
-  if (q.includes('cyber') || q.includes('online') || q.includes('साइबर') || q.includes('hack') || q.includes('फ्रॉड') || q.includes('1930')) {
-    if (voiceMode) {
-      return "Cyber fraud BNS 318 + IT Act के तहत। BSA 63 electronic evidence certificate mandatory। 1930 पर कॉल करें तुरंत।";
-    }
-    return `🔍 **Problem:** Cyber Crime / साइबर अपराध
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'cyber': {
+      voice: "Cyber fraud BNS 318 + IT Act के तहत। BSA 63 electronic evidence certificate mandatory। 1930 पर कॉल करें तुरंत।",
+      full: `🔍 **Problem:** Cyber Crime / साइबर अपराध
 
 ⚖️ **Legal Position:** BNS 318 (Cheating) + IT Act 2000
 
@@ -295,15 +307,11 @@ function getFallbackAnswer(query, voiceMode = false) {
 💡 **Tips:** Screenshots लें, transaction details save करें
 📞 **Helplines:** 1930 – Cyber Crime, 100 – Police
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Maintenance related queries
-  if (q.includes('maintenance') || q.includes('भरण') || q.includes('पोषण') || q.includes('144') || q.includes('crpc 125')) {
-    if (voiceMode) {
-      return "BNSS 144 Maintenance – पत्नी, बच्चे, माता-पिता हकदार। Rajnesh v. Neha guidelines apply।";
-    }
-    return `🔍 **Problem:** Maintenance / भरण-पोषण
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'maintenance': {
+      voice: "BNSS 144 Maintenance – पत्नी, बच्चे, माता-पिता हकदार। Rajnesh v. Neha guidelines apply।",
+      full: `🔍 **Problem:** Maintenance / भरण-पोषण
 
 ⚖️ **Legal Position:** BNSS 144 – Maintenance (पत्नी, बच्चे, माता-पिता)
 
@@ -317,15 +325,11 @@ function getFallbackAnswer(query, voiceMode = false) {
 💡 **Tips:** Income, needs, lifestyle को ध्यान में रखा जाता है
 📞 **Helplines:** 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Property related queries
-  if (q.includes('property') || q.includes('जमीन') || q.includes('जमीन') || q.includes('land') || q.includes('संपत्ति')) {
-    if (voiceMode) {
-      return "Property dispute – Civil suit + criminal FIR यदि कब्ज़ा हो। SDM से stay ले सकते हैं।";
-    }
-    return `🔍 **Problem:** Property Dispute / संपत्ति विवाद
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'property': {
+      voice: "Property dispute – Civil suit + criminal FIR यदि कब्ज़ा हो। SDM से stay ले सकते हैं।",
+      full: `🔍 **Problem:** Property Dispute / संपत्ति विवाद
 
 ⚖️ **Legal Position:** Civil suit (title suit) + Criminal FIR (BNSS 173) यदि कब्ज़ा हो
 
@@ -339,15 +343,11 @@ function getFallbackAnswer(query, voiceMode = false) {
 💡 **Tips:** All documents (sale deed, mutation) सुरक्षित रखें
 📞 **Helplines:** 100 – Police, 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Women rights related queries
-  if (q.includes('women') || q.includes('महिला') || q.includes('wife') || q.includes('पत्नी') || q.includes('181')) {
-    if (voiceMode) {
-      return "महिला अधिकार: BNS 85 cruelty, Domestic Violence Act, POSH Act, BNSS 144 maintenance, Maternity Benefit Act। 181 helpline 24x7।";
-    }
-    return `🔍 **Problem:** महिला अधिकार / Women Rights
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'women': {
+      voice: "महिला अधिकार: BNS 85 cruelty, Domestic Violence Act, POSH Act, BNSS 144 maintenance, Maternity Benefit Act। 181 helpline 24x7।",
+      full: `🔍 **Problem:** महिला अधिकार / Women Rights
 
 ⚖️ **Legal Position:** BNS 85 (Cruelty), Domestic Violence Act 2005, POSH Act 2013, BNSS 144 (Maintenance)
 
@@ -356,20 +356,16 @@ function getFallbackAnswer(query, voiceMode = false) {
   ② कार्यस्थल पर उत्पीड़न → POSH Act के तहत ICC में complain करें।
   ③ दहेज उत्पीड़न → BNS 85 के तहत FIR दर्ज कराएँ।
 
-📜 **Sections:** BNS 85, DV Act, POSH Act, BNSS 144, Hindu Succession Act
+📜 **Sections:** BNS 85, DV Act, POSH Act, BNSS 144
 ⚖️ **Case Law:** Vishakha v. State (1997) – workplace harassment
 💡 **Tips:** 181 – 24x7 Women Helpline, DLSA से free legal aid लें
 📞 **Helplines:** 181 – Women Helpline, 100 – Police, 15100 – Legal Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
-
-  // Consumer related queries
-  if (q.includes('consumer') || q.includes('उपभोक्ता') || q.includes('customer') || q.includes('शिकायत')) {
-    if (voiceMode) {
-      return "Consumer Protection Act 2019 – District/State/National Consumer Commission में शिकायत करें। Helpline 1800-11-4000।";
-    }
-    return `🔍 **Problem:** Consumer Complaint / उपभोक्ता शिकायत
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'consumer': {
+      voice: "Consumer Protection Act 2019 – District/State/National Consumer Commission में शिकायत करें। Helpline 1800-11-4000।",
+      full: `🔍 **Problem:** Consumer Complaint / उपभोक्ता शिकायत
 
 ⚖️ **Legal Position:** Consumer Protection Act 2019
 
@@ -379,58 +375,40 @@ function getFallbackAnswer(query, voiceMode = false) {
   ③ Amount: ₹50 lakh तक District, ₹1 करोड़ तक State, ₹1 करोड़ से अधिक National
 
 📜 **Sections:** Consumer Protection Act 2019
-⚖️ **Case Law:** Spring Meadows Hospital v. Harjol (1998)
 💡 **Tips:** 6 अधिकार: Safety, Choice, Information, Heard, Redressal, Education
 📞 **Helplines:** 1800-11-4000 – Consumer Helpline
 
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
-  }
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    },
+    'rti': {
+      voice: "RTI Act 2005 – 30 days में reply mandatory। Form A + ₹10 fee। First appeal to PIO, second to CIC।",
+      full: `🔍 **Problem:** RTI Application / सूचना का अधिकार
 
-  // RTO related queries
-  if (q.includes('rto') || q.includes('vehicle') || q.includes('गाड़ी') || q.includes('car') || q.includes('bike') || q.includes('traffic')) {
-    if (voiceMode) {
-      return "RTO office – Vehicle registration, driving license, challan। Motor Vehicles Act 1988। Transport Department में जाएँ।";
-    }
-    return `🚗 **RTO / Traffic Information**
-
-📍 **RTO Office:** Transport Department, Lucknow
-📋 **Services:** Vehicle Registration, Driving License, Challan, Fitness Certificate
-📜 **Law:** Motor Vehicles Act 1988
-🌐 **Website:** https://parivahan.gov.in
-📞 **Contact:** 0522-2238001
-
-💡 **Tips:**
-  - All documents (RC, DL, Insurance) always carry
-  - Challan pay online
-  - Driving test की तैयारी करें
-
-⚠️ यह सामान्य जानकारी है। RTO office contact करें।`;
-  }
-
-  // RTI related queries
-  if (q.includes('rti') || q.includes('information') || q.includes('जानकारी') || q.includes('right to information')) {
-    if (voiceMode) {
-      return "RTI Act 2005 – सरकारी विभागों से जानकारी माँगने का अधिकार। First Appeal, Second Appeal process।";
-    }
-    return `📋 **RTI – Right to Information Act 2005**
-
-⚖️ **Law:** Right to Information Act 2005
+⚖️ **Legal Position:** RTI Act 2005 – Right to Information
 
 📋 **Steps:**
-  ① RTI application online/offline दायर करें
-  ② 30 दिन में जवाब मिलना चाहिए
-  ③ जवाब न मिले → First Appeal (30 दिन)
-  ④ Second Appeal → State Information Commission (90 दिन)
+  ① Form A में application तैयार करें
+  ② ₹10 की fee जमा करें (cash/DD/court fee stamp)
+  ③ PIO को submit करें (hand/post/email)
 
+📜 **Sections:** RTI Act 2005
+💡 **Tips:** 30 days में reply mandatory, No reason required for asking info
 📞 **Helplines:** 15100 – Legal Helpline
-🌐 **Website:** https://rti.gov.in
 
-⚠️ यह सामान्य जानकारी है।`;
+⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
+    }
+  };
+
+  // Check topic matches
+  for (const [key, response] of Object.entries(responses)) {
+    if (q.includes(key)) {
+      return voiceMode ? response.voice : response.full;
+    }
   }
 
-  // ============================================
-  // 3. DEFAULT RESPONSE
-  // ============================================
+  // ============================================================
+  // 4. DEFAULT RESPONSE
+  // ============================================================
   if (voiceMode) {
     return `आपके प्रश्न "${query}" के लिए हमारे पास जानकारी है। कृपया Zeenat AI से पूछें या हमारे Legal Dictionary का उपयोग करें।`;
   }
