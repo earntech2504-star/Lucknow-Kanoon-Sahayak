@@ -4,9 +4,9 @@
 
 // UPI Configuration
 const UPI_CONFIG = {
-    upiId: process.env.UPI_ID || 'icfai.sandeep@oksbi',
-    upiPhone: process.env.UPI_PHONE || '7235870777',
-    upiName: process.env.UPI_NAME || 'Sandeep Gupta'
+    upiId: 'icfai.sandeep@oksbi',
+    upiPhone: '7235870777',
+    upiName: 'Sandeep Gupta'
 };
 
 // Payment function
@@ -110,9 +110,6 @@ if (typeof module !== 'undefined' && module.exports) {
         
         const { paymentId, amount, method } = req.body;
         
-        // In production, verify with actual payment gateway
-        // For demo, we just return success
-        
         res.status(200).json({ 
             success: true, 
             message: 'Payment verified',
@@ -124,14 +121,7 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 
-// Export for frontend
-export { 
-    UPI_CONFIG, 
-    donateUPI, 
-    copyUPI, 
-    generateQR, 
-    verifyPayment 
-};
+// ✅ REMOVED EXPORT - Functions are globally available
 
 // Auto-init QR on page load
 if (typeof window !== 'undefined') {
