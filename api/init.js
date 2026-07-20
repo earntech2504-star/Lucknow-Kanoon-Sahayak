@@ -208,7 +208,9 @@ function getHealthJSON() {
       chat: typeof handleZeenatQuery === 'function'
     }
   };
+<<<<<<< HEAD
 }
+<<<<<<< HEAD
 
 // ===== INITIALIZE ALL MODULES =====
 function initAllModules() {
@@ -358,3 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
 console.log('✅ init.js loaded - Health check available');
 console.log('📋 Type __health.display() for status');
 console.log('📋 Type __health.json() for JSON response');
+=======
+=======
+}
+>>>>>>> 87d7a1f (Fix: Update switchTab fallback and Amazon links)
+>>>>>>> d53527a (Fix: Update switchTab fallback and Amazon links)
