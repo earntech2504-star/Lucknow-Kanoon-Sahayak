@@ -358,15 +358,27 @@ function getSectionDetails(act, number) {
                     actName: actData.name
                 };
             }
+            // Also check if number matches without spaces (e.g., "BNS103")
+            const cleanNumber = number.replace(/\s/g, '');
+            const sectionClean = section.number.replace(/\s/g, '');
+            if (sectionClean === cleanNumber) {
+                return {
+                    ...section,
+                    act: act,
+                    chapter: chapter.title,
+                    chapterNumber: chapter.number,
+                    actName: actData.name
+                };
+            }
         }
     }
     return null;
 }
 
 // ============================================================
-// API HANDLER
+// API HANDLER - FIXED (No export default)
 // ============================================================
-export default async function handler(req, res) {
+async function handler(req, res) {
     // CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -493,15 +505,10 @@ export default async function handler(req, res) {
 }
 
 // ============================================================
-// EXPORTS
+// EXPORT FOR NODE/VERCEL (No ES6 export)
 // ============================================================
-export {
-    SECTIONS_DB,
-    IPC_TO_BNS_MAPPING,
-    CRPC_TO_BNSS_MAPPING,
-    EVIDENCE_TO_BSA_MAPPING,
-    getAllSections,
-    searchSections,
-    convertOldToNew,
-    getSectionDetails
-};
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = handler;
+}
+
+console.log('✅ sections.js loaded - Database ready');
