@@ -57,14 +57,14 @@ const VOICE_PROVIDERS = {
 // DEFAULT VOICE SETTINGS
 // ============================================================
 const DEFAULT_SETTINGS = {
-    provider: 'elevenlabs',
-    voiceId: '21m00Tcm4TlvDq8ikWAM', // Rachel
-    voiceName: 'Rachel',
+    provider: 'google',
+    voiceId: 'hi-IN-Wavenet-A',
+    voiceName: 'Hindi Female',
     language: 'hi-IN',
     rate: 0.9,
     pitch: 1.0,
     volume: 1.0,
-    model: 'eleven_monolingual_v1'
+    model: 'neural'
 };
 
 // ============================================================
@@ -130,27 +130,20 @@ const LANGUAGE_CONFIGS = {
 };
 
 // ============================================================
-// GET VOICE SETTINGS FROM ENVIRONMENT
+// GET VOICE SETTINGS
 // ============================================================
 function getVoiceSettings() {
-    const provider = process.env.VOICE_PROVIDER || DEFAULT_SETTINGS.provider;
-    const voiceId = process.env.ELEVENLABS_VOICE_ID || DEFAULT_SETTINGS.voiceId;
-    const voiceName = process.env.ELEVENLABS_VOICE_NAME || DEFAULT_SETTINGS.voiceName;
-    const apiKey = process.env.ELEVENLABS_API_KEY || process.env.GOOGLE_TTS_API_KEY || process.env.AZURE_TTS_API_KEY || process.env.AMAZON_POLLY_API_KEY;
-    const language = process.env.VOICE_LANGUAGE || DEFAULT_SETTINGS.language;
-    const rate = parseFloat(process.env.VOICE_RATE) || DEFAULT_SETTINGS.rate;
-    const pitch = parseFloat(process.env.VOICE_PITCH) || DEFAULT_SETTINGS.pitch;
-
+    // Use default settings (no process.env in browser)
     return {
-        provider,
-        voiceId,
-        voiceName,
-        language,
-        rate,
-        pitch,
-        apiKey: !!apiKey,
-        configured: !!apiKey,
-        model: process.env.VOICE_MODEL || DEFAULT_SETTINGS.model
+        provider: DEFAULT_SETTINGS.provider,
+        voiceId: DEFAULT_SETTINGS.voiceId,
+        voiceName: DEFAULT_SETTINGS.voiceName,
+        language: DEFAULT_SETTINGS.language,
+        rate: DEFAULT_SETTINGS.rate,
+        pitch: DEFAULT_SETTINGS.pitch,
+        model: DEFAULT_SETTINGS.model,
+        apiKey: false,
+        configured: true
     };
 }
 
@@ -183,207 +176,209 @@ function getLanguages() {
 }
 
 // ============================================================
-// API HANDLER
+// API HANDLER (for Vercel/Node)
 // ============================================================
-export default async function handler(req, res) {
-    // CORS Headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = async function handler(req, res) {
+        // CORS Headers
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
 
-    // Handle Preflight (OPTIONS) request
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+        // Handle Preflight (OPTIONS) request
+        if (req.method === 'OPTIONS') {
+            return res.status(200).end();
+        }
 
-    // Only allow GET and POST
-    if (req.method !== 'GET' && req.method !== 'POST') {
-        return res.status(405).json({
-            error: 'Method not allowed',
-            allowed: ['GET', 'POST', 'OPTIONS'],
-            status: 'error'
-        });
-    }
-
-    try {
-        // ============================================================
-        // GET - Fetch voice configuration
-        // ============================================================
-        if (req.method === 'GET') {
-            const { action, provider, language, voiceId } = req.query;
-
-            // Get available voices
-            if (action === 'voices') {
-                const voices = getAvailableVoices(provider);
-                return res.status(200).json({
-                    voices: voices,
-                    providers: Object.keys(VOICE_PROVIDERS),
-                    status: 'success',
-                    message: `✅ Available voices loaded`
-                });
-            }
-
-            // Get languages
-            if (action === 'languages') {
-                const languages = getLanguages();
-                return res.status(200).json({
-                    languages: languages,
-                    total: languages.length,
-                    status: 'success'
-                });
-            }
-
-            // Get specific voice
-            if (voiceId && provider) {
-                const voices = VOICE_PROVIDERS[provider]?.voices || {};
-                const voice = Object.values(voices).find(v => v.id === voiceId);
-                if (voice) {
-                    return res.status(200).json({
-                        voice: voice,
-                        provider: provider,
-                        status: 'success'
-                    });
-                }
-                return res.status(404).json({
-                    error: 'Voice not found',
-                    status: 'error'
-                });
-            }
-
-            // Get all providers
-            if (action === 'providers') {
-                return res.status(200).json({
-                    providers: Object.values(VOICE_PROVIDERS).map(p => ({
-                        name: p.name,
-                        models: p.models,
-                        voiceCount: Object.keys(p.voices).length
-                    })),
-                    status: 'success'
-                });
-            }
-
-            // Default: Get current voice settings
-            const settings = getVoiceSettings();
-            
-            // Get provider info
-            const providerInfo = VOICE_PROVIDERS[settings.provider] || null;
-            const availableVoices = providerInfo ? Object.values(providerInfo.voices) : [];
-            
-            // Get language info
-            const languageInfo = LANGUAGE_CONFIGS[settings.language] || null;
-
-            return res.status(200).json({
-                current: settings,
-                provider: {
-                    name: providerInfo?.name || settings.provider,
-                    availableVoices: availableVoices,
-                    models: providerInfo?.models || []
-                },
-                language: languageInfo,
-                configured: settings.configured,
-                status: 'success',
-                // Backward compatibility
-                voiceId: settings.voiceId,
-                voiceName: settings.voiceName,
-                providerName: settings.provider,
-                isConfigured: settings.configured,
-                model: settings.model
+        // Only allow GET and POST
+        if (req.method !== 'GET' && req.method !== 'POST') {
+            return res.status(405).json({
+                error: 'Method not allowed',
+                allowed: ['GET', 'POST', 'OPTIONS'],
+                status: 'error'
             });
         }
 
-        // ============================================================
-        // POST - Update voice configuration
-        // ============================================================
-        if (req.method === 'POST') {
-            const { provider, voiceId, voiceName, language, rate, pitch, model, test } = req.body;
+        try {
+            // ============================================================
+            // GET - Fetch voice configuration
+            // ============================================================
+            if (req.method === 'GET') {
+                const { action, provider, language, voiceId } = req.query;
 
-            // Validate provider
-            if (provider && !VOICE_PROVIDERS[provider]) {
-                return res.status(400).json({
-                    error: `Provider '${provider}' not supported`,
-                    availableProviders: Object.keys(VOICE_PROVIDERS),
-                    status: 'error'
-                });
-            }
+                // Get available voices
+                if (action === 'voices') {
+                    const voices = getAvailableVoices(provider);
+                    return res.status(200).json({
+                        voices: voices,
+                        providers: Object.keys(VOICE_PROVIDERS),
+                        status: 'success',
+                        message: '✅ Available voices loaded'
+                    });
+                }
 
-            // Validate voice
-            if (voiceId && provider) {
-                const voices = VOICE_PROVIDERS[provider]?.voices || {};
-                const voice = Object.values(voices).find(v => v.id === voiceId);
-                if (!voice) {
-                    return res.status(400).json({
-                        error: `Voice '${voiceId}' not found for provider '${provider}'`,
-                        availableVoices: Object.values(voices).map(v => ({ id: v.id, name: v.name })),
+                // Get languages
+                if (action === 'languages') {
+                    const languages = getLanguages();
+                    return res.status(200).json({
+                        languages: languages,
+                        total: languages.length,
+                        status: 'success'
+                    });
+                }
+
+                // Get specific voice
+                if (voiceId && provider) {
+                    const voices = VOICE_PROVIDERS[provider]?.voices || {};
+                    const voice = Object.values(voices).find(v => v.id === voiceId);
+                    if (voice) {
+                        return res.status(200).json({
+                            voice: voice,
+                            provider: provider,
+                            status: 'success'
+                        });
+                    }
+                    return res.status(404).json({
+                        error: 'Voice not found',
                         status: 'error'
                     });
                 }
-            }
 
-            // Validate language
-            if (language && !LANGUAGE_CONFIGS[language]) {
-                return res.status(400).json({
-                    error: `Language '${language}' not supported`,
-                    availableLanguages: Object.keys(LANGUAGE_CONFIGS),
-                    status: 'error'
+                // Get all providers
+                if (action === 'providers') {
+                    return res.status(200).json({
+                        providers: Object.values(VOICE_PROVIDERS).map(p => ({
+                            name: p.name,
+                            models: p.models,
+                            voiceCount: Object.keys(p.voices).length
+                        })),
+                        status: 'success'
+                    });
+                }
+
+                // Default: Get current voice settings
+                const settings = getVoiceSettings();
+                
+                // Get provider info
+                const providerInfo = VOICE_PROVIDERS[settings.provider] || null;
+                const availableVoices = providerInfo ? Object.values(providerInfo.voices) : [];
+                
+                // Get language info
+                const languageInfo = LANGUAGE_CONFIGS[settings.language] || null;
+
+                return res.status(200).json({
+                    current: settings,
+                    provider: {
+                        name: providerInfo?.name || settings.provider,
+                        availableVoices: availableVoices,
+                        models: providerInfo?.models || []
+                    },
+                    language: languageInfo,
+                    configured: settings.configured,
+                    status: 'success',
+                    voiceId: settings.voiceId,
+                    voiceName: settings.voiceName,
+                    providerName: settings.provider,
+                    isConfigured: settings.configured,
+                    model: settings.model
                 });
             }
 
-            // Test voice (return sample audio URL or test message)
-            if (test) {
-                const settings = {
+            // ============================================================
+            // POST - Update voice configuration
+            // ============================================================
+            if (req.method === 'POST') {
+                const { provider, voiceId, voiceName, language, rate, pitch, model, test } = req.body;
+
+                // Validate provider
+                if (provider && !VOICE_PROVIDERS[provider]) {
+                    return res.status(400).json({
+                        error: `Provider '${provider}' not supported`,
+                        availableProviders: Object.keys(VOICE_PROVIDERS),
+                        status: 'error'
+                    });
+                }
+
+                // Validate voice
+                if (voiceId && provider) {
+                    const voices = VOICE_PROVIDERS[provider]?.voices || {};
+                    const voice = Object.values(voices).find(v => v.id === voiceId);
+                    if (!voice) {
+                        return res.status(400).json({
+                            error: `Voice '${voiceId}' not found for provider '${provider}'`,
+                            availableVoices: Object.values(voices).map(v => ({ id: v.id, name: v.name })),
+                            status: 'error'
+                        });
+                    }
+                }
+
+                // Validate language
+                if (language && !LANGUAGE_CONFIGS[language]) {
+                    return res.status(400).json({
+                        error: `Language '${language}' not supported`,
+                        availableLanguages: Object.keys(LANGUAGE_CONFIGS),
+                        status: 'error'
+                    });
+                }
+
+                // Test voice
+                if (test) {
+                    const settings = {
+                        provider: provider || DEFAULT_SETTINGS.provider,
+                        voiceId: voiceId || DEFAULT_SETTINGS.voiceId,
+                        voiceName: voiceName || DEFAULT_SETTINGS.voiceName,
+                        language: language || DEFAULT_SETTINGS.language,
+                        rate: rate || DEFAULT_SETTINGS.rate,
+                        pitch: pitch || DEFAULT_SETTINGS.pitch
+                    };
+
+                    return res.status(200).json({
+                        settings: settings,
+                        testMessage: '🔊 Testing voice configuration...',
+                        testText: 'नमस्ते, मैं Zeenat हूँ। आपकी सहायता के लिए यहाँ हूँ।',
+                        status: 'success',
+                        message: '✅ Voice configuration tested successfully'
+                    });
+                }
+
+                // Build updated settings
+                const updatedSettings = {
                     provider: provider || DEFAULT_SETTINGS.provider,
                     voiceId: voiceId || DEFAULT_SETTINGS.voiceId,
                     voiceName: voiceName || DEFAULT_SETTINGS.voiceName,
                     language: language || DEFAULT_SETTINGS.language,
                     rate: rate || DEFAULT_SETTINGS.rate,
-                    pitch: pitch || DEFAULT_SETTINGS.pitch
+                    pitch: pitch || DEFAULT_SETTINGS.pitch,
+                    model: model || DEFAULT_SETTINGS.model
                 };
 
-                // Return test configuration
                 return res.status(200).json({
-                    settings: settings,
-                    testMessage: '🔊 Testing voice configuration...',
-                    testText: 'नमस्ते, मैं Zeenat हूँ। आपकी सहायता के लिए यहाँ हूँ।',
+                    settings: updatedSettings,
                     status: 'success',
-                    message: '✅ Voice configuration tested successfully'
+                    message: '✅ Voice configuration updated successfully'
                 });
             }
 
-            // Build updated settings
-            const updatedSettings = {
-                provider: provider || DEFAULT_SETTINGS.provider,
-                voiceId: voiceId || DEFAULT_SETTINGS.voiceId,
-                voiceName: voiceName || DEFAULT_SETTINGS.voiceName,
-                language: language || DEFAULT_SETTINGS.language,
-                rate: rate || DEFAULT_SETTINGS.rate,
-                pitch: pitch || DEFAULT_SETTINGS.pitch,
-                model: model || DEFAULT_SETTINGS.model
-            };
-
-            return res.status(200).json({
-                settings: updatedSettings,
-                status: 'success',
-                message: '✅ Voice configuration updated successfully'
+        } catch (error) {
+            console.error('Voice config error:', error);
+            return res.status(500).json({
+                error: error.message,
+                status: 'error'
             });
         }
-
-    } catch (error) {
-        console.error('Voice config error:', error);
-        return res.status(500).json({
-            error: error.message,
-            status: 'error'
-        });
-    }
+    };
 }
 
 // ============================================================
-// EXPORT FOR TESTING/REUSE
+// MAKE FUNCTIONS GLOBALLY AVAILABLE (for browser)
 // ============================================================
-export {
-    VOICE_PROVIDERS,
-    DEFAULT_SETTINGS,
-    LANGUAGE_CONFIGS,
-    getVoiceSettings,
-    getAvailableVoices,
-    getLanguages
-};
+if (typeof window !== 'undefined') {
+    window.VOICE_PROVIDERS = VOICE_PROVIDERS;
+    window.DEFAULT_SETTINGS = DEFAULT_SETTINGS;
+    window.LANGUAGE_CONFIGS = LANGUAGE_CONFIGS;
+    window.getVoiceSettings = getVoiceSettings;
+    window.getAvailableVoices = getAvailableVoices;
+    window.getLanguages = getLanguages;
+}
+
+console.log('✅ voice-config.js loaded');
