@@ -278,7 +278,19 @@ function getFallbackAnswer(query, voiceMode = false) {
 }
 
 // ===== API HANDLER =====
-async function handler(req, res) {
+export default async function handler(req, res) {
+  console.log('📨 /api/ask called');
+  
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -290,6 +302,9 @@ async function handler(req, res) {
     return res.status(400).json({ error: 'Query is required' });
   }
 
+  console.log('🔍 Query:', query);
+  console.log('🎤 Voice Mode:', voiceMode);
+
   // Try to use Gemini if key is available
   const geminiKey = process.env.GEMINI_API_KEY;
   let answer = '';
@@ -297,6 +312,7 @@ async function handler(req, res) {
 
   if (geminiKey) {
     try {
+      console.log('🤖 Using Gemini API...');
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
         {
@@ -339,16 +355,18 @@ async function handler(req, res) {
       if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
         answer = data.candidates[0].content.parts[0].text;
         sources = ['Gemini AI'];
+        console.log('✅ Gemini response received');
       } else {
         throw new Error('No response from Gemini');
       }
     } catch (err) {
-      console.error('Gemini error:', err.message);
+      console.error('❌ Gemini error:', err.message);
       answer = getFallbackAnswer(query, voiceMode);
       sources = ['Static Knowledge Base'];
     }
   } else {
     // No API key – use fallback
+    console.log('ℹ️ No GEMINI_API_KEY, using fallback');
     answer = getFallbackAnswer(query, voiceMode);
     sources = ['Static Knowledge Base'];
   }
@@ -362,17 +380,19 @@ async function handler(req, res) {
   if (voiceMode) {
     const shortAnswer = answer.split('\n').slice(0, 4).join('\n');
     return res.status(200).json({ 
+      success: true,
       answer: shortAnswer, 
       fullAnswer: answer,
       sources,
-      voiceMode: true
+      voiceMode: true,
+      timestamp: new Date().toISOString()
     });
   }
 
-  return res.status(200).json({ answer, sources });
-}
-
-// ===== EXPORT FOR NODE/VERCEL =====
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = handler;
+  return res.status(200).json({ 
+    success: true,
+    answer, 
+    sources,
+    timestamp: new Date().toISOString()
+  });
 }
