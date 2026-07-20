@@ -2,7 +2,11 @@
 // api/ask.js - Zeenat AI Assistant with Court Info & Voice Support
 // ============================================================
 
-// ===== COMPLETE FALLBACK with ALL Sections & Court Info =====
+console.log('✅ ask.js loaded - Zeenat AI Active');
+
+// ============================================================
+// COMPLETE FALLBACK with ALL Sections & Court Info
+// ============================================================
 function getFallbackAnswer(query, voiceMode = false) {
   const q = query.toLowerCase().trim();
 
@@ -277,33 +281,47 @@ function getFallbackAnswer(query, voiceMode = false) {
 ⚠️ **Disclaimer:** यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
 }
 
-// ===== API HANDLER =====
+// ============================================================
+// MAIN API HANDLER - FIXED WITH ASYNC
+// ============================================================
 export default async function handler(req, res) {
   console.log('📨 /api/ask called');
+  console.log('📝 Method:', req.method);
   
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight
+  // Handle preflight (OPTIONS)
   if (req.method === 'OPTIONS') {
+    console.log('✅ OPTIONS request handled');
     return res.status(200).end();
   }
 
   // Only allow POST
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    console.error('❌ Method not allowed:', req.method);
+    return res.status(405).json({ 
+      success: false,
+      error: 'Method not allowed. Use POST.' 
+    });
   }
 
+  // Get query from request body
   const { query, date, tab, lang, voiceMode } = req.body || {};
 
   if (!query || query.trim().length === 0) {
-    return res.status(400).json({ error: 'Query is required' });
+    console.error('❌ No query provided');
+    return res.status(400).json({ 
+      success: false,
+      error: 'Query is required' 
+    });
   }
 
   console.log('🔍 Query:', query);
-  console.log('🎤 Voice Mode:', voiceMode);
+  console.log('🎤 Voice Mode:', voiceMode || false);
+  console.log('🌐 Language:', lang || 'hi');
 
   // Try to use Gemini if key is available
   const geminiKey = process.env.GEMINI_API_KEY;
@@ -312,7 +330,7 @@ export default async function handler(req, res) {
 
   if (geminiKey) {
     try {
-      console.log('🤖 Using Gemini API...');
+      console.log('🤖 Trying Gemini API...');
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
         {
@@ -375,6 +393,8 @@ export default async function handler(req, res) {
   if (!answer || answer.trim().length === 0) {
     answer = 'क्षमा करें, मैं इस समय उत्तर नहीं दे पा रही हूँ। कृपया पुनः प्रयास करें।';
   }
+
+  console.log('✅ Response generated, length:', answer.length);
 
   // If voice mode, return shorter version
   if (voiceMode) {
