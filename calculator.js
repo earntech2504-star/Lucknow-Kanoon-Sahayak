@@ -1,353 +1,4 @@
-// ============================================================
-// CALCULATOR.JS - All 14 Legal/Financial Calculators
-// ============================================================
-
-console.log('✅ calculator.js loaded');
-
-// ============================================================
-// 1. Court Fee Calculator
-// ============================================================
-function calculateCourtFee() {
-    const amount = parseFloat(document.getElementById('court-fee-amount')?.value) || 0;
-    const type = document.getElementById('court-fee-type')?.value || 'civil';
-    const resultDiv = document.getElementById('court-fee-result');
-    
-    let fee = 0;
-    if (type === 'civil') fee = amount * 0.01;
-    else if (type === 'family') fee = Math.max(500, amount * 0.005);
-    else if (type === 'property') fee = amount * 0.02;
-    
-    fee = Math.round(fee);
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `💰 ₹${fee.toLocaleString()}`;
-    }
-}
-
-// ============================================================
-// 2. EMI Calculator
-// ============================================================
-function calculateEMI() {
-    const P = parseFloat(document.getElementById('emi-amount')?.value) || 0;
-    const annualRate = parseFloat(document.getElementById('emi-rate')?.value) || 0;
-    const months = parseFloat(document.getElementById('emi-tenure')?.value) || 1;
-    const r = annualRate / 12 / 100;
-    const emi = P * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
-    const resultDiv = document.getElementById('emi-result');
-    
-    if (!isFinite(emi) || emi < 0 || P <= 0) {
-        if (resultDiv) {
-            resultDiv.className = 'calc-result error text-sm';
-            resultDiv.innerHTML = '⚠️ Invalid inputs.';
-        }
-        return;
-    }
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `₹${Math.round(emi).toLocaleString()} / month<br><span class="text-[10px] text-slate-400">Total: ₹${Math.round(emi * months).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 3. Stamp Duty Calculator
-// ============================================================
-function calculateStampDuty() {
-    const propertyType = document.getElementById('stamp-property-type')?.value || 'residential';
-    const value = parseFloat(document.getElementById('stamp-value')?.value) || 0;
-    const gender = document.getElementById('stamp-gender')?.value || 'male';
-    const resultDiv = document.getElementById('stamp-result');
-    
-    let stampRate = propertyType === 'residential' ? 7 : 8;
-    if (gender === 'female') stampRate -= 1;
-    
-    const stampDuty = value * (stampRate / 100);
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `📊 ₹${Math.round(stampDuty).toLocaleString()}`;
-    }
-}
-
-// ============================================================
-// 4. Income Tax Calculator
-// ============================================================
-function calculateTax() {
-    const income = parseFloat(document.getElementById('tax-income')?.value) || 0;
-    const deduction = parseFloat(document.getElementById('tax-deduction')?.value) || 0;
-    const regime = document.getElementById('tax-regime')?.value || 'old';
-    const resultDiv = document.getElementById('tax-result');
-    
-    let taxable = Math.max(0, income - deduction);
-    let tax = 0;
-    
-    if (regime === 'old') {
-        if (taxable <= 250000) tax = 0;
-        else if (taxable <= 500000) tax = (taxable - 250000) * 0.05;
-        else if (taxable <= 1000000) tax = 12500 + (taxable - 500000) * 0.2;
-        else tax = 112500 + (taxable - 1000000) * 0.3;
-    } else {
-        if (taxable <= 300000) tax = 0;
-        else if (taxable <= 600000) tax = (taxable - 300000) * 0.05;
-        else if (taxable <= 900000) tax = 15000 + (taxable - 600000) * 0.1;
-        else if (taxable <= 1200000) tax = 45000 + (taxable - 900000) * 0.15;
-        else if (taxable <= 1500000) tax = 90000 + (taxable - 1200000) * 0.2;
-        else tax = 150000 + (taxable - 1500000) * 0.3;
-    }
-    
-    tax = Math.round(tax);
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `🧾 ₹${tax.toLocaleString()}`;
-    }
-}
-
-// ============================================================
-// 5. GST Calculator
-// ============================================================
-function calculateGST() {
-    const amount = parseFloat(document.getElementById('gst-amount')?.value) || 0;
-    const rate = parseFloat(document.getElementById('gst-rate')?.value) || 0;
-    const type = document.getElementById('gst-type')?.value || 'exclusive';
-    const resultDiv = document.getElementById('gst-result');
-    
-    let gstAmount, total;
-    if (type === 'exclusive') {
-        gstAmount = amount * (rate / 100);
-        total = amount + gstAmount;
-        if (resultDiv) {
-            resultDiv.innerHTML = `💵 ₹${total.toFixed(2)} (GST: ₹${gstAmount.toFixed(2)})`;
-        }
-    } else {
-        const base = amount / (1 + rate / 100);
-        gstAmount = amount - base;
-        if (resultDiv) {
-            resultDiv.innerHTML = `💵 ₹${base.toFixed(2)} (GST: ₹${gstAmount.toFixed(2)})`;
-        }
-    }
-    if (resultDiv) resultDiv.className = 'calc-result text-sm';
-}
-
-// ============================================================
-// 6. SIP Calculator
-// ============================================================
-function calculateSIP() {
-    const monthly = parseFloat(document.getElementById('sip-amount')?.value) || 0;
-    const rate = parseFloat(document.getElementById('sip-rate')?.value) || 0;
-    const years = parseFloat(document.getElementById('sip-years')?.value) || 0;
-    const months = years * 12;
-    const r = rate / 12 / 100;
-    const fv = monthly * ((Math.pow(1 + r, months) - 1) / r) * (1 + r);
-    const invested = monthly * months;
-    const returns = fv - invested;
-    const resultDiv = document.getElementById('sip-result');
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `📈 ₹${Math.round(fv).toLocaleString()}<br><span class="text-[10px] text-slate-400">Invested: ₹${Math.round(invested).toLocaleString()} | Returns: ₹${Math.round(returns).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 7. PPF Calculator
-// ============================================================
-function calculatePPF() {
-    const annual = parseFloat(document.getElementById('ppf-amount')?.value) || 0;
-    const rate = parseFloat(document.getElementById('ppf-rate')?.value) || 0;
-    const years = parseFloat(document.getElementById('ppf-years')?.value) || 0;
-    const r = rate / 100;
-    let total = 0;
-    
-    for (let i = 0; i < years; i++) {
-        total = (total + annual) * (1 + r);
-    }
-    
-    const invested = annual * years;
-    const returns = total - invested;
-    const resultDiv = document.getElementById('ppf-result');
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `🏦 ₹${Math.round(total).toLocaleString()}<br><span class="text-[10px] text-slate-400">Invested: ₹${Math.round(invested).toLocaleString()} | Returns: ₹${Math.round(returns).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 8. FD Calculator
-// ============================================================
-function calculateFD() {
-    const deposit = parseFloat(document.getElementById('fd-amount')?.value) || 0;
-    const rate = parseFloat(document.getElementById('fd-rate')?.value) || 0;
-    const years = parseFloat(document.getElementById('fd-years')?.value) || 0;
-    const total = deposit * Math.pow(1 + rate / 100, years);
-    const interest = total - deposit;
-    const resultDiv = document.getElementById('fd-result');
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `🏦 ₹${Math.round(total).toLocaleString()}<br><span class="text-[10px] text-slate-400">Interest: ₹${Math.round(interest).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 9. Loan EMI Calculator
-// ============================================================
-function calculateLoanEMI() {
-    const P = parseFloat(document.getElementById('loan-amount')?.value) || 0;
-    const annualRate = parseFloat(document.getElementById('loan-rate')?.value) || 0;
-    const months = parseFloat(document.getElementById('loan-tenure')?.value) || 1;
-    const r = annualRate / 12 / 100;
-    const emi = P * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
-    const resultDiv = document.getElementById('loan-result');
-    
-    if (!isFinite(emi) || emi < 0 || P <= 0) {
-        if (resultDiv) {
-            resultDiv.className = 'calc-result error text-sm';
-            resultDiv.innerHTML = '⚠️ Invalid inputs.';
-        }
-        return;
-    }
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `💰 ₹${Math.round(emi).toLocaleString()} / month<br><span class="text-[10px] text-slate-400">Total: ₹${Math.round(emi * months).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 10. ROI Calculator
-// ============================================================
-function calculateROI() {
-    const initial = parseFloat(document.getElementById('roi-initial')?.value) || 0;
-    const final = parseFloat(document.getElementById('roi-final')?.value) || 0;
-    const years = parseFloat(document.getElementById('roi-period')?.value) || 1;
-    const resultDiv = document.getElementById('roi-result');
-    
-    if (initial <= 0 || final <= 0 || years <= 0) {
-        if (resultDiv) {
-            resultDiv.className = 'calc-result error text-sm';
-            resultDiv.innerHTML = '⚠️ Invalid inputs.';
-        }
-        return;
-    }
-    
-    const cagr = (Math.pow(final / initial, 1 / years) - 1) * 100;
-    const totalReturn = ((final - initial) / initial) * 100;
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `📈 CAGR: ${cagr.toFixed(2)}%<br><span class="text-[10px] text-slate-400">Total Return: ${totalReturn.toFixed(2)}%</span>`;
-    }
-}
-
-// ============================================================
-// 11. Currency Converter
-// ============================================================
-function convertCurrency() {
-    const amount = parseFloat(document.getElementById('currency-amount')?.value) || 0;
-    const to = document.getElementById('currency-to')?.value || 'usd';
-    const rates = { usd: 0.012, eur: 0.011, gbp: 0.0095, aed: 0.044 };
-    const converted = amount * (rates[to] || 0.012);
-    const symbols = { usd: '$', eur: '€', gbp: '£', aed: 'د.إ' };
-    const resultDiv = document.getElementById('currency-result');
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `${symbols[to] || '$'} ${converted.toFixed(2)}`;
-    }
-}
-
-// ============================================================
-// 12. BMI Calculator
-// ============================================================
-function calculateBMI() {
-    const weight = parseFloat(document.getElementById('bmi-weight')?.value) || 0;
-    const heightCm = parseFloat(document.getElementById('bmi-height')?.value) || 0;
-    const heightM = heightCm / 100;
-    const bmi = weight / (heightM * heightM);
-    const resultDiv = document.getElementById('bmi-result');
-    
-    let status = '';
-    if (bmi < 18.5) status = 'Underweight';
-    else if (bmi < 25) status = 'Normal';
-    else if (bmi < 30) status = 'Overweight';
-    else status = 'Obese';
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `⚕️ BMI: ${bmi.toFixed(1)}<br><span class="text-[10px] text-slate-400">${status}</span>`;
-    }
-}
-
-// ============================================================
-// 13. Interest Calculator
-// ============================================================
-function calculateInterest() {
-    const principal = parseFloat(document.getElementById('interest-principal')?.value) || 0;
-    const rate = parseFloat(document.getElementById('interest-rate')?.value) || 0;
-    const years = parseFloat(document.getElementById('interest-years')?.value) || 0;
-    const resultDiv = document.getElementById('interest-result');
-    
-    const interest = principal * (rate / 100) * years;
-    const total = principal + interest;
-    
-    if (resultDiv) {
-        resultDiv.className = 'calc-result text-sm';
-        resultDiv.innerHTML = `📊 ₹${Math.round(interest).toLocaleString()}<br><span class="text-[10px] text-slate-400">Total: ₹${Math.round(total).toLocaleString()}</span>`;
-    }
-}
-
-// ============================================================
-// 14. Limitation Calculator
-// ============================================================
-function calculateLimitation() {
-    const dateInput = document.getElementById('limitation-incident-date');
-    const period = parseInt(document.getElementById('limitation-period')?.value) || 3;
-    const resultDiv = document.getElementById('limitation-result');
-    
-    if (!dateInput?.value) {
-        if (resultDiv) {
-            resultDiv.className = 'calc-result warning text-sm';
-            resultDiv.innerHTML = '⚠️ कृपया Incident Date चुनें।';
-        }
-        return;
-    }
-    
-    const incidentDate = new Date(dateInput.value);
-    const deadline = new Date(incidentDate);
-    deadline.setFullYear(deadline.getFullYear() + period);
-    const today = new Date();
-    const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-    
-    if (resultDiv) {
-        resultDiv.className = `calc-result ${daysLeft > 0 ? '' : 'error'} text-sm`;
-        resultDiv.innerHTML = `📅 Deadline: ${deadline.toLocaleDateString()}<br><span class="${daysLeft > 0 ? 'text-green-400' : 'text-red-400'}">${daysLeft > 0 ? `⏳ ${daysLeft} days left` : '⚠️ Deadline passed!'}</span>`;
-    }
-}
-
-// ============================================================
-// MAKE FUNCTIONS GLOBALLY AVAILABLE
-// ============================================================
-// For browser environment
-if (typeof window !== 'undefined') {
-    window.calculateCourtFee = calculateCourtFee;
-    window.calculateEMI = calculateEMI;
-    window.calculateStampDuty = calculateStampDuty;
-    window.calculateTax = calculateTax;
-    window.calculateGST = calculateGST;
-    window.calculateSIP = calculateSIP;
-    window.calculatePPF = calculatePPF;
-    window.calculateFD = calculateFD;
-    window.calculateLoanEMI = calculateLoanEMI;
-    window.calculateROI = calculateROI;
-    window.convertCurrency = convertCurrency;
-    window.calculateBMI = calculateBMI;
-    window.calculateInterest = calculateInterest;
-    window.calculateLimitation = calculateLimitation;
-}
-
-// ============================================================
-// EXPORT FOR VERCEL (if used as serverless function)
-// ============================================================
+// api/calculator.js - Serverless API Version
 export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -358,24 +9,178 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
-    // Return calculator functions list
     if (req.method === 'GET') {
         return res.status(200).json({
             success: true,
             message: 'Calculator API is ready',
             functions: [
-                'calculateCourtFee', 'calculateEMI', 'calculateStampDuty',
-                'calculateTax', 'calculateGST', 'calculateSIP',
-                'calculatePPF', 'calculateFD', 'calculateLoanEMI',
-                'calculateROI', 'convertCurrency', 'calculateBMI',
-                'calculateInterest', 'calculateLimitation'
+                'court-fee', 'emi', 'stamp-duty', 'tax',
+                'gst', 'sip', 'ppf', 'fd', 'loan-emi',
+                'roi', 'currency', 'bmi', 'interest', 'limitation'
             ],
-            status: 'active'
+            usage: 'POST with { type: "court-fee", amount: 100000, caseType: "civil" }'
         });
     }
 
-    return res.status(405).json({ 
-        success: false, 
-        error: 'Method not allowed. Use GET.' 
-    });
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed. Use GET or POST.' });
+    }
+
+    const { type, ...params } = req.body;
+
+    if (!type) {
+        return res.status(400).json({ error: 'Calculator type is required' });
+    }
+
+    try {
+        let result = { success: true, type };
+
+        switch(type) {
+            case 'court-fee': {
+                const amount = parseFloat(params.amount) || 0;
+                const caseType = params.caseType || 'civil';
+                let fee = 0;
+                
+                if (caseType === 'civil') {
+                    if (amount <= 100000) fee = amount * 0.01;
+                    else if (amount <= 500000) fee = 1000 + (amount - 100000) * 0.008;
+                    else if (amount <= 1000000) fee = 4200 + (amount - 500000) * 0.006;
+                    else if (amount <= 5000000) fee = 7200 + (amount - 1000000) * 0.004;
+                    else fee = 23200 + (amount - 5000000) * 0.002;
+                } else if (caseType === 'family') {
+                    fee = Math.max(500, amount * 0.005);
+                } else if (caseType === 'property') {
+                    fee = amount * 0.02;
+                }
+                
+                result.fee = Math.round(fee);
+                result.formatted = `₹${Math.round(fee).toLocaleString()}`;
+                break;
+            }
+            
+            case 'emi': {
+                const P = parseFloat(params.amount) || 0;
+                const annualRate = parseFloat(params.rate) || 0;
+                const months = parseFloat(params.tenure) || 1;
+                const r = annualRate / 12 / 100;
+                const emi = P * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+                
+                if (!isFinite(emi) || emi < 0 || P <= 0) {
+                    return res.status(400).json({ error: 'Invalid inputs' });
+                }
+                
+                result.emi = Math.round(emi);
+                result.totalPayment = Math.round(emi * months);
+                result.totalInterest = Math.round(emi * months - P);
+                break;
+            }
+            
+            case 'stamp-duty': {
+                const propertyType = params.propertyType || 'residential';
+                const value = parseFloat(params.value) || 0;
+                const gender = params.gender || 'male';
+                
+                let stampRate = propertyType === 'residential' ? 7 : 8;
+                if (gender === 'female') stampRate -= 1;
+                
+                result.stampDuty = Math.round(value * (stampRate / 100));
+                result.stampRate = stampRate;
+                break;
+            }
+            
+            case 'tax': {
+                const income = parseFloat(params.income) || 0;
+                const deduction = parseFloat(params.deduction) || 0;
+                const regime = params.regime || 'old';
+                
+                let taxable = Math.max(0, income - deduction);
+                let tax = 0;
+                
+                if (regime === 'old') {
+                    if (taxable <= 250000) tax = 0;
+                    else if (taxable <= 500000) tax = (taxable - 250000) * 0.05;
+                    else if (taxable <= 1000000) tax = 12500 + (taxable - 500000) * 0.2;
+                    else tax = 112500 + (taxable - 1000000) * 0.3;
+                } else {
+                    if (taxable <= 300000) tax = 0;
+                    else if (taxable <= 600000) tax = (taxable - 300000) * 0.05;
+                    else if (taxable <= 900000) tax = 15000 + (taxable - 600000) * 0.1;
+                    else if (taxable <= 1200000) tax = 45000 + (taxable - 900000) * 0.15;
+                    else if (taxable <= 1500000) tax = 90000 + (taxable - 1200000) * 0.2;
+                    else tax = 150000 + (taxable - 1500000) * 0.3;
+                }
+                
+                result.tax = Math.round(tax);
+                result.taxableIncome = Math.round(taxable);
+                break;
+            }
+            
+            case 'gst': {
+                const amount = parseFloat(params.amount) || 0;
+                const rate = parseFloat(params.rate) || 0;
+                const type = params.type || 'exclusive';
+                
+                let gstAmount, total, base;
+                if (type === 'exclusive') {
+                    gstAmount = amount * (rate / 100);
+                    total = amount + gstAmount;
+                    result.gstAmount = gstAmount;
+                    result.total = total;
+                    result.base = amount;
+                } else {
+                    base = amount / (1 + rate / 100);
+                    gstAmount = amount - base;
+                    result.gstAmount = gstAmount;
+                    result.total = amount;
+                    result.base = base;
+                }
+                break;
+            }
+            
+            case 'sip': {
+                const monthly = parseFloat(params.monthly) || 0;
+                const rate = parseFloat(params.rate) || 0;
+                const years = parseFloat(params.years) || 0;
+                const months = years * 12;
+                const r = rate / 12 / 100;
+                const fv = monthly * ((Math.pow(1 + r, months) - 1) / r) * (1 + r);
+                const invested = monthly * months;
+                const returns = fv - invested;
+                
+                result.futureValue = Math.round(fv);
+                result.invested = Math.round(invested);
+                result.returns = Math.round(returns);
+                break;
+            }
+            
+            case 'limitation': {
+                const incidentDate = params.incidentDate;
+                const period = parseInt(params.period) || 3;
+                
+                if (!incidentDate) {
+                    return res.status(400).json({ error: 'incidentDate is required' });
+                }
+                
+                const incident = new Date(incidentDate);
+                const deadline = new Date(incident);
+                deadline.setFullYear(deadline.getFullYear() + period);
+                const today = new Date();
+                const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+                
+                result.deadline = deadline.toISOString().split('T')[0];
+                result.daysLeft = daysLeft;
+                result.status = daysLeft > 0 ? 'active' : 'expired';
+                break;
+            }
+            
+            default:
+                return res.status(400).json({ error: `Unknown calculator type: ${type}` });
+        }
+
+        return res.status(200).json(result);
+        
+    } catch (error) {
+        console.error('Calculator error:', error);
+        return res.status(500).json({ error: 'Calculation failed', details: error.message });
+    }
 }
