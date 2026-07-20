@@ -2,103 +2,7 @@
 // api/ask.js - Zeenat AI Assistant with Court Info & Voice Support
 // ============================================================
 
-export default async function handler(req, res) {
-  // Only allow POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { query, date, tab, lang, voiceMode } = req.body || {};
-
-  if (!query || query.trim().length === 0) {
-    return res.status(400).json({ error: 'Query is required' });
-  }
-
-  // Try to use Gemini if key is available
-  const geminiKey = process.env.GEMINI_API_KEY;
-  let answer = '';
-  let sources = [];
-
-  if (geminiKey) {
-    try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `You are Zeenat, a legal assistant for Indian law (BNS/BNSS/BSA). 
-                    
-                    **IMPORTANT:** Keep responses CONCISE and POINT-WISE. Use this structure:
-                    
-                    🔍 Problem: [summarize the issue]
-                    ⚖️ Legal Position: [key legal provision]
-                    📋 Steps: [numbered list of practical steps]
-                    📜 Sections: [relevant sections]
-                    ⚖️ Case Law: [relevant case law]
-                    💡 Tips: [practical tips]
-                    📞 Helplines: [emergency numbers]
-                    
-                    ⚠️ Always add disclaimer: "यह सामान्य जानकारी है, कानूनी सलाह नहीं।"
-                    
-                    User query: ${query}
-                    Context: date=${date || 'today'}, tab=${tab || 'general'}, lang=${lang || 'hi'}
-                    
-                    ${voiceMode ? 'Keep response very short and clear for voice output (max 100 words).' : ''}
-                    
-                    Respond in ${lang === 'hi' ? 'Hindi' : 'English/Hindi mix'}.`
-                  }
-                ]
-              }
-            ]
-          })
-        }
-      );
-
-      const data = await response.json();
-      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-        answer = data.candidates[0].content.parts[0].text;
-        sources = ['Gemini AI'];
-      } else {
-        throw new Error('No response from Gemini');
-      }
-    } catch (err) {
-      console.error('Gemini error:', err.message);
-      answer = getFallbackAnswer(query, voiceMode);
-      sources = ['Static Knowledge Base'];
-    }
-  } else {
-    // No API key – use fallback
-    answer = getFallbackAnswer(query, voiceMode);
-    sources = ['Static Knowledge Base'];
-  }
-
-  // Ensure answer is never empty
-  if (!answer || answer.trim().length === 0) {
-    answer = 'क्षमा करें, मैं इस समय उत्तर नहीं दे पा रही हूँ। कृपया पुनः प्रयास करें।';
-  }
-
-  // If voice mode, return shorter version
-  if (voiceMode) {
-    const shortAnswer = answer.split('\n').slice(0, 4).join('\n');
-    return res.status(200).json({ 
-      answer: shortAnswer, 
-      fullAnswer: answer,
-      sources,
-      voiceMode: true
-    });
-  }
-
-  return res.status(200).json({ answer, sources });
-}
-
-// ============================================================
-// COMPLETE FALLBACK with ALL Sections & Court Info
-// ============================================================
+// ===== COMPLETE FALLBACK with ALL Sections & Court Info =====
 function getFallbackAnswer(query, voiceMode = false) {
   const q = query.toLowerCase().trim();
 
@@ -209,17 +113,10 @@ function getFallbackAnswer(query, voiceMode = false) {
     'bns 85': { act: 'BNS', number: '85', title: 'Cruelty', text: '3 years imprisonment. IPC 498A replaced.', mnemonic: '🧠 8+5=13 → 3 years' },
     'bns 64': { act: 'BNS', number: '64', title: 'Rape', text: '10 years minimum. IPC 375 replaced.', mnemonic: '🧠 6+4=10 → 10 years minimum' },
     'bns 65': { act: 'BNS', number: '65', title: 'Gang Rape', text: '20 years minimum. IPC 376 replaced.', mnemonic: '🧠 6+5=11 → 20 years minimum' },
-    'bns 66': { act: 'BNS', number: '66', title: 'Sexual Assault', text: 'Up to 7 years. IPC 354 replaced.', mnemonic: '🧠 6+6=12 → 7 years' },
-    'bns 304': { act: 'BNS', number: '304', title: 'Robbery', text: '7 years imprisonment. IPC 390 replaced.', mnemonic: '🧠 3+0+4=7 → 7 years' },
-    'bns 319': { act: 'BNS', number: '319', title: 'Cheating by Personation', text: '5 years imprisonment. IPC 419 replaced.', mnemonic: '🧠 3+1+9=13 → 5 years' },
-    'bns 352': { act: 'BNS', number: '352', title: 'Criminal Breach of Trust', text: '7 years imprisonment. IPC 405 replaced.', mnemonic: '🧠 3+5+2=10 → 7 years' },
-    'bns 356': { act: 'BNS', number: '356', title: 'Defamation', text: '2 years imprisonment. IPC 499 replaced.', mnemonic: '🧠 3+5+6=14 → 2 years' },
     'bnss 173': { act: 'BNSS', number: '173', title: 'FIR', text: 'CrPC 154 replaced. FIR mandatory for cognizable offences.', mnemonic: '🧠 1+7+3=11 → FIR' },
     'bnss 480': { act: 'BNSS', number: '480', title: 'Regular Bail', text: 'CrPC 437 replaced. Magistrate can grant bail.', mnemonic: '🧠 4+8+0=12 → Bail' },
     'bnss 482': { act: 'BNSS', number: '482', title: 'Anticipatory Bail', text: 'CrPC 438 replaced. Pre-arrest bail from Sessions or HC.', mnemonic: '🧠 4+8+2=14 → Anticipatory Bail' },
-    'bnss 484': { act: 'BNSS', number: '484', title: 'Bail Bond', text: 'CrPC 441 replaced. Execution of bail bond.', mnemonic: '🧠 4+8+4=16 → Bond' },
     'bnss 144': { act: 'BNSS', number: '144', title: 'Maintenance', text: 'CrPC 125 replaced. Maintenance for wife, children, parents.', mnemonic: '🧠 1+4+4=9 → 9 months' },
-    'bnss 176': { act: 'BNSS', number: '176', title: 'Police Investigation', text: 'CrPC 156 replaced. Police investigation powers.', mnemonic: '🧠 1+7+6=14 → Investigation' },
     'bsa 63': { act: 'BSA', number: '63', title: 'Electronic Evidence', text: 'Evidence Act 65B replaced. Certificate mandatory.', mnemonic: '🧠 6+3=9 → Evidence' }
   };
 
@@ -344,58 +241,6 @@ function getFallbackAnswer(query, voiceMode = false) {
 📞 **Helplines:** 100 – Police, 15100 – Legal Helpline
 
 ⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
-    },
-    'women': {
-      voice: "महिला अधिकार: BNS 85 cruelty, Domestic Violence Act, POSH Act, BNSS 144 maintenance, Maternity Benefit Act। 181 helpline 24x7।",
-      full: `🔍 **Problem:** महिला अधिकार / Women Rights
-
-⚖️ **Legal Position:** BNS 85 (Cruelty), Domestic Violence Act 2005, POSH Act 2013, BNSS 144 (Maintenance)
-
-📋 **Steps:**
-  ① घरेलू हिंसा → 181 (Women Helpline) या Police (100) को call करें।
-  ② कार्यस्थल पर उत्पीड़न → POSH Act के तहत ICC में complain करें।
-  ③ दहेज उत्पीड़न → BNS 85 के तहत FIR दर्ज कराएँ।
-
-📜 **Sections:** BNS 85, DV Act, POSH Act, BNSS 144
-⚖️ **Case Law:** Vishakha v. State (1997) – workplace harassment
-💡 **Tips:** 181 – 24x7 Women Helpline, DLSA से free legal aid लें
-📞 **Helplines:** 181 – Women Helpline, 100 – Police, 15100 – Legal Helpline
-
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
-    },
-    'consumer': {
-      voice: "Consumer Protection Act 2019 – District/State/National Consumer Commission में शिकायत करें। Helpline 1800-11-4000।",
-      full: `🔍 **Problem:** Consumer Complaint / उपभोक्ता शिकायत
-
-⚖️ **Legal Position:** Consumer Protection Act 2019
-
-📋 **Steps:**
-  ① सबूत इकट्ठा करें (bills, receipts, communication)
-  ② District Consumer Commission में complaint दायर करें
-  ③ Amount: ₹50 lakh तक District, ₹1 करोड़ तक State, ₹1 करोड़ से अधिक National
-
-📜 **Sections:** Consumer Protection Act 2019
-💡 **Tips:** 6 अधिकार: Safety, Choice, Information, Heard, Redressal, Education
-📞 **Helplines:** 1800-11-4000 – Consumer Helpline
-
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
-    },
-    'rti': {
-      voice: "RTI Act 2005 – 30 days में reply mandatory। Form A + ₹10 fee। First appeal to PIO, second to CIC।",
-      full: `🔍 **Problem:** RTI Application / सूचना का अधिकार
-
-⚖️ **Legal Position:** RTI Act 2005 – Right to Information
-
-📋 **Steps:**
-  ① Form A में application तैयार करें
-  ② ₹10 की fee जमा करें (cash/DD/court fee stamp)
-  ③ PIO को submit करें (hand/post/email)
-
-📜 **Sections:** RTI Act 2005
-💡 **Tips:** 30 days में reply mandatory, No reason required for asking info
-📞 **Helplines:** 15100 – Legal Helpline
-
-⚠️ यह सामान्य जानकारी है, कानूनी सलाह नहीं।`
     }
   };
 
@@ -430,4 +275,104 @@ function getFallbackAnswer(query, voiceMode = false) {
   ⚖️ 15100 – Legal Helpline
 
 ⚠️ **Disclaimer:** यह सामान्य जानकारी है, कानूनी सलाह नहीं।`;
+}
+
+// ===== API HANDLER =====
+async function handler(req, res) {
+  // Only allow POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { query, date, tab, lang, voiceMode } = req.body || {};
+
+  if (!query || query.trim().length === 0) {
+    return res.status(400).json({ error: 'Query is required' });
+  }
+
+  // Try to use Gemini if key is available
+  const geminiKey = process.env.GEMINI_API_KEY;
+  let answer = '';
+  let sources = [];
+
+  if (geminiKey) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `You are Zeenat, a legal assistant for Indian law (BNS/BNSS/BSA). 
+                    
+                    **IMPORTANT:** Keep responses CONCISE and POINT-WISE. Use this structure:
+                    
+                    🔍 Problem: [summarize the issue]
+                    ⚖️ Legal Position: [key legal provision]
+                    📋 Steps: [numbered list of practical steps]
+                    📜 Sections: [relevant sections]
+                    ⚖️ Case Law: [relevant case law]
+                    💡 Tips: [practical tips]
+                    📞 Helplines: [emergency numbers]
+                    
+                    ⚠️ Always add disclaimer: "यह सामान्य जानकारी है, कानूनी सलाह नहीं।"
+                    
+                    User query: ${query}
+                    Context: date=${date || 'today'}, tab=${tab || 'general'}, lang=${lang || 'hi'}
+                    
+                    ${voiceMode ? 'Keep response very short and clear for voice output (max 100 words).' : ''}
+                    
+                    Respond in ${lang === 'hi' ? 'Hindi' : 'English/Hindi mix'}.`
+                  }
+                ]
+              }
+            ]
+          })
+        }
+      );
+
+      const data = await response.json();
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        answer = data.candidates[0].content.parts[0].text;
+        sources = ['Gemini AI'];
+      } else {
+        throw new Error('No response from Gemini');
+      }
+    } catch (err) {
+      console.error('Gemini error:', err.message);
+      answer = getFallbackAnswer(query, voiceMode);
+      sources = ['Static Knowledge Base'];
+    }
+  } else {
+    // No API key – use fallback
+    answer = getFallbackAnswer(query, voiceMode);
+    sources = ['Static Knowledge Base'];
+  }
+
+  // Ensure answer is never empty
+  if (!answer || answer.trim().length === 0) {
+    answer = 'क्षमा करें, मैं इस समय उत्तर नहीं दे पा रही हूँ। कृपया पुनः प्रयास करें।';
+  }
+
+  // If voice mode, return shorter version
+  if (voiceMode) {
+    const shortAnswer = answer.split('\n').slice(0, 4).join('\n');
+    return res.status(200).json({ 
+      answer: shortAnswer, 
+      fullAnswer: answer,
+      sources,
+      voiceMode: true
+    });
+  }
+
+  return res.status(200).json({ answer, sources });
+}
+
+// ===== EXPORT FOR NODE/VERCEL =====
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = handler;
 }
