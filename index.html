@@ -70,9 +70,8 @@
     <script src="api/payment.js"></script>
     <script src="api/init.js"></script>
 
-    <!-- ✅ CSS - Clean & Optimized -->
     <style>
-        /* RESET & BASE */
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -92,7 +91,7 @@
             overflow-x: hidden
         }
 
-        /* SCROLLBAR */
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px
@@ -106,7 +105,7 @@
             border-radius: 4px
         }
 
-        /* GLASS CARD */
+        /* ===== GLASS CARD ===== */
         .glass-card {
             background: rgba(255, 255, 255, 0.05) !important;
             backdrop-filter: blur(16px);
@@ -121,7 +120,7 @@
             box-shadow: 0 8px 40px rgba(249, 115, 22, 0.1)
         }
 
-        /* TABS */
+        /* ===== TABS ===== */
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-out
@@ -140,7 +139,7 @@
             }
         }
 
-        /* TAB NAV */
+        /* ===== TAB NAV ===== */
         .tab-nav-grid {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
@@ -246,7 +245,7 @@
             box-shadow: 0 8px 30px rgba(239, 68, 68, 0.5)
         }
 
-        /* CHAT */
+        /* ===== CHAT ===== */
         .zeenat-chat-messages {
             background: rgba(0, 0, 0, 0.15);
             border-radius: 12px;
@@ -342,7 +341,7 @@
             animation: pulse 1s infinite
         }
 
-        /* FLOATING CHAT */
+        /* ===== FLOATING CHAT ===== */
         .floating-chat-btn {
             position: fixed;
             bottom: 28px;
@@ -435,7 +434,7 @@
             justify-content: center
         }
 
-        /* EMERGENCY */
+        /* ===== EMERGENCY ===== */
         .emergency-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -447,7 +446,7 @@
             }
         }
 
-        /* TOAST */
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 100px;
@@ -486,7 +485,7 @@
             }
         }
 
-        /* ✅ MOBILE RESPONSIVE */
+        /* ===== MOBILE RESPONSIVE ===== */
         @media(max-width: 768px) {
             html {
                 font-size: 16px !important
@@ -1821,6 +1820,9 @@
                 '<p class="text-slate-400">☕ Donate loaded. Coming soon!</p>'; }
 
         // ===== PDF FUNCTIONS =====
+        let uploadedFiles = [];
+        let uploadHistory = JSON.parse(localStorage.getItem('uploadHistory') || '[]');
+
         function handleFiles(files) {
             const fileList = document.getElementById('fileList');
             for (const file of files) {
